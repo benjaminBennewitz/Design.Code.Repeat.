@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Kommerzielle Studio-Website für Design. Code. Repeat.",
   "author": "Benjamin Bennewitz",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "ng": "ng",
