@@ -44,6 +44,30 @@
 .marquee span:nth-child(3n + 2) { color: var(--dcr-color-lime); }
 .marquee span:nth-child(3n) { color: var(--dcr-color-pink); }
 
+.marquee[data-tone='primary'],
+.marquee[data-tone='pink'] {
+  border-block: 0;
+  mask-image: none;
+}
+
+.marquee[data-tone='primary'] {
+  background: var(--dcr-color-primary);
+}
+
+.marquee[data-tone='primary'] span {
+  border-color: color-mix(in srgb, var(--dcr-color-on-primary) 28%, transparent);
+  color: var(--dcr-color-on-primary);
+}
+
+.marquee[data-tone='pink'] {
+  background: var(--dcr-color-pink);
+}
+
+.marquee[data-tone='pink'] span {
+  border-color: color-mix(in srgb, var(--dcr-color-on-pink) 28%, transparent);
+  color: var(--dcr-color-on-pink);
+}
+
 @keyframes marquee-run {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

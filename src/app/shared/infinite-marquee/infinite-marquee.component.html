@@ -1,4 +1,4 @@
-<div class="marquee" [class.marquee--reverse]="reverse()" [attr.aria-label]="ariaLabel()">
+<div class="marquee" [class.marquee--reverse]="reverse()" [attr.data-tone]="tone()" [attr.aria-label]="ariaLabel()">
   <div class="marquee__track">
     @for (item of items(); track $index) {
       <span>{{ item }}</span>

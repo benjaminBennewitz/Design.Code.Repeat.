@@ -21,6 +21,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html.dcr-menu-open,
+html.dcr-menu-open body {
+  overflow: hidden;
+}
+
 button,
 input,
 select,

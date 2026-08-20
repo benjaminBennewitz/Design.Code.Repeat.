@@ -5,31 +5,41 @@
     <small>B²</small>
   </a>
 
-  <button class="site-header__menu-button" type="button" [attr.aria-label]="menuOpen() ? content().closeLabel : content().menuLabel"
-    aria-controls="studio-navigation" [attr.aria-expanded]="menuOpen()" (click)="toggleMenu()">
-    <span class="material-symbols-outlined" aria-hidden="true">{{ menuOpen() ? 'close' : 'menu' }}</span>
-  </button>
+  <div class="site-header__status" aria-hidden="true"><i></i> AVAILABLE FOR SELECTED PROJECTS</div>
 
-  <div id="studio-navigation" class="site-header__navigation" [class.is-open]="menuOpen()">
+  <div class="site-header__controls">
+    <button class="site-header__icon-button" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
+      <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
+    </button>
+    <button class="site-header__language" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
+      {{ languageService.language() === 'de' ? 'EN' : 'DE' }}
+    </button>
+    <button class="site-header__menu-button" type="button" [attr.aria-label]="content().menuLabel"
+      aria-controls="studio-navigation" [attr.aria-expanded]="menuOpen()" (click)="toggleMenu()">
+      <span>{{ content().menuLabel }}</span><b aria-hidden="true">+</b>
+    </button>
+    <dcr-action-button class="site-header__contact" [label]="content().ctaLabel" route="/kontakt" variant="primary" size="small" (pressed)="closeMenu()" />
+  </div>
+
+  <div id="studio-navigation" class="site-header__navigation" [class.is-open]="menuOpen()" [attr.aria-hidden]="!menuOpen()">
+    <button class="site-header__close" type="button" [attr.aria-label]="content().closeLabel" (click)="closeMenu()"><b aria-hidden="true">×</b></button>
     <nav [attr.aria-label]="content().ariaLabel">
-      @for (item of content().items; track item.href) {
+      @for (item of content().items; track item.href; let index = $index) {
         @if (fragmentFor(item); as fragment) {
-          <a routerLink="/" [fragment]="fragment" (click)="closeMenu()">{{ item.label }}</a>
+          <a routerLink="/" [fragment]="fragment" (click)="closeMenu()"><small>0{{ index + 1 }}</small><span>{{ item.label }}</span><b aria-hidden="true">↗</b></a>
         } @else {
           <a [routerLink]="routeFor(item)" routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: item.href === '/' }" (click)="closeMenu()">{{ item.label }}</a>
+            [routerLinkActiveOptions]="{ exact: item.href === '/' }" (click)="closeMenu()"><small>0{{ index + 1 }}</small><span>{{ item.label }}</span><b aria-hidden="true">↗</b></a>
         }
       }
     </nav>
 
-    <div class="site-header__controls">
-      <button class="site-header__icon-button" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
-        <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
-      </button>
-      <button class="site-header__language" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
-        {{ languageService.language() === 'de' ? 'EN' : 'DE' }}
-      </button>
-      <dcr-action-button [label]="content().ctaLabel" route="/kontakt" variant="primary" size="small" (pressed)="closeMenu()" />
-    </div>
+    <aside class="site-header__menu-aside" aria-hidden="true">
+      <span>DCR / NAVIGATION</span>
+      <strong>MG — 51.1805° N<br>06.4428° E</strong>
+      <span>INDEPENDENT DIGITAL STUDIO</span>
+    </aside>
+
+    <div class="site-header__menu-wordmark" aria-hidden="true">DESIGN. CODE. REPEAT.</div>
   </div>
 </header>

@@ -46,7 +46,7 @@
   --dcr-header-height: 72px;
   --dcr-content-width: 1600px;
   --dcr-page-gutter: clamp(1rem, 4vw, 5rem);
-  --dcr-section-y: clamp(2.6rem, 5.2vh, 4.75rem);
+  --dcr-section-y: clamp(3rem, 5.9vh, 4rem);
   --dcr-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dcr-color-contrast-dark: #080808;
   --dcr-color-contrast-light: #ffffff;
@@ -77,6 +77,8 @@
   --dcr-color-on-violet: #080808;
   --dcr-color-on-orange: #080808;
   --dcr-color-on-surface-strong: #f7f2e9;
+  --dcr-color-card-hover: #dedad1;
+  --dcr-color-on-card-hover: #080808;
 }
 
 :root[data-theme='light'] {
@@ -103,6 +105,8 @@
   --dcr-color-on-violet: #ffffff;
   --dcr-color-on-orange: #ffffff;
   --dcr-color-on-surface-strong: #101112;
+  --dcr-color-card-hover: var(--dcr-color-primary);
+  --dcr-color-on-card-hover: var(--dcr-color-on-primary);
 }
 
 
@@ -116,6 +120,8 @@
   --dcr-color-border: rgba(255, 255, 255, 0.5);
   --dcr-color-border-strong: rgba(255, 255, 255, 0.82);
   --dcr-color-shadow: rgba(0, 0, 0, 0.78);
+  --dcr-color-card-hover: #ffffff;
+  --dcr-color-on-card-hover: #000000;
 }
 
 :root[data-theme='light'][data-contrast='high'] {
@@ -124,6 +130,8 @@
   --dcr-color-border: rgba(0, 0, 0, 0.48);
   --dcr-color-border-strong: rgba(0, 0, 0, 0.82);
   --dcr-color-shadow: rgba(0, 0, 0, 0.24);
+  --dcr-color-card-hover: #000000;
+  --dcr-color-on-card-hover: #ffffff;
 }
 
 :root[data-color-vision='deuteranopia'] {

@@ -14,6 +14,7 @@
 }
 
 .dcr-viewport-section {
+  box-sizing: border-box;
   min-height: calc(100svh - var(--dcr-header-height));
 }
 
@@ -29,9 +30,16 @@
   right: 0;
   bottom: -1px;
   left: 0;
-  height: clamp(2.5rem, 8vh, 6rem);
+  height: clamp(6rem, 17vh, 12rem);
   content: '';
-  background: linear-gradient(to bottom, transparent, var(--dcr-section-next-bg));
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 18%,
+    color-mix(in srgb, var(--dcr-section-next-bg) 24%, transparent) 48%,
+    color-mix(in srgb, var(--dcr-section-next-bg) 68%, transparent) 76%,
+    var(--dcr-section-next-bg) 100%
+  );
   pointer-events: none;
 }
 
@@ -116,12 +124,11 @@
 @media (min-width: 901px) and (min-height: 800px) {
   .dcr-viewport-section {
     height: calc(100svh - var(--dcr-header-height));
-    max-height: calc(100svh - var(--dcr-header-height));
-    overflow: clip;
+    min-height: calc(100svh - var(--dcr-header-height));
   }
 
   .dcr-viewport-section > .dcr-container {
-    max-height: calc(100svh - var(--dcr-header-height) - (var(--dcr-section-y) * 2));
+    min-height: 0;
   }
 }
 

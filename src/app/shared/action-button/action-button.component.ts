@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, output, input } from '@angular/core
 import { RouterLink } from '@angular/router';
 
 /** Visuelle Varianten des Studio-Buttons. */
-export type ActionButtonVariant = 'default' | 'primary' | 'ghost' | 'dark' | 'accent';
+export type ActionButtonVariant = 'default' | 'primary' | 'ghost' | 'dark' | 'accent' | 'inverse';
 
 /** Größenvarianten des Studio-Buttons. */
 export type ActionButtonSize = 'default' | 'small';

@@ -1,8 +1,15 @@
 :host {
   position: fixed;
   right: clamp(1rem, 2vw, 1.5rem);
-  bottom: clamp(1rem, 2vw, 1.5rem);
+  bottom: calc(clamp(1rem, 2vw, 1.5rem) + 4.25rem);
   z-index: 1200;
+  transition: opacity 160ms ease, visibility 160ms;
+}
+
+:host-context(html.dcr-menu-open) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .access-panel__trigger {
@@ -46,6 +53,17 @@
   font-family: var(--dcr-font-mono);
   font-size: 0.64rem;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(0.5rem);
+  transition: opacity 160ms ease, transform 200ms var(--dcr-ease-out), visibility 200ms;
+}
+
+.access-panel__trigger:hover .access-panel__status,
+.access-panel__trigger:focus-within .access-panel__status {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 
 .access-panel__status strong {
@@ -232,5 +250,12 @@
   .access-panel__quick-actions,
   .access-panel__chips--grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  :host {
+    right: 0.75rem;
+    bottom: 5rem;
   }
 }

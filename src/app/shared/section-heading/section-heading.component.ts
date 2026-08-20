@@ -14,6 +14,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionHeadingComponent {
+  /** Textausrichtung der Section-Überschrift für bewusst variierende Layouts. */
+  readonly align = input<'left' | 'center' | 'right'>('left');
   /** Terminal-artige Vorzeile. */
   readonly eyebrow = input.required<string>();
   /** Hauptüberschrift. */

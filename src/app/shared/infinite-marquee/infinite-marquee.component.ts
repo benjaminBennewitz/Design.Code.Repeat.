@@ -5,6 +5,9 @@
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+/** Verfügbare Flächenfarben des Marquees. */
+type MarqueeTone = 'surface' | 'primary' | 'pink';
+
 /** Kontinuierlich laufende Liste für Techstack und kurze Schlagworte. */
 @Component({
   selector: 'dcr-infinite-marquee',
@@ -22,4 +25,7 @@ export class InfiniteMarqueeComponent {
 
   /** Laufrichtung. */
   readonly reverse = input<boolean>(false);
+
+  /** Flächenvariante für neutrale oder harte farbige Trenner. */
+  readonly tone = input<MarqueeTone>('surface');
 }

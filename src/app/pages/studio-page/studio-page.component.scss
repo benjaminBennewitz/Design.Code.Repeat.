@@ -167,14 +167,21 @@
   border: 2px solid var(--dcr-color-border-strong);
   padding: clamp(1rem, 2vw, 1.4rem);
   background: var(--dcr-color-surface-solid);
-  transition: transform 180ms var(--dcr-ease-out), border-color 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms var(--dcr-ease-out), border-color 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
 
 .studio-principles article:hover,
 .studio-principles article:focus-within {
-  border-color: var(--dcr-color-primary);
+  border-color: var(--dcr-color-card-hover);
+  background: var(--dcr-color-card-hover);
+  color: var(--dcr-color-on-card-hover);
   box-shadow: 7px 7px 0 color-mix(in srgb, var(--dcr-color-primary) 38%, transparent);
   transform: translate(-3px, -3px);
+}
+
+.studio-principles article:hover :is(p, span),
+.studio-principles article:focus-within :is(p, span) {
+  color: inherit;
 }
 
 .studio-principles article > span {

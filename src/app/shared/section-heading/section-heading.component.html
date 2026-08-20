@@ -1,4 +1,4 @@
-<header class="section-heading">
+<header class="section-heading" [class.section-heading--center]="align() === 'center'" [class.section-heading--right]="align() === 'right'">
   <p class="dcr-eyebrow">{{ eyebrow() }}</p>
   <h2>{{ title() }}</h2>
   @if (text()) {

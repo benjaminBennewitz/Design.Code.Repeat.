@@ -1,9 +1,35 @@
-<a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
-<dcr-header />
-<dcr-accessibility-panel />
-<dcr-cookie-banner />
-<div id="main-content" tabindex="-1">
-  <router-outlet />
-</div>
-<dcr-footer />
-<dcr-scroll-to-top />
+@if (isLoading()) {
+  <div
+    class="site-loader"
+    role="status"
+    aria-live="polite"
+    aria-busy="true"
+    [attr.aria-label]="languageService.language() === 'de' ? 'Website wird geladen' : 'Website is loading'">
+    <div class="site-loader__meta" aria-hidden="true">
+      <span>B² // DESIGN. CODE. REPEAT.</span>
+      <span>{{ languageService.language() === 'de' ? 'SYSTEMSTART' : 'SYSTEM START' }}</span>
+    </div>
+
+    <div class="site-loader__core" aria-hidden="true">
+      <span class="site-loader__word">DESIGN.</span>
+      <span class="site-loader__mark"><i></i><i></i><i></i><i></i></span>
+      <span class="site-loader__word">CODE.</span>
+      <span class="site-loader__word site-loader__word--accent">REPEAT.</span>
+    </div>
+
+    <div class="site-loader__footer" aria-hidden="true">
+      <div class="site-loader__progress"><span></span></div>
+      <div><span>INITIALIZING EXPERIENCE</span><span>05.2 SEC</span></div>
+    </div>
+  </div>
+} @else {
+  <a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
+  <dcr-header />
+  <dcr-accessibility-panel />
+  <dcr-cookie-banner />
+  <div id="main-content" tabindex="-1">
+    <router-outlet />
+  </div>
+  <dcr-footer />
+  <dcr-scroll-to-top />
+}

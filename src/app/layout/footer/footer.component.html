@@ -6,20 +6,24 @@
     </div>
 
     <div class="site-footer__arrows">
-      <button type="button" [attr.aria-label]="ui().previous" (click)="previousPanel()">
-        <span class="material-symbols-outlined" aria-hidden="true">west</span>
-      </button>
-      <button type="button" [attr.aria-label]="ui().next" (click)="nextPanel()">
-        <span class="material-symbols-outlined" aria-hidden="true">east</span>
-      </button>
+      @if (activePanel() === 1) {
+        <div><small>{{ ui().sitemap }}</small><button type="button" [attr.aria-label]="ui().previous + ': ' + ui().sitemap" (click)="previousPanel()"><span class="material-symbols-outlined" aria-hidden="true">west</span></button></div>
+      }
+      @if (activePanel() === 0) {
+        <div><small>{{ ui().legal }}</small><button type="button" [attr.aria-label]="ui().next + ': ' + ui().legal" (click)="nextPanel()"><span class="material-symbols-outlined" aria-hidden="true">east</span></button></div>
+      }
     </div>
 
     <div class="site-footer__status" aria-live="polite">
-      0{{ activePanel() + 1 }} / 03
+      0{{ activePanel() + 1 }} / 02
     </div>
   </div>
 
   <div class="site-footer__stage dcr-container">
+    <div class="site-footer__characters" aria-hidden="true">
+      <img class="site-footer__character site-footer__character--fuelli" src="/assets/images/studio/fuelli.webp" alt="" width="700" height="636" loading="lazy" decoding="async">
+    </div>
+
     <div class="site-footer__panel-copy" [attr.aria-label]="ui().panelLabel">
       <section id="footer-sitemap" class="site-footer__panel" [class.is-active]="activePanel() === 0" [attr.aria-hidden]="activePanel() !== 0" [attr.inert]="activePanel() !== 0 ? '' : null">
         <div class="site-footer__panel-head">
@@ -60,19 +64,11 @@
         </div>
       </section>
 
-      <section id="footer-kontakt" class="site-footer__panel site-footer__panel--contact" [class.is-active]="activePanel() === 2" [attr.aria-hidden]="activePanel() !== 2" [attr.inert]="activePanel() !== 2 ? '' : null">
-        <div class="site-footer__panel-head">
-          <p>{{ ui().contact }}</p>
-          <h2>{{ ui().lead }}</h2>
-        </div>
-        <div class="site-footer__contact-form">
-          <dcr-contact-form idPrefix="footer-contact" />
-        </div>
-      </section>
     </div>
 
     <div class="site-footer__wordmark" aria-hidden="true">
-      <span>DESIGN.</span><span>CODE.</span><span>REPEAT.</span>
+      <span class="site-footer__wordmark-state site-footer__wordmark-state--design" [class.is-active]="activePanel() === 0">DESIGN. CODE.</span>
+      <span class="site-footer__wordmark-state site-footer__wordmark-state--repeat" [class.is-active]="activePanel() !== 0">REPEAT.</span>
     </div>
 
     <div class="site-footer__meta">
