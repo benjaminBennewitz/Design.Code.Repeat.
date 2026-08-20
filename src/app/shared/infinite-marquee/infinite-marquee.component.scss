@@ -7,7 +7,7 @@
   overflow: hidden;
   border-block: 1px solid var(--dcr-color-border-strong);
   background: color-mix(in srgb, var(--dcr-color-surface-solid) 86%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, var(--dcr-color-contrast-dark) 6%, var(--dcr-color-contrast-dark) 94%, transparent);
 }
 
 .marquee__track,

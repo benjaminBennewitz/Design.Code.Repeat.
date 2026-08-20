@@ -9,6 +9,7 @@ import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.
 import { InfiniteMarqueeComponent } from '../../shared/infinite-marquee/infinite-marquee.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
 import { TerminalPanelComponent } from '../../shared/terminal-panel/terminal-panel.component';
+import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 
@@ -16,7 +17,7 @@ import { SeoService } from '../../core/services/seo.service';
 @Component({
   selector: 'dcr-studio-page',
   standalone: true,
-  imports: [ActionButtonComponent, AmbientFieldComponent, InfiniteMarqueeComponent, SectionHeadingComponent, TerminalPanelComponent],
+  imports: [ActionButtonComponent, AmbientFieldComponent, InfiniteMarqueeComponent, SectionHeadingComponent, TerminalPanelComponent, SystemGridComponent],
   templateUrl: './studio-page.component.html',
   styleUrl: './studio-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +31,24 @@ export class StudioPageComponent {
 
   /** Sprachabhängiger Content. */
   readonly content = computed(() => this.languageService.content());
+
+  /** Erstes Prinzip als Kontextblock der großen Systemfläche. */
+  readonly principlesSystemAside = computed(() => {
+    const principle = this.content().studioPage.principles[0];
+
+    return {
+      eyebrow: '01 // PRINCIPLE',
+      title: principle.title,
+      text: principle.text,
+    };
+  });
+
+  /** Übrige drei Prinzipien für die wiederkehrenden Sekundärflächen. */
+  readonly principlesSystemPanels = computed(() => this.content().studioPage.principles.slice(1, 4).map((principle, index) => ({
+    eyebrow: `0${index + 2} // PRINCIPLE`,
+    title: principle.title,
+    text: principle.text,
+  })));
 
   /** Zugängliche Beschriftung des Tech-Marquees. */
   readonly stackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');

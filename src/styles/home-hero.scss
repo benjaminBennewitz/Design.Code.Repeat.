@@ -35,7 +35,7 @@ html:has(dcr-home-page) {
   font-size: clamp(5.4rem, min(9.5vw, 16.5vh), 11rem);
   font-weight: 900;
   line-height: 0.84;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.004em;
   text-transform: uppercase;
   transform: translate(-50%, -50%);
 }
@@ -106,21 +106,39 @@ html:has(dcr-home-page) {
 
 .home-hero__service {
   position: absolute;
-  z-index: 1;
-  max-width: 20ch;
+  z-index: 3;
+  max-width: min(30ch, calc(50vw - (var(--dcr-page-gutter) * 1.5)));
   margin: 0;
   color: var(--dcr-color-text-muted);
   font: 800 clamp(0.68rem, 0.84vw, 0.9rem)/1.28 var(--dcr-font-mono);
   letter-spacing: 0.025em;
   text-transform: uppercase;
+  white-space: nowrap;
   opacity: 0;
   animation: hero-detail-in 500ms ease 1.65s forwards;
 }
 
-.home-hero__service--web { top: 40%; left: 4.5%; text-align: right; }
-.home-hero__service--software { top: 19%; left: 53%; }
-.home-hero__service--design { bottom: 19%; left: 10%; text-align: right; }
-.home-hero__service--care { right: 10%; bottom: 14%; }
+.home-hero__service--web,
+.home-hero__service--software {
+  top: clamp(4.5rem, 15vh, 8rem);
+}
+
+.home-hero__service--design,
+.home-hero__service--care {
+  bottom: clamp(4rem, 12vh, 7rem);
+}
+
+.home-hero__service--web,
+.home-hero__service--design {
+  left: var(--dcr-page-gutter);
+  text-align: left;
+}
+
+.home-hero__service--software,
+.home-hero__service--care {
+  right: var(--dcr-page-gutter);
+  text-align: right;
+}
 
 .home-hero__cta {
   position: absolute;
@@ -147,8 +165,8 @@ html:has(dcr-home-page) {
 
 @media (max-width: 980px) {
   .home-hero__claim { width: 94vw; font-size: clamp(3.6rem, 9.4vw, 7rem); }
-  .home-hero__service--software { left: 61%; }
-  .home-hero__service--care { right: 4%; }
+  .home-hero__service--web, .home-hero__service--design { left: var(--dcr-page-gutter); }
+  .home-hero__service--software, .home-hero__service--care { right: var(--dcr-page-gutter); }
   .home-hero__cta { top: auto; right: var(--dcr-page-gutter); bottom: 6%; }
 }
 
@@ -156,8 +174,9 @@ html:has(dcr-home-page) {
   .home-hero { height: calc(100svh - var(--dcr-header-height)); min-height: 31rem; }
   .home-hero__claim { top: 45%; width: 98vw; gap: 0.12em; font-size: clamp(2.25rem, 9.8vw, 5rem); line-height: 0.88; }
   .home-hero__service { font-size: 0.58rem; }
-  .home-hero__service--web { top: 15%; left: 1rem; text-align: left; }
-  .home-hero__service--software { top: 15%; right: 1rem; left: auto; text-align: right; }
+  .home-hero__service { max-width: calc(50vw - 1.5rem); white-space: normal; }
+  .home-hero__service--web { top: 9%; left: 1rem; text-align: left; }
+  .home-hero__service--software { top: 9%; right: 1rem; left: auto; text-align: right; }
   .home-hero__service--design, .home-hero__service--care { display: none; }
   .home-hero__cta { right: 1rem; bottom: 7%; }
   .home-hero__cta .dcr-button { width: min(15rem, calc(100vw - 2rem)); }

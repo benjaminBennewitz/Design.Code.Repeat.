@@ -140,8 +140,13 @@
 }
 
 .ambient-field[data-variant='studio'] .ambient-field__scan {
-  width: 22vw;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--dcr-color-pink) 10%, transparent), transparent);
+  display: none;
+}
+
+:host-context(:root[data-theme='light']) .ambient-field[data-variant='studio'] .ambient-field__grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--dcr-color-contrast-dark) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--dcr-color-contrast-dark) 9%, transparent) 1px, transparent 1px);
 }
 
 @keyframes ambient-grid-drift {
@@ -171,5 +176,10 @@
 
 :host-context(:root[data-comfort='simple']) .ambient-field__orbit--b,
 :host-context(:root[data-comfort='simple']) .ambient-field__nodes span:nth-child(n + 5) {
+  display: none;
+}
+
+/* Der Services-Hero nutzt die neue Maschinenanimation statt des alten Scanner-Balkens. */
+.ambient-field[data-variant='services'] .ambient-field__scan {
   display: none;
 }

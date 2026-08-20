@@ -26,34 +26,34 @@
 
   <section id="studio-intro" class="studio-intro dcr-section dcr-viewport-section dcr-section-flow">
     <div class="dcr-container studio-intro__layout">
-      <div class="studio-intro__b2" aria-hidden="true">B²</div>
+      <div class="studio-intro__identity">
+        <div class="studio-intro__b2" aria-hidden="true">B²</div>
+        <img class="studio-intro__portrait" src="/assets/images/studio/ben-head.webp" alt="Ben" width="800" height="800" loading="lazy" decoding="async">
+      </div>
+
       <div class="studio-intro__copy">
-        @for (paragraph of content().studioPage.intro; track paragraph) {
-          <p>{{ paragraph }}</p>
+        @for (paragraph of content().studioPage.intro; track paragraph; let index = $index) {
+          <article class="studio-intro__statement">
+            <span class="studio-intro__statement-index" aria-hidden="true">0{{ index + 1 }}</span>
+            <p>{{ paragraph }}</p>
+          </article>
         }
-        <dcr-action-button label="Portfolio" href="https://design-code-repeat.de" target="_blank" variant="dark" icon="arrow_outward" />
+
+        <div class="studio-intro__action">
+          <dcr-action-button label="Portfolio" href="https://design-code-repeat.de" target="_blank" variant="dark" icon="arrow_outward" />
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="studio-prinzipien" class="studio-principles dcr-section dcr-viewport-section dcr-section-flow">
-    <div class="dcr-container studio-principles__layout">
-      <dcr-section-heading
-        align="right"
-        [eyebrow]="content().studioPage.principlesHeading.eyebrow"
-        [title]="content().studioPage.principlesHeading.title"
-        [text]="content().studioPage.principlesHeading.text" />
-
-      <div class="studio-principles__grid">
-        @for (principle of content().studioPage.principles; track principle.title; let index = $index) {
-          <article>
-            <span>0{{ index + 1 }}</span>
-            <h2>{{ principle.title }}</h2>
-            <p>{{ principle.text }}</p>
-          </article>
-        }
-      </div>
-    </div>
+  <section id="studio-prinzipien" class="studio-principles dcr-viewport-section" aria-labelledby="studio-principles-title">
+    <dcr-system-grid
+      [eyebrow]="content().studioPage.principlesHeading.eyebrow"
+      [title]="content().studioPage.principlesHeading.title"
+      [text]="content().studioPage.principlesHeading.text"
+      titleId="studio-principles-title"
+      [leadAside]="principlesSystemAside()"
+      [panels]="principlesSystemPanels()" />
   </section>
 
   <section id="studio-stack" class="studio-stack dcr-section dcr-viewport-section dcr-section-flow">
@@ -71,7 +71,7 @@
     </div>
 
     <div class="dcr-container studio-stack__action">
-      <dcr-action-button [label]="content().navigation.ctaLabel" route="/kontakt" variant="ghost" icon="arrow_outward" />
+      <dcr-action-button [label]="content().navigation.ctaLabel" route="/kontakt" variant="accent" icon="arrow_outward" />
     </div>
   </section>
 </main>

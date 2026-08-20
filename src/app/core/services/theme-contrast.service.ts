@@ -50,6 +50,8 @@ const CONTRAST_CONFIGURATIONS: readonly ContrastTokenConfiguration[] = [
   { backgroundToken: '--dcr-color-orange', outputToken: '--dcr-color-on-orange', foregroundTokens: DEFAULT_FOREGROUND_TOKENS },
   { backgroundToken: '--dcr-color-danger', outputToken: '--dcr-color-on-danger', foregroundTokens: DEFAULT_FOREGROUND_TOKENS },
   { backgroundToken: '--dcr-color-surface-strong', outputToken: '--dcr-color-on-surface-strong', foregroundTokens: DEFAULT_FOREGROUND_TOKENS },
+  { backgroundToken: '--dcr-color-card-hover', outputToken: '--dcr-color-on-card-hover', foregroundTokens: DEFAULT_FOREGROUND_TOKENS },
+  { backgroundToken: '--dcr-color-neutral-panel', outputToken: '--dcr-color-on-neutral-panel', foregroundTokens: DEFAULT_FOREGROUND_TOKENS },
 ];
 
 /** Verwaltet dynamische Vordergrund-Tokens für wechselnde Farbflächen. */

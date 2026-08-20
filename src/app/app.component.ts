@@ -45,7 +45,7 @@ export class AppComponent {
   constructor() {
     effect(() => this.tabTitleService.setHiddenTitle(this.languageService.content().meta.hiddenTitle));
 
-    const loaderTimer = globalThis.setTimeout(() => this.isLoading.set(false), 5_200);
+    const loaderTimer = globalThis.setTimeout(() => this.isLoading.set(false), 3_000);
     this.destroyRef.onDestroy(() => globalThis.clearTimeout(loaderTimer));
   }
 }

@@ -42,7 +42,7 @@ export class ThemeService {
       const theme = this.theme();
       this.document.documentElement.dataset['theme'] = theme;
       this.persistTheme(theme);
-      this.updateThemeColor(theme);
+      this.updateThemeColor();
       queueMicrotask(() => this.contrastService.refresh());
     });
   }
@@ -110,11 +110,16 @@ export class ThemeService {
     }
   }
 
-  /** Aktualisiert die Farbe der Browser-Chrome. */
-  private updateThemeColor(theme: StudioTheme): void {
+  /** Aktualisiert die Browser-Chrome aus dem aktuell gerenderten Design-Token. */
+  private updateThemeColor(): void {
     const meta = this.document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if (meta) {
-      meta.content = theme === 'light' ? '#fbf7ee' : '#0b0d0f';
+    const background = this.document.defaultView
+      ?.getComputedStyle(this.document.documentElement)
+      .getPropertyValue('--dcr-color-bg')
+      .trim();
+
+    if (meta && background) {
+      meta.content = background;
     }
   }
 }

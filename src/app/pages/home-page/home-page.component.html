@@ -90,7 +90,7 @@
 
   <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
     <div class="dcr-container">
-      <dcr-section-heading align="center" [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
+      <dcr-section-heading [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
 
       <div class="home-services__grid">
         @for (service of content().services; track service.slug; let index = $index) {

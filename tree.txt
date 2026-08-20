@@ -1,4 +1,6 @@
 Design.Code.Repeat/
+├── .angular/
+│   └── ...
 ├── backend/
 │   ├── config/
 │   │   ├── __init__.py
@@ -34,21 +36,35 @@ Design.Code.Repeat/
 │   │   │   ├── models/
 │   │   │   │   └── studio.models.ts
 │   │   │   └── services/
+│   │   │       ├── accessibility-preference.service.ts
 │   │   │       ├── contact-api.service.ts
+│   │   │       ├── cookie-consent.service.ts
 │   │   │       ├── language.service.ts
 │   │   │       ├── seo.service.ts
 │   │   │       ├── tab-title.service.ts
 │   │   │       ├── theme.service.ts
 │   │   │       └── theme-contrast.service.ts
 │   │   ├── layout/
+│   │   │   ├── accessibility-panel/
+│   │   │   │   ├── accessibility-panel.component.html
+│   │   │   │   ├── accessibility-panel.component.scss
+│   │   │   │   └── accessibility-panel.component.ts
+│   │   │   ├── cookie-banner/
+│   │   │   │   ├── cookie-banner.component.html
+│   │   │   │   ├── cookie-banner.component.scss
+│   │   │   │   └── cookie-banner.component.ts
 │   │   │   ├── footer/
 │   │   │   │   ├── footer.component.html
 │   │   │   │   ├── footer.component.scss
 │   │   │   │   └── footer.component.ts
-│   │   │   └── header/
-│   │   │       ├── header.component.html
-│   │   │       ├── header.component.scss
-│   │   │       └── header.component.ts
+│   │   │   ├── header/
+│   │   │   │   ├── header.component.html
+│   │   │   │   ├── header.component.scss
+│   │   │   │   └── header.component.ts
+│   │   │   └── scroll-to-top/
+│   │   │       ├── scroll-to-top.component.html
+│   │   │       ├── scroll-to-top.component.scss
+│   │   │       └── scroll-to-top.component.ts
 │   │   ├── pages/
 │   │   │   ├── contact-page/
 │   │   │   │   ├── contact-page.component.html
@@ -91,18 +107,43 @@ Design.Code.Repeat/
 │   │   │       ├── thank-you-page.component.scss
 │   │   │       └── thank-you-page.component.ts
 │   │   ├── shared/
+│   │   │   ├── action-button/
+│   │   │   │   ├── action-button.component.html
+│   │   │   │   ├── action-button.component.scss
+│   │   │   │   └── action-button.component.ts
+│   │   │   ├── ambient-field/
+│   │   │   │   ├── ambient-field.component.html
+│   │   │   │   ├── ambient-field.component.scss
+│   │   │   │   └── ambient-field.component.ts
 │   │   │   ├── contact-form/
 │   │   │   │   ├── contact-form.component.html
 │   │   │   │   ├── contact-form.component.scss
 │   │   │   │   └── contact-form.component.ts
+│   │   │   ├── dithering-shader/
+│   │   │   │   ├── dithering-shader.component.html
+│   │   │   │   ├── dithering-shader.component.scss
+│   │   │   │   └── dithering-shader.component.ts
+│   │   │   ├── infinite-marquee/
+│   │   │   │   ├── infinite-marquee.component.html
+│   │   │   │   ├── infinite-marquee.component.scss
+│   │   │   │   └── infinite-marquee.component.ts
 │   │   │   ├── section-heading/
 │   │   │   │   ├── section-heading.component.html
 │   │   │   │   ├── section-heading.component.scss
 │   │   │   │   └── section-heading.component.ts
-│   │   │   └── terminal-panel/
-│   │   │       ├── terminal-panel.component.html
-│   │   │       ├── terminal-panel.component.scss
-│   │   │       └── terminal-panel.component.ts
+│   │   │   ├── signal-divider/
+│   │   │   │   ├── signal-divider.component.html
+│   │   │   │   ├── signal-divider.component.scss
+│   │   │   │   └── signal-divider.component.ts
+│   │   │   ├── system-grid/
+│   │   │   │   ├── system-grid.component.html
+│   │   │   │   ├── system-grid.component.scss
+│   │   │   │   └── system-grid.component.ts
+│   │   │   ├── terminal-panel/
+│   │   │   │   ├── terminal-panel.component.html
+│   │   │   │   ├── terminal-panel.component.scss
+│   │   │   │   └── terminal-panel.component.ts
+│   │   │   └── horizontal-wheel-scroll.directive.ts
 │   │   ├── app.component.html
 │   │   ├── app.component.scss
 │   │   ├── app.component.ts
@@ -114,12 +155,16 @@ Design.Code.Repeat/
 │   │   │   ├── material-symbols-outlined-latin-fill-normal.woff2
 │   │   │   └── README.md
 │   │   ├── images/
-│   │   │   └── projects/
-│   │   │       ├── design-archive.webp
-│   │   │       └── globi-flow.webp
+│   │   │   ├── projects/
+│   │   │   │   ├── design-archive.webp
+│   │   │   │   └── globi-flow.webp
+│   │   │   └── studio/
+│   │   │       ├── ben-head.webp
+│   │   │       └── fuelli.webp
 │   │   └── favicon.svg
 │   ├── styles/
 │   │   ├── base.scss
+│   │   ├── home-hero.scss
 │   │   ├── tokens.scss
 │   │   └── utilities.scss
 │   ├── index.html
@@ -136,6 +181,7 @@ Design.Code.Repeat/
 ├── proxy.conf.json
 ├── README.md
 ├── tools.md
+├── tree.txt
 ├── tsconfig.app.json
 ├── tsconfig.json
 └── tsconfig.spec.json

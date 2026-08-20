@@ -1,3 +1,8 @@
+html:has(dcr-services-page),
+html:has(dcr-studio-page) {
+  scroll-snap-type: y proximity;
+}
+
 .dcr-container {
   width: min(calc(100% - (var(--dcr-page-gutter) * 2)), var(--dcr-content-width));
   margin-inline: auto;

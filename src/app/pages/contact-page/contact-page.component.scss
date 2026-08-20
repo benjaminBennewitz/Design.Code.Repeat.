@@ -43,3 +43,8 @@
 @media (max-width: 900px) {
   .contact-page__layout { grid-template-columns: 1fr; align-items: start; }
 }
+
+.contact-page__section.dcr-section-flow::after {
+  height: clamp(18rem, 44vh, 34rem);
+  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--dcr-color-contrast-dark) 8%, transparent) 16%, color-mix(in srgb, var(--dcr-color-contrast-dark) 34%, transparent) 44%, color-mix(in srgb, var(--dcr-color-contrast-dark) 72%, transparent) 72%, var(--dcr-color-contrast-dark) 100%);
+}

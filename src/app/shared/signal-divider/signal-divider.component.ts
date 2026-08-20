@@ -1,9 +1,17 @@
 /**
  * @file Dekorativer Signal- und Section-Trenner der Studio-Website.
- * @description Kapselt die fragmentierte DCR-Grafiksprache in einer sparsamen, rein dekorativen Komponente.
+ * @description Kapselt die fragmentierte DCR-Grafiksprache als vollbreiten, scroll-getriggerten Störer.
  */
 
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  input,
+} from '@angular/core';
 
 /** Verfügbare visuelle Varianten des Signal-Trenners. */
 export type SignalDividerVariant = 'paper' | 'accent';
@@ -32,12 +40,7 @@ interface SignalFragment {
   readonly opacity: number;
 }
 
-/**
- * Rein dekorativer Section-Trenner mit animierten Glyphen, Raster und Datenfragmenten.
- *
- * Die Komponente trägt bewusst `aria-hidden`, da sämtliche enthaltenen Zeichen nur visuelle
- * Atmosphäre erzeugen und keine zusätzliche Information gegenüber dem umgebenden Inhalt liefern.
- */
+/** Vollbreiter Section-Trenner mit einmaliger Zug-Einfahrt beim Eintritt in den Viewport. */
 @Component({
   selector: 'dcr-signal-divider',
   standalone: true,
@@ -45,7 +48,16 @@ interface SignalFragment {
   styleUrl: './signal-divider.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignalDividerComponent {
+export class SignalDividerComponent implements AfterViewInit {
+  /** Host-Element zum Setzen des einmaligen Reveal-Zustands. */
+  private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+  /** Lifecycle-Handle zum Trennen des IntersectionObservers. */
+  private readonly destroyRef = inject(DestroyRef);
+
+  /** Beobachter für die einmalige Scroll-Reveal-Animation. */
+  private observer?: IntersectionObserver;
+
   /** Farbvariante des Trenners. */
   readonly variant = input<SignalDividerVariant>('paper');
 
@@ -60,7 +72,7 @@ export class SignalDividerComponent {
     pixelLeft: `${12 + ((index % 3) * 22)}%`,
   }));
 
-  /** Deterministisch verteilte Datenblöcke; kein Laufzeit-Random, damit das Layout reproduzierbar bleibt. */
+  /** Deterministisch verteilte Datenblöcke; kein Laufzeit-Random. */
   readonly blocks: readonly SignalBlock[] = Array.from({ length: 12 }, (_, index) => ({
     index,
     left: 4 + ((index * 8) % 88),
@@ -75,4 +87,34 @@ export class SignalDividerComponent {
     width: 12 + ((index % 5) * 5),
     opacity: 0.18 + ((index % 4) * 0.18),
   }));
+
+  /** Aktiviert die Zug-Einfahrt nur bei erlaubter Bewegung und moderner Observer-Unterstützung. */
+  ngAfterViewInit(): void {
+    const windowRef = this.hostElement.ownerDocument.defaultView;
+    const root = this.hostElement.ownerDocument.documentElement;
+    const reducedMotion = root.dataset['motion'] === 'reduced'
+      || root.dataset['motion'] === 'off'
+      || windowRef?.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!windowRef || reducedMotion || !('IntersectionObserver' in windowRef)) {
+      this.hostElement.classList.add('is-in-view');
+      return;
+    }
+
+    this.hostElement.classList.add('is-motion-ready');
+    this.observer = new windowRef.IntersectionObserver(([entry], observer) => {
+      if (!entry?.isIntersecting) {
+        return;
+      }
+
+      this.hostElement.classList.add('is-in-view');
+      observer.disconnect();
+    }, {
+      threshold: 0.22,
+      rootMargin: '0px 0px -8% 0px',
+    });
+
+    this.observer.observe(this.hostElement);
+    this.destroyRef.onDestroy(() => this.observer?.disconnect());
+  }
 }

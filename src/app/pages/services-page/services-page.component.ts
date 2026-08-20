@@ -8,10 +8,10 @@ import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.component';
-import { DitheringShaderComponent } from '../../shared/dithering-shader/dithering-shader.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
 import { SignalDividerComponent } from '../../shared/signal-divider/signal-divider.component';
-import { TerminalPanelComponent } from '../../shared/terminal-panel/terminal-panel.component';
+import { DitheringShaderComponent } from '../../shared/dithering-shader/dithering-shader.component';
+import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 
 /** Leistungsseite mit kompakten In-Page-Details statt unnötiger Unterseiten-Navigation. */
 @Component({
@@ -20,10 +20,10 @@ import { TerminalPanelComponent } from '../../shared/terminal-panel/terminal-pan
   imports: [
     ActionButtonComponent,
     AmbientFieldComponent,
-    DitheringShaderComponent,
     SectionHeadingComponent,
     SignalDividerComponent,
-    TerminalPanelComponent,
+    DitheringShaderComponent,
+    SystemGridComponent,
   ],
   templateUrl: './services-page.component.html',
   styleUrl: './services-page.component.scss',
@@ -63,6 +63,27 @@ export class ServicesPageComponent {
         contact: 'Discuss this project',
         selector: 'Choose service module',
       });
+
+  /** Kontextblock der großen Maintenance-Systemfläche. */
+  readonly careSystemAside = computed(() => {
+    const careService = this.content().services.find((service) => service.slug === 'wartung') ?? this.content().services[3];
+
+    return {
+      eyebrow: careService.kicker,
+      title: careService.title,
+      text: careService.summary,
+      meta: careService.price,
+    };
+  });
+
+  /** Drei Care-Modelle für die wiederkehrende Systemflächen-Section. */
+  readonly careSystemPanels = computed(() => this.content().carePlans.map((plan, index) => ({
+    eyebrow: `CARE::0${index + 1}`,
+    title: plan.name,
+    text: plan.text,
+    meta: plan.price,
+    details: plan.features,
+  })));
 
   /** Übersetzte Pipeline-Texte der Managed-Ops-Visualisierung. */
   readonly opsLabels = computed(() => this.languageService.language() === 'de'

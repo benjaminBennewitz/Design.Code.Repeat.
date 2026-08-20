@@ -1,0 +1,106 @@
+<div class="system-grid" [class.system-grid--meta-reveal]="revealMetaOnInteraction()">
+  <article class="system-grid__panel system-grid__panel--lead" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+    <span class="system-grid__mark system-grid__mark--arrow" aria-hidden="true">↗</span>
+
+    <div class="system-grid__lead-copy">
+      <p class="system-grid__eyebrow">{{ eyebrow() }}</p>
+      @if (titleLevel() === 1) {
+        <h1 [id]="titleId()">{{ title() }}</h1>
+      } @else {
+        <h2 [id]="titleId()">{{ title() }}</h2>
+      }
+      @if (text()) {
+        <p class="system-grid__lead-text">{{ text() }}</p>
+      }
+    </div>
+
+    @if (leadAside(); as aside) {
+      <div class="system-grid__lead-aside">
+        @if (aside.eyebrow) {
+          <span class="system-grid__label">{{ aside.eyebrow }}</span>
+        }
+        <h3>{{ aside.title }}</h3>
+        @if (aside.meta) {
+          <strong>{{ aside.meta }}</strong>
+        }
+        @if (aside.text) {
+          <p>{{ aside.text }}</p>
+        }
+      </div>
+    }
+  </article>
+
+  <div class="system-grid__split">
+    @for (panel of visiblePanels().slice(0, 2); track panel.title; let index = $index) {
+      <article class="system-grid__panel" [class.system-grid__panel--light]="index === 0" [class.system-grid__panel--neutral]="index === 1" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+        <div class="system-grid__panel-top">
+          <span class="system-grid__mark" [class.system-grid__mark--asterisk]="index === 0" [class.system-grid__mark--cluster]="index === 1" aria-hidden="true">
+            @if (index === 0) {
+              ✳
+            } @else {
+              <i></i><i></i><i></i><i></i>
+            }
+          </span>
+          @if (panel.href) {
+            <a class="system-grid__jump" [href]="panel.href" [attr.aria-label]="panel.actionLabel ?? panel.title">↘</a>
+          }
+        </div>
+
+        <div class="system-grid__content">
+          @if (panel.eyebrow) {
+            <p class="system-grid__label">{{ panel.eyebrow }}</p>
+          }
+          <h3>{{ panel.title }}</h3>
+          @if (panel.text) {
+            <p>{{ panel.text }}</p>
+          }
+        </div>
+
+        <div class="system-grid__footer">
+          @if (panel.meta) {
+            <strong>{{ panel.meta }}</strong>
+          }
+          @if (panel.details?.length) {
+            <ul>
+              @for (detail of panel.details; track detail) {
+                <li>{{ detail }}</li>
+              }
+            </ul>
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+  @if (visiblePanels()[2]; as panel) {
+    <article class="system-grid__panel system-grid__panel--dark" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+      <span class="system-grid__mark system-grid__mark--diamond" aria-hidden="true">✦</span>
+
+      <div class="system-grid__content">
+        @if (panel.eyebrow) {
+          <p class="system-grid__label">{{ panel.eyebrow }}</p>
+        }
+        <h3>{{ panel.title }}</h3>
+        @if (panel.text) {
+          <p>{{ panel.text }}</p>
+        }
+      </div>
+
+      <div class="system-grid__footer system-grid__footer--side">
+        @if (panel.meta) {
+          <strong>{{ panel.meta }}</strong>
+        }
+        @if (panel.details?.length) {
+          <ul>
+            @for (detail of panel.details; track detail) {
+              <li>{{ detail }}</li>
+            }
+          </ul>
+        }
+        @if (panel.href) {
+          <a class="system-grid__jump" [href]="panel.href" [attr.aria-label]="panel.actionLabel ?? panel.title">↘</a>
+        }
+      </div>
+    </article>
+  }
+</div>
