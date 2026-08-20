@@ -1,0 +1,81 @@
+<div class="access-panel__trigger">
+  <div class="access-panel__status" aria-hidden="true">
+    <strong>{{ texts().statusTitle }}</strong>
+    <span>{{ statusText() }}</span>
+  </div>
+  <button class="access-panel__toggle" type="button" [attr.aria-label]="texts().openLabel" (click)="open()">
+    <span class="material-symbols-outlined" aria-hidden="true">accessibility_new</span>
+  </button>
+</div>
+
+<dialog #accessibilityDialog class="access-panel" [attr.aria-label]="texts().title" (click)="closeOnBackdrop($event)">
+  <section id="accessibility-controls" class="access-panel__window">
+    <header class="access-panel__head">
+      <div>
+        <p>accessibility.exe</p>
+        <h2>{{ texts().title }}</h2>
+      </div>
+      <button class="access-panel__close" type="button" [attr.aria-label]="texts().closeLabel" (click)="close()">×</button>
+    </header>
+
+    <p class="access-panel__intro">{{ texts().intro }}</p>
+
+    <div class="access-panel__quick-actions">
+      <button type="button" (click)="accessibility.enableCalmMode()">
+        <span class="material-symbols-outlined" aria-hidden="true">motion_photos_off</span>
+        {{ texts().calmMode }}
+      </button>
+      <button type="button" (click)="accessibility.resetPreferences()">{{ texts().reset }}</button>
+    </div>
+
+    <fieldset class="access-panel__group">
+      <legend>{{ texts().motionTitle }}</legend>
+      <div class="access-panel__chips">
+        @for (mode of motionModes; track mode) {
+          <button type="button" [class.is-active]="accessibility.motionMode() === mode"
+            [attr.aria-pressed]="accessibility.motionMode() === mode" (click)="setMotionMode(mode)">
+            {{ texts().motion[mode] }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="access-panel__group">
+      <legend>{{ texts().comfortTitle }}</legend>
+      <div class="access-panel__chips">
+        @for (mode of comfortModes; track mode) {
+          <button type="button" [class.is-active]="accessibility.comfortMode() === mode"
+            [attr.aria-pressed]="accessibility.comfortMode() === mode" (click)="setComfortMode(mode)">
+            {{ texts().comfort[mode] }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="access-panel__group">
+      <legend>{{ texts().contrastTitle }}</legend>
+      <div class="access-panel__chips">
+        @for (mode of contrastModes; track mode) {
+          <button type="button" [class.is-active]="accessibility.contrastMode() === mode"
+            [attr.aria-pressed]="accessibility.contrastMode() === mode" (click)="setContrastMode(mode)">
+            {{ texts().contrast[mode] }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="access-panel__group">
+      <legend>{{ texts().colorTitle }}</legend>
+      <div class="access-panel__chips access-panel__chips--grid">
+        @for (mode of colorModes; track mode) {
+          <button type="button" [class.is-active]="accessibility.colorVisionMode() === mode"
+            [attr.aria-pressed]="accessibility.colorVisionMode() === mode" (click)="setColorVisionMode(mode)">
+            {{ texts().color[mode] }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <p class="access-panel__storage">{{ texts().storageHint }}</p>
+  </section>
+</dialog>

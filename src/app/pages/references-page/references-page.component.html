@@ -1,0 +1,102 @@
+<main class="references-page">
+  <section id="referenzen-hero" class="references-hero dcr-section dcr-viewport-section dcr-section-flow" aria-labelledby="references-title">
+    <div class="dcr-container references-hero__layout">
+      <div>
+        <p class="dcr-eyebrow">{{ content().referencesPage.heading.eyebrow }}</p>
+        <h1 id="references-title">{{ content().referencesPage.heading.title }}</h1>
+        @if (content().referencesPage.heading.text) {
+          <p class="references-hero__text">{{ content().referencesPage.heading.text }}</p>
+        }
+      </div>
+      <div class="references-hero__counter" aria-hidden="true">
+        <span>{{ content().references.length }}</span>
+        <small>CASE STUDIES</small>
+      </div>
+    </div>
+  </section>
+
+  @for (reference of content().references; track reference.slug; let index = $index) {
+    <section
+      [id]="'case-' + reference.slug"
+      class="case-study dcr-section dcr-viewport-section dcr-section-flow"
+      [attr.data-accent]="reference.accent">
+      <div class="dcr-container">
+        <article class="reference-row">
+          <div class="reference-row__number" aria-hidden="true">0{{ index + 1 }}</div>
+          <div class="reference-row__visual">
+            @if (reference.image) {
+              <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="900" height="540" loading="lazy" decoding="async">
+            } @else {
+              <span>{{ reference.name }}</span>
+            }
+          </div>
+          <div class="reference-row__content">
+            <div class="reference-row__meta"><span>{{ reference.type }}</span><span>{{ reference.year }}</span></div>
+            <h2>{{ reference.name }}</h2>
+            <p>{{ reference.summary }}</p>
+            <ul [attr.aria-label]="techStackLabel()">
+              @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
+            </ul>
+            <small>{{ content().referencesPage.portfolioHint }}</small>
+            <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">
+              {{ content().referencesPage.cta }} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  }
+
+  <dcr-signal-divider variant="accent" marker="CASE::CLIENT_SPLIT" />
+
+  <section id="kundenprojekte" class="delivered-projects dcr-section dcr-viewport-section dcr-section-flow" [attr.aria-label]="content().referencesPage.deliveredAriaLabel" [dcrHorizontalWheel]="clientTrack">
+    <div class="dcr-container delivered-projects__layout">
+      <dcr-section-heading
+        [eyebrow]="content().referencesPage.deliveredHeading.eyebrow"
+        [title]="content().referencesPage.deliveredHeading.title"
+        [text]="content().referencesPage.deliveredHeading.text" />
+
+      <div
+        #clientTrack
+        class="delivered-projects__track"
+        tabindex="0"
+        [attr.aria-label]="horizontalHint()">
+        @for (project of content().deliveredProjects; track project.name; let index = $index) {
+          <article class="delivered-card">
+            <div class="delivered-card__preview">
+              <div class="delivered-card__browser" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <b>{{ project.name }}</b>
+              </div>
+              @if (project.image) {
+                <img [src]="project.image" [alt]="project.imageAlt ?? project.name" width="1200" height="720" loading="lazy" decoding="async">
+              } @else {
+                <div class="delivered-card__preview-fallback" aria-hidden="true">
+                  <strong>{{ project.name }}</strong>
+                  <span>{{ project.label }}</span>
+                </div>
+              }
+            </div>
+
+            <div class="delivered-card__body">
+              <div class="delivered-card__index" aria-hidden="true">0{{ index + 1 }}</div>
+              <p>{{ project.label }}</p>
+              <h2>{{ project.name }}</h2>
+              <ul [attr.aria-label]="techStackLabel()">
+                @for (tech of project.stack; track tech) { <li>{{ tech }}</li> }
+              </ul>
+              <a [href]="project.url" target="_blank" rel="noopener noreferrer">
+                {{ content().referencesPage.deliveredCta }}
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+              </a>
+            </div>
+          </article>
+        }
+        <div class="delivered-projects__end" aria-hidden="true">
+          <span>END::04</span>
+          <span class="material-symbols-outlined">south</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

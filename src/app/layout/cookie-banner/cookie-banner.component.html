@@ -1,0 +1,49 @@
+@if (consentService.visible()) {
+  <section
+    id="privacy-controls"
+    class="cookie-banner"
+    [class.cookie-banner--details]="consentService.detailsOpen()"
+    role="dialog"
+    aria-live="polite"
+    [attr.aria-label]="texts().ariaLabel">
+    <div class="cookie-banner__head">
+      <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+      <div>
+        <p>{{ texts().eyebrow }}</p>
+        <h2>{{ texts().title }}</h2>
+      </div>
+    </div>
+
+    @if (!consentService.detailsOpen()) {
+      <p class="cookie-banner__text">{{ texts().text }}</p>
+      <ul class="cookie-banner__chips" aria-label="Privacy status">
+        <li>{{ texts().necessaryLabel }}</li>
+        <li>{{ texts().trackingLabel }}</li>
+        <li>{{ texts().externalLabel }}</li>
+      </ul>
+    } @else {
+      <div class="cookie-banner__controls">
+        @for (control of texts().controls; track control.title) {
+          <article class="cookie-banner__control" [attr.data-state]="control.state">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ control.icon }}</span>
+            <div>
+              <h3>{{ control.title }}</h3>
+              <b>{{ control.status }}</b>
+              <p>{{ control.text }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    }
+
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-banner__details" (click)="consentService.toggleDetails()">
+        {{ consentService.detailsOpen() ? texts().overviewLabel : texts().detailsLabel }}
+      </button>
+      <button type="button" class="cookie-banner__submit" (click)="consentService.acceptNecessary()">
+        <span>{{ texts().acceptLabel }}</span>
+        <span class="material-symbols-outlined" aria-hidden="true">check</span>
+      </button>
+    </div>
+  </section>
+}

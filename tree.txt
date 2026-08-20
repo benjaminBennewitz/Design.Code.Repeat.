@@ -1,0 +1,141 @@
+Design.Code.Repeat/
+├── backend/
+│   ├── config/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── contact/
+│   │   ├── __init__.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── services.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── tests/
+│   ├── .env.example
+│   ├── manage.py
+│   └── requirements.txt
+├── docs/
+│   ├── phase-2-architecture.md
+│   └── security.md
+├── node_modules/
+│   └── ...
+├── scripts/
+│   └── copy-fonts.ps1
+├── src/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── data/
+│   │   │   │   ├── studio-content.spec.ts
+│   │   │   │   └── studio-content.ts
+│   │   │   ├── models/
+│   │   │   │   └── studio.models.ts
+│   │   │   └── services/
+│   │   │       ├── contact-api.service.ts
+│   │   │       ├── language.service.ts
+│   │   │       ├── seo.service.ts
+│   │   │       ├── tab-title.service.ts
+│   │   │       ├── theme.service.ts
+│   │   │       └── theme-contrast.service.ts
+│   │   ├── layout/
+│   │   │   ├── footer/
+│   │   │   │   ├── footer.component.html
+│   │   │   │   ├── footer.component.scss
+│   │   │   │   └── footer.component.ts
+│   │   │   └── header/
+│   │   │       ├── header.component.html
+│   │   │       ├── header.component.scss
+│   │   │       └── header.component.ts
+│   │   ├── pages/
+│   │   │   ├── contact-page/
+│   │   │   │   ├── contact-page.component.html
+│   │   │   │   ├── contact-page.component.scss
+│   │   │   │   └── contact-page.component.ts
+│   │   │   ├── home-page/
+│   │   │   │   ├── home-page.component.html
+│   │   │   │   ├── home-page.component.scss
+│   │   │   │   └── home-page.component.ts
+│   │   │   ├── legal-notice-page/
+│   │   │   │   ├── legal-notice-page.component.html
+│   │   │   │   ├── legal-notice-page.component.scss
+│   │   │   │   └── legal-notice-page.component.ts
+│   │   │   ├── not-found-page/
+│   │   │   │   ├── not-found-page.component.html
+│   │   │   │   ├── not-found-page.component.scss
+│   │   │   │   └── not-found-page.component.ts
+│   │   │   ├── privacy-page/
+│   │   │   │   ├── privacy-page.component.html
+│   │   │   │   ├── privacy-page.component.scss
+│   │   │   │   └── privacy-page.component.ts
+│   │   │   ├── references-page/
+│   │   │   │   ├── references-page.component.html
+│   │   │   │   ├── references-page.component.scss
+│   │   │   │   └── references-page.component.ts
+│   │   │   ├── service-detail-page/
+│   │   │   │   ├── service-detail-page.component.html
+│   │   │   │   ├── service-detail-page.component.scss
+│   │   │   │   └── service-detail-page.component.ts
+│   │   │   ├── services-page/
+│   │   │   │   ├── services-page.component.html
+│   │   │   │   ├── services-page.component.scss
+│   │   │   │   └── services-page.component.ts
+│   │   │   ├── studio-page/
+│   │   │   │   ├── studio-page.component.html
+│   │   │   │   ├── studio-page.component.scss
+│   │   │   │   └── studio-page.component.ts
+│   │   │   └── thank-you-page/
+│   │   │       ├── thank-you-page.component.html
+│   │   │       ├── thank-you-page.component.scss
+│   │   │       └── thank-you-page.component.ts
+│   │   ├── shared/
+│   │   │   ├── contact-form/
+│   │   │   │   ├── contact-form.component.html
+│   │   │   │   ├── contact-form.component.scss
+│   │   │   │   └── contact-form.component.ts
+│   │   │   ├── section-heading/
+│   │   │   │   ├── section-heading.component.html
+│   │   │   │   ├── section-heading.component.scss
+│   │   │   │   └── section-heading.component.ts
+│   │   │   └── terminal-panel/
+│   │   │       ├── terminal-panel.component.html
+│   │   │       ├── terminal-panel.component.scss
+│   │   │       └── terminal-panel.component.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.scss
+│   │   ├── app.component.ts
+│   │   └── app.routes.ts
+│   ├── assets/
+│   │   ├── fonts/
+│   │   │   ├── inter-variable.ttf
+│   │   │   ├── jetbrains-mono-variable.ttf
+│   │   │   ├── material-symbols-outlined-latin-fill-normal.woff2
+│   │   │   └── README.md
+│   │   ├── images/
+│   │   │   └── projects/
+│   │   │       ├── design-archive.webp
+│   │   │       └── globi-flow.webp
+│   │   └── favicon.svg
+│   ├── styles/
+│   │   ├── base.scss
+│   │   ├── tokens.scss
+│   │   └── utilities.scss
+│   ├── index.html
+│   ├── main.ts
+│   ├── robots.txt
+│   └── styles.scss
+├── .editorconfig
+├── .gitignore
+├── .nvmrc
+├── angular.json
+├── make-tree.ps1
+├── package.json
+├── package-lock.json
+├── proxy.conf.json
+├── README.md
+├── tools.md
+├── tsconfig.app.json
+├── tsconfig.json
+└── tsconfig.spec.json

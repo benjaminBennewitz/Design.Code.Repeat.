@@ -1,0 +1,84 @@
+<footer class="site-footer">
+  <div class="site-footer__toolbar dcr-container">
+    <div>
+      <span>Design. Code. Repeat.</span>
+      <small>B² // studio.footer</small>
+    </div>
+
+    <div class="site-footer__arrows">
+      <button type="button" [attr.aria-label]="ui().previous" (click)="previousPanel()">
+        <span class="material-symbols-outlined" aria-hidden="true">west</span>
+      </button>
+      <button type="button" [attr.aria-label]="ui().next" (click)="nextPanel()">
+        <span class="material-symbols-outlined" aria-hidden="true">east</span>
+      </button>
+    </div>
+
+    <div class="site-footer__status" aria-live="polite">
+      0{{ activePanel() + 1 }} / 03
+    </div>
+  </div>
+
+  <div class="site-footer__stage dcr-container">
+    <div class="site-footer__panel-copy" [attr.aria-label]="ui().panelLabel">
+      <section id="footer-sitemap" class="site-footer__panel" [class.is-active]="activePanel() === 0" [attr.aria-hidden]="activePanel() !== 0" [attr.inert]="activePanel() !== 0 ? '' : null">
+        <div class="site-footer__panel-head">
+          <p>{{ ui().sitemap }}</p>
+          <h2>{{ content().footer.tagline }}</h2>
+        </div>
+
+        <div class="site-footer__sitemap">
+          <nav aria-label="Primary footer navigation">
+            <a routerLink="/">{{ ui().home }}</a>
+            <a routerLink="/leistungen">{{ content().navigation.items[1].label }}</a>
+            <a routerLink="/referenzen">{{ content().navigation.items[2].label }}</a>
+            <a routerLink="/studio">{{ content().navigation.items[3].label }}</a>
+            <a routerLink="/" fragment="prozess">{{ ui().process }}</a>
+            <a routerLink="/" fragment="faq">{{ ui().faq }}</a>
+            <a routerLink="/kontakt">{{ content().navigation.ctaLabel }}</a>
+          </nav>
+
+          <nav [attr.aria-label]="content().footer.servicesTitle">
+            @for (service of content().services; track service.slug) {
+              <a routerLink="/leistungen" fragment="service-index">{{ service.shortTitle }}</a>
+            }
+          </nav>
+        </div>
+      </section>
+
+      <section id="footer-rechtliches" class="site-footer__panel" [class.is-active]="activePanel() === 1" [attr.aria-hidden]="activePanel() !== 1" [attr.inert]="activePanel() !== 1 ? '' : null">
+        <div class="site-footer__panel-head">
+          <p>{{ ui().legal }}</p>
+          <h2>privacy / legal / control</h2>
+        </div>
+
+        <div class="site-footer__legal-grid">
+          <a routerLink="/impressum"><span>01</span>{{ ui().notice }}</a>
+          <a routerLink="/datenschutz"><span>02</span>{{ ui().privacy }}</a>
+          <button type="button" (click)="cookieConsentService.openSettings()"><span>03</span>{{ ui().cookie }}</button>
+          <a href="https://design-code-repeat.de" target="_blank" rel="noopener noreferrer"><span>04</span>{{ ui().portfolio }} ↗</a>
+        </div>
+      </section>
+
+      <section id="footer-kontakt" class="site-footer__panel site-footer__panel--contact" [class.is-active]="activePanel() === 2" [attr.aria-hidden]="activePanel() !== 2" [attr.inert]="activePanel() !== 2 ? '' : null">
+        <div class="site-footer__panel-head">
+          <p>{{ ui().contact }}</p>
+          <h2>{{ ui().lead }}</h2>
+        </div>
+        <div class="site-footer__contact-form">
+          <dcr-contact-form idPrefix="footer-contact" />
+        </div>
+      </section>
+    </div>
+
+    <div class="site-footer__wordmark" aria-hidden="true">
+      <span>DESIGN.</span><span>CODE.</span><span>REPEAT.</span>
+    </div>
+
+    <div class="site-footer__meta">
+      <span>© {{ year }} Design. Code. Repeat.</span>
+      <span>{{ content().footer.signature }}</span>
+      <a href="mailto:kontakt@bennewitz.de">kontakt&#64;bennewitz.de</a>
+    </div>
+  </div>
+</footer>

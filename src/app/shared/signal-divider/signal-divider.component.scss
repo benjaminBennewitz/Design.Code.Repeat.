@@ -1,0 +1,252 @@
+:host {
+  position: relative;
+  z-index: 8;
+  display: block;
+  width: min(30vw, 32rem);
+  min-width: 20rem;
+  margin: clamp(-3.5rem, -4vh, -2rem) var(--dcr-page-gutter) clamp(-3rem, -3vh, -1.5rem) auto;
+}
+
+.signal-divider {
+  --signal-bg: var(--dcr-color-contrast-light);
+  --signal-fg: var(--dcr-color-contrast-dark);
+  --signal-accent: var(--dcr-color-lime);
+  position: relative;
+  min-height: clamp(11rem, 18vw, 16rem);
+  overflow: hidden;
+  border: 2px solid color-mix(in srgb, var(--signal-fg) 46%, transparent);
+  background: var(--signal-bg);
+  color: var(--signal-fg);
+  box-shadow: 9px 9px 0 color-mix(in srgb, var(--dcr-color-primary) 22%, transparent);
+  isolation: isolate;
+  transform: rotate(-0.7deg);
+}
+
+.signal-divider[data-variant='accent'] {
+  --signal-bg: var(--dcr-color-lime);
+  --signal-fg: var(--dcr-color-on-lime);
+  --signal-accent: var(--dcr-color-contrast-dark);
+}
+
+.signal-divider__grid {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--signal-fg) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--signal-fg) 8%, transparent) 1px, transparent 1px);
+  background-size: 33.333% 100%, 100% 33.333%;
+}
+
+.signal-divider__grid::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background:
+    radial-gradient(circle at 13% 23%, color-mix(in srgb, var(--signal-accent) 78%, transparent) 0 3px, transparent 4px),
+    radial-gradient(circle at 72% 38%, color-mix(in srgb, var(--signal-accent) 74%, transparent) 0 4px, transparent 5px),
+    radial-gradient(circle at 86% 77%, color-mix(in srgb, var(--signal-accent) 72%, transparent) 0 3px, transparent 4px);
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.signal-divider__meta,
+.signal-divider__baseline {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-family: var(--dcr-font-mono);
+  font-size: clamp(0.46rem, 0.52vw, 0.58rem);
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.signal-divider__meta--start {
+  top: 0.7rem;
+  left: 0.75rem;
+}
+
+.signal-divider__meta--end {
+  top: 0.7rem;
+  right: 0.75rem;
+}
+
+.signal-divider__meta span:first-child,
+.signal-divider__baseline span:nth-child(3) {
+  padding: 0.18rem 0.3rem;
+  background: var(--signal-fg);
+  color: var(--signal-bg);
+}
+
+.signal-divider__glyphs {
+  position: absolute;
+  z-index: 2;
+  right: -12%;
+  bottom: 24%;
+  left: -12%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.06rem;
+  transform: rotate(-1deg);
+  white-space: nowrap;
+}
+
+.signal-divider__glyph {
+  --glyph-index: 0;
+  position: relative;
+  display: inline-grid;
+  min-width: 0.55em;
+  place-items: center;
+  font-family: var(--dcr-font-display);
+  font-size: clamp(2rem, 4.6vw, 4.8rem);
+  font-weight: 900;
+  line-height: 0.72;
+  letter-spacing: -0.09em;
+  text-transform: uppercase;
+  transform-origin: 50% 70%;
+  animation: signal-glyph-drift 3.8s steps(2, jump-none) infinite;
+  animation-delay: calc(var(--glyph-index) * -0.13s);
+}
+
+.signal-divider__glyph::before,
+.signal-divider__glyph::after {
+  position: absolute;
+  content: '';
+  background: var(--signal-accent);
+  pointer-events: none;
+}
+
+.signal-divider__glyph::before {
+  top: var(--pixel-top);
+  left: var(--pixel-left);
+  width: clamp(0.25rem, 0.5vw, 0.48rem);
+  aspect-ratio: 1;
+  animation: signal-pixel-pulse 2.2s steps(2, jump-none) infinite;
+  animation-delay: calc(var(--glyph-index) * -0.19s);
+}
+
+.signal-divider__glyph::after {
+  right: 2%;
+  bottom: 9%;
+  width: 34%;
+  height: 0.08em;
+  opacity: 0.38;
+  transform: translateX(8%);
+}
+
+.signal-divider__blocks {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+}
+
+.signal-divider__blocks span {
+  --block-index: 0;
+  position: absolute;
+  width: clamp(0.28rem, 0.5vw, 0.52rem);
+  aspect-ratio: 1;
+  background: var(--signal-accent);
+  box-shadow: 0.6rem 0 0 color-mix(in srgb, var(--signal-fg) 76%, transparent);
+  animation: signal-block-shift 3.2s steps(3, jump-none) infinite;
+  animation-delay: calc(var(--block-index) * -0.22s);
+}
+
+.signal-divider__fragments {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 27%;
+  overflow: hidden;
+}
+
+.signal-divider__fragments span {
+  --fragment-index: 0;
+  position: absolute;
+  height: clamp(0.12rem, 0.24vw, 0.26rem);
+  background: var(--signal-fg);
+  transform-origin: left center;
+  animation: signal-fragment-scan 4.8s steps(4, jump-none) infinite;
+  animation-delay: calc(var(--fragment-index) * -0.17s);
+}
+
+.signal-divider__baseline {
+  right: 0.7rem;
+  bottom: 0.55rem;
+  gap: 0.45rem;
+  opacity: 0.72;
+}
+
+@keyframes signal-glyph-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scaleY(1); }
+  24% { transform: translate3d(0, -0.06em, 0) rotate(-1.2deg) scaleY(0.96); }
+  48% { transform: translate3d(0.02em, 0.03em, 0) rotate(0.8deg) scaleY(1.03); }
+  72% { transform: translate3d(-0.02em, -0.02em, 0) rotate(-0.45deg) scaleY(0.99); }
+}
+
+@keyframes signal-pixel-pulse {
+  0%, 42%, 100% { opacity: 1; transform: scale(1); }
+  46%, 62% { opacity: 0.12; transform: scale(0.62); }
+}
+
+@keyframes signal-block-shift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(0.45rem, -0.25rem, 0); }
+  66% { transform: translate3d(-0.25rem, 0.34rem, 0); }
+}
+
+@keyframes signal-fragment-scan {
+  0%, 100% { transform: translateX(0) scaleX(0.84); }
+  40% { transform: translateX(6rem) scaleX(1.18); }
+  68% { transform: translateX(2rem) scaleX(0.62); }
+}
+
+:host-context(:root[data-motion='reduced']) .signal-divider__glyph,
+:host-context(:root[data-motion='reduced']) .signal-divider__glyph::before,
+:host-context(:root[data-motion='reduced']) .signal-divider__blocks span,
+:host-context(:root[data-motion='reduced']) .signal-divider__fragments span,
+:host-context(:root[data-motion='off']) .signal-divider__glyph,
+:host-context(:root[data-motion='off']) .signal-divider__glyph::before,
+:host-context(:root[data-motion='off']) .signal-divider__blocks span,
+:host-context(:root[data-motion='off']) .signal-divider__fragments span {
+  animation: none;
+}
+
+:host-context(:root[data-comfort='simple']) .signal-divider__blocks span:nth-child(n + 7),
+:host-context(:root[data-comfort='simple']) .signal-divider__fragments span:nth-child(n + 10) {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  :host {
+    width: min(76vw, 30rem);
+    min-width: 0;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  :host {
+    width: calc(100% - 2rem);
+    margin: -1.5rem 1rem;
+  }
+
+  .signal-divider {
+    min-height: 10rem;
+  }
+
+  .signal-divider__meta--end,
+  .signal-divider__glyph:nth-child(2n) {
+    display: none;
+  }
+
+  .signal-divider__glyph {
+    font-size: clamp(2rem, 11vw, 3.4rem);
+  }
+}

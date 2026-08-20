@@ -1,0 +1,18 @@
+<main class="legal-page">
+  <section class="legal-page__hero dcr-section dcr-viewport-section dcr-section-flow" id="impressum">
+    <div class="dcr-container legal-page__content">
+      <p class="dcr-eyebrow">legal.notice</p>
+      <h1>{{ content().noticeTitle }}</h1>
+    </div>
+  </section>
+
+  @for (item of content().noticeSections; track item.title; let index = $index) {
+    <section class="legal-page__section dcr-section dcr-viewport-section dcr-section-flow" [id]="'impressum-' + (index + 1)">
+      <div class="dcr-container legal-page__content">
+        <span class="legal-page__index">0{{ index + 1 }}</span>
+        <h2>{{ item.title }}</h2>
+        @for (line of item.lines; track line) { <p>{{ line }}</p> }
+      </div>
+    </section>
+  }
+</main>

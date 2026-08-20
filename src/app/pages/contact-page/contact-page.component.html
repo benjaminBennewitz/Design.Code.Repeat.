@@ -1,0 +1,22 @@
+<main class="contact-page">
+  <section class="contact-page__section dcr-section dcr-viewport-section dcr-section-flow" id="kontakt-anfrage">
+    <div class="dcr-container contact-page__layout">
+      <div class="contact-page__copy">
+        <dcr-section-heading [eyebrow]="content().contactPage.heading.eyebrow" [title]="content().contactPage.heading.title" [text]="content().contactPage.heading.text" />
+
+        <aside class="contact-page__direct">
+          <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+          <div>
+            <h2>{{ content().contactPage.directTitle }}</h2>
+            <p>{{ content().contactPage.directText }}</p>
+            <a [href]="'mailto:' + content().contactPage.email">{{ content().contactPage.emailLabel }} →</a>
+          </div>
+        </aside>
+
+        <dcr-terminal-panel title="request.security" [lines]="['xsrf=client-ready', 'maxlength=client+server', 'payload=whitelisted', 'rate_limit=backend']" />
+      </div>
+
+      <dcr-contact-form idPrefix="contact-page" />
+    </div>
+  </section>
+</main>

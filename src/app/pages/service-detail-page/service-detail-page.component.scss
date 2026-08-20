@@ -1,0 +1,52 @@
+.service-detail { --service-accent: var(--dcr-color-primary); --service-on-accent: var(--dcr-color-on-primary); }
+.service-detail[data-accent='lime'] { --service-accent: var(--dcr-color-lime); --service-on-accent: var(--dcr-color-on-lime); }
+.service-detail[data-accent='pink'] { --service-accent: var(--dcr-color-pink); --service-on-accent: var(--dcr-color-on-pink); }
+.service-detail[data-accent='violet'] { --service-accent: var(--dcr-color-violet); --service-on-accent: var(--dcr-color-on-violet); }
+.service-detail[data-accent='orange'] { --service-accent: var(--dcr-color-orange); --service-on-accent: var(--dcr-color-on-orange); }
+
+.service-detail__hero { min-height: min(820px, calc(100svh - var(--dcr-header-height))); display: grid; align-items: center; background: linear-gradient(135deg, color-mix(in srgb, var(--service-accent) 9%, var(--dcr-color-bg)), var(--dcr-color-bg)); }
+.service-detail__hero-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr); gap: clamp(2rem, 8vw, 8rem); align-items: center; }
+.service-detail__back { display: inline-flex; gap: 0.45rem; align-items: center; margin-bottom: 2rem; color: var(--dcr-color-text-muted); font-family: var(--dcr-font-mono); font-size: 0.72rem; font-weight: 800; text-decoration: none; }
+.service-detail__back:hover, .service-detail__back:focus-visible { color: var(--dcr-color-text); text-decoration: underline 3px var(--service-accent); text-underline-offset: 0.2em; }
+.service-detail h1 { max-width: 12ch; margin: 0.8rem 0 0.7rem; font-family: var(--dcr-font-display); font-size: clamp(4rem, 8vw, 8rem); line-height: 0.84; letter-spacing: -0.07em; }
+.service-detail__kicker { width: fit-content; margin: 0; padding: 0.35rem 0.5rem; background: var(--service-accent); color: var(--service-on-accent); font-family: var(--dcr-font-mono); font-weight: 800; }
+.service-detail__lead { max-width: 55rem; color: var(--dcr-color-text-muted); font-size: 1.08rem; line-height: 1.7; }
+.service-detail__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+.service-detail__actions strong { font-family: var(--dcr-font-mono); }
+.dcr-button--accent { border-color: var(--service-accent); background: var(--service-accent); color: var(--service-on-accent); }
+
+.service-detail__columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.service-detail__columns article { border: 2px solid var(--dcr-color-border-strong); padding: clamp(1.5rem, 4vw, 3rem); background: var(--dcr-color-surface-solid); }
+.service-detail__columns h2 { margin: 0.7rem 0 1.5rem; font-family: var(--dcr-font-display); font-size: clamp(2.4rem, 4vw, 4.3rem); line-height: 0.9; }
+.service-detail__columns ul { display: grid; gap: 0.8rem; margin: 0; padding: 0; list-style: none; }
+.service-detail__columns li { display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: 0.6rem; align-items: start; color: var(--dcr-color-text-muted); line-height: 1.55; }
+.service-detail__columns li .material-symbols-outlined { display: grid; place-items: center; width: 1.35rem; height: 1.35rem; background: var(--service-accent); color: var(--service-on-accent); font-size: 1rem; }
+
+.service-detail__cta { background: var(--service-accent); color: var(--service-on-accent); }
+.service-detail__cta-layout { display: flex; gap: 2rem; align-items: end; justify-content: space-between; }
+.service-detail__cta h2 { margin: 0.6rem 0; font-family: var(--dcr-font-display); font-size: clamp(2.7rem, 5vw, 5.5rem); line-height: 0.9; }
+.service-detail__cta p { max-width: 48rem; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .service-detail__hero-layout, .service-detail__columns { grid-template-columns: 1fr; }
+  .service-detail__cta-layout { align-items: start; flex-direction: column; }
+}
+
+.service-detail__hero {
+  --dcr-section-bg: color-mix(in srgb, var(--service-accent) 9%, var(--dcr-color-bg));
+  --dcr-section-next-bg: var(--dcr-color-bg);
+}
+
+.service-detail__body {
+  --dcr-section-bg: var(--dcr-color-bg);
+  --dcr-section-next-bg: var(--service-accent);
+  display: grid;
+  align-items: center;
+}
+
+.service-detail__cta {
+  --dcr-section-bg: var(--service-accent);
+  --dcr-section-next-bg: var(--dcr-color-bg);
+  display: grid;
+  align-items: center;
+}

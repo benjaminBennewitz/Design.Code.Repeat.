@@ -1,0 +1,55 @@
+:host {
+  display: contents;
+}
+
+.scroll-top {
+  position: fixed;
+  z-index: 70;
+  right: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.35rem;
+  align-items: center;
+  min-height: 2.75rem;
+  border: 1px solid var(--dcr-color-border-strong);
+  padding: 0 0.75rem;
+  background: color-mix(in srgb, var(--dcr-color-surface-solid) 90%, transparent);
+  color: var(--dcr-color-text);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--dcr-color-primary) 24%, transparent);
+  backdrop-filter: blur(12px);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  cursor: pointer;
+  animation: scroll-top-in 240ms var(--dcr-ease-out) both;
+}
+
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  border-color: var(--dcr-color-primary);
+  background: var(--dcr-color-primary);
+  color: var(--dcr-color-on-primary);
+  transform: translate(-2px, -2px);
+}
+
+.scroll-top .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+@keyframes scroll-top-in {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility-Panel bleibt als primäre globale Kontrolle unten rechts frei zugänglich. */
+.scroll-top {
+  bottom: calc(clamp(1rem, 2vw, 1.5rem) + 4.4rem);
+}
+
+@media (max-width: 560px) {
+  .scroll-top {
+    right: 0.75rem;
+    bottom: 4.9rem;
+  }
+}

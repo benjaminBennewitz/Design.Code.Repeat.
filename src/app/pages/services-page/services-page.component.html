@@ -1,0 +1,204 @@
+<main class="services-page">
+  <section id="leistungen-hero" class="services-hero dcr-section dcr-viewport-section dcr-section-flow">
+    <dcr-ambient-field variant="services" />
+    <div class="dcr-container services-hero__layout">
+      <div class="services-hero__copy">
+        <p class="dcr-eyebrow">{{ content().servicesPage.hero.eyebrow }}</p>
+        <h1>{{ content().servicesPage.hero.title }}</h1>
+        <p class="services-hero__lead">{{ content().servicesPage.hero.text }}</p>
+        <div class="services-hero__actions">
+          <dcr-action-button
+            [label]="content().servicesPage.hero.primaryCta"
+            route="/kontakt"
+            variant="primary"
+            icon="arrow_outward" />
+          <a class="services-hero__jump" href="#service-index">
+            <span>service.index</span>
+            <span class="material-symbols-outlined" aria-hidden="true">south</span>
+          </a>
+        </div>
+        <p class="services-hero__note">{{ content().servicesPage.hero.note }}</p>
+      </div>
+
+      <div class="services-hero__visual">
+        <div class="services-hero__counter" aria-hidden="true">
+          <span>06</span>
+          <small>MODULES</small>
+        </div>
+        <dcr-terminal-panel title="scope_check.exe" [lines]="['problem=first', 'stack=second', 'outcome=always', 'ops=optional']" />
+      </div>
+    </div>
+  </section>
+
+  <section id="preisrahmen" class="services-offers dcr-section dcr-viewport-section dcr-section-flow" aria-labelledby="services-offers-title">
+    <div class="services-offers__layout dcr-container">
+      <div class="services-offers__head">
+        <p class="dcr-eyebrow">{{ content().servicesPage.offersHeading.eyebrow }}</p>
+        <h2 id="services-offers-title">{{ content().servicesPage.offersHeading.title }}</h2>
+        @if (content().servicesPage.offersHeading.text) {
+          <p>{{ content().servicesPage.offersHeading.text }}</p>
+        }
+      </div>
+
+      <div class="services-offers__list">
+        @for (offer of content().offers; track offer.title; let index = $index) {
+          <article class="service-offer" [class.service-offer--featured]="offer.featured">
+            <div class="service-offer__index" aria-hidden="true">0{{ index + 1 }}</div>
+            @if (offer.badge) {
+              <span class="service-offer__badge">{{ offer.badge }}</span>
+            }
+
+            <div class="service-offer__main">
+              <h3>{{ offer.title }}</h3>
+              <strong class="service-offer__price">{{ offer.price }}</strong>
+              <p class="service-offer__claim">{{ offer.claim }}</p>
+              <p class="service-offer__description">{{ offer.description }}</p>
+              <code class="service-offer__command">{{ offer.command }}</code>
+            </div>
+
+            <div class="service-offer__details">
+              <ul>
+                @for (feature of offer.features; track feature) {
+                  <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ feature }}</li>
+                }
+              </ul>
+              <p class="service-offer__quality">{{ content().servicesPage.qualityBaseline }}</p>
+              <dcr-action-button [label]="offer.ctaLabel" route="/kontakt" [variant]="offer.featured ? 'dark' : 'primary'" icon="arrow_outward" />
+            </div>
+          </article>
+        }
+      </div>
+
+      <p class="services-offers__note">{{ content().servicesPage.offerNote }}</p>
+    </div>
+  </section>
+
+  <dcr-signal-divider variant="paper" marker="SVC::MATRIX_06" />
+
+  <section id="service-index" class="service-index dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container service-index__layout">
+      <div class="service-index__head">
+        <p class="dcr-eyebrow">{{ indexLabels().eyebrow }}</p>
+        <h2>{{ indexLabels().title }}</h2>
+      </div>
+
+      <div class="service-console">
+        <div class="service-console__tabs" [attr.aria-label]="indexLabels().selector">
+          @for (service of content().services; track service.slug; let index = $index) {
+            <button
+              type="button"
+              [id]="'service-selector-' + service.slug"
+              aria-controls="service-console-panel"
+              [attr.aria-pressed]="selectedServiceIndex() === index"
+              [class.is-active]="selectedServiceIndex() === index"
+              [attr.data-accent]="service.accent"
+              (click)="selectService(index)">
+              <span class="service-console__index">0{{ index + 1 }}</span>
+              <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
+              <span class="service-console__label">
+                <strong>{{ service.title }}</strong>
+                <small>{{ service.kicker }}</small>
+              </span>
+              <span class="material-symbols-outlined service-console__arrow" aria-hidden="true">east</span>
+            </button>
+          }
+        </div>
+
+        @if (selectedService(); as service) {
+          <article
+            class="service-console__panel"
+            id="service-console-panel"
+            aria-live="polite"
+            [attr.aria-labelledby]="'service-selector-' + service.slug"
+            [attr.data-accent]="service.accent">
+            <div class="service-console__scan" aria-hidden="true"></div>
+            <div class="service-console__panel-top">
+              <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
+              <code>{{ service.command }}</code>
+            </div>
+            <div>
+              <p class="service-console__kicker">{{ service.kicker }}</p>
+              <h3>{{ service.title }}</h3>
+              <p class="service-console__summary">{{ service.summary }}</p>
+            </div>
+            <div class="service-console__quick">
+              <div>
+                <span>{{ indexLabels().price }}</span>
+                <strong>{{ service.price }}</strong>
+              </div>
+              <div>
+                <span>{{ indexLabels().highlights }}</span>
+                <ul>
+                  @for (highlight of service.features.slice(0, 4); track highlight) {
+                    <li>{{ highlight }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+            <dcr-action-button [label]="indexLabels().contact" route="/kontakt" variant="primary" icon="arrow_outward" />
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="betreuung" class="care-section dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container care-section__layout">
+      <dcr-section-heading
+        [eyebrow]="content().servicesPage.careHeading.eyebrow"
+        [title]="content().servicesPage.careHeading.title"
+        [text]="content().servicesPage.careHeading.text" />
+
+      <div class="care-section__wave-stage">
+        <dcr-dithering-shader
+          class="care-section__wave"
+          shape="wave"
+          type="8x8"
+          colorBack="transparent"
+          colorFront="var(--services-transition-color)"
+          [pxSize]="3"
+          [speed]="0.6"
+          [intensity]="1.18" />
+
+        <div class="care-section__wave-content">
+          <div class="care-grid">
+            @for (plan of content().carePlans; track plan.name) {
+              <article>
+                <h3>{{ plan.name }}</h3>
+                <strong>{{ plan.price }}</strong>
+                <p>{{ plan.text }}</p>
+                <ul>@for (feature of plan.features; track feature) { <li>{{ feature }}</li> }</ul>
+              </article>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="managed-ops" class="ops-section dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container ops-section__layout">
+      <div>
+        <dcr-section-heading
+          [eyebrow]="content().servicesPage.hostingHeading.eyebrow"
+          [title]="content().servicesPage.hostingHeading.title"
+          [text]="content().servicesPage.hostingHeading.text" />
+        <div class="ops-section__actions">
+          <dcr-action-button [label]="content().services[4].title" route="/kontakt" variant="dark" icon="arrow_outward" />
+          <dcr-action-button [label]="content().services[5].title" route="/kontakt" variant="dark" icon="arrow_outward" />
+        </div>
+      </div>
+
+      <div class="ops-pipeline" aria-hidden="true">
+        <div class="ops-pipeline__line"></div>
+        @for (label of opsLabels(); track label; let index = $index) {
+          <div class="ops-pipeline__node" [style.--node-index]="index">
+            <span>{{ index + 1 }}</span>
+            <strong>{{ label }}</strong>
+          </div>
+        }
+        <code>request → deploy → observe → recover</code>
+      </div>
+    </div>
+  </section>
+</main>
