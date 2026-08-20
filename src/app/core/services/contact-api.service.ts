@@ -6,6 +6,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { ContactTopic } from '../models/studio.models';
 
 /** Expliziter Request-Body; zusätzliche Formularfelder werden nicht an das Backend weitergereicht. */
@@ -21,8 +22,9 @@ export interface ContactRequest {
 @Injectable({ providedIn: 'root' })
 export class ContactApiService {
   private readonly http = inject(HttpClient);
-  private readonly endpoint = '/api/contact/';
-  private readonly csrfEndpoint = '/api/csrf/';
+  private readonly apiBaseUrl = environment.apiBaseUrl.replace(/\/$/, '');
+  private readonly endpoint = `${this.apiBaseUrl}/contact/`;
+  private readonly csrfEndpoint = `${this.apiBaseUrl}/csrf/`;
 
   /**
    * Sendet die Anfrage mit Angulars same-origin XSRF-Schutz.

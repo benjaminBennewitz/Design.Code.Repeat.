@@ -18,9 +18,12 @@ Design.Code.Repeat/
 │   │   └── views.py
 │   ├── tests/
 │   ├── .env.example
+│   ├── .env.production.example
 │   ├── manage.py
 │   └── requirements.txt
 ├── docs/
+│   ├── readme/
+│   │   └── dcr-readme-banner.svg
 │   ├── phase-2-architecture.md
 │   └── security.md
 ├── node_modules/
@@ -162,6 +165,9 @@ Design.Code.Repeat/
 │   │   │       ├── ben-head.webp
 │   │   │       └── fuelli.webp
 │   │   └── favicon.svg
+│   ├── environments/
+│   │   ├── environment.production.ts
+│   │   └── environment.ts
 │   ├── styles/
 │   │   ├── base.scss
 │   │   ├── home-hero.scss
@@ -175,6 +181,7 @@ Design.Code.Repeat/
 ├── .gitignore
 ├── .nvmrc
 ├── angular.json
+├── LICENSE
 ├── make-tree.ps1
 ├── package.json
 ├── package-lock.json

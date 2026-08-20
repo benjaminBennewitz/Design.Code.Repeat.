@@ -1,11 +1,12 @@
 /**
  * @file SEO-Service für Meta-Daten, Canonical und strukturierte Daten.
- * @description Nutzt die aktuelle Origin statt eine unbekannte Studio-Domain fest einzubrennen.
+ * @description Nutzt im Browser die aktuelle Origin und fällt außerhalb davon auf das Angular-Environment zurück.
  */
 
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 import { SeoPageContent } from '../models/studio.models';
 import { TabTitleService } from './tab-title.service';
 
@@ -16,6 +17,7 @@ export class SeoService {
   private readonly meta = inject(Meta);
   private readonly tabTitle = inject(TabTitleService);
   private readonly structuredDataId = 'dcr-structured-data';
+  private readonly configuredSiteUrl = environment.siteUrl.replace(/\/$/, '');
 
   /** Setzt SEO-Daten für eine reguläre indexierbare Seite. */
   setPage(content: SeoPageContent, path: string, type: 'website' | 'article' = 'website'): void {
@@ -55,13 +57,16 @@ export class SeoService {
     this.setCanonical(this.absoluteUrl(path));
   }
 
-  /** Erstellt eine absolute URL auf Basis des realen Hosts. */
+  /** Erstellt eine absolute URL auf Basis des realen Hosts mit Environment-Fallback. */
   private absoluteUrl(path: string): string {
-    const origin = this.document.location?.origin && this.document.location.origin !== 'null'
-      ? this.document.location.origin
-      : '';
     const normalized = path.startsWith('/') ? path : `/${path}`;
-    return `${origin}${normalized}`;
+    return `${this.siteOrigin()}${normalized}`;
+  }
+
+  /** Liefert im Browser die reale Origin und außerhalb davon die konfigurierte Site-URL. */
+  private siteOrigin(): string {
+    const documentOrigin = this.document.location?.origin;
+    return documentOrigin && documentOrigin !== 'null' ? documentOrigin : this.configuredSiteUrl;
   }
 
   /** Aktualisiert den Canonical-Link. */
@@ -98,7 +103,7 @@ export class SeoService {
       '@type': 'ProfessionalService',
       name: 'Design. Code. Repeat.',
       description: 'Webentwicklung, Softwareentwicklung, UI/UX, Wartung und Managed Hosting.',
-      url: this.document.location?.origin ?? '',
+      url: this.siteOrigin(),
       email: 'mailto:kontakt@bennewitz.de',
       founder: {
         '@type': 'Person',
