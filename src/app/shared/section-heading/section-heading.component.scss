@@ -1,0 +1,22 @@
+.section-heading {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 58rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-family: var(--dcr-font-display);
+  font-size: clamp(2.4rem, 5vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.section-heading__text {
+  max-width: 48rem;
+  margin: 0;
+  color: var(--dcr-section-text-color, var(--dcr-color-text-muted));
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+}

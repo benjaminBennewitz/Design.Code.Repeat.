@@ -1,0 +1,12 @@
+<div class="marquee" [class.marquee--reverse]="reverse()" [attr.aria-label]="ariaLabel()">
+  <div class="marquee__track">
+    @for (item of items(); track $index) {
+      <span>{{ item }}</span>
+    }
+    <div class="marquee__clone" aria-hidden="true">
+      @for (item of items(); track $index) {
+        <span>{{ item }}</span>
+      }
+    </div>
+  </div>
+</div>

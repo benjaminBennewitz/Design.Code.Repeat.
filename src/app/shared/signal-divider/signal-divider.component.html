@@ -1,0 +1,54 @@
+<section class="signal-divider" [attr.data-variant]="variant()" aria-hidden="true">
+  <div class="signal-divider__grid">
+    <div class="signal-divider__meta signal-divider__meta--start">
+      <span>{{ marker() }}</span>
+      <span>DESIGN.CODE.REPEAT</span>
+    </div>
+
+    <div class="signal-divider__meta signal-divider__meta--end">
+      <span>B²</span>
+      <span>SYNC::ACTIVE</span>
+    </div>
+
+    <div class="signal-divider__glyphs">
+      @for (glyph of glyphs; track glyph.index) {
+        <span
+          class="signal-divider__glyph"
+          [style.--glyph-index]="glyph.index"
+          [style.--pixel-top]="glyph.pixelTop"
+          [style.--pixel-left]="glyph.pixelLeft">
+          {{ glyph.char }}
+        </span>
+      }
+    </div>
+
+    <div class="signal-divider__blocks">
+      @for (block of blocks; track block.index) {
+        <span
+          [style.--block-index]="block.index"
+          [style.left.%]="block.left"
+          [style.top.%]="block.top">
+        </span>
+      }
+    </div>
+
+    <div class="signal-divider__fragments">
+      @for (fragment of fragments; track fragment.index) {
+        <span
+          [style.--fragment-index]="fragment.index"
+          [style.left.%]="fragment.left"
+          [style.top.%]="fragment.top"
+          [style.width.%]="fragment.width"
+          [style.opacity]="fragment.opacity">
+        </span>
+      }
+    </div>
+
+    <div class="signal-divider__baseline">
+      <span>001</span>
+      <span>///</span>
+      <span>DCR</span>
+      <span>010</span>
+    </div>
+  </div>
+</section>

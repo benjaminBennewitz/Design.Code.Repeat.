@@ -1,0 +1,38 @@
+@if (route()) {
+  <a
+    [class]="buttonClasses()"
+    [routerLink]="route()"
+    [fragment]="fragment()"
+    [attr.aria-label]="ariaLabel() ?? label()"
+    (click)="pressed.emit($event)">
+    <span>{{ label() }}</span>
+    @if (icon()) {
+      <span class="material-symbols-outlined" aria-hidden="true">{{ icon() }}</span>
+    }
+  </a>
+} @else if (href()) {
+  <a
+    [class]="buttonClasses()"
+    [href]="href()"
+    [target]="target()"
+    [attr.rel]="rel()"
+    [attr.aria-label]="ariaLabel() ?? label()"
+    (click)="pressed.emit($event)">
+    <span>{{ label() }}</span>
+    @if (icon()) {
+      <span class="material-symbols-outlined" aria-hidden="true">{{ icon() }}</span>
+    }
+  </a>
+} @else {
+  <button
+    [class]="buttonClasses()"
+    [type]="type()"
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabel() ?? label()"
+    (click)="pressed.emit($event)">
+    <span>{{ label() }}</span>
+    @if (icon()) {
+      <span class="material-symbols-outlined" aria-hidden="true">{{ icon() }}</span>
+    }
+  </button>
+}

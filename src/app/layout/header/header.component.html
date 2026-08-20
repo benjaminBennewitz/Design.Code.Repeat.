@@ -1,0 +1,35 @@
+<header class="site-header">
+  <a class="site-header__brand" routerLink="/" (click)="closeMenu()" [attr.aria-label]="brandLabel()">
+    <span class="site-header__mark" aria-hidden="true">DCR</span>
+    <span class="site-header__wordmark">Design. Code. Repeat.</span>
+    <small>B²</small>
+  </a>
+
+  <button class="site-header__menu-button" type="button" [attr.aria-label]="menuOpen() ? content().closeLabel : content().menuLabel"
+    aria-controls="studio-navigation" [attr.aria-expanded]="menuOpen()" (click)="toggleMenu()">
+    <span class="material-symbols-outlined" aria-hidden="true">{{ menuOpen() ? 'close' : 'menu' }}</span>
+  </button>
+
+  <div id="studio-navigation" class="site-header__navigation" [class.is-open]="menuOpen()">
+    <nav [attr.aria-label]="content().ariaLabel">
+      @for (item of content().items; track item.href) {
+        @if (fragmentFor(item); as fragment) {
+          <a routerLink="/" [fragment]="fragment" (click)="closeMenu()">{{ item.label }}</a>
+        } @else {
+          <a [routerLink]="routeFor(item)" routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.href === '/' }" (click)="closeMenu()">{{ item.label }}</a>
+        }
+      }
+    </nav>
+
+    <div class="site-header__controls">
+      <button class="site-header__icon-button" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
+        <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
+      </button>
+      <button class="site-header__language" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
+        {{ languageService.language() === 'de' ? 'EN' : 'DE' }}
+      </button>
+      <dcr-action-button [label]="content().ctaLabel" route="/kontakt" variant="primary" size="small" (pressed)="closeMenu()" />
+    </div>
+  </div>
+</header>

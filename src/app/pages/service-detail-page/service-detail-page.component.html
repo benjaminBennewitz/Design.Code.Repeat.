@@ -1,0 +1,50 @@
+@if (service(); as item) {
+<main class="service-detail" [attr.data-accent]="item.accent">
+  <section class="service-detail__hero dcr-section dcr-viewport-section dcr-section-flow" [id]="item.slug + '-hero'">
+    <div class="dcr-container service-detail__hero-layout">
+      <div>
+        <a class="service-detail__back" routerLink="/leistungen"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>{{ backLabel() }}</a>
+        <p class="dcr-eyebrow">{{ item.command }}</p>
+        <h1>{{ item.title }}</h1>
+        <p class="service-detail__kicker">{{ item.kicker }}</p>
+        <p class="service-detail__lead">{{ item.description }}</p>
+        <div class="service-detail__actions">
+          <a class="dcr-button dcr-button--accent" routerLink="/kontakt">{{ item.ctaLabel }}</a>
+          <strong>{{ item.price }}</strong>
+        </div>
+      </div>
+      <dcr-terminal-panel title="service.scope" [lines]="item.outcomes" />
+    </div>
+  </section>
+
+  <section class="service-detail__body dcr-section dcr-viewport-section dcr-section-flow" [id]="item.slug + '-umfang'">
+    <div class="dcr-container service-detail__columns">
+      <article>
+        <p class="dcr-eyebrow">capabilities.list</p>
+        <h2>{{ capabilitiesLabel() }}</h2>
+        <ul>
+          @for (feature of item.features; track feature) {
+            <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ feature }}</li>
+          }
+        </ul>
+      </article>
+      <article>
+        <p class="dcr-eyebrow">scope.includes</p>
+        <h2>{{ includedLabel() }}</h2>
+        <ul>
+          @for (included of item.includes; track included) {
+            <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ included }}</li>
+          }
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="service-detail__cta dcr-section dcr-viewport-section dcr-section-flow" [id]="item.slug + '-kontakt'">
+    <div class="dcr-container service-detail__cta-layout">
+      <div><p class="dcr-eyebrow">next.step</p><h2>{{ item.ctaLabel }}</h2><p>{{ contactHint() }}</p></div>
+      <a class="dcr-button dcr-button--dark" routerLink="/kontakt">{{ item.ctaLabel }} →</a>
+    </div>
+  </section>
+</main>
+}

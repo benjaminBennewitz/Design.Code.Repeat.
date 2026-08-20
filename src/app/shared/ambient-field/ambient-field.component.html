@@ -1,0 +1,14 @@
+<div class="ambient-field" [attr.data-variant]="variant()" aria-hidden="true">
+  <div class="ambient-field__grid"></div>
+  <div class="ambient-field__orbit ambient-field__orbit--a"></div>
+  <div class="ambient-field__orbit ambient-field__orbit--b"></div>
+  <div class="ambient-field__scan"></div>
+  <div class="ambient-field__nodes">
+    @for (node of [0, 1, 2, 3, 4, 5, 6, 7]; track node) {
+      <span [style.--node-index]="node"></span>
+    }
+  </div>
+  <div class="ambient-field__code">
+    <span>001</span><span>DCR</span><span>B²</span><span>010</span>
+  </div>
+</div>

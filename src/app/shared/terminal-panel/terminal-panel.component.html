@@ -1,0 +1,12 @@
+<aside class="terminal" [attr.aria-label]="title()">
+  <div class="terminal__bar">
+    <span>{{ title() }}</span>
+    <span class="terminal__lights" aria-hidden="true"><i></i><i></i><i></i></span>
+  </div>
+  <div class="terminal__body">
+    @for (line of lines(); track line) {
+      <code>&gt; {{ line }}</code>
+    }
+    <span class="terminal__cursor" aria-hidden="true"></span>
+  </div>
+</aside>

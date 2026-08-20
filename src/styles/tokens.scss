@@ -1,0 +1,169 @@
+/*###############################
+###
+###     Design. Code. Repeat. Studio
+###     DESIGN TOKENS
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter-variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url('/assets/fonts/material-symbols-outlined-latin-fill-normal.woff2') format('woff2');
+}
+
+:root {
+  color-scheme: dark;
+  --dcr-font-display: 'Arial Black', Impact, system-ui, sans-serif;
+  --dcr-font-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --dcr-font-mono: 'JetBrains Mono', Consolas, ui-monospace, monospace;
+  --dcr-header-height: 72px;
+  --dcr-content-width: 1600px;
+  --dcr-page-gutter: clamp(1rem, 4vw, 5rem);
+  --dcr-section-y: clamp(2.6rem, 5.2vh, 4.75rem);
+  --dcr-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dcr-color-contrast-dark: #080808;
+  --dcr-color-contrast-light: #ffffff;
+  --dcr-shadow-hard: 9px 9px 0 color-mix(in srgb, var(--dcr-color-text) 13%, transparent);
+}
+
+:root,
+:root[data-theme='dark'] {
+  --dcr-color-bg: #0b0d0f;
+  --dcr-color-bg-soft: #101317;
+  --dcr-color-surface-solid: #15191e;
+  --dcr-color-surface-strong: #222830;
+  --dcr-color-text: #f7f2e9;
+  --dcr-color-text-muted: #bbb5ad;
+  --dcr-color-border: rgba(247, 242, 233, 0.16);
+  --dcr-color-border-strong: rgba(247, 242, 233, 0.34);
+  --dcr-color-shadow: rgba(0, 0, 0, 0.55);
+  --dcr-color-primary: #67a2ff;
+  --dcr-color-lime: #adff2f;
+  --dcr-color-pink: #ff4ca5;
+  --dcr-color-violet: #9b74ff;
+  --dcr-color-orange: #ff9a32;
+  --dcr-color-danger: #ff5c7c;
+  --dcr-color-on-danger: #080808;
+  --dcr-color-on-primary: #080808;
+  --dcr-color-on-lime: #080808;
+  --dcr-color-on-pink: #080808;
+  --dcr-color-on-violet: #080808;
+  --dcr-color-on-orange: #080808;
+  --dcr-color-on-surface-strong: #f7f2e9;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --dcr-color-bg: #fbf7ee;
+  --dcr-color-bg-soft: #f1eadf;
+  --dcr-color-surface-solid: #fffdf8;
+  --dcr-color-surface-strong: #e9dfd0;
+  --dcr-color-text: #101112;
+  --dcr-color-text-muted: #49433d;
+  --dcr-color-border: rgba(16, 17, 18, 0.16);
+  --dcr-color-border-strong: rgba(16, 17, 18, 0.38);
+  --dcr-color-shadow: rgba(34, 27, 19, 0.18);
+  --dcr-color-primary: #005fe8;
+  --dcr-color-lime: #b8ff2e;
+  --dcr-color-pink: #ed2d88;
+  --dcr-color-violet: #7246e8;
+  --dcr-color-orange: #d96500;
+  --dcr-color-danger: #a8002d;
+  --dcr-color-on-danger: #ffffff;
+  --dcr-color-on-primary: #ffffff;
+  --dcr-color-on-lime: #101112;
+  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-violet: #ffffff;
+  --dcr-color-on-orange: #ffffff;
+  --dcr-color-on-surface-strong: #101112;
+}
+
+
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+:root[data-contrast='high'] {
+  --dcr-color-text: #ffffff;
+  --dcr-color-text-muted: #f2eee8;
+  --dcr-color-border: rgba(255, 255, 255, 0.5);
+  --dcr-color-border-strong: rgba(255, 255, 255, 0.82);
+  --dcr-color-shadow: rgba(0, 0, 0, 0.78);
+}
+
+:root[data-theme='light'][data-contrast='high'] {
+  --dcr-color-text: #050505;
+  --dcr-color-text-muted: #171717;
+  --dcr-color-border: rgba(0, 0, 0, 0.48);
+  --dcr-color-border-strong: rgba(0, 0, 0, 0.82);
+  --dcr-color-shadow: rgba(0, 0, 0, 0.24);
+}
+
+:root[data-color-vision='deuteranopia'] {
+  --dcr-color-primary: #0072b2;
+  --dcr-color-lime: #e69f00;
+  --dcr-color-pink: #cc79a7;
+  --dcr-color-violet: #56b4e9;
+  --dcr-color-orange: #f0e442;
+}
+
+:root[data-color-vision='protanopia'] {
+  --dcr-color-primary: #009e73;
+  --dcr-color-lime: #f0e442;
+  --dcr-color-pink: #0072b2;
+  --dcr-color-violet: #56b4e9;
+  --dcr-color-orange: #e69f00;
+}
+
+:root[data-color-vision='tritanopia'] {
+  --dcr-color-primary: #d55e00;
+  --dcr-color-lime: #009e73;
+  --dcr-color-pink: #cc79a7;
+  --dcr-color-violet: #0072b2;
+  --dcr-color-orange: #f0e442;
+}
+
+:root[data-color-vision='achromatopsia'] {
+  --dcr-color-primary: #f0f0f0;
+  --dcr-color-lime: #d4d4d4;
+  --dcr-color-pink: #b8b8b8;
+  --dcr-color-violet: #969696;
+  --dcr-color-orange: #737373;
+  --dcr-color-danger: #d0d0d0;
+}
+
+:root[data-theme='light'][data-color-vision='achromatopsia'] {
+  --dcr-color-primary: #101010;
+  --dcr-color-lime: #333333;
+  --dcr-color-pink: #4f4f4f;
+  --dcr-color-violet: #686868;
+  --dcr-color-orange: #7d7d7d;
+  --dcr-color-danger: #222222;
+}

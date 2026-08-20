@@ -1,0 +1,75 @@
+<main class="studio-page">
+  <section id="studio-hero" class="studio-hero dcr-section dcr-viewport-section dcr-section-flow">
+    <dcr-ambient-field variant="studio" />
+    <div class="studio-hero__ghost" aria-hidden="true">B²</div>
+    <div class="dcr-container studio-hero__layout">
+      <div class="studio-hero__copy">
+        <p class="dcr-eyebrow">{{ content().studioPage.heading.eyebrow }}</p>
+        <h1>{{ content().studioPage.heading.title }}</h1>
+        <p class="studio-hero__lead">{{ content().studioPage.heading.text }}</p>
+        <div class="studio-hero__signals" aria-hidden="true">
+          <span>FULL STACK</span>
+          <span>DESIGN SYSTEMS</span>
+          <span>OPERATIONS</span>
+        </div>
+      </div>
+
+      <div class="studio-hero__console">
+        <div class="studio-hero__badge" aria-hidden="true">
+          <span>B²</span>
+          <small>DEV / DESIGN</small>
+        </div>
+        <dcr-terminal-panel title="identity.cfg" [lines]="['brand=Design.Code.Repeat', 'developer=B²', 'mode=studio', 'portfolio=separate']" />
+      </div>
+    </div>
+  </section>
+
+  <section id="studio-intro" class="studio-intro dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container studio-intro__layout">
+      <div class="studio-intro__b2" aria-hidden="true">B²</div>
+      <div class="studio-intro__copy">
+        @for (paragraph of content().studioPage.intro; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+        <dcr-action-button label="Portfolio" href="https://design-code-repeat.de" target="_blank" variant="dark" icon="arrow_outward" />
+      </div>
+    </div>
+  </section>
+
+  <section id="studio-prinzipien" class="studio-principles dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container studio-principles__layout">
+      <dcr-section-heading
+        [eyebrow]="content().studioPage.principlesHeading.eyebrow"
+        [title]="content().studioPage.principlesHeading.title"
+        [text]="content().studioPage.principlesHeading.text" />
+
+      <div class="studio-principles__grid">
+        @for (principle of content().studioPage.principles; track principle.title; let index = $index) {
+          <article>
+            <span>0{{ index + 1 }}</span>
+            <h2>{{ principle.title }}</h2>
+            <p>{{ principle.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="studio-stack" class="studio-stack dcr-section dcr-viewport-section dcr-section-flow">
+    <div class="dcr-container studio-stack__head">
+      <dcr-section-heading
+        [eyebrow]="content().studioPage.stackHeading.eyebrow"
+        [title]="content().studioPage.stackHeading.title"
+        [text]="content().studioPage.stackHeading.text" />
+    </div>
+
+    <div class="studio-stack__marquees">
+      <dcr-infinite-marquee [items]="content().studioPage.stack" [ariaLabel]="stackLabel()" />
+      <dcr-infinite-marquee [items]="practiceItems()" [ariaLabel]="stackLabel()" [reverse]="true" />
+    </div>
+
+    <div class="dcr-container studio-stack__action">
+      <dcr-action-button [label]="content().navigation.ctaLabel" route="/kontakt" variant="ghost" icon="arrow_outward" />
+    </div>
+  </section>
+</main>

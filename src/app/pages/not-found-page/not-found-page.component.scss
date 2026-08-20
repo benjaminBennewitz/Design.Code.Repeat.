@@ -1,0 +1,5 @@
+.system-page__section { display: grid; place-items: center; overflow: hidden; }
+.system-page__box { max-width: 900px; text-align: center; }
+.system-page__code { margin: 0; color: var(--dcr-color-primary); font-family: var(--dcr-font-display); font-size: clamp(8rem, 25vw, 24rem); line-height: 0.65; letter-spacing: -0.12em; opacity: 0.22; }
+.system-page h1 { margin: 1rem 0; font-family: var(--dcr-font-display); font-size: clamp(2.8rem, 6vw, 6rem); line-height: 0.88; }
+.system-page p:not(.system-page__code) { color: var(--dcr-color-text-muted); line-height: 1.6; }

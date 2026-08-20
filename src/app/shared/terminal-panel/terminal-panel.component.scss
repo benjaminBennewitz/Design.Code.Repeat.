@@ -1,0 +1,63 @@
+.terminal {
+  border: 2px solid var(--dcr-color-border-strong);
+  background: var(--dcr-color-surface-solid);
+  box-shadow: var(--dcr-shadow-hard);
+  color: var(--dcr-color-text);
+}
+
+.terminal__bar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--dcr-color-border-strong);
+  padding: 0.7rem 0.85rem;
+  background: var(--dcr-color-surface-strong);
+  color: var(--dcr-color-on-surface-strong);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.terminal__lights {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.terminal__lights i {
+  width: 0.55rem;
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  background: currentColor;
+}
+
+.terminal__body {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.terminal code {
+  overflow-wrap: anywhere;
+  color: var(--dcr-color-text-muted);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.78rem;
+}
+
+.terminal__cursor {
+  width: 0.7rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  background: var(--dcr-color-lime);
+  animation: terminal-blink 1s steps(2, end) infinite;
+}
+
+@keyframes terminal-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal__cursor { animation: none; }
+}

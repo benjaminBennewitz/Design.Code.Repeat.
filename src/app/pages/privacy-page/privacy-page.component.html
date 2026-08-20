@@ -1,0 +1,22 @@
+<main class="legal-page">
+  <section class="legal-page__hero dcr-section dcr-viewport-section dcr-section-flow" id="datenschutz">
+    <div class="dcr-container legal-page__content">
+      <p class="dcr-eyebrow">privacy.policy</p>
+      <h1>{{ content().privacyTitle }}</h1>
+      <button class="dcr-button dcr-button--primary" type="button" (click)="cookieConsentService.openSettings()">
+        <span class="material-symbols-outlined" aria-hidden="true">cookie</span>
+        {{ cookieSettingsLabel() }}
+      </button>
+    </div>
+  </section>
+
+  @for (item of content().privacySections; track item.title; let index = $index) {
+    <section class="legal-page__section dcr-section dcr-viewport-section dcr-section-flow" [id]="'datenschutz-' + (index + 1)">
+      <div class="dcr-container legal-page__content">
+        <span class="legal-page__index">0{{ index + 1 }}</span>
+        <h2>{{ item.title }}</h2>
+        @for (paragraph of item.paragraphs; track paragraph) { <p>{{ paragraph }}</p> }
+      </div>
+    </section>
+  }
+</main>

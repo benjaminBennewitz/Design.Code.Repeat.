@@ -1,0 +1,4 @@
+.system-page__section { display: grid; place-items: center; }
+.system-page__box { max-width: 800px; text-align: center; }
+.system-page h1 { margin: 0.8rem 0; font-family: var(--dcr-font-display); font-size: clamp(3.5rem, 8vw, 8rem); line-height: 0.85; }
+.system-page p:not(.dcr-eyebrow) { margin: 0 auto 2rem; max-width: 40rem; color: var(--dcr-color-text-muted); line-height: 1.6; }

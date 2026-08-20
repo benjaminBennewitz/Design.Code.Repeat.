@@ -1,0 +1,9 @@
+<a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
+<dcr-header />
+<dcr-accessibility-panel />
+<dcr-cookie-banner />
+<div id="main-content" tabindex="-1">
+  <router-outlet />
+</div>
+<dcr-footer />
+<dcr-scroll-to-top />

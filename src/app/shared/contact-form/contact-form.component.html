@@ -1,0 +1,93 @@
+<form #formElement class="contact-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <p class="contact-form__required">{{ content().requiredHint }}</p>
+
+  <div class="contact-form__honeypot" aria-hidden="true">
+    <label [attr.for]="ids().website">Website</label>
+    <input [id]="ids().website" name="website" type="text" autocomplete="off" tabindex="-1" [value]="website()" (input)="updateHoneypot($event)">
+  </div>
+
+  <div class="contact-form__grid">
+    <div class="dcr-field">
+      <label [attr.for]="ids().name">{{ content().nameLabel }} <span aria-hidden="true">*</span></label>
+      <input [id]="ids().name" type="text" formControlName="name" autocomplete="name" maxlength="80" required
+        [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
+        [attr.aria-describedby]="errorFor('name') ? ids().nameError : null">
+      @if (errorFor('name')) {
+        <small [id]="ids().nameError" class="dcr-field__error">{{ errorFor('name') }}</small>
+      }
+    </div>
+
+    <div class="dcr-field">
+      <label [attr.for]="ids().email">{{ content().emailLabel }} <span aria-hidden="true">*</span></label>
+      <input [id]="ids().email" type="email" formControlName="email" autocomplete="email" maxlength="254" inputmode="email" required
+        [attr.aria-invalid]="form.controls.email.invalid && form.controls.email.touched"
+        [attr.aria-describedby]="errorFor('email') ? ids().emailError : null">
+      @if (errorFor('email')) {
+        <small [id]="ids().emailError" class="dcr-field__error">{{ errorFor('email') }}</small>
+      }
+    </div>
+  </div>
+
+  <div class="contact-form__grid">
+    <div class="dcr-field">
+      <label [attr.for]="ids().company">{{ content().companyLabel }}</label>
+      <input [id]="ids().company" type="text" formControlName="company" autocomplete="organization" maxlength="120"
+        [attr.aria-invalid]="form.controls.company.invalid && form.controls.company.touched"
+        [attr.aria-describedby]="errorFor('company') ? ids().companyError : null">
+      @if (errorFor('company')) {
+        <small [id]="ids().companyError" class="dcr-field__error">{{ errorFor('company') }}</small>
+      }
+    </div>
+
+    <div class="dcr-field">
+      <label [attr.for]="ids().topic">{{ content().topicLabel }} <span aria-hidden="true">*</span></label>
+      <select [id]="ids().topic" formControlName="topic" required
+        [attr.aria-invalid]="form.controls.topic.invalid && form.controls.topic.touched"
+        [attr.aria-describedby]="errorFor('topic') ? ids().topicError : null">
+        <option value="" disabled>—</option>
+        @for (topic of content().topics; track topic.value) {
+          <option [value]="topic.value">{{ topic.label }}</option>
+        }
+      </select>
+      @if (errorFor('topic')) {
+        <small [id]="ids().topicError" class="dcr-field__error">{{ errorFor('topic') }}</small>
+      }
+    </div>
+  </div>
+
+  <div class="dcr-field">
+    <label [attr.for]="ids().message">{{ content().messageLabel }} <span aria-hidden="true">*</span></label>
+    <textarea [id]="ids().message" rows="7" formControlName="message" minlength="20" maxlength="4000" required
+      [attr.aria-invalid]="form.controls.message.invalid && form.controls.message.touched"
+      [attr.aria-describedby]="errorFor('message') ? ids().messageError + ' ' + ids().messageCounter : ids().messageCounter"></textarea>
+    <div class="contact-form__message-meta">
+      <span>
+        @if (errorFor('message')) {
+          <small [id]="ids().messageError" class="dcr-field__error">{{ errorFor('message') }}</small>
+        }
+      </span>
+      <small [id]="ids().messageCounter">{{ form.controls.message.value.length }} / 4000</small>
+    </div>
+  </div>
+
+  <div class="contact-form__privacy">
+    <input [id]="ids().privacy" type="checkbox" formControlName="privacy" required
+      [attr.aria-invalid]="form.controls.privacy.invalid && form.controls.privacy.touched"
+      [attr.aria-describedby]="errorFor('privacy') ? ids().privacyError : null">
+    <label [attr.for]="ids().privacy">{{ content().privacyText }} <span aria-hidden="true">*</span></label>
+  </div>
+  @if (errorFor('privacy')) {
+    <small [id]="ids().privacyError" class="dcr-field__error dcr-field__error--block">{{ errorFor('privacy') }}</small>
+  }
+
+  <dcr-action-button
+    [label]="isSubmitting() ? content().sendingLabel : content().submitLabel"
+    type="submit"
+    variant="primary"
+    icon="arrow_outward"
+    [disabled]="isSubmitting()" />
+
+  @if (status()) {
+    <p class="contact-form__status" role="alert" aria-live="assertive">{{ status() }}</p>
+  }
+</form>

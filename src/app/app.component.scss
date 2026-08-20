@@ -1,0 +1,36 @@
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.7rem 1rem;
+  background: var(--dcr-color-primary);
+  color: var(--dcr-color-on-primary);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-decoration: none;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.scroll-progress {
+  position: fixed;
+  z-index: 80;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--dcr-color-primary), var(--dcr-color-lime));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--dcr-color-primary) 70%, transparent);
+  transition: width 80ms linear;
+}
