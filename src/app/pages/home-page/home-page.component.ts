@@ -29,7 +29,7 @@ export class HomePageComponent {
   readonly techStackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');
   readonly marqueeLabel = computed(() => this.languageService.language() === 'de' ? 'Leistungen und Arbeitsweise' : 'Services and process');
   readonly servicesMarqueeItems = computed(() => this.content().services.map((service) => service.shortTitle));
-  readonly processMarqueeItems = computed(() => this.content().process.map((step) => `${step.index} ${step.title}`));
+  readonly processMarqueeItems = computed(() => [...this.content().process].reverse().map((step) => `${step.index} ${step.title}`));
   readonly heroClaimLines = computed(() => this.languageService.language() === 'de'
     ? [
         { before: 'DIGITALE', after: 'PRODUKTE' },

@@ -20,12 +20,22 @@
         <p class="services-hero__note">{{ content().servicesPage.hero.note }}</p>
       </div>
 
-      <div class="services-hero__visual">
-        <div class="services-hero__counter" aria-hidden="true">
-          <span>06</span>
-          <small>MODULES</small>
-        </div>
-        <dcr-terminal-panel title="scope_check.exe" [lines]="['problem=first', 'stack=second', 'outcome=always', 'ops=optional']" />
+    </div>
+
+    <div class="services-hero__visual" aria-hidden="true">
+      <dcr-dithering-shader
+        class="services-hero__shader"
+        shape="wave"
+        type="4x4"
+        [pxSize]="3"
+        [zoom]="0.62"
+        [speed]="0.16"
+        [intensity]="1"
+        colorBack="var(--services-shader-back)"
+        colorFront="var(--services-shader-front)" />
+      <div class="services-hero__shader-meta">
+        <span>DITHER.WAVE // LIVE</span>
+        <span>WEBGL2 / 4×4</span>
       </div>
     </div>
   </section>
@@ -111,7 +121,6 @@
             aria-live="polite"
             [attr.aria-labelledby]="'service-selector-' + service.slug"
             [attr.data-accent]="service.accent">
-            <div class="service-console__scan" aria-hidden="true"></div>
             <div class="service-console__panel-top">
               <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
               <code>{{ service.command }}</code>
@@ -142,39 +151,15 @@
     </div>
   </section>
 
-  <section id="betreuung" class="care-section dcr-section dcr-viewport-section dcr-section-flow">
-    <div class="dcr-container care-section__layout">
-      <dcr-section-heading
-        align="right"
-        [eyebrow]="content().servicesPage.careHeading.eyebrow"
-        [title]="content().servicesPage.careHeading.title"
-        [text]="content().servicesPage.careHeading.text" />
-
-      <div class="care-section__wave-stage">
-        <dcr-dithering-shader
-          class="care-section__wave"
-          shape="wave"
-          type="8x8"
-          colorBack="transparent"
-          colorFront="var(--services-transition-color)"
-          [pxSize]="3"
-          [speed]="0.6"
-          [intensity]="1.18" />
-
-        <div class="care-section__wave-content">
-          <div class="care-grid">
-            @for (plan of content().carePlans; track plan.name) {
-              <article>
-                <h3>{{ plan.name }}</h3>
-                <strong>{{ plan.price }}</strong>
-                <p>{{ plan.text }}</p>
-                <ul>@for (feature of plan.features; track feature) { <li>{{ feature }}</li> }</ul>
-              </article>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
+  <section id="betreuung" class="care-section dcr-viewport-section" aria-labelledby="care-system-title">
+    <dcr-system-grid
+      [eyebrow]="content().servicesPage.careHeading.eyebrow"
+      [title]="content().servicesPage.careHeading.title"
+      [text]="content().servicesPage.careHeading.text"
+      titleId="care-system-title"
+      [leadAside]="careSystemAside()"
+      [panels]="careSystemPanels()"
+      [revealMetaOnInteraction]="true" />
   </section>
 
   <section id="managed-ops" class="ops-section dcr-section dcr-viewport-section dcr-section-flow">

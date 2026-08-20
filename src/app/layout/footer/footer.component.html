@@ -1,7 +1,6 @@
 <footer class="site-footer">
   <div class="site-footer__toolbar dcr-container">
     <div>
-      <span>Design. Code. Repeat.</span>
       <small>B² // studio.footer</small>
     </div>
 
@@ -57,10 +56,10 @@
         </div>
 
         <div class="site-footer__legal-grid">
-          <a routerLink="/impressum"><span>01</span>{{ ui().notice }}</a>
-          <a routerLink="/datenschutz"><span>02</span>{{ ui().privacy }}</a>
-          <button type="button" (click)="cookieConsentService.openSettings()"><span>03</span>{{ ui().cookie }}</button>
-          <a href="https://design-code-repeat.de" target="_blank" rel="noopener noreferrer"><span>04</span>{{ ui().portfolio }} ↗</a>
+          <a routerLink="/impressum">{{ ui().notice }}</a>
+          <a routerLink="/datenschutz">{{ ui().privacy }}</a>
+          <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
+          <a href="https://design-code-repeat.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
         </div>
       </section>
 
@@ -73,7 +72,6 @@
 
     <div class="site-footer__meta">
       <span>© {{ year }} Design. Code. Repeat.</span>
-      <span>{{ content().footer.signature }}</span>
       <a href="mailto:kontakt@bennewitz.de">kontakt&#64;bennewitz.de</a>
     </div>
   </div>

@@ -11,7 +11,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBind
 type DitheringMatrixType = '2x2' | '4x4' | '8x8';
 
 /** Unterstützte prozedurale Shader-Muster. */
-type DitheringShape = 'swirl' | 'wave' | 'liquid';
+type DitheringShape = 'swirl' | 'wave' | 'liquid' | 'cat';
 
 /** RGBA-Farbwert mit normalisierten Kanälen von 0 bis 1. */
 type RgbaColor = readonly [number, number, number, number];
@@ -394,7 +394,7 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
     gl.uniform4f(uniforms.frontColor, ...this.frontColor);
     gl.uniform4f(uniforms.backColor, ...this.backColor);
     gl.uniform1i(uniforms.ditherSize, this.getDitherSize());
-    gl.uniform1i(uniforms.shape, this.shape === 'liquid' ? 2 : this.shape === 'wave' ? 1 : 0);
+    gl.uniform1i(uniforms.shape, this.shape === 'cat' ? 3 : this.shape === 'liquid' ? 2 : this.shape === 'wave' ? 1 : 0);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
@@ -475,7 +475,19 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
         const ny = ((y + 0.5 - height / 2) / radiusBase) * zoom;
         let energy = 0;
 
-        if (this.shape === 'liquid') {
+        if (this.shape === 'cat') {
+          const head = this.ellipseMask(nx, ny, 0, -0.34, 0.38, 0.34);
+          const body = this.ellipseMask(nx, ny, 0, 0.3, 0.47, 0.62);
+          const leftEar = this.diamondMask(nx, ny, -0.27, -0.62, 0.18, 0.28);
+          const rightEar = this.diamondMask(nx, ny, 0.27, -0.62, 0.18, 0.28);
+          const leftPaw = this.ellipseMask(nx, ny, -0.2, 0.82, 0.2, 0.16);
+          const rightPaw = this.ellipseMask(nx, ny, 0.2, 0.82, 0.2, 0.16);
+          const tailBase = this.rotatedEllipseMask(nx, ny, 0.47, 0.34, 0.17, 0.5, -0.58);
+          const tailTip = this.rotatedEllipseMask(nx, ny, 0.62, 0.02, 0.14, 0.34, -0.82);
+          const silhouette = Math.max(head, body, leftEar, rightEar, leftPaw, rightPaw, tailBase, tailTip);
+          const bands = 0.58 + 0.22 * Math.sin((nx * 8.5) + (ny * 5.8)) + 0.12 * Math.cos(ny * 13.0);
+          energy = Math.min(1, Math.max(0, silhouette * bands));
+        } else if (this.shape === 'liquid') {
           const firstDistance = Math.hypot(nx + 0.45, ny + 0.08);
           const secondDistance = Math.hypot(nx - 0.32, ny - 0.12);
           const thirdDistance = Math.hypot(nx - 0.05, ny + 0.48);
@@ -510,6 +522,38 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
     }
 
     context.putImageData(imageData, 0, 0);
+  }
+
+  /** Liefert eine weich begrenzte Ellipsenmaske für den statischen Cat-Fallback. */
+  private ellipseMask(x: number, y: number, centerX: number, centerY: number, radiusX: number, radiusY: number): number {
+    const normalizedX = (x - centerX) / radiusX;
+    const normalizedY = (y - centerY) / radiusY;
+    return 1 - this.smoothStep(0.84, 1, (normalizedX * normalizedX) + (normalizedY * normalizedY));
+  }
+
+  /** Liefert eine rautenförmige Maske, die im Cat-Fallback als Ohrspitze dient. */
+  private diamondMask(x: number, y: number, centerX: number, centerY: number, radiusX: number, radiusY: number): number {
+    const distance = Math.abs((x - centerX) / radiusX) + Math.abs((y - centerY) / radiusY);
+    return 1 - this.smoothStep(0.82, 1, distance);
+  }
+
+  /** Liefert eine rotierte Ellipsenmaske für Schwanzsegmente im statischen Cat-Fallback. */
+  private rotatedEllipseMask(
+    x: number,
+    y: number,
+    centerX: number,
+    centerY: number,
+    radiusX: number,
+    radiusY: number,
+    rotation: number,
+  ): number {
+    const offsetX = x - centerX;
+    const offsetY = y - centerY;
+    const cosine = Math.cos(rotation);
+    const sine = Math.sin(rotation);
+    const rotatedX = (offsetX * cosine) - (offsetY * sine);
+    const rotatedY = (offsetX * sine) + (offsetY * cosine);
+    return this.ellipseMask(rotatedX, rotatedY, 0, 0, radiusX, radiusY);
   }
 
   /** Interpoliert weich zwischen zwei Grenzwerten für den statischen Canvas-Fallback. */
@@ -553,6 +597,28 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
     float smooth_step(float edge0, float edge1, float value) {
       float t = clamp((value - edge0) / (edge1 - edge0), 0.0, 1.0);
       return t * t * (3.0 - 2.0 * t);
+    }
+
+    float ellipse_mask(vec2 point, vec2 center, vec2 radius) {
+      vec2 normalized_point = (point - center) / radius;
+      return 1.0 - smooth_step(0.84, 1.0, dot(normalized_point, normalized_point));
+    }
+
+    float diamond_mask(vec2 point, vec2 center, vec2 radius) {
+      vec2 normalized_point = abs((point - center) / radius);
+      return 1.0 - smooth_step(0.82, 1.0, normalized_point.x + normalized_point.y);
+    }
+
+    float rotated_ellipse_mask(vec2 point, vec2 center, vec2 radius, float rotation) {
+      float cosine = cos(rotation);
+      float sine = sin(rotation);
+      vec2 offset = point - center;
+      vec2 rotated = vec2(
+        offset.x * cosine - offset.y * sine,
+        offset.x * sine + offset.y * cosine
+      );
+      vec2 normalized_point = rotated / radius;
+      return 1.0 - smooth_step(0.84, 1.0, dot(normalized_point, normalized_point));
     }
 
     float bayer2(ivec2 point) {
@@ -606,7 +672,27 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
       float time = u_time * u_speed;
       float field = 0.0;
 
-      if (u_shape == 2) {
+      if (u_shape == 3) {
+        float breathe = sin(time * 0.82) * 0.018;
+        float sway = sin(time * 0.54) * 0.035;
+        vec2 cat_point = normalized;
+        cat_point.x -= sway * smooth_step(-0.9, 0.75, cat_point.y);
+
+        float head = ellipse_mask(cat_point, vec2(0.0, -0.34), vec2(0.38, 0.34));
+        float body = ellipse_mask(cat_point, vec2(0.0, 0.30 + breathe), vec2(0.47, 0.62 + breathe));
+        float left_ear = diamond_mask(cat_point, vec2(-0.27, -0.62), vec2(0.18, 0.28));
+        float right_ear = diamond_mask(cat_point, vec2(0.27, -0.62), vec2(0.18, 0.28));
+        float left_paw = ellipse_mask(cat_point, vec2(-0.20, 0.82), vec2(0.20, 0.16));
+        float right_paw = ellipse_mask(cat_point, vec2(0.20, 0.82), vec2(0.20, 0.16));
+        float tail_base = rotated_ellipse_mask(cat_point, vec2(0.47, 0.34), vec2(0.17, 0.50), -0.58);
+        float tail_tip = rotated_ellipse_mask(cat_point, vec2(0.62, 0.02), vec2(0.14, 0.34), -0.82);
+        float silhouette = max(max(max(head, body), max(left_ear, right_ear)), max(max(left_paw, right_paw), max(tail_base, tail_tip)));
+        float bands = 0.58
+          + 0.22 * sin(cat_point.x * 8.5 + cat_point.y * 5.8 - time * 0.72)
+          + 0.12 * cos(cat_point.y * 13.0 + time * 0.46);
+        float pulse = 0.06 * sin((cat_point.x - cat_point.y) * 17.0 + time * 0.9);
+        field = clamp(silhouette * (bands + pulse) * (0.88 + u_intensity * 0.18), 0.0, 1.0);
+      } else if (u_shape == 2) {
         vec2 first_center = vec2(-0.52 + sin(time * 0.34) * 0.22, -0.08 + cos(time * 0.27) * 0.18);
         vec2 second_center = vec2(0.38 + cos(time * 0.31) * 0.2, 0.12 + sin(time * 0.39) * 0.2);
         vec2 third_center = vec2(sin(time * 0.23) * 0.2, -0.52 + cos(time * 0.35) * 0.16);

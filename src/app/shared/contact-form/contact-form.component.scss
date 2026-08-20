@@ -154,16 +154,23 @@
   font-size: 0.66rem;
 }
 
-/* Modernes Project-Briefing statt schwerer Formularbox. */
+/* Modernes Project-Briefing mit vollständig tokenisiertem Farbkontext. */
 .contact-form {
+  --contact-form-bg: var(--dcr-color-surface-solid);
+  --contact-form-text: var(--dcr-color-text);
+  --contact-form-muted: var(--dcr-color-text-muted);
+  --contact-form-border: var(--dcr-color-border-strong);
+  --contact-form-accent: var(--dcr-color-primary);
+  --contact-form-danger: var(--dcr-color-danger);
   position: relative;
   gap: clamp(0.85rem, 1.8vh, 1.2rem);
-  border: 1px solid var(--dcr-color-border-strong);
+  border: 1px solid var(--contact-form-border);
   border-radius: clamp(0.9rem, 1.5vw, 1.4rem);
   padding: clamp(1.15rem, 2.5vw, 2rem);
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--dcr-color-primary) 7%, transparent), transparent 42%),
-    color-mix(in srgb, var(--dcr-color-surface-solid) 94%, transparent);
+    linear-gradient(135deg, color-mix(in srgb, var(--contact-form-accent) 7%, transparent), transparent 42%),
+    var(--contact-form-bg);
+  color: var(--contact-form-text);
   box-shadow: 0 22px 60px color-mix(in srgb, var(--dcr-color-shadow) 65%, transparent);
 }
 
@@ -175,40 +182,60 @@
   height: 0.35rem;
   border-radius: 0 0 1rem 1rem;
   content: '';
-  background: var(--dcr-color-primary);
+  background: var(--contact-form-accent);
 }
 
-.contact-form__required { justify-self: end; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.contact-form__required { justify-self: end; color: var(--contact-form-muted); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .contact-form__grid { gap: clamp(0.9rem, 2vw, 1.5rem); }
 .dcr-field { position: relative; gap: 0.2rem; }
-.dcr-field label, .contact-form__privacy label { color: var(--dcr-color-text-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
+.dcr-field label, .contact-form__privacy label { color: var(--contact-form-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
 
 .dcr-field input,
 .dcr-field select,
 .dcr-field textarea {
   border: 0;
-  border-bottom: 1px solid var(--dcr-color-border-strong);
+  border-bottom: 1px solid var(--contact-form-border);
   border-radius: 0;
   padding: 0.65rem 0.15rem 0.8rem;
   background: transparent;
+  color: var(--contact-form-text);
   font-size: clamp(0.9rem, 1.1vw, 1.02rem);
   transition: border-color 180ms ease, background-color 180ms ease, padding 220ms var(--dcr-ease-out);
 }
 
 .dcr-field textarea { min-height: clamp(6.5rem, 14vh, 9rem); resize: vertical; }
-.dcr-field input:hover, .dcr-field select:hover, .dcr-field textarea:hover { border-bottom-color: var(--dcr-color-text); }
-.dcr-field input:focus-visible, .dcr-field select:focus-visible, .dcr-field textarea:focus-visible { border-bottom-color: var(--dcr-color-primary); padding-left: 0.55rem; background: color-mix(in srgb, var(--dcr-color-primary) 5%, transparent); box-shadow: inset 0 -2px 0 var(--dcr-color-primary); outline: none; }
-.contact-form__message-meta { font-size: 0.62rem; }
-.contact-form__privacy { align-items: center; border: 1px solid var(--dcr-color-border); border-radius: 0.65rem; padding: 0.75rem; }
+.dcr-field option { background: var(--contact-form-bg); color: var(--contact-form-text); }
+.dcr-field input:hover, .dcr-field select:hover, .dcr-field textarea:hover { border-bottom-color: var(--contact-form-text); }
+.dcr-field input:focus-visible, .dcr-field select:focus-visible, .dcr-field textarea:focus-visible { border-bottom-color: var(--contact-form-accent); padding-left: 0.55rem; background: color-mix(in srgb, var(--contact-form-accent) 8%, transparent); box-shadow: inset 0 -2px 0 var(--contact-form-accent); outline: none; }
+.contact-form__message-meta { color: var(--contact-form-muted); font-size: 0.62rem; }
+.dcr-field :is(input, select, textarea)[aria-invalid='true'] { border-bottom-color: var(--contact-form-danger); }
+.dcr-field__error { color: var(--contact-form-danger); }
+.contact-form__status {
+  border-left-color: var(--contact-form-danger);
+  background: color-mix(in srgb, var(--contact-form-danger) 14%, var(--contact-form-bg));
+  color: var(--contact-form-text);
+}
+.contact-form__privacy { align-items: center; border: 1px solid var(--contact-form-border); border-radius: 0.65rem; padding: 0.75rem; }
 .contact-form__privacy label { text-transform: none; line-height: 1.45; }
 .contact-form__privacy input { margin: 0; }
 .contact-form dcr-action-button { justify-self: end; }
 
 .contact-form--compact {
-  gap: 0.6rem;
-  border-radius: 0.75rem;
-  padding: 0.85rem 1rem;
-  box-shadow: none;
+  gap: 0.55rem;
+  border-radius: 0;
+  padding: 0.9rem 1.05rem 1rem;
+  box-shadow: 8px 8px 0 color-mix(in srgb, var(--contact-form-text) 18%, transparent);
 }
-.contact-form--compact .dcr-field textarea { min-height: 4.5rem; }
-.contact-form--compact :is(.dcr-field input, .dcr-field select, .dcr-field textarea) { padding: 0.42rem 0.1rem 0.5rem; }
+
+.contact-form--compact::before {
+  left: 0;
+  width: clamp(3.5rem, 8vw, 6rem);
+  border-radius: 0;
+}
+
+.contact-form--compact .contact-form__required {
+  color: var(--contact-form-muted);
+}
+
+.contact-form--compact .dcr-field textarea { min-height: 4.2rem; }
+.contact-form--compact :is(.dcr-field input, .dcr-field select, .dcr-field textarea) { padding: 0.38rem 0.1rem 0.46rem; }

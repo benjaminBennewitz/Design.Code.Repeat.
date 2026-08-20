@@ -11,7 +11,7 @@ const PORTFOLIO_BASE_URL = 'https://design-code-repeat.de';
 /** Deutsche Inhalte. */
 const de: StudioContent = {
   meta: {
-    hiddenTitle: 'psst... hier entsteht noch was 👀',
+    hiddenTitle: 'psst... komm zurück 👀',
     siteName: 'Design. Code. Repeat. Studio',
   },
   navigation: {
@@ -93,7 +93,7 @@ const de: StudioContent = {
     hero: {
       eyebrow: 'services.exe',
       title: 'Nicht jedes Problem braucht eine App. Aber jedes Projekt die richtige Lösung.',
-      text: 'Die frühere Portfolio-Leistungsroute wird hier bewusst weiterentwickelt: klarere Angebote, zusätzliche Betriebsleistungen und genug technische Tiefe für individuelle Systeme.',
+      text: 'Von der kompakten Website bis zur internen Business-Anwendung: Entwicklung, Design und Betrieb werden passend zum tatsächlichen Problem zusammengesetzt.',
       primaryCta: 'Projekt einordnen',
       note: 'Preise sind Einstiegswerte. Umfang, Inhalte, Integrationen, Datenmodell und Betriebsanforderungen bestimmen den tatsächlichen Aufwand.',
     },
@@ -124,14 +124,14 @@ const de: StudioContent = {
     heading: {
       eyebrow: 'references.index',
       title: 'Ausgewählte Systeme und Interfaces.',
-      text: 'Die Studio-Seite zeigt den wirtschaftlichen Kontext. Die tieferen technischen Case Studies bleiben bewusst im persönlichen Portfolio.',
+      text: 'Ausgewählte Arbeiten zeigen, wie aus Anforderungen belastbare Interfaces, Datenflüsse und digitale Werkzeuge werden.',
     },
     portfolioHint: 'Mehr Architektur, Screens und technische Entscheidungen gibt es in der jeweiligen Case Study im Portfolio.',
     cta: 'Case Study öffnen',
     deliveredHeading: {
       eyebrow: 'realisiert.log',
       title: 'Realisierte Kundenprojekte.',
-      text: 'Veröffentlichte Websites und Websysteme aus realen Kundenprojekten. Bewusst getrennt von den technischen Case Studies.',
+      text: 'Veröffentlichte Websites und Websysteme aus realen Kundenprojekten – vom kompakten Auftritt bis zur individuellen Anwendung.',
     },
     deliveredCta: 'Projekt öffnen',
     deliveredAriaLabel: 'Realisierte Kundenprojekte',
@@ -145,7 +145,7 @@ const de: StudioContent = {
     heading: {
       eyebrow: 'about.studio',
       title: 'Kleines Studio. Kurze Wege. Volle technische Verantwortung.',
-      text: 'Design. Code. Repeat. ist der kommerzielle Rahmen für Webentwicklung, Software, Design und Betreuung. B² bleibt meine persönliche Developer-Signatur.',
+      text: 'Design. Code. Repeat. verbindet Webentwicklung, individuelle Software, Design und technische Betreuung in einer direkten Studio-Struktur. B² ist die Developer-Signatur dahinter.',
     },
     intro: [
       'Ich begleite Projekte nicht nur bis zum hübschen Screen. Struktur, Frontend, Backend, Daten, Deployment und spätere Wartbarkeit werden als ein zusammenhängendes Produkt betrachtet.',
@@ -231,22 +231,18 @@ const de: StudioContent = {
     noticeSections: [
       {
         title: 'Angaben gemäß § 5 DDG',
-        lines: ['Benjamin Bennewitz', '[vollständige ladungsfähige Anschrift vor Veröffentlichung ergänzen]', 'Deutschland'],
+        lines: ['Benjamin Bennewitz', 'Deutschland'],
       },
       {
         title: 'Kontakt',
-        lines: ['E-Mail: kontakt@bennewitz.de', 'Telefon: [vor Veröffentlichung ergänzen]'],
-      },
-      {
-        title: 'Hinweis',
-        lines: ['Die Platzhalter in diesem Impressum müssen vor dem produktiven Go-live durch die tatsächlichen Pflichtangaben ersetzt werden.'],
+        lines: ['E-Mail: kontakt@bennewitz.de'],
       },
     ],
     privacyTitle: 'Datenschutz',
     privacySections: [
       {
         title: 'Verantwortlicher',
-        paragraphs: ['Verantwortlich für die Verarbeitung personenbezogener Daten ist Benjamin Bennewitz. Die vollständige Anschrift ist vor dem produktiven Go-live im Impressum und hier zu ergänzen.'],
+        paragraphs: ['Verantwortlich für die Verarbeitung personenbezogener Daten ist Benjamin Bennewitz. Kontakt: kontakt@bennewitz.de.'],
       },
       {
         title: 'Kontaktformular',
@@ -254,11 +250,11 @@ const de: StudioContent = {
       },
       {
         title: 'Server-Logs',
-        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden. Welche Daten konkret gespeichert werden und wie lange, hängt vom später eingesetzten Hosting-Setup ab und muss vor Veröffentlichung ergänzt werden.'],
+        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden. Sie dienen dem sicheren und stabilen Betrieb sowie der Fehleranalyse.'],
       },
       {
         title: 'Externe Dienste',
-        paragraphs: ['Die Basisversion dieser Website bindet keine extern gehosteten Schriftarten, Tracking-Skripte oder Social-Media-Widgets ein. Material Symbols, Inter und JetBrains Mono werden lokal ausgeliefert.'],
+        paragraphs: ['Die Website lädt Material Symbols, Inter und JetBrains Mono lokal und verwendet keine extern eingebundenen Tracking-Skripte oder Social-Media-Widgets.'],
       },
     ],
   },
@@ -496,7 +492,7 @@ const de: StudioContent = {
 const en: StudioContent = {
   ...de,
   meta: {
-    hiddenTitle: 'psst... something is happening 👀',
+    hiddenTitle: 'psst... come back 👀',
     siteName: 'Design. Code. Repeat. Studio',
   },
   navigation: {
@@ -578,7 +574,7 @@ const en: StudioContent = {
     hero: {
       eyebrow: 'services.exe',
       title: 'Not every problem needs an app. But every project needs the right solution.',
-      text: 'The former portfolio services page evolves here into clearer offers, an operations layer and enough technical depth for custom systems.',
+      text: 'From a focused website to an internal business application, development, design and operations are assembled around the actual problem.',
       primaryCta: 'Classify your project',
       note: 'Prices are starting points. Scope, content, integrations, data model and operational requirements determine the actual effort.',
     },
@@ -609,14 +605,14 @@ const en: StudioContent = {
     heading: {
       eyebrow: 'references.index',
       title: 'Selected systems and interfaces.',
-      text: 'The studio site focuses on business context. Deeper technical case studies intentionally remain in the personal portfolio.',
+      text: 'Selected work shows how requirements become robust interfaces, data flows and digital tools.',
     },
     portfolioHint: 'More architecture, screens and technical decisions are available in each portfolio case study.',
     cta: 'Open case study',
     deliveredHeading: {
       eyebrow: 'delivered.log',
       title: 'Delivered client projects.',
-      text: 'Published websites and web systems from real client work. Intentionally separated from the technical case studies.',
+      text: 'Published websites and web systems from real client projects, from focused web presences to custom applications.',
     },
     deliveredCta: 'Open project',
     deliveredAriaLabel: 'Delivered client projects',
@@ -630,7 +626,7 @@ const en: StudioContent = {
     heading: {
       eyebrow: 'about.studio',
       title: 'Small studio. Short paths. Full technical ownership.',
-      text: 'Design. Code. Repeat. is the commercial framework for web development, software, design and support. B² remains my personal developer signature.',
+      text: 'Design. Code. Repeat. combines web development, custom software, design and technical support in a direct studio structure. B² is the developer signature behind it.',
     },
     intro: [
       'I do not stop at the polished screen. Structure, frontend, backend, data, deployment and maintainability are treated as one connected product.',
@@ -714,16 +710,15 @@ const en: StudioContent = {
     },
     noticeTitle: 'Legal Notice',
     noticeSections: [
-      { title: 'Provider information', lines: ['Benjamin Bennewitz', '[add full serviceable address before publication]', 'Germany'] },
-      { title: 'Contact', lines: ['Email: kontakt@bennewitz.de', 'Phone: [add before publication]'] },
-      { title: 'Notice', lines: ['The placeholders in this legal notice must be replaced by the actual mandatory information before production launch.'] },
+      { title: 'Provider information', lines: ['Benjamin Bennewitz', 'Germany'] },
+      { title: 'Contact', lines: ['Email: kontakt@bennewitz.de'] },
     ],
     privacyTitle: 'Privacy',
     privacySections: [
-      { title: 'Controller', paragraphs: ['Benjamin Bennewitz is responsible for processing personal data. The full address must be added here and in the legal notice before production launch.'] },
+      { title: 'Controller', paragraphs: ['Benjamin Bennewitz is responsible for processing personal data. Contact: kontakt@bennewitz.de.'] },
       { title: 'Contact form', paragraphs: ['When you use the contact form, name, email address, optional company/organization, selected topic and message are processed to handle your inquiry. Data is sent only to the site’s own server-side protected contact endpoint.', 'The frontend limits input and validates formats. Server-side validation remains authoritative. Spam protection, rate limiting, CSRF validation and retention rules must be enforced by the backend.'] },
-      { title: 'Server logs', paragraphs: ['Technical server log data may be processed when the website is accessed. The exact data and retention period depend on the final hosting setup and must be completed before publication.'] },
-      { title: 'External services', paragraphs: ['The base version of this site does not load externally hosted fonts, tracking scripts or social widgets. Material Symbols, Inter and JetBrains Mono are served locally.'] },
+      { title: 'Server logs', paragraphs: ['Technical server log data may be processed when the website is accessed. It is used to keep the service secure and stable and to diagnose errors.'] },
+      { title: 'External services', paragraphs: ['Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets.'] },
     ],
   },
   footer: {

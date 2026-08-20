@@ -79,6 +79,8 @@
   --dcr-color-on-surface-strong: #f7f2e9;
   --dcr-color-card-hover: #dedad1;
   --dcr-color-on-card-hover: #080808;
+  --dcr-color-neutral-panel: #d8dadd;
+  --dcr-color-on-neutral-panel: #080808;
 }
 
 :root[data-theme='light'] {
@@ -107,6 +109,8 @@
   --dcr-color-on-surface-strong: #101112;
   --dcr-color-card-hover: var(--dcr-color-primary);
   --dcr-color-on-card-hover: var(--dcr-color-on-primary);
+  --dcr-color-neutral-panel: #d8dadd;
+  --dcr-color-on-neutral-panel: #101112;
 }
 
 
