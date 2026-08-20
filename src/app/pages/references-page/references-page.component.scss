@@ -121,6 +121,7 @@
 
 .reference-row__content {
   display: grid;
+  min-width: 0;
   gap: clamp(0.55rem, 1.3vh, 0.9rem);
   align-content: center;
   padding: clamp(1.3rem, 3vw, 2.7rem);
@@ -136,7 +137,9 @@
 }
 
 .reference-row h2 {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: anywhere;
   font-family: var(--dcr-font-display);
   font-size: clamp(2.2rem, min(4vw, 5vh), 4.5rem);
   line-height: 0.86;
@@ -145,7 +148,9 @@
 
 .reference-row p,
 .reference-row small {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: anywhere;
   color: var(--dcr-color-text-muted);
   font-size: clamp(0.75rem, 0.9vw, 0.9rem);
   line-height: 1.55;
@@ -169,6 +174,8 @@
 
 .reference-row a {
   width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   border: 2px solid var(--reference-accent);
   padding: 0.45rem 0.6rem;
   background: var(--reference-accent);
@@ -329,6 +336,7 @@
 .delivered-card__body {
   position: relative;
   display: grid;
+  min-width: 0;
   grid-template-rows: auto auto 1fr auto;
   gap: 0.8rem;
   padding: clamp(1.3rem, 3vw, 2.2rem);
@@ -358,6 +366,7 @@
 
 .delivered-card h2 {
   position: relative;
+  min-width: 0;
   z-index: 1;
   margin: 0;
   overflow-wrap: anywhere;
@@ -388,6 +397,8 @@
 
 .delivered-card a {
   display: inline-flex;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   gap: 0.5rem;
   align-items: center;
   width: fit-content;

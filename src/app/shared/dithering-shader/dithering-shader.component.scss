@@ -14,3 +14,7 @@
   height: 100%;
   image-rendering: pixelated;
 }
+
+.dithering-shader__canvas--liquid {
+  image-rendering: auto;
+}

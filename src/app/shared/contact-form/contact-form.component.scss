@@ -118,3 +118,97 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Kompakter Modus nutzt dieselbe Formularlogik, reduziert aber nur den visuellen Footprint. */
+.contact-form--compact {
+  gap: 0.75rem;
+  padding: clamp(0.9rem, 1.6vh, 1.25rem);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--dcr-color-text) 13%, transparent);
+}
+
+.contact-form--compact .contact-form__grid {
+  gap: 0.65rem;
+}
+
+.contact-form--compact .dcr-field {
+  gap: 0.3rem;
+}
+
+.contact-form--compact .dcr-field label,
+.contact-form--compact .contact-form__privacy label {
+  font-size: 0.74rem;
+}
+
+.contact-form--compact :is(.dcr-field input, .dcr-field select, .dcr-field textarea) {
+  padding: 0.62rem 0.75rem;
+}
+
+.contact-form--compact .dcr-field textarea {
+  min-height: 6.5rem;
+}
+
+.contact-form--compact .contact-form__required,
+.contact-form--compact .contact-form__message-meta,
+.contact-form--compact .contact-form__status {
+  font-size: 0.66rem;
+}
+
+/* Modernes Project-Briefing statt schwerer Formularbox. */
+.contact-form {
+  position: relative;
+  gap: clamp(0.85rem, 1.8vh, 1.2rem);
+  border: 1px solid var(--dcr-color-border-strong);
+  border-radius: clamp(0.9rem, 1.5vw, 1.4rem);
+  padding: clamp(1.15rem, 2.5vw, 2rem);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dcr-color-primary) 7%, transparent), transparent 42%),
+    color-mix(in srgb, var(--dcr-color-surface-solid) 94%, transparent);
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--dcr-color-shadow) 65%, transparent);
+}
+
+.contact-form::before {
+  position: absolute;
+  top: 0;
+  left: clamp(1.15rem, 2.5vw, 2rem);
+  width: clamp(4rem, 9vw, 7rem);
+  height: 0.35rem;
+  border-radius: 0 0 1rem 1rem;
+  content: '';
+  background: var(--dcr-color-primary);
+}
+
+.contact-form__required { justify-self: end; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.contact-form__grid { gap: clamp(0.9rem, 2vw, 1.5rem); }
+.dcr-field { position: relative; gap: 0.2rem; }
+.dcr-field label, .contact-form__privacy label { color: var(--dcr-color-text-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.dcr-field input,
+.dcr-field select,
+.dcr-field textarea {
+  border: 0;
+  border-bottom: 1px solid var(--dcr-color-border-strong);
+  border-radius: 0;
+  padding: 0.65rem 0.15rem 0.8rem;
+  background: transparent;
+  font-size: clamp(0.9rem, 1.1vw, 1.02rem);
+  transition: border-color 180ms ease, background-color 180ms ease, padding 220ms var(--dcr-ease-out);
+}
+
+.dcr-field textarea { min-height: clamp(6.5rem, 14vh, 9rem); resize: vertical; }
+.dcr-field input:hover, .dcr-field select:hover, .dcr-field textarea:hover { border-bottom-color: var(--dcr-color-text); }
+.dcr-field input:focus-visible, .dcr-field select:focus-visible, .dcr-field textarea:focus-visible { border-bottom-color: var(--dcr-color-primary); padding-left: 0.55rem; background: color-mix(in srgb, var(--dcr-color-primary) 5%, transparent); box-shadow: inset 0 -2px 0 var(--dcr-color-primary); outline: none; }
+.contact-form__message-meta { font-size: 0.62rem; }
+.contact-form__privacy { align-items: center; border: 1px solid var(--dcr-color-border); border-radius: 0.65rem; padding: 0.75rem; }
+.contact-form__privacy label { text-transform: none; line-height: 1.45; }
+.contact-form__privacy input { margin: 0; }
+.contact-form dcr-action-button { justify-self: end; }
+
+.contact-form--compact {
+  gap: 0.6rem;
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  box-shadow: none;
+}
+.contact-form--compact .dcr-field textarea { min-height: 4.5rem; }
+.contact-form--compact :is(.dcr-field input, .dcr-field select, .dcr-field textarea) { padding: 0.42rem 0.1rem 0.5rem; }

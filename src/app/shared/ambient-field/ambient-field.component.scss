@@ -81,17 +81,23 @@
 }
 
 .ambient-field__nodes span {
-  --node-index: 0;
   position: absolute;
-  left: calc(8% + (var(--node-index) * 11%));
-  top: calc(12% + ((var(--node-index) % 4) * 18%));
+  top: 12%;
+  left: 8%;
   width: clamp(0.28rem, 0.45vw, 0.48rem);
   aspect-ratio: 1;
   background: var(--dcr-color-primary);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--dcr-color-primary) 10%, transparent);
   animation: ambient-node 3.8s steps(2, jump-none) infinite;
-  animation-delay: calc(var(--node-index) * -0.31s);
 }
+
+.ambient-field__nodes span:nth-child(2) { top: 30%; left: 19%; animation-delay: -0.31s; }
+.ambient-field__nodes span:nth-child(3) { top: 48%; left: 30%; animation-delay: -0.62s; }
+.ambient-field__nodes span:nth-child(4) { top: 66%; left: 41%; animation-delay: -0.93s; }
+.ambient-field__nodes span:nth-child(5) { top: 12%; left: 52%; animation-delay: -1.24s; }
+.ambient-field__nodes span:nth-child(6) { top: 30%; left: 63%; animation-delay: -1.55s; }
+.ambient-field__nodes span:nth-child(7) { top: 48%; left: 74%; animation-delay: -1.86s; }
+.ambient-field__nodes span:nth-child(8) { top: 66%; left: 85%; animation-delay: -2.17s; }
 
 .ambient-field__nodes span:nth-child(3n) {
   background: var(--dcr-color-lime);

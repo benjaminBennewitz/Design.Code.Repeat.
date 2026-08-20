@@ -11,7 +11,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBind
 type DitheringMatrixType = '2x2' | '4x4' | '8x8';
 
 /** Unterstützte prozedurale Shader-Muster. */
-type DitheringShape = 'swirl' | 'wave';
+type DitheringShape = 'swirl' | 'wave' | 'liquid';
 
 /** RGBA-Farbwert mit normalisierten Kanälen von 0 bis 1. */
 type RgbaColor = readonly [number, number, number, number];
@@ -394,7 +394,7 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
     gl.uniform4f(uniforms.frontColor, ...this.frontColor);
     gl.uniform4f(uniforms.backColor, ...this.backColor);
     gl.uniform1i(uniforms.ditherSize, this.getDitherSize());
-    gl.uniform1i(uniforms.shape, this.shape === 'wave' ? 1 : 0);
+    gl.uniform1i(uniforms.shape, this.shape === 'liquid' ? 2 : this.shape === 'wave' ? 1 : 0);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
@@ -475,7 +475,15 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
         const ny = ((y + 0.5 - height / 2) / radiusBase) * zoom;
         let energy = 0;
 
-        if (this.shape === 'wave') {
+        if (this.shape === 'liquid') {
+          const firstDistance = Math.hypot(nx + 0.45, ny + 0.08);
+          const secondDistance = Math.hypot(nx - 0.32, ny - 0.12);
+          const thirdDistance = Math.hypot(nx - 0.05, ny + 0.48);
+          const density = 0.3 / (firstDistance ** 2 + 0.08)
+            + 0.26 / (secondDistance ** 2 + 0.08)
+            + 0.2 / (thirdDistance ** 2 + 0.07);
+          energy = this.smoothStep(0.9, 1.3, density);
+        } else if (this.shape === 'wave') {
           const uvX = x / Math.max(1, width);
           const uvY = 1 - y / Math.max(1, height);
           const waveX = uvX * 8 - 4;
@@ -598,7 +606,24 @@ export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
       float time = u_time * u_speed;
       float field = 0.0;
 
-      if (u_shape == 1) {
+      if (u_shape == 2) {
+        vec2 first_center = vec2(-0.52 + sin(time * 0.34) * 0.22, -0.08 + cos(time * 0.27) * 0.18);
+        vec2 second_center = vec2(0.38 + cos(time * 0.31) * 0.2, 0.12 + sin(time * 0.39) * 0.2);
+        vec2 third_center = vec2(sin(time * 0.23) * 0.2, -0.52 + cos(time * 0.35) * 0.16);
+        float first_distance = dot(normalized - first_center, normalized - first_center) + 0.075;
+        float second_distance = dot(normalized - second_center, normalized - second_center) + 0.075;
+        float third_distance = dot(normalized - third_center, normalized - third_center) + 0.065;
+        float density = 0.30 / first_distance + 0.27 / second_distance + 0.21 / third_distance;
+        float body = smooth_step(0.9, 1.28, density);
+        float edge = smooth_step(0.84, 1.02, density) - smooth_step(1.02, 1.28, density);
+        float bands = 0.5 + 0.5 * sin((normalized.y * 7.5 + normalized.x * 2.2) - time * 0.55 + density * 0.42);
+        float shine = pow(clamp(1.0 - abs(bands * 2.0 - 1.0), 0.0, 1.0), 5.0);
+        vec3 shadow_color = mix(vec3(0.015, 0.02, 0.03), u_front_color.rgb, 0.2);
+        vec3 metal_color = mix(shadow_color, u_front_color.rgb, 0.26 + bands * 0.48);
+        metal_color = mix(metal_color, vec3(1.0), shine * 0.78 + edge * 0.3);
+        out_color = vec4(metal_color, body * min(0.82, u_front_color.a));
+        return;
+      } else if (u_shape == 1) {
         // Sine-Wave nach dem Dithering-Prinzip der Referenzkomponente.
         vec2 uv = gl_FragCoord.xy / max(u_resolution, vec2(1.0));
         float aspect = u_resolution.x / max(1.0, u_resolution.y);

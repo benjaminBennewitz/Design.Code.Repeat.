@@ -1,69 +1,188 @@
 /**
- * @file Horizontaler Wheel-Scroll für fokussierte Showcase-Sections.
- * @description Übersetzt vertikales Mausrad-Scrolling innerhalb der Section in horizontales Scrolling.
- * An Anfang und Ende wird das Wheel bewusst nicht blockiert, damit der normale Body-Scroll weiterläuft.
+ * @file Scrollgekoppelte horizontale Showcase-Navigation.
+ * @description Pinnt eine Section im Desktop-Viewport und leitet den regulären
+ * Seitenfortschritt deterministisch auf ein horizontales Scroll-Ziel ab.
  */
 
-import { Directive, ElementRef, HostListener, inject, input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, NgZone, OnDestroy, inject, input } from '@angular/core';
 
-/** Wiederverwendbare Wheel-to-horizontal-Scroll-Direktive mit optionalem Scroll-Ziel. */
+/** Synchronisiert vertikalen Seitenfortschritt mit einem horizontalen Showcase. */
 @Directive({
   selector: '[dcrHorizontalWheel]',
   standalone: true,
 })
-export class HorizontalWheelScrollDirective {
-  /** Optionales horizontales Ziel; ohne Angabe scrollt der Host selbst. */
+export class HorizontalWheelScrollDirective implements AfterViewInit, OnDestroy {
+  /** Horizontales Ziel innerhalb des Hosts. */
   readonly dcrHorizontalWheel = input<HTMLElement | undefined>();
 
-  /** Host-Element, das Wheel- und Keyboard-Events für die gesamte Showcase-Section empfängt. */
+  /** Eigenständiger Sticky-Viewport; davor liegende Inhalte bleiben normal scrollbar. */
+  readonly dcrHorizontalSticky = input<HTMLElement | undefined>();
+
+  /** Section, deren zusätzliche Höhe den horizontalen Scrollweg bereitstellt. */
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  /** Übersetzt primäre Wheel-Bewegung in horizontales Scrollen. */
-  @HostListener('wheel', ['$event'])
-  onWheel(event: WheelEvent): void {
-    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
-      return;
-    }
+  /** Hält Scroll- und Resize-Arbeit aus der Angular-Change-Detection heraus. */
+  private readonly ngZone = inject(NgZone);
 
-    const target = this.scrollTarget();
-    const maxScrollLeft = target.scrollWidth - target.clientWidth;
+  /** Beobachtet Größenänderungen am Track. */
+  private resizeObserver?: ResizeObserver;
 
-    if (maxScrollLeft <= 1) {
-      return;
-    }
+  /** Aktuell berechneter Dokumentstart der gepinnten Strecke. */
+  private scrollStart = 0;
 
-    const movingForward = event.deltaY > 0;
-    const movingBackward = event.deltaY < 0;
-    const atStart = target.scrollLeft <= 1;
-    const atEnd = target.scrollLeft >= maxScrollLeft - 1;
+  /** Scrollbare horizontale Distanz in Pixeln. */
+  private scrollDistance = 0;
 
-    if ((movingForward && atEnd) || (movingBackward && atStart)) {
-      return;
-    }
+  /** Gebündelter Render-Frame für Scroll-Updates. */
+  private scrollFrameId = 0;
 
-    event.preventDefault();
-    target.scrollLeft += event.deltaY;
+  /** Gebündelter Render-Frame für Layout-Neuberechnungen. */
+  private layoutFrameId = 0;
+
+  /** Initialisiert die scrollgekoppelte Strecke nach dem Rendern des Tracks. */
+  ngAfterViewInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.scheduleScrollUpdate, { passive: true });
+      window.addEventListener('resize', this.scheduleLayoutUpdate, { passive: true });
+
+      const target = this.scrollTarget();
+      const sticky = this.stickyElement();
+      if (target) {
+        this.resizeObserver = new ResizeObserver(this.scheduleLayoutUpdate);
+        this.resizeObserver.observe(target);
+        sticky && this.resizeObserver.observe(sticky);
+
+        const introduction = sticky?.previousElementSibling;
+        if (introduction instanceof HTMLElement) {
+          this.resizeObserver.observe(introduction);
+        }
+      }
+
+      this.scheduleLayoutUpdate();
+    });
   }
 
-  /** Unterstützt dieselbe Interaktion per Tastatur, wenn ein Kind des Hosts fokussiert ist. */
+  /** Entfernt Listener, Observer, Frames und die dynamische Section-Höhe. */
+  ngOnDestroy(): void {
+    window.removeEventListener('scroll', this.scheduleScrollUpdate);
+    window.removeEventListener('resize', this.scheduleLayoutUpdate);
+    window.cancelAnimationFrame(this.scrollFrameId);
+    window.cancelAnimationFrame(this.layoutFrameId);
+    this.resizeObserver?.disconnect();
+    this.host.style.removeProperty('height');
+    this.host.style.removeProperty('--dcr-horizontal-progress');
+    this.host.classList.remove('is-scroll-pinned');
+  }
+
+  /** Navigiert im gepinnten Zustand per Pfeiltaste vorwärts. */
   @HostListener('keydown.arrowright', ['$event'])
-  onArrowRight(event: KeyboardEvent): void {
-    event.preventDefault();
-    const target = this.scrollTarget();
-    target.scrollBy({ left: Math.max(280, target.clientWidth * 0.45), behavior: this.scrollBehavior() });
+  onArrowRight(event: Event): void {
+    this.navigateByKeyboard(event as KeyboardEvent, 1);
   }
 
-  /** Unterstützt Rückwärtsnavigation per Tastatur. */
+  /** Navigiert im gepinnten Zustand per Pfeiltaste rückwärts. */
   @HostListener('keydown.arrowleft', ['$event'])
-  onArrowLeft(event: KeyboardEvent): void {
-    event.preventDefault();
-    const target = this.scrollTarget();
-    target.scrollBy({ left: -Math.max(280, target.clientWidth * 0.45), behavior: this.scrollBehavior() });
+  onArrowLeft(event: Event): void {
+    this.navigateByKeyboard(event as KeyboardEvent, -1);
   }
 
-  /** Liefert das konfigurierte Scroll-Ziel oder den Host als Fallback. */
-  private scrollTarget(): HTMLElement {
-    return this.dcrHorizontalWheel() ?? this.host;
+  /** Bündelt Scroll-Ereignisse auf maximal einen DOM-Schreibzugriff pro Frame. */
+  private readonly scheduleScrollUpdate = (): void => {
+    if (this.scrollFrameId) {
+      return;
+    }
+
+    this.scrollFrameId = window.requestAnimationFrame(() => {
+      this.scrollFrameId = 0;
+      this.updateHorizontalProgress();
+    });
+  };
+
+  /** Berechnet die Pinning-Strecke nach Größenänderungen neu. */
+  private readonly scheduleLayoutUpdate = (): void => {
+    window.cancelAnimationFrame(this.layoutFrameId);
+    this.layoutFrameId = window.requestAnimationFrame(() => {
+      this.layoutFrameId = 0;
+      this.updateLayout();
+    });
+  };
+
+  /** Setzt die Section-Höhe aus Viewport und realer Track-Breite zusammen. */
+  private updateLayout(): void {
+    const target = this.scrollTarget();
+    const sticky = this.stickyElement();
+    const canPin = window.matchMedia('(min-width: 901px) and (min-height: 800px)').matches;
+
+    if (!target || !sticky || !canPin) {
+      this.scrollDistance = 0;
+      this.host.style.removeProperty('height');
+      this.host.style.removeProperty('--dcr-horizontal-progress');
+      this.host.classList.remove('is-scroll-pinned');
+      return;
+    }
+
+    const headerHeight = this.headerHeight();
+    const stickyHeight = Math.max(1, window.innerHeight - headerHeight);
+    this.scrollDistance = Math.max(0, target.scrollWidth - target.clientWidth);
+
+    if (this.scrollDistance <= 1) {
+      this.host.style.removeProperty('height');
+      this.host.classList.remove('is-scroll-pinned');
+      return;
+    }
+
+    const stickyOffset = sticky.offsetTop;
+    this.host.style.height = `${stickyOffset + stickyHeight + this.scrollDistance}px`;
+    this.host.classList.add('is-scroll-pinned');
+    this.scrollStart = window.scrollY + this.host.getBoundingClientRect().top + stickyOffset - headerHeight;
+    this.updateHorizontalProgress();
+  }
+
+  /** Überträgt den normalen Seitenfortschritt verlustfrei auf den Track. */
+  private updateHorizontalProgress(): void {
+    const target = this.scrollTarget();
+
+    if (!target || this.scrollDistance <= 1) {
+      return;
+    }
+
+    const progress = Math.min(1, Math.max(0, (window.scrollY - this.scrollStart) / this.scrollDistance));
+    target.scrollLeft = progress * this.scrollDistance;
+    this.host.style.setProperty('--dcr-horizontal-progress', progress.toFixed(4));
+  }
+
+  /** Verschiebt je Tastendruck etwa eine halbe sichtbare Kartenbreite. */
+  private navigateByKeyboard(event: KeyboardEvent, direction: -1 | 1): void {
+    const target = this.scrollTarget();
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    const distance = Math.max(280, target.clientWidth * 0.45) * direction;
+
+    if (this.scrollDistance > 1) {
+      window.scrollBy({ top: distance, behavior: this.scrollBehavior() });
+      return;
+    }
+
+    target.scrollBy({ left: distance, behavior: this.scrollBehavior() });
+  }
+
+  /** Liefert den konfigurierten Track. */
+  private scrollTarget(): HTMLElement | undefined {
+    return this.dcrHorizontalWheel();
+  }
+
+  /** Liefert den gepinnten Karten-Viewport. */
+  private stickyElement(): HTMLElement | undefined {
+    return this.dcrHorizontalSticky();
+  }
+
+  /** Liest die zentrale Header-Höhe als Pixelwert. */
+  private headerHeight(): number {
+    const value = getComputedStyle(document.documentElement).getPropertyValue('--dcr-header-height');
+    return Number.parseFloat(value) || 0;
   }
 
   /** Respektiert die globale Motion-Einstellung. */

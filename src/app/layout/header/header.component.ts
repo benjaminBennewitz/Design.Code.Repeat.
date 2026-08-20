@@ -3,7 +3,8 @@
  * @description Konventionelle Hauptnavigation mit reduziertem Terminal-Charakter, Mobile-Menü sowie Theme- und Sprachschalter.
  */
 
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, HostListener, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NavigationItem } from '../../core/models/studio.models';
 import { LanguageService } from '../../core/services/language.service';
@@ -20,6 +21,7 @@ import { ActionButtonComponent } from '../../shared/action-button/action-button.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  private readonly document = inject(DOCUMENT);
   readonly languageService = inject(LanguageService);
   readonly themeService = inject(ThemeService);
   readonly content = computed(() => this.languageService.content().navigation);
@@ -27,6 +29,10 @@ export class HeaderComponent {
   readonly brandLabel = computed(() => this.languageService.language() === 'de'
     ? 'Design. Code. Repeat. Startseite'
     : 'Design. Code. Repeat. Home');
+
+  constructor() {
+    effect(() => this.document.documentElement.classList.toggle('dcr-menu-open', this.menuOpen()));
+  }
 
   /** Öffnet oder schließt die mobile Navigation. */
   toggleMenu(): void {
@@ -36,6 +42,12 @@ export class HeaderComponent {
   /** Schließt die Navigation nach einer Auswahl. */
   closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  /** Schließt das Overlay erwartungsgemäß über Escape. */
+  @HostListener('document:keydown.escape')
+  closeMenuWithEscape(): void {
+    this.closeMenu();
   }
 
   /** Extrahiert das Fragment aus einem Home-Anker. */

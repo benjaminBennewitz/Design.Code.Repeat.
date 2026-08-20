@@ -45,6 +45,9 @@ export class ContactFormComponent {
   /** Eindeutiger Präfix für DOM-IDs bei mehreren Formularinstanzen auf derselben Route. */
   readonly idPrefix = input('contact');
 
+  /** Kompakter Darstellungsmodus für begrenzte Flächen wie den globalen Footer. */
+  readonly compact = input(false);
+
   /** Abgeleitete, kollisionsfreie IDs für Labels, Felder und Fehlermeldungen. */
   readonly ids = computed(() => {
     const prefix = this.idPrefix().replace(/[^a-zA-Z0-9_-]/g, '-');

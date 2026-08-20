@@ -1,41 +1,96 @@
 <main>
-  <section class="home-hero dcr-section dcr-viewport-section dcr-section-flow" id="start">
-    <div class="dcr-container home-hero__layout">
-      <div class="home-hero__copy">
-        <p class="dcr-eyebrow">{{ content().home.hero.eyebrow }}</p>
-        <h1>{{ content().home.hero.title }}</h1>
-        <p class="home-hero__lead">{{ content().home.hero.lead }}</p>
+  <section class="home-hero dcr-viewport-section" id="start" aria-labelledby="home-hero-title">
+    <div class="home-hero__stage">
+      <p class="home-hero__service home-hero__service--web">{{ content().services[0].title }}</p>
+      <p class="home-hero__service home-hero__service--software">{{ content().services[1].title }}</p>
+      <p class="home-hero__service home-hero__service--design">{{ content().services[2].title }}</p>
+      <p class="home-hero__service home-hero__service--care">{{ content().services[3].title }}</p>
 
-        <div class="home-hero__actions">
-          <dcr-action-button [label]="content().home.hero.primaryCta" route="/leistungen" variant="primary" icon="arrow_outward" />
-          <dcr-action-button [label]="content().home.hero.secondaryCta" route="/kontakt" variant="ghost" />
-        </div>
+      <h1 id="home-hero-title" class="home-hero__claim" [attr.aria-label]="heroClaimLabel()">
+        <span class="home-hero__line">
+          <span>{{ heroClaimLines()[0].before }}</span>
+          <span class="home-hero__slot home-hero__slot--one" aria-hidden="true">
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-0"></span>
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-2">&lt;/&gt;</span>
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-1"><i></i><i></i><i></i><i></i></span>
+          </span>
+          <span>{{ heroClaimLines()[0].after }}</span>
+        </span>
+        <span class="home-hero__line">
+          <span>{{ heroClaimLines()[1].before }}</span>
+          <span class="home-hero__slot home-hero__slot--two" aria-hidden="true">
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-0"><i></i><i></i><i></i><i></i></span>
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-2"></span>
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-1">&lt;/&gt;</span>
+          </span>
+          <span>{{ heroClaimLines()[1].after }}</span>
+        </span>
+        <span class="home-hero__line home-hero__line--accent">
+          <span>{{ heroClaimLines()[2].before }}</span>
+          <span class="home-hero__slot home-hero__slot--three" aria-hidden="true">
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-0">&lt;/&gt;</span>
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-2"><i></i><i></i><i></i><i></i></span>
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-1"></span>
+          </span>
+          <span>{{ heroClaimLines()[2].after }}</span>
+        </span>
+      </h1>
 
-        <dl class="home-hero__proof">
-          @for (proof of content().home.hero.proof; track proof.value) {
-            <div>
-              <dt>{{ proof.value }}</dt>
-              <dd>{{ proof.label }}</dd>
-            </div>
-          }
-        </dl>
-      </div>
-
-      <div class="home-hero__visual" aria-hidden="true">
-        <div class="home-hero__poster">
-          <span>DESIGN</span>
-          <span>CODE</span>
-          <span>REPEAT</span>
-          <b>B²</b>
-        </div>
-        <dcr-terminal-panel title="studio.boot" [lines]="content().home.hero.status" />
+      <div class="home-hero__cta">
+        <dcr-action-button [label]="content().home.hero.secondaryCta" route="/kontakt" variant="primary" icon="arrow_outward" />
       </div>
     </div>
+    <span class="home-hero__baseline" aria-hidden="true"></span>
   </section>
+
+  <section class="home-capabilities dcr-viewport-section" id="intro" aria-labelledby="home-capabilities-title">
+    <a class="home-capabilities__panel home-capabilities__panel--lead" routerLink="/leistungen" fragment="service-index">
+      <span class="home-capabilities__mark home-capabilities__mark--arrow" aria-hidden="true">↗</span>
+      <div class="home-capabilities__lead-copy">
+        <p class="home-capabilities__eyebrow">{{ content().home.hero.eyebrow }}</p>
+        <h2 id="home-capabilities-title">{{ content().home.hero.title }}</h2>
+        <p>{{ content().home.hero.lead }}</p>
+      </div>
+      <div class="home-capabilities__meta">
+        <span class="home-capabilities__category">{{ content().services[0].kicker }}</span>
+        <p class="home-capabilities__summary">{{ content().services[0].summary }}</p>
+      </div>
+    </a>
+
+    <div class="home-capabilities__split">
+      <a class="home-capabilities__panel home-capabilities__panel--light" routerLink="/leistungen" fragment="service-index">
+        <span class="home-capabilities__mark home-capabilities__mark--asterisk" aria-hidden="true">✳</span>
+        <div class="home-capabilities__copy">
+          <h3>{{ content().services[2].title }}</h3>
+          <p class="home-capabilities__summary">{{ content().services[2].summary }}</p>
+        </div>
+        <span class="home-capabilities__label">{{ content().services[2].kicker }}</span>
+      </a>
+      <a class="home-capabilities__panel home-capabilities__panel--grey" routerLink="/leistungen" fragment="service-index">
+        <span class="home-capabilities__mark home-capabilities__mark--cluster" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <div class="home-capabilities__copy">
+          <h3>{{ content().services[3].title }}</h3>
+          <p class="home-capabilities__summary">{{ content().services[3].summary }}</p>
+        </div>
+        <span class="home-capabilities__label">{{ content().services[3].kicker }}</span>
+      </a>
+    </div>
+
+    <a class="home-capabilities__panel home-capabilities__panel--dark" routerLink="/leistungen" fragment="service-index">
+      <span class="home-capabilities__mark home-capabilities__mark--diamond" aria-hidden="true">✦</span>
+      <div class="home-capabilities__copy">
+        <h3>{{ content().services[1].title }}</h3>
+        <p class="home-capabilities__summary">{{ content().services[1].summary }}</p>
+      </div>
+      <span class="home-capabilities__label">{{ content().services[1].kicker }}</span>
+    </a>
+  </section>
+
+  <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
 
   <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
     <div class="dcr-container">
-      <dcr-section-heading [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
+      <dcr-section-heading align="center" [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
 
       <div class="home-services__grid">
         @for (service of content().services; track service.slug; let index = $index) {
@@ -83,23 +138,29 @@
     </div>
   </section>
 
-  <section class="home-references dcr-section dcr-viewport-section dcr-section-flow" id="referenzen">
-    <div class="dcr-container">
+  <section class="home-references dcr-section dcr-viewport-section dcr-section-flow" id="referenzen" [dcrHorizontalWheel]="workTrack" [dcrHorizontalSticky]="workSticky">
+    <div class="dcr-container home-references__head">
       <dcr-section-heading [eyebrow]="content().home.references.eyebrow" [title]="content().home.references.title" [text]="content().home.references.text" />
+      <div class="home-references__control">
+        <span>VERTICAL INPUT / HORIZONTAL OUTPUT</span>
+        <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} →</a>
+      </div>
+    </div>
 
-      <div class="reference-grid">
+    <div #workSticky class="home-references__sticky">
+      <div #workTrack class="reference-track" tabindex="0" [attr.aria-label]="content().home.references.title">
         @for (reference of content().references.slice(0, 4); track reference.slug) {
           <article class="reference-card" [attr.data-accent]="reference.accent">
-            @if (reference.image) {
-              <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="900" height="540" loading="lazy" decoding="async">
-            } @else {
-              <div class="reference-card__placeholder" aria-hidden="true">
-                <span>{{ reference.name }}</span>
-                <span>{{ reference.type }}</span>
-              </div>
-            }
+            <div class="reference-card__visual">
+              <div class="reference-card__browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>PROJECT / {{ reference.year }}</span></div>
+              @if (reference.image) {
+                <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="1200" height="760" loading="lazy" decoding="async">
+              } @else {
+                <div class="reference-card__placeholder" aria-hidden="true"><span>{{ reference.name }}</span><span>{{ reference.type }}</span></div>
+              }
+            </div>
             <div class="reference-card__content">
-              <div class="reference-card__meta"><span>{{ reference.type }}</span><span>{{ reference.year }}</span></div>
+              <div class="reference-card__meta"><span>SELECTED WORK</span><span>{{ reference.type }}</span></div>
               <h3>{{ reference.name }}</h3>
               <p>{{ reference.summary }}</p>
               <ul [attr.aria-label]="techStackLabel()">
@@ -110,18 +171,16 @@
           </article>
         }
       </div>
-
-      <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} →</a>
     </div>
   </section>
 
   <section class="home-process dcr-section dcr-viewport-section dcr-section-flow" id="prozess">
     <div class="dcr-container">
-      <dcr-section-heading [eyebrow]="content().home.process.eyebrow" [title]="content().home.process.title" [text]="content().home.process.text" />
+      <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="content().home.process.title" [text]="content().home.process.text" />
 
       <ol class="process-list">
         @for (step of content().process; track step.index) {
-          <li>
+          <li tabindex="0">
             <span class="process-list__index">{{ step.index }}</span>
             <div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div>
             <code>{{ step.command }}</code>
@@ -131,13 +190,15 @@
     </div>
   </section>
 
+  <dcr-infinite-marquee class="home-marquee" [items]="processMarqueeItems()" [ariaLabel]="marqueeLabel()" [reverse]="true" tone="pink" />
+
   <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
     <div class="dcr-container home-faq__layout">
       <dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" />
 
       <div class="faq-list">
         @for (item of content().faq; track item.question; let index = $index) {
-          <details [attr.open]="index === 0 ? '' : null">
+          <details [open]="openFaqIndex() === index" (toggle)="onFaqToggle(index, $event)">
             <summary><span>0{{ index + 1 }}</span>{{ item.question }}<span class="material-symbols-outlined" aria-hidden="true">add</span></summary>
             <p>{{ item.answer }}</p>
           </details>
@@ -150,9 +211,8 @@
     <div class="dcr-container home-contact__layout">
       <div class="home-contact__copy">
         <dcr-section-heading [eyebrow]="content().home.contact.eyebrow" [title]="content().home.contact.title" [text]="content().home.contact.text" />
-        <dcr-terminal-panel title="connection.status" [lines]="['endpoint=/api/contact/', 'xsrf=client-ready', 'input=validated', 'server=required']" />
       </div>
-      <dcr-contact-form idPrefix="home-contact" />
+      <dcr-contact-form idPrefix="home-contact" [compact]="true" />
     </div>
   </section>
 </main>

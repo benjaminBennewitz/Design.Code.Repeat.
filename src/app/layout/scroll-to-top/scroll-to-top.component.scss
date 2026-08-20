@@ -4,37 +4,33 @@
 
 .scroll-top {
   position: fixed;
-  z-index: 70;
+  z-index: 1190;
   right: clamp(1rem, 2vw, 1.5rem);
   bottom: clamp(1rem, 2vw, 1.5rem);
   display: grid;
-  grid-template-columns: auto auto;
-  gap: 0.35rem;
-  align-items: center;
-  min-height: 2.75rem;
-  border: 1px solid var(--dcr-color-border-strong);
-  padding: 0 0.75rem;
-  background: color-mix(in srgb, var(--dcr-color-surface-solid) 90%, transparent);
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 2px solid var(--dcr-color-border-strong);
+  padding: 0;
+  background: var(--dcr-color-surface-solid);
   color: var(--dcr-color-text);
-  box-shadow: 5px 5px 0 color-mix(in srgb, var(--dcr-color-primary) 24%, transparent);
-  backdrop-filter: blur(12px);
-  font-family: var(--dcr-font-mono);
-  font-size: 0.62rem;
-  font-weight: 900;
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--dcr-color-primary) 28%, transparent);
   cursor: pointer;
+  transition: transform 160ms var(--dcr-ease-out), background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
   animation: scroll-top-in 240ms var(--dcr-ease-out) both;
 }
 
 .scroll-top:hover,
 .scroll-top:focus-visible {
-  border-color: var(--dcr-color-primary);
   background: var(--dcr-color-primary);
   color: var(--dcr-color-on-primary);
+  box-shadow: 9px 9px 0 color-mix(in srgb, var(--dcr-color-primary) 56%, transparent);
   transform: translate(-2px, -2px);
 }
 
 .scroll-top .material-symbols-outlined {
-  font-size: 1rem;
+  font-size: 1.35rem;
 }
 
 @keyframes scroll-top-in {
@@ -42,14 +38,9 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Accessibility-Panel bleibt als primäre globale Kontrolle unten rechts frei zugänglich. */
-.scroll-top {
-  bottom: calc(clamp(1rem, 2vw, 1.5rem) + 4.4rem);
-}
-
 @media (max-width: 560px) {
   .scroll-top {
     right: 0.75rem;
-    bottom: 4.9rem;
+    bottom: 0.75rem;
   }
 }

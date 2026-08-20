@@ -1,19 +1,18 @@
 /**
  * @file Interaktiver Studio-Footer.
- * @description Bündelt Sitemap, Rechtliches und Kontakt in einer großen typografischen Footer-Bühne mit kontrollierten Slides.
+ * @description Bündelt Sitemap und Rechtliches in einer großen typografischen Footer-Bühne mit kontrollierten Slides.
  */
 
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CookieConsentService } from '../../core/services/cookie-consent.service';
 import { LanguageService } from '../../core/services/language.service';
-import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
 
 /** Globaler, interaktiver Footer. */
 @Component({
   selector: 'dcr-footer',
   standalone: true,
-  imports: [RouterLink, ContactFormComponent],
+  imports: [RouterLink],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +27,7 @@ export class FooterComponent {
   /** Sprachabhängiger Gesamtcontent. */
   readonly content = computed(() => this.languageService.content());
 
-  /** Aktives Footer-Panel: Sitemap, Rechtliches oder Kontakt. */
+  /** Aktives Footer-Panel: Sitemap oder Rechtliches. */
   readonly activePanel = signal<number>(0);
 
   /** Aktuelles Jahr. */
@@ -42,7 +41,6 @@ export class FooterComponent {
         panelLabel: 'Footer-Bereich',
         sitemap: 'Sitemap',
         legal: 'Rechtliches',
-        contact: 'Kontakt',
         cookie: 'Cookie-Einstellungen',
         notice: 'Impressum',
         privacy: 'Datenschutz',
@@ -50,7 +48,6 @@ export class FooterComponent {
         process: 'Prozess',
         faq: 'FAQ',
         portfolio: 'Portfolio',
-        lead: 'Bereit für das richtige Projekt.',
       }
     : {
         previous: 'Previous footer section',
@@ -58,7 +55,6 @@ export class FooterComponent {
         panelLabel: 'Footer section',
         sitemap: 'Sitemap',
         legal: 'Legal',
-        contact: 'Contact',
         cookie: 'Cookie settings',
         notice: 'Legal notice',
         privacy: 'Privacy',
@@ -66,16 +62,15 @@ export class FooterComponent {
         process: 'Process',
         faq: 'FAQ',
         portfolio: 'Portfolio',
-        lead: 'Open to the right project.',
       });
 
   /** Aktiviert den vorherigen Panel-Index zyklisch. */
   previousPanel(): void {
-    this.activePanel.update((current) => (current + 2) % 3);
+    this.activePanel.update((current) => (current + 1) % 2);
   }
 
   /** Aktiviert den nächsten Panel-Index zyklisch. */
   nextPanel(): void {
-    this.activePanel.update((current) => (current + 1) % 3);
+    this.activePanel.update((current) => (current + 1) % 2);
   }
 }
