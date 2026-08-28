@@ -4,6 +4,7 @@ setlocal EnableExtensions
 
 REM Baut das Angular-Frontend lokal, packt nur den Browser-Build und startet das Server-Deployment.
 REM Voraussetzung: OpenSSH-Client, scp, ssh, tar, Node/npm und Git sind lokal verfuegbar.
+REM Wichtig: npm ist unter Windows eine CMD-Datei und muss in Batch-Scripten mit CALL gestartet werden.
 
 set "SCRIPT_DIR=%~dp0"
 set "PROJECT_DIR=%SCRIPT_DIR%.."
@@ -23,11 +24,11 @@ git pull --ff-only || exit /b 1
 
 echo.
 echo [DCR] Dependencies installieren...
-npm ci || exit /b 1
+call npm ci || exit /b 1
 
 echo.
 echo [DCR] Production-Build erstellen...
-npm run build:production || exit /b 1
+call npm run build:production || exit /b 1
 
 if not exist "%BUILD_DIR%\index.html" (
   echo.

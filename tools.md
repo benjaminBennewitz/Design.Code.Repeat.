@@ -53,6 +53,9 @@ sudo install -m 755 /tmp/deploy-dcr-server.sh /usr/local/bin/deploy-dcr-frontend
 sudo apt install -y rsync
 ```
 
+
+Hinweis fuer Windows-Batch-Scripte: `npm` wird als `npm.cmd` ausgefuehrt. Deshalb muessen npm-Befehle innerhalb von `.cmd`-Dateien mit `call` gestartet werden, sonst endet das Deploy-Script direkt nach `npm ci`.
+
 Regulaeres Frontend-Deployment lokal aus dem Projektordner:
 
 ```cmd
