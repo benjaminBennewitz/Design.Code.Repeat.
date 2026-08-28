@@ -31,7 +31,9 @@ Design.Code.Repeat/
 ├── node_modules/
 │   └── ...
 ├── scripts/
-│   └── copy-fonts.ps1
+│   ├── copy-fonts.ps1
+│   ├── deploy-dcr-local.cmd
+│   └── deploy-dcr-server.sh
 ├── src/
 │   ├── app/
 │   │   ├── core/
