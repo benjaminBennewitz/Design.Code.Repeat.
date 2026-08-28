@@ -1,2 +1,7 @@
+# src/robots.txt
+
 User-agent: *
-Allow: /
+Disallow: /
+
+# Hinweis: Link-Following wird nicht zuverlässig über robots.txt gesteuert.
+# Die zusätzliche nofollow-Anweisung liegt deshalb im SEO-Service als Meta-Robots-Wert.

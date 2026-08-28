@@ -154,10 +154,10 @@ export const environment = {
 
 ### Angular Production
 
-`src/environments/environment.production.ts` ist bewusst nur ein Template. Vor dem Deployment muss mindestens `siteUrl` ersetzt werden:
+`src/environments/environment.production.ts` ist für die öffentliche Domain vorkonfiguriert:
 
 ```ts
-siteUrl: 'https://replace-with-production-domain.invalid'
+siteUrl: 'https://design-code-repeat.de'
 ```
 
 `apiBaseUrl` bleibt standardmäßig `/api`, weil das Django-Backend in Produktion vorzugsweise über denselben Host und einen Reverse Proxy bereitgestellt wird.
@@ -228,11 +228,15 @@ http://localhost:4200
 npm run build:production
 ```
 
-Output:
+Output für das statische Frontend-Deployment:
 
 ```text
-dist/design-code-repeat-studio/
+dist/design-code-repeat-studio/browser/
 ```
+
+Nur der Inhalt des `browser`-Ordners wird in den öffentlichen KeyHelp-Webspace kopiert. Repository-Dateien wie `README.md`, `LICENSE`, `src/`, `backend/`, `.git/` oder `node_modules/` werden nicht ausgeliefert.
+
+Die aktuelle Vorab-Konfiguration blockiert Suchmaschinen über `src/robots.txt` und setzt zusätzlich `noindex, nofollow` über den SEO-Service. Vor dem öffentlichen Launch müssen `src/robots.txt` und die `robots`-Werte in den Environment-Dateien bewusst auf Indexierung umgestellt werden.
 
 ### Tests
 

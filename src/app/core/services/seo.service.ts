@@ -18,6 +18,7 @@ export class SeoService {
   private readonly tabTitle = inject(TabTitleService);
   private readonly structuredDataId = 'dcr-structured-data';
   private readonly configuredSiteUrl = environment.siteUrl.replace(/\/$/, '');
+  private readonly robotsDirective = environment.robots;
 
   /** Setzt SEO-Daten für eine reguläre indexierbare Seite. */
   setPage(content: SeoPageContent, path: string, type: 'website' | 'article' = 'website'): void {
@@ -26,7 +27,7 @@ export class SeoService {
     this.tabTitle.setActiveTitle(content.title);
     this.meta.updateTag({ name: 'description', content: content.description });
     this.meta.updateTag({ name: 'keywords', content: content.keywords.join(', ') });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow' });
+    this.meta.updateTag({ name: 'robots', content: this.robotsDirective });
     this.meta.updateTag({ property: 'og:site_name', content: 'Design. Code. Repeat.' });
     this.meta.updateTag({ property: 'og:type', content: type });
     this.meta.updateTag({ property: 'og:url', content: url });
@@ -53,7 +54,7 @@ export class SeoService {
   setNoIndex(title: string, description: string, path: string): void {
     this.tabTitle.setActiveTitle(title);
     this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ name: 'robots', content: 'noindex, follow' });
+    this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
     this.setCanonical(this.absoluteUrl(path));
   }
 
