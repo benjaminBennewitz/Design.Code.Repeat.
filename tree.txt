@@ -178,6 +178,7 @@ Design.Code.Repeat/
 │   │   ├── home-hero.scss
 │   │   ├── tokens.scss
 │   │   └── utilities.scss
+│   ├── .htaccess
 │   ├── index.html
 │   ├── main.ts
 │   ├── robots.txt
