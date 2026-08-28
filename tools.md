@@ -23,53 +23,31 @@ Nur der Inhalt dieses `browser`-Ordners wird später auf den Server nach `/home/
 `src/robots.txt` wird dagegen explizit durch Angular in den Build kopiert. Der aktuelle Vorab-Stand blockiert Crawler (`Disallow: /`) und setzt zusätzlich `noindex, nofollow` über den SEO-Service. Vor dem Launch muss das bewusst auf `Allow: /` beziehungsweise `index, follow` geändert werden.
 
 
-## Deployment auf KeyHelp-Webspace
+## Angular-Deep-Links unter Apache / KeyHelp
 
-Das Repository wird nicht auf dem Server gebaut. Lokal wird der Angular-Production-Build erstellt, als Archiv gepackt und auf den Server geladen. Das Server-Script entpackt nur den fertigen Build und spiegelt ihn in den KeyHelp-Webspace.
+Direkte Routenaufrufe wie `https://design-code-repeat.de/leistungen` müssen serverseitig auf `index.html` fallen, weil Angular das Routing im Browser übernimmt.
 
-Zielpfad auf dem Server:
-
-```txt
-/home/users/dcr/www/design-code-repeat.de/
-```
-
-Build-Quelle lokal:
+Die Fallback-Regel liegt in:
 
 ```txt
-dist\design-code-repeat-studio\browser
+src/.htaccess
 ```
 
-Einmalige Installation des Server-Scripts:
+`angular.json` kopiert diese Datei beim Production-Build automatisch in den Build-Root:
+
+```txt
+dist\design-code-repeat-studio\browser\.htaccess
+```
+
+Damit werden nur echte Angular-Routen auf `index.html` umgeleitet. Bestehende Dateien, Verzeichnisse, `/api/...` und Asset-Dateien bleiben unberührt.
+
+Nach Änderungen an `.htaccess` immer neu builden und deployen:
 
 ```cmd
-scp -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" scripts\deploy-dcr-server.sh ben@159.195.54.12:/tmp/deploy-dcr-server.sh
-ssh -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" ben@159.195.54.12
-```
-
-Auf dem Server:
-
-```bash
-sudo install -m 755 /tmp/deploy-dcr-server.sh /usr/local/bin/deploy-dcr-frontend
-sudo apt install -y rsync
-```
-
-
-Hinweis fuer Windows-Batch-Scripte: `npm` wird als `npm.cmd` ausgefuehrt. Deshalb muessen npm-Befehle innerhalb von `.cmd`-Dateien mit `call` gestartet werden, sonst endet das Deploy-Script direkt nach `npm ci`.
-
-Regulaeres Frontend-Deployment lokal aus dem Projektordner:
-
-```cmd
+npm run build:production
 scripts\deploy-dcr-local.cmd
 ```
 
-Der Ablauf ist bewusst zweigeteilt:
-
-```txt
-Lokal:  git pull -> npm ci -> npm run build:production -> tar.gz -> scp
-Server: tar.gz entpacken -> rsync in Webroot -> chown dcr:dcr -> Rechte setzen
-```
-
-`README.md`, `LICENSE`, `src/`, `backend/`, `.git/` und `node_modules/` werden dabei nicht ausgeliefert. Im Webroot landet nur der Inhalt des Angular-Build-Ordners.
 
 ## Neu bauen + Cache leeren
 

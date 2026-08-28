@@ -1,0 +1,22 @@
+# src/.htaccess
+
+# Apache-Fallback für Angular-Deep-Links.
+# Direkte Aufrufe wie /leistungen werden auf index.html geroutet.
+# Echte Dateien, Verzeichnisse, API-Routen und Asset-Dateien bleiben unberührt.
+
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteRule ^index\.html$ - [L]
+
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteCond %{REQUEST_URI} !^/api(?:/|$)
+  RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]{2,8}(?:$|[?#])
+  RewriteRule ^ /index.html [L]
+</IfModule>
