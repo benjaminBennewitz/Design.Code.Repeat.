@@ -32,6 +32,8 @@ Design.Code.Repeat/
 │   └── ...
 ├── scripts/
 │   ├── copy-fonts.ps1
+│   ├── deploy-dcr-backend-local.cmd
+│   ├── deploy-dcr-backend-server.sh
 │   ├── deploy-dcr-local.cmd
 │   └── deploy-dcr-server.sh
 ├── src/
