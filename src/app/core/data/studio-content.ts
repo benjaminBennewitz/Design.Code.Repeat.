@@ -248,12 +248,20 @@ const de: StudioContent = {
         paragraphs: ['Verantwortlich für die Verarbeitung personenbezogener Daten ist Benjamin Bennewitz. Kontakt: kontakt@bennewitz.de.'],
       },
       {
+        title: 'Grundsatz',
+        paragraphs: ['Aktuell werden keine Analyse-, Marketing- oder Trackingdaten erhoben und keine Nutzerprofile erstellt. Personenbezogene Daten werden nur verarbeitet, wenn du sie aktiv über das Kontaktformular mitteilst oder direkt per E-Mail Kontakt aufnimmst.', 'Technisch notwendige Daten, die beim Abruf einer Website üblicherweise durch Server und Sicherheitssysteme entstehen können, bleiben davon unberührt und dienen ausschließlich Betrieb, Sicherheit und Fehleranalyse.'],
+      },
+      {
         title: 'Kontaktformular',
-        paragraphs: ['Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, optional Unternehmen/Organisation, gewähltes Thema und Nachricht verarbeitet, um deine Anfrage zu bearbeiten. Die Daten werden ausschließlich an den eigenen, serverseitig geschützten Kontakt-Endpunkt übertragen.', 'Das Frontend begrenzt Eingaben und validiert Formate. Maßgeblich bleibt die serverseitige Validierung. Spam-Schutz, Rate Limiting, CSRF-Prüfung und Aufbewahrungsregeln sind auf dem Backend umzusetzen.'],
+        paragraphs: ['Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, optional Unternehmen/Organisation, gewähltes Thema und Nachricht verarbeitet, um deine Anfrage zu bearbeiten. Die Angaben werden ausschließlich für die Bearbeitung deiner Anfrage genutzt und nicht für Werbung, Newsletter oder Profilbildung verwendet.', 'Die Daten werden an den eigenen, serverseitig geschützten Kontakt-Endpunkt übertragen. Das Frontend begrenzt Eingaben und validiert Formate. Maßgeblich bleibt die serverseitige Validierung mit Spam-Schutz, Rate Limiting und CSRF-Prüfung.'],
+      },
+      {
+        title: 'Lokale Hinweise und notwendige Technik',
+        paragraphs: ['Die Website kann lokal in deinem Browser speichern, dass der Datenschutz-/Cookie-Hinweis bestätigt wurde. Diese Information bleibt auf deinem Gerät und wird nicht für Tracking verwendet.'],
       },
       {
         title: 'Server-Logs',
-        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden. Sie dienen dem sicheren und stabilen Betrieb sowie der Fehleranalyse.'],
+        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden, zum Beispiel IP-Adresse, Zeitpunkt des Abrufs, angefragte URL, User-Agent und technische Statusinformationen. Sie dienen dem sicheren und stabilen Betrieb sowie der Fehleranalyse.'],
       },
       {
         title: 'Externe Dienste',
@@ -722,8 +730,10 @@ const en: StudioContent = {
     privacyTitle: 'Privacy',
     privacySections: [
       { title: 'Controller', paragraphs: ['Benjamin Bennewitz is responsible for processing personal data. Contact: kontakt@bennewitz.de.'] },
-      { title: 'Contact form', paragraphs: ['When you use the contact form, name, email address, optional company/organization, selected topic and message are processed to handle your inquiry. Data is sent only to the site’s own server-side protected contact endpoint.', 'The frontend limits input and validates formats. Server-side validation remains authoritative. Spam protection, rate limiting, CSRF validation and retention rules must be enforced by the backend.'] },
-      { title: 'Server logs', paragraphs: ['Technical server log data may be processed when the website is accessed. It is used to keep the service secure and stable and to diagnose errors.'] },
+      { title: 'Principle', paragraphs: ['No analytics, marketing or tracking data is currently collected and no user profiles are created. Personal data is processed only when you actively provide it through the contact form or contact me directly by email.', 'Technically necessary data that can normally arise when a website is accessed by servers and security systems is reserved for operation, security and error analysis only.'] },
+      { title: 'Contact form', paragraphs: ['When you use the contact form, name, email address, optional company/organization, selected topic and message are processed to handle your inquiry. The information is used only to process your inquiry and not for advertising, newsletters or profiling.', 'Data is sent to the site’s own server-side protected contact endpoint. The frontend limits input and validates formats. Server-side validation remains authoritative and includes spam protection, rate limiting and CSRF validation.'] },
+      { title: 'Local notices and necessary technology', paragraphs: ['The website may store locally in your browser that the privacy/cookie notice has been confirmed. This information remains on your device and is not used for tracking.'] },
+      { title: 'Server logs', paragraphs: ['Technical server log data may be processed when the website is accessed, for example IP address, request time, requested URL, user agent and technical status information. It is used to keep the service secure and stable and to diagnose errors.'] },
       { title: 'External services', paragraphs: ['Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets.'] },
     ],
   },

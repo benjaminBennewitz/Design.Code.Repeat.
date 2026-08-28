@@ -1,44 +1,34 @@
 .system-page__section {
   display: grid;
   place-items: center;
-  text-align: center;
 }
 
 .system-page__box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: min(calc(100% - (var(--dcr-page-gutter) * 2)), 800px);
-  max-width: 800px;
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  width: fit-content;
+  max-width: min(calc(100% - (var(--dcr-page-gutter) * 2)), 92rem);
   margin-inline: auto;
-  padding-inline: 0;
   text-align: center;
 }
 
 .system-page h1 {
-  max-width: 10ch;
+  width: max-content;
+  max-width: 100%;
   margin: 0.8rem auto 0;
   font-family: var(--dcr-font-display);
   font-size: clamp(3.5rem, 8vw, 8rem);
   line-height: 0.85;
+  letter-spacing: -0.06em;
+  overflow-wrap: anywhere;
   text-align: center;
+  text-wrap: balance;
 }
 
-.system-page__text {
+.system-page p:not(.dcr-eyebrow) {
   max-width: 40rem;
-  margin: clamp(1.5rem, 4vw, 2.6rem) auto 2rem;
+  margin: clamp(1.4rem, 2.6vw, 2.3rem) auto 2rem;
   color: var(--dcr-color-text-muted);
   line-height: 1.6;
-  text-align: center;
-}
-
-.system-page .dcr-button {
-  margin-inline: auto;
-}
-
-@media (max-width: 640px) {
-  .system-page__box {
-    width: min(calc(100% - 2rem), 800px);
-  }
 }
