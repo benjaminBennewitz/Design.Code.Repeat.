@@ -21,6 +21,8 @@ Design.Code.Repeat/
 │   ├── .env.production.example
 │   ├── manage.py
 │   └── requirements.txt
+├── dist/
+│   └── ...
 ├── docs/
 │   ├── readme/
 │   │   └── dcr-readme-banner.svg
@@ -170,6 +172,7 @@ Design.Code.Repeat/
 │   │   └── environment.ts
 │   ├── styles/
 │   │   ├── base.scss
+│   │   ├── home-capabilities.scss
 │   │   ├── home-hero.scss
 │   │   ├── tokens.scss
 │   │   └── utilities.scss
