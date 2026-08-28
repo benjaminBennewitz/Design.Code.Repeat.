@@ -136,7 +136,8 @@
 }
 
 .contact-form--compact .dcr-field label,
-.contact-form--compact .contact-form__privacy label {
+.contact-form--compact .contact-form__privacy label,
+.contact-form--compact .contact-form__privacy-copy {
   font-size: 0.74rem;
 }
 
@@ -188,7 +189,7 @@
 .contact-form__required { justify-self: end; color: var(--contact-form-muted); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .contact-form__grid { gap: clamp(0.9rem, 2vw, 1.5rem); }
 .dcr-field { position: relative; gap: 0.2rem; }
-.dcr-field label, .contact-form__privacy label { color: var(--contact-form-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
+.dcr-field label, .contact-form__privacy label, .contact-form__privacy-copy { color: var(--contact-form-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
 
 .dcr-field input,
 .dcr-field select,
@@ -216,6 +217,9 @@
   color: var(--contact-form-text);
 }
 .contact-form__privacy { align-items: center; border: 1px solid var(--contact-form-border); border-radius: 0.65rem; padding: 0.75rem; }
+.contact-form__privacy-copy { margin: 0; color: var(--contact-form-muted); font-family: var(--dcr-font-mono); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.05em; line-height: 1.45; }
+.contact-form__privacy-copy a { color: var(--contact-form-text); text-decoration: underline; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+.contact-form__privacy-copy a:hover, .contact-form__privacy-copy a:focus-visible { color: var(--contact-form-accent); }
 .contact-form__privacy label { text-transform: none; line-height: 1.45; }
 .contact-form__privacy input { margin: 0; }
 .contact-form dcr-action-button { justify-self: end; }

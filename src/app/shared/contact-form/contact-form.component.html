@@ -72,9 +72,12 @@
 
   <div class="contact-form__privacy">
     <input [id]="ids().privacy" type="checkbox" formControlName="privacy" required
+      [attr.aria-label]="content().privacyAriaLabel"
       [attr.aria-invalid]="form.controls.privacy.invalid && form.controls.privacy.touched"
-      [attr.aria-describedby]="errorFor('privacy') ? ids().privacyError : null">
-    <label [attr.for]="ids().privacy">{{ content().privacyText }} <span aria-hidden="true">*</span></label>
+      [attr.aria-describedby]="errorFor('privacy') ? ids().privacyInfo + ' ' + ids().privacyError : ids().privacyInfo">
+    <p [id]="ids().privacyInfo" class="contact-form__privacy-copy">
+      {{ content().privacyTextBefore }}<a routerLink="/datenschutz">{{ content().privacyLinkLabel }}</a>{{ content().privacyTextAfter }} <span aria-hidden="true">*</span>
+    </p>
   </div>
   @if (errorFor('privacy')) {
     <small [id]="ids().privacyError" class="dcr-field__error dcr-field__error--block">{{ errorFor('privacy') }}</small>

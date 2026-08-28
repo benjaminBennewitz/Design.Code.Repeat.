@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, ElementRef, computed, inject, input, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ContactTopic } from '../../core/models/studio.models';
 import { ContactApiService, ContactRequest } from '../../core/services/contact-api.service';
 import { ActionButtonComponent } from '../action-button/action-button.component';
@@ -36,7 +36,7 @@ function allowedTopic(control: AbstractControl): ValidationErrors | null {
 @Component({
   selector: 'dcr-contact-form',
   standalone: true,
-  imports: [ReactiveFormsModule, ActionButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, ActionButtonComponent],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,6 +66,7 @@ export class ContactFormComponent {
       messageError: `${prefix}-message-error`,
       messageCounter: `${prefix}-message-counter`,
       privacy: `${prefix}-privacy`,
+      privacyInfo: `${prefix}-privacy-info`,
       privacyError: `${prefix}-privacy-error`,
     };
   });

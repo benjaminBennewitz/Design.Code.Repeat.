@@ -212,7 +212,10 @@ export interface StudioContent {
     readonly submitLabel: string;
     readonly sendingLabel: string;
     readonly requiredHint: string;
-    readonly privacyText: string;
+    readonly privacyTextBefore: string;
+    readonly privacyLinkLabel: string;
+    readonly privacyTextAfter: string;
+    readonly privacyAriaLabel: string;
     readonly topics: readonly ContactTopicOption[];
     readonly errors: {
       readonly required: string;

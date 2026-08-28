@@ -178,7 +178,7 @@ const de: StudioContent = {
     heading: {
       eyebrow: 'contact.request',
       title: 'Was soll besser funktionieren?',
-      text: 'Ein paar Eckdaten reichen. Das Formular fragt bewusst nur Informationen ab, die für eine erste Einordnung nützlich sind.',
+      text: '',
     },
     directTitle: 'Lieber direkt per E-Mail?',
     directText: 'Kein Problem. Sensible Unterlagen bitte trotzdem nicht unverschlüsselt im Erstkontakt mitsenden.',
@@ -195,7 +195,10 @@ const de: StudioContent = {
     submitLabel: 'Anfrage senden',
     sendingLabel: 'Wird gesendet …',
     requiredHint: 'Mit * markierte Felder sind erforderlich.',
-    privacyText: 'Ich habe die Datenschutzhinweise zur Verarbeitung meiner Angaben für die Bearbeitung der Anfrage zur Kenntnis genommen.',
+    privacyTextBefore: 'Ich habe die ',
+    privacyLinkLabel: 'Datenschutzhinweise',
+    privacyTextAfter: ' zur Verarbeitung meiner Angaben für die Bearbeitung der Anfrage zur Kenntnis genommen.',
+    privacyAriaLabel: 'Datenschutzhinweise bestätigen',
     topics: [
       { value: 'website', label: 'Website / Webpräsenz' },
       { value: 'software', label: 'Software / internes Tool' },
@@ -659,7 +662,7 @@ const en: StudioContent = {
     heading: {
       eyebrow: 'contact.request',
       title: 'What should work better?',
-      text: 'A few facts are enough. The form intentionally asks only for information that is useful for an initial assessment.',
+      text: '',
     },
     directTitle: 'Prefer direct email?',
     directText: 'No problem. Please do not send sensitive documents unencrypted in the first contact.',
@@ -676,7 +679,10 @@ const en: StudioContent = {
     submitLabel: 'Send inquiry',
     sendingLabel: 'Sending …',
     requiredHint: 'Fields marked with * are required.',
-    privacyText: 'I have read the privacy notice regarding the processing of my information for handling this inquiry.',
+    privacyTextBefore: 'I have read the ',
+    privacyLinkLabel: 'privacy notice',
+    privacyTextAfter: ' regarding the processing of my information for handling this inquiry.',
+    privacyAriaLabel: 'Confirm privacy notice',
     topics: [
       { value: 'website', label: 'Website / web presence' },
       { value: 'software', label: 'Software / internal tool' },
