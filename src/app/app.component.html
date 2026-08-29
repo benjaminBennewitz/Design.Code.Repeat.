@@ -1,39 +1,20 @@
-<div class="app-shell" [attr.inert]="isLoading() ? '' : null" [attr.aria-hidden]="isLoading() ? 'true' : null">
+<div class="app-shell">
   <a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
   <dcr-header />
-  <dcr-accessibility-panel />
-  @if (!isLoading()) {
+
+  @defer (on timer(3500ms)) {
+    <dcr-accessibility-panel />
     <dcr-cookie-banner />
+    <dcr-scroll-to-top />
   }
+
   <div id="main-content" tabindex="-1" [class.is-route-changing]="isRouteChanging()">
     <router-outlet />
   </div>
-  <dcr-footer [class.is-route-changing]="isRouteChanging()" />
-  <dcr-scroll-to-top />
+
+  @defer (on viewport) {
+    <dcr-footer [class.is-route-changing]="isRouteChanging()" />
+  } @placeholder {
+    <div class="site-footer-placeholder" aria-hidden="true"></div>
+  }
 </div>
-
-@if (isLoading()) {
-  <div
-    class="site-loader"
-    role="status"
-    aria-live="polite"
-    aria-busy="true"
-    [attr.aria-label]="languageService.language() === 'de' ? 'Website wird geladen' : 'Website is loading'">
-    <div class="site-loader__meta" aria-hidden="true">
-      <span>B² // DESIGN. CODE. REPEAT.</span>
-      <span>{{ languageService.language() === 'de' ? 'SYSTEMSTART' : 'SYSTEM START' }}</span>
-    </div>
-
-    <div class="site-loader__core" aria-hidden="true">
-      <span class="site-loader__word">DESIGN.</span>
-      <span class="site-loader__mark"><i></i><i></i><i></i><i></i></span>
-      <span class="site-loader__word">CODE.</span>
-      <span class="site-loader__word site-loader__word--accent">REPEAT.</span>
-    </div>
-
-    <div class="site-loader__footer" aria-hidden="true">
-      <div class="site-loader__progress"><span></span></div>
-      <div><span>INITIALIZING EXPERIENCE</span><span>03.0 SEC</span></div>
-    </div>
-  </div>
-}

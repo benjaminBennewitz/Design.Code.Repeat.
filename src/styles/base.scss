@@ -15,6 +15,12 @@ html.dcr-route-is-changing {
   scroll-behavior: auto;
 }
 
+/* Hält die großen lokalen Textfonts aus dem kritischen 3-Sekunden-Startpfad. */
+html.dcr-initial-load {
+  --dcr-font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --dcr-font-mono: Consolas, ui-monospace, monospace;
+}
+
 body {
   max-width: 100%;
   min-width: 320px;

@@ -759,3 +759,12 @@
     var(--dcr-color-contrast-dark) 100%
   );
 }
+
+.home-deferred-placeholder {
+  background: var(--dcr-color-bg);
+}
+
+.home-marquee-placeholder {
+  min-height: clamp(3.5rem, 7vw, 6rem);
+  background: var(--dcr-color-bg);
+}

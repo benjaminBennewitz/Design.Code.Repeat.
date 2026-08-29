@@ -86,127 +86,155 @@
     </a>
   </section>
 
-  <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
+  @defer (on viewport) {
+    <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
+  } @placeholder {
+    <div class="home-marquee-placeholder" aria-hidden="true"></div>
+  }
 
-  <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
-    <div class="dcr-container">
-      <dcr-section-heading [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
-
-      <div class="home-services__grid">
-        @for (service of content().services; track service.slug; let index = $index) {
-          <article class="service-card" [attr.data-accent]="service.accent">
-            <div class="service-card__top">
-              <span class="service-card__index">0{{ index + 1 }}</span>
-              <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
-            </div>
-            <div>
-              <p class="service-card__kicker">{{ service.kicker }}</p>
-              <h3>{{ service.title }}</h3>
-              <p>{{ service.summary }}</p>
-            </div>
-            <div class="service-card__bottom">
-              <strong>{{ service.price }}</strong>
-              <a routerLink="/leistungen" fragment="service-index" [attr.aria-label]="service.title">
-                <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
-              </a>
-            </div>
-          </article>
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="hosting-strip dcr-section dcr-viewport-section dcr-section-flow" id="hosting">
-    <div class="dcr-container hosting-strip__layout">
-      <div>
-        <dcr-section-heading [eyebrow]="content().home.hosting.eyebrow" [title]="content().home.hosting.title" [text]="content().home.hosting.text" />
-        <ul class="hosting-strip__points">
-          @for (point of content().home.hosting.points; track point) {
-            <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>{{ point }}</li>
+@defer (on viewport) {
+    <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
+      <div class="dcr-container">
+        <dcr-section-heading [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
+  
+        <div class="home-services__grid">
+          @for (service of content().services; track service.slug; let index = $index) {
+            <article class="service-card" [attr.data-accent]="service.accent">
+              <div class="service-card__top">
+                <span class="service-card__index">0{{ index + 1 }}</span>
+                <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
+              </div>
+              <div>
+                <p class="service-card__kicker">{{ service.kicker }}</p>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.summary }}</p>
+              </div>
+              <div class="service-card__bottom">
+                <strong>{{ service.price }}</strong>
+                <a routerLink="/leistungen" fragment="service-index" [attr.aria-label]="service.title">
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+                </a>
+              </div>
+            </article>
           }
-        </ul>
-        <dcr-action-button [label]="content().home.hosting.cta" route="/leistungen" fragment="managed-ops" variant="dark" />
+        </div>
       </div>
+    </section>
+} @placeholder {
+  <section class="home-services dcr-section dcr-viewport-section home-deferred-placeholder" id="leistungen" aria-hidden="true"></section>
+}
 
-      <aside class="hosting-strip__mail">
-        <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>
-        <p class="dcr-eyebrow">mail.addon</p>
-        <h3>{{ content().home.hosting.emailTitle }}</h3>
-        <p>{{ content().home.hosting.emailText }}</p>
-        <a routerLink="/leistungen" fragment="managed-ops">{{ content().services[5].ctaLabel }} →</a>
-      </aside>
-    </div>
-  </section>
-
-  <section class="home-references dcr-section dcr-viewport-section dcr-section-flow" id="referenzen" [dcrHorizontalWheel]="workTrack" [dcrHorizontalSticky]="workSticky">
-    <div class="dcr-container home-references__head">
-      <dcr-section-heading [eyebrow]="content().home.references.eyebrow" [title]="content().home.references.title" [text]="content().home.references.text" />
-      <div class="home-references__control">
-        <span>VERTICAL INPUT / HORIZONTAL OUTPUT</span>
-        <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} →</a>
+@defer (on viewport) {
+    <section class="hosting-strip dcr-section dcr-viewport-section dcr-section-flow" id="hosting">
+      <div class="dcr-container hosting-strip__layout">
+        <div>
+          <dcr-section-heading [eyebrow]="content().home.hosting.eyebrow" [title]="content().home.hosting.title" [text]="content().home.hosting.text" />
+          <ul class="hosting-strip__points">
+            @for (point of content().home.hosting.points; track point) {
+              <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>{{ point }}</li>
+            }
+          </ul>
+          <dcr-action-button [label]="content().home.hosting.cta" route="/leistungen" fragment="managed-ops" variant="dark" />
+        </div>
+  
+        <aside class="hosting-strip__mail">
+          <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>
+          <p class="dcr-eyebrow">mail.addon</p>
+          <h3>{{ content().home.hosting.emailTitle }}</h3>
+          <p>{{ content().home.hosting.emailText }}</p>
+          <a routerLink="/leistungen" fragment="managed-ops">{{ content().services[5].ctaLabel }} →</a>
+        </aside>
       </div>
-    </div>
+    </section>
+} @placeholder {
+  <section class="hosting-strip dcr-section dcr-viewport-section home-deferred-placeholder" id="hosting" aria-hidden="true"></section>
+}
 
-    <div #workSticky class="home-references__sticky">
-      <div #workTrack class="reference-track" tabindex="0" [attr.aria-label]="content().home.references.title">
-        @for (reference of content().references.slice(0, 4); track reference.slug) {
-          <article class="reference-card" [attr.data-accent]="reference.accent">
-            <div class="reference-card__visual">
-              <div class="reference-card__browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>PROJECT / {{ reference.year }}</span></div>
-              @if (reference.image) {
-                <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="1200" height="760" loading="lazy" decoding="async">
-              } @else {
-                <div class="reference-card__placeholder" aria-hidden="true"><span>{{ reference.name }}</span><span>{{ reference.type }}</span></div>
-              }
-            </div>
-            <div class="reference-card__content">
-              <div class="reference-card__meta"><span>SELECTED WORK</span><span>{{ reference.type }}</span></div>
-              <h3>{{ reference.name }}</h3>
-              <p>{{ reference.summary }}</p>
-              <ul [attr.aria-label]="techStackLabel()">
-                @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
-              </ul>
-              <a [href]="reference.portfolioUrl" target="_blank" rel="noopener">{{ content().referencesPage.cta }} <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-        }
+@defer (on viewport) {
+    <section class="home-references dcr-section dcr-viewport-section dcr-section-flow" id="referenzen" [dcrHorizontalWheel]="workTrack" [dcrHorizontalSticky]="workSticky">
+      <div class="dcr-container home-references__head">
+        <dcr-section-heading [eyebrow]="content().home.references.eyebrow" [title]="content().home.references.title" [text]="content().home.references.text" />
+        <div class="home-references__control">
+          <span>VERTICAL INPUT / HORIZONTAL OUTPUT</span>
+          <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} →</a>
+        </div>
       </div>
-      <dcr-horizontal-scroll-hint [target]="workTrack" />
-    </div>
-  </section>
-
-  <section class="home-process dcr-section dcr-viewport-section dcr-section-flow" id="prozess">
-    <div class="dcr-container">
-      <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="content().home.process.title" [text]="content().home.process.text" />
-
-      <ol class="process-list">
-        @for (step of content().process; track step.index) {
-          <li tabindex="0">
-            <span class="process-list__index">{{ step.index }}</span>
-            <div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div>
-            <code>{{ step.command }}</code>
-          </li>
-        }
-      </ol>
-    </div>
-  </section>
-
-  <dcr-infinite-marquee class="home-marquee" [items]="processMarqueeItems()" [ariaLabel]="marqueeLabel()" [reverse]="true" tone="pink" />
-
-  <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
-    <div class="dcr-container home-faq__layout">
-      <dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" />
-
-      <div class="faq-list">
-        @for (item of content().faq; track item.question; let index = $index) {
-          <details [open]="openFaqIndex() === index" (toggle)="onFaqToggle(index, $event)">
-            <summary><span>0{{ index + 1 }}</span>{{ item.question }}<span class="material-symbols-outlined" aria-hidden="true">add</span></summary>
-            <p>{{ item.answer }}</p>
-          </details>
-        }
+  
+      <div #workSticky class="home-references__sticky">
+        <div #workTrack class="reference-track" tabindex="0" [attr.aria-label]="content().home.references.title">
+          @for (reference of content().references.slice(0, 4); track reference.slug) {
+            <article class="reference-card" [attr.data-accent]="reference.accent">
+              <div class="reference-card__visual">
+                <div class="reference-card__browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>PROJECT / {{ reference.year }}</span></div>
+                @if (reference.image) {
+                  <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="1200" height="760" loading="lazy" decoding="async">
+                } @else {
+                  <div class="reference-card__placeholder" aria-hidden="true"><span>{{ reference.name }}</span><span>{{ reference.type }}</span></div>
+                }
+              </div>
+              <div class="reference-card__content">
+                <div class="reference-card__meta"><span>SELECTED WORK</span><span>{{ reference.type }}</span></div>
+                <h3>{{ reference.name }}</h3>
+                <p>{{ reference.summary }}</p>
+                <ul [attr.aria-label]="techStackLabel()">
+                  @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
+                </ul>
+                <a [href]="reference.portfolioUrl" target="_blank" rel="noopener">{{ content().referencesPage.cta }} <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          }
+        </div>
+        <dcr-horizontal-scroll-hint [target]="workTrack" />
       </div>
-    </div>
-  </section>
+    </section>
+} @placeholder {
+  <section class="home-references dcr-section dcr-viewport-section home-deferred-placeholder" id="referenzen" aria-hidden="true"></section>
+}
+
+@defer (on viewport) {
+    <section class="home-process dcr-section dcr-viewport-section dcr-section-flow" id="prozess">
+      <div class="dcr-container">
+        <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="content().home.process.title" [text]="content().home.process.text" />
+  
+        <ol class="process-list">
+          @for (step of content().process; track step.index) {
+            <li tabindex="0">
+              <span class="process-list__index">{{ step.index }}</span>
+              <div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div>
+              <code>{{ step.command }}</code>
+            </li>
+          }
+        </ol>
+      </div>
+    </section>
+} @placeholder {
+  <section class="home-process dcr-section dcr-viewport-section home-deferred-placeholder" id="prozess" aria-hidden="true"></section>
+}
+
+  @defer (on viewport) {
+    <dcr-infinite-marquee class="home-marquee" [items]="processMarqueeItems()" [ariaLabel]="marqueeLabel()" [reverse]="true" tone="pink" />
+  } @placeholder {
+    <div class="home-marquee-placeholder" aria-hidden="true"></div>
+  }
+
+@defer (on viewport) {
+    <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
+      <div class="dcr-container home-faq__layout">
+        <dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" />
+  
+        <div class="faq-list">
+          @for (item of content().faq; track item.question; let index = $index) {
+            <details [open]="openFaqIndex() === index" (toggle)="onFaqToggle(index, $event)">
+              <summary><span>0{{ index + 1 }}</span>{{ item.question }}<span class="material-symbols-outlined" aria-hidden="true">add</span></summary>
+              <p>{{ item.answer }}</p>
+            </details>
+          }
+        </div>
+      </div>
+    </section>
+} @placeholder {
+  <section class="home-faq dcr-section dcr-viewport-section home-deferred-placeholder" id="faq" aria-hidden="true"></section>
+}
 
   <section class="home-contact dcr-section dcr-viewport-section dcr-section-flow" id="kontakt">
     <div class="dcr-container home-contact__layout">

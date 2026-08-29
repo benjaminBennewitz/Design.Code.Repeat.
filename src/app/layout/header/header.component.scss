@@ -132,3 +132,18 @@
 @media (prefers-reduced-motion: reduce) {
   .site-header__navigation, .site-header nav a, .site-header nav a b, .site-header__mark { transition: none; }
 }
+
+.site-header__tool-glyph {
+  display: inline-grid;
+  min-width: 1.5rem;
+  place-items: center;
+  font-family: var(--dcr-font-mono);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.site-header__tool-glyph--text {
+  font-size: 0.58rem;
+  letter-spacing: -0.04em;
+}

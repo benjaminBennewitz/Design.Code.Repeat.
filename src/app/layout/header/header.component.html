@@ -42,15 +42,15 @@
 
     <div class="site-header__menu-tools">
       <button type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
-        <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
+        <span class="site-header__tool-glyph" aria-hidden="true">{{ themeService.isLight() ? '◐' : '☼' }}</span>
         <span>{{ content().themeLabel }}</span>
       </button>
       <button type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
-        <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+        <span class="site-header__tool-glyph" aria-hidden="true">文</span>
         <span>{{ languageService.language() === 'de' ? 'EN' : 'DE' }}</span>
       </button>
       <button type="button" [attr.aria-label]="accessibilityLabel()" (click)="openAccessibilityPanel()">
-        <span class="material-symbols-outlined" aria-hidden="true">accessibility_new</span>
+        <span class="site-header__tool-glyph site-header__tool-glyph--text" aria-hidden="true">A11Y</span>
         <span>{{ accessibilityLabel() }}</span>
       </button>
     </div>

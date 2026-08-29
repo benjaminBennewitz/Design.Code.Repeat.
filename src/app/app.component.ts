@@ -4,7 +4,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LanguageService } from './core/services/language.service';
@@ -32,9 +32,6 @@ import { ScrollToTopComponent } from './layout/scroll-to-top/scroll-to-top.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  /** Steuert die bewusst verlängerte Startsequenz der Website. */
-  readonly isLoading = signal(true);
-
   /** Blendet den alten Seiteninhalt während eines echten Routenwechsels aus. */
   readonly isRouteChanging = signal(false);
 
@@ -63,16 +60,9 @@ export class AppComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((event) => this.handleRouterEvent(event));
 
-    this.document.documentElement.classList.add('dcr-initial-load');
-
-    const loaderTimer = globalThis.setTimeout(() => {
-      this.isLoading.set(false);
-      this.document.documentElement.classList.remove('dcr-initial-load');
-    }, 3_000);
-
-    this.destroyRef.onDestroy(() => {
-      globalThis.clearTimeout(loaderTimer);
-      this.document.documentElement.classList.remove('dcr-initial-load');
+    afterNextRender(() => {
+      const windowRef = this.document.defaultView;
+      windowRef?.dispatchEvent(new windowRef.Event('dcr:app-ready'));
     });
   }
 
