@@ -22,6 +22,35 @@ Nur der Inhalt dieses `browser`-Ordners wird spaeter auf den Server nach `/home/
 
 `src/robots.txt` wird dagegen explizit durch Angular in den Build kopiert. Der aktuelle Vorab-Stand blockiert Crawler (`Disallow: /`) und setzt zusaetzlich `noindex, nofollow` ueber den SEO-Service. Vor dem Launch muss das bewusst auf `Allow: /` beziehungsweise `index, follow` geaendert werden.
 
+## SSH-Key fuer Deployment pro Rechner
+
+Die lokalen Deploy-Scripte verwenden zuerst die Umgebungsvariable `DCR_SSH_KEY`. Wenn sie nicht gesetzt ist, wird automatisch der Windows-Standard-Key verwendet:
+
+```txt
+%USERPROFILE%\.ssh\id_ed25519
+```
+
+Damit muss pro Rechner nur einmal festgelegt werden, welcher private SSH-Key fuer den Server verwendet wird. Beispiel Heimrechner:
+
+```cmd
+setx DCR_SSH_KEY "%USERPROFILE%\.ssh\id_ed25519"
+```
+
+Beispiel Arbeitsrechner:
+
+```cmd
+setx DCR_SSH_KEY "%USERPROFILE%\.ssh\dcr_vserver_werbung06"
+```
+
+Nach `setx` muss das CMD-Fenster neu geoeffnet werden, weil bestehende Terminals die neue Umgebungsvariable noch nicht kennen. Test:
+
+```cmd
+echo %DCR_SSH_KEY%
+ssh -i "%DCR_SSH_KEY%" ben@159.195.54.12
+```
+
+Der private Key selbst wird nie committed und nie auf den Server kopiert. Auf dem Server liegt nur der passende Public Key in `~/.ssh/authorized_keys` des Benutzers `ben`.
+
 ## Frontend-Deployment auf KeyHelp-Webspace
 
 Das Repository wird nicht auf dem Server gebaut. Lokal wird der Angular-Production-Build erstellt, als Archiv gepackt und auf den Server geladen. Das Server-Script entpackt nur den fertigen Build und spiegelt ihn in den KeyHelp-Webspace.
@@ -41,8 +70,8 @@ dist\design-code-repeat-studio\browser
 Einmalige Installation des Server-Scripts:
 
 ```cmd
-scp -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" scripts\deploy-dcr-server.sh ben@159.195.54.12:/tmp/deploy-dcr-server.sh
-ssh -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" ben@159.195.54.12
+scp -i "%DCR_SSH_KEY%" scripts\deploy-dcr-server.sh ben@159.195.54.12:/tmp/deploy-dcr-server.sh
+ssh -i "%DCR_SSH_KEY%" ben@159.195.54.12
 ```
 
 Auf dem Server:
@@ -118,8 +147,8 @@ Laufzeitpfade auf dem Server:
 Einmalige Installation des Backend-Deploy-Scripts:
 
 ```cmd
-scp -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" scripts\deploy-dcr-backend-server.sh ben@159.195.54.12:/tmp/deploy-dcr-backend-server.sh
-ssh -i "%USERPROFILE%\.ssh\dcr_vserver_werbung06" ben@159.195.54.12
+scp -i "%DCR_SSH_KEY%" scripts\deploy-dcr-backend-server.sh ben@159.195.54.12:/tmp/deploy-dcr-backend-server.sh
+ssh -i "%DCR_SSH_KEY%" ben@159.195.54.12
 ```
 
 Auf dem Server:

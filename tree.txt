@@ -1,4 +1,4 @@
-Design.Code.Repeat/
+Deign.Code.Repeat/
 ├── .angular/
 │   └── ...
 ├── backend/
@@ -16,13 +16,10 @@ Design.Code.Repeat/
 │   │   ├── tests.py
 │   │   ├── urls.py
 │   │   └── views.py
-│   ├── tests/
 │   ├── .env.example
 │   ├── .env.production.example
 │   ├── manage.py
 │   └── requirements.txt
-├── dist/
-│   └── ...
 ├── docs/
 │   ├── readme/
 │   │   └── dcr-readme-banner.svg

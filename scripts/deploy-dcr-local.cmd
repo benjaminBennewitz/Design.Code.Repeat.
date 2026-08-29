@@ -10,13 +10,27 @@ set "SCRIPT_DIR=%~dp0"
 set "PROJECT_DIR=%SCRIPT_DIR%.."
 set "BUILD_DIR=%PROJECT_DIR%\dist\design-code-repeat-studio\browser"
 set "ARCHIVE=%TEMP%\dcr-frontend.tar.gz"
-set "SSH_KEY=%USERPROFILE%\.ssh\dcr_vserver_werbung06"
+REM Rechnerabhaengiger SSH-Key. Optional einmalig pro Rechner setzen:
+REM   setx DCR_SSH_KEY "%USERPROFILE%\.ssh\id_ed25519"
+REM Ohne gesetzte Variable wird der Windows-Standard-Key id_ed25519 verwendet.
+if not defined DCR_SSH_KEY set "DCR_SSH_KEY=%USERPROFILE%\.ssh\id_ed25519"
+set "SSH_KEY=%DCR_SSH_KEY%"
 set "SERVER_USER=ben"
 set "SERVER_HOST=159.195.54.12"
 set "SERVER_ARCHIVE=/tmp/dcr-frontend.tar.gz"
 set "SERVER_DEPLOY=/usr/local/bin/deploy-dcr-frontend"
 
 cd /d "%PROJECT_DIR%" || exit /b 1
+
+if not exist "%SSH_KEY%" (
+  echo.
+  echo [DCR][FEHLER] SSH-Key wurde nicht gefunden: %SSH_KEY%
+  echo [DCR][HINWEIS] Setze optional DCR_SSH_KEY auf den passenden privaten Key.
+  exit /b 1
+)
+
+echo.
+echo [DCR] SSH-Key: %SSH_KEY%
 
 echo.
 echo [DCR] Git aktualisieren...
