@@ -116,7 +116,7 @@
   min-width: 0.55em;
   place-items: center;
   font-family: var(--dcr-font-display);
-  font-size: clamp(3.6rem, 8.1vw, 9.6rem);
+  font-size: clamp(3.2rem, 6.6vw, 8.6rem);
   font-weight: 900;
   line-height: 0.72;
   letter-spacing: -0.09em;
@@ -237,7 +237,7 @@
   }
 
   .signal-divider__glyph {
-    font-size: clamp(3rem, 10.5vw, 6rem);
+    font-size: clamp(2.8rem, 7.4vw, 5rem);
   }
 }
 
@@ -252,6 +252,6 @@
   }
 
   .signal-divider__glyph {
-    font-size: clamp(2.3rem, 11vw, 3.4rem);
+    font-size: clamp(2rem, 7.5vw, 2.85rem);
   }
 }

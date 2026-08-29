@@ -1,0 +1,13 @@
+<!-- src/app/shared/horizontal-scroll-hint/horizontal-scroll-hint.component.html -->
+
+<button
+  type="button"
+  class="horizontal-scroll-hint"
+  [class.is-visible]="isVisible() && !isDismissed()"
+  [attr.aria-label]="actionLabel()"
+  [attr.aria-hidden]="!isVisible() || isDismissed() ? 'true' : null"
+  [attr.tabindex]="isVisible() && !isDismissed() ? 0 : -1"
+  (click)="showNext()">
+  <span class="material-symbols-outlined" aria-hidden="true">swipe_left</span>
+  <span>{{ label() }}</span>
+</button>

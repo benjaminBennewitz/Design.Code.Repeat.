@@ -132,6 +132,10 @@ Deign.Code.Repeat/
 │   │   │   │   ├── dithering-shader.component.html
 │   │   │   │   ├── dithering-shader.component.scss
 │   │   │   │   └── dithering-shader.component.ts
+│   │   │   ├── horizontal-scroll-hint/
+│   │   │   │   ├── horizontal-scroll-hint.component.html
+│   │   │   │   ├── horizontal-scroll-hint.component.scss
+│   │   │   │   └── horizontal-scroll-hint.component.ts
 │   │   │   ├── infinite-marquee/
 │   │   │   │   ├── infinite-marquee.component.html
 │   │   │   │   ├── infinite-marquee.component.scss

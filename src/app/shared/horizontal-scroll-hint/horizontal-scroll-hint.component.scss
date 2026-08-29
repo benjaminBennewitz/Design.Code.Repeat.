@@ -1,0 +1,80 @@
+/* src/app/shared/horizontal-scroll-hint/horizontal-scroll-hint.component.scss */
+
+:host {
+  position: absolute;
+  z-index: 7;
+  top: 50%;
+  right: max(var(--dcr-page-gutter), 0.75rem);
+  display: none;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.horizontal-scroll-hint {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 2.7rem;
+  border: 1px solid color-mix(in srgb, var(--dcr-color-primary) 58%, var(--dcr-color-border-strong));
+  padding: 0.55rem 0.72rem;
+  background: color-mix(in srgb, var(--dcr-color-surface-solid) 76%, transparent);
+  color: var(--dcr-color-text);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 24px transparent;
+  font-family: var(--dcr-font-mono);
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translateX(0.8rem) scale(0.96);
+  transition: opacity 220ms ease, transform 260ms var(--dcr-ease-out), background 180ms ease;
+}
+
+.horizontal-scroll-hint .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+
+.horizontal-scroll-hint.is-visible {
+  opacity: 0.72;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+  animation: horizontal-scroll-hint-pulse 1.9s ease-in-out 2;
+}
+
+.horizontal-scroll-hint:is(:hover, :focus-visible) {
+  background: var(--dcr-color-surface-solid);
+  opacity: 1;
+}
+
+@keyframes horizontal-scroll-hint-pulse {
+  0%, 100% {
+    opacity: 0.72;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 24px transparent;
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 26px color-mix(in srgb, var(--dcr-color-primary) 48%, transparent);
+  }
+}
+
+@media (max-width: 900px) {
+  :host {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-scroll-hint,
+  .horizontal-scroll-hint.is-visible {
+    animation: none;
+    transition: none;
+  }
+}
+
+:host-context(:root[data-motion='reduced']) .horizontal-scroll-hint,
+:host-context(:root[data-motion='off']) .horizontal-scroll-hint {
+  animation: none;
+  transition: none;
+}

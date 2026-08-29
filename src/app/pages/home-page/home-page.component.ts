@@ -10,6 +10,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
 import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-scroll.directive';
+import { HorizontalScrollHintComponent } from '../../shared/horizontal-scroll-hint/horizontal-scroll-hint.component';
 import { InfiniteMarqueeComponent } from '../../shared/infinite-marquee/infinite-marquee.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
 
@@ -17,7 +18,7 @@ import { SectionHeadingComponent } from '../../shared/section-heading/section-he
 @Component({
   selector: 'dcr-home-page',
   standalone: true,
-  imports: [RouterLink, ActionButtonComponent, ContactFormComponent, HorizontalWheelScrollDirective, InfiniteMarqueeComponent, SectionHeadingComponent],
+  imports: [RouterLink, ActionButtonComponent, ContactFormComponent, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, InfiniteMarqueeComponent, SectionHeadingComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

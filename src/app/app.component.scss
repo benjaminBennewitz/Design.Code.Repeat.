@@ -94,6 +94,8 @@ dcr-footer.is-route-changing {
   position: relative;
   z-index: 2;
   display: grid;
+  width: 100%;
+  max-width: 100%;
   grid-template-columns: max-content clamp(4rem, 8.5vw, 8.5rem) max-content;
   grid-template-rows: auto auto;
   gap: 0.06em 0.12em;
@@ -158,8 +160,13 @@ dcr-footer.is-route-changing {
 }
 
 @media (max-width: 680px) {
-  .site-loader { padding: 1rem; }
-  .site-loader__core { grid-template-columns: max-content clamp(2.8rem, 15vw, 4.5rem) max-content; font-size: clamp(2.45rem, 12.5vw, 4.8rem); }
+  .site-loader { min-width: 0; padding: 1rem; }
+  .site-loader__core {
+    grid-template-columns: max-content clamp(2.35rem, 12vw, 4rem) max-content;
+    gap: 0.06em;
+    font-size: clamp(2.15rem, 10.8vw, 4.2rem);
+  }
+  .site-loader__word { white-space: nowrap; }
   .site-loader__meta span:last-child,
   .site-loader__footer > div:last-child span:last-child { display: none; }
 }
