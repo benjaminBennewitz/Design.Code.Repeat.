@@ -8,6 +8,7 @@ html {
   max-width: 100%;
   overflow-x: clip;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   background: var(--dcr-color-bg);
 }
 
@@ -15,8 +16,17 @@ html.dcr-route-is-changing {
   scroll-behavior: auto;
 }
 
-/* Hält die großen lokalen Textfonts aus dem kritischen 3-Sekunden-Startpfad. */
-html.dcr-initial-load {
+dcr-root {
+  display: block;
+  min-height: 100svh;
+}
+
+html.dcr-app-hidden dcr-root {
+  visibility: hidden;
+}
+
+/* Verhindert einen verspäteten Webfont-Swap auf langsamen Erstaufrufen. */
+html.dcr-critical-font-fallback {
   --dcr-font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --dcr-font-mono: Consolas, ui-monospace, monospace;
 }
