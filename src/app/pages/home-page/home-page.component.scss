@@ -258,6 +258,7 @@
 }
 .home-contact__layout { display: grid; grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.25fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; }
 .home-contact__copy { display: grid; gap: 2rem; position: sticky; top: calc(var(--dcr-header-height) + 2rem); }
+.home-contact__form-placeholder { min-height: clamp(32rem, 70svh, 42rem); border: 1px solid var(--dcr-color-border); background: var(--dcr-color-surface-solid); }
 
 @media (max-width: 1150px) {
   .home-services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

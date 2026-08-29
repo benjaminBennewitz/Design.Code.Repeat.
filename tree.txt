@@ -193,6 +193,7 @@ Deign.Code.Repeat/
 │   ├── index.html
 │   ├── main.ts
 │   ├── robots.txt
+│   ├── sitemap.xml
 │   └── styles.scss
 ├── .editorconfig
 ├── .gitignore

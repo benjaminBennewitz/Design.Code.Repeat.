@@ -29,7 +29,9 @@ body {
 }
 
 html.dcr-menu-open,
-html.dcr-menu-open body {
+html.dcr-menu-open body,
+html.dcr-initial-load,
+html.dcr-initial-load body {
   overflow: hidden;
 }
 

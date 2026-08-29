@@ -23,6 +23,12 @@ html:has(dcr-studio-page) {
   min-height: calc(100svh - var(--dcr-header-height));
 }
 
+/* Überspringt Layout und Paint weit außerhalb des Viewports, ohne die Scroll-Geometrie zu verlieren. */
+.dcr-viewport-section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto calc(100svh - var(--dcr-header-height));
+}
+
 .dcr-section-flow {
   --dcr-section-bg: var(--dcr-color-bg);
   --dcr-section-next-bg: var(--dcr-section-bg);

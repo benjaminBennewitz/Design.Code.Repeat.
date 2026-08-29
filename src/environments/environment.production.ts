@@ -7,5 +7,5 @@ export const environment = {
   production: true,
   siteUrl: 'https://design-code-repeat.de',
   apiBaseUrl: '/api',
-  robots: 'noindex, nofollow',
+  robots: 'index, follow',
 } as const;

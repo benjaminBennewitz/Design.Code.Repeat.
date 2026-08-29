@@ -213,7 +213,11 @@
       <div class="home-contact__copy">
         <dcr-section-heading [eyebrow]="content().home.contact.eyebrow" [title]="content().home.contact.title" [text]="content().home.contact.text" />
       </div>
-      <dcr-contact-form idPrefix="home-contact" [compact]="true" />
+      @defer (on viewport) {
+        <dcr-contact-form idPrefix="home-contact" [compact]="true" />
+      } @placeholder {
+        <div class="home-contact__form-placeholder" aria-hidden="true"></div>
+      }
     </div>
   </section>
 </main>

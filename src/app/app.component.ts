@@ -63,8 +63,17 @@ export class AppComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((event) => this.handleRouterEvent(event));
 
-    const loaderTimer = globalThis.setTimeout(() => this.isLoading.set(false), 3_000);
-    this.destroyRef.onDestroy(() => globalThis.clearTimeout(loaderTimer));
+    this.document.documentElement.classList.add('dcr-initial-load');
+
+    const loaderTimer = globalThis.setTimeout(() => {
+      this.isLoading.set(false);
+      this.document.documentElement.classList.remove('dcr-initial-load');
+    }, 3_000);
+
+    this.destroyRef.onDestroy(() => {
+      globalThis.clearTimeout(loaderTimer);
+      this.document.documentElement.classList.remove('dcr-initial-load');
+    });
   }
 
   /** Verhindert sichtbares Hochscrollen und vorzeitig ausgelöste Reveals bei Routenwechseln. */

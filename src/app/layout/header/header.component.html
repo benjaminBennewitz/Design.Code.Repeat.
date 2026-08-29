@@ -9,7 +9,7 @@
 
   <div class="site-header__controls">
     <button class="site-header__icon-button site-header__desktop-tool" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
-      <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
+      <span class="site-header__theme-glyph" aria-hidden="true">{{ themeService.isLight() ? '◐' : '☼' }}</span>
     </button>
     <button class="site-header__language site-header__desktop-tool" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
       {{ languageService.language() === 'de' ? 'EN' : 'DE' }}

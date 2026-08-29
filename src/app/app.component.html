@@ -1,3 +1,17 @@
+<div class="app-shell" [attr.inert]="isLoading() ? '' : null" [attr.aria-hidden]="isLoading() ? 'true' : null">
+  <a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
+  <dcr-header />
+  <dcr-accessibility-panel />
+  @if (!isLoading()) {
+    <dcr-cookie-banner />
+  }
+  <div id="main-content" tabindex="-1" [class.is-route-changing]="isRouteChanging()">
+    <router-outlet />
+  </div>
+  <dcr-footer [class.is-route-changing]="isRouteChanging()" />
+  <dcr-scroll-to-top />
+</div>
+
 @if (isLoading()) {
   <div
     class="site-loader"
@@ -22,14 +36,4 @@
       <div><span>INITIALIZING EXPERIENCE</span><span>03.0 SEC</span></div>
     </div>
   </div>
-} @else {
-  <a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
-  <dcr-header />
-  <dcr-accessibility-panel />
-  <dcr-cookie-banner />
-  <div id="main-content" tabindex="-1" [class.is-route-changing]="isRouteChanging()">
-    <router-outlet />
-  </div>
-  <dcr-footer [class.is-route-changing]="isRouteChanging()" />
-  <dcr-scroll-to-top />
 }

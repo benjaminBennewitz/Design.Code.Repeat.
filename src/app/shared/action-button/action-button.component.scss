@@ -1,3 +1,9 @@
 :host {
   display: contents;
 }
+
+.dcr-button__glyph {
+  font-family: var(--dcr-font-body);
+  font-size: 1.1em;
+  line-height: 1;
+}
