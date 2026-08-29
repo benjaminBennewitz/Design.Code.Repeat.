@@ -45,6 +45,9 @@ export class HomePageComponent {
     ? 'Digitale Produkte, die Arbeit erledigen.'
     : 'Digital products that get work done.');
 
+  /** Zufällig verteilte, pro Slot unterschiedliche Bewegungsmuster der Hero-Symbole. */
+  readonly heroSymbolAnimations = this.createHeroSymbolAnimations();
+
   /** Index des aktuell geöffneten FAQ-Eintrags. -1 bedeutet: alle geschlossen. */
   readonly openFaqIndex = signal<number>(0);
 
@@ -71,4 +74,26 @@ export class HomePageComponent {
     }
   }
 
+  /**
+   * Verteilt die verfügbaren Symbolanimationen je Hero-Slot zufällig. Innerhalb
+   * eines Slots werden keine Bewegungsmuster doppelt vergeben.
+   */
+  private createHeroSymbolAnimations(): readonly (readonly HeroSymbolAnimation[])[] {
+    const animations: readonly HeroSymbolAnimation[] = ['flip-shrink', 'rotate-cw', 'rotate-ccw', 'flip-up'];
+
+    return Array.from({ length: 3 }, () => {
+      const shuffled = [...animations];
+
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const targetIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[targetIndex]] = [shuffled[targetIndex], shuffled[index]];
+      }
+
+      return shuffled.slice(0, 3);
+    });
+  }
+
 }
+
+/** Unterstützte Bewegungsmuster für ein zyklisch wechselndes Hero-Symbol. */
+type HeroSymbolAnimation = 'flip-shrink' | 'rotate-cw' | 'rotate-ccw' | 'flip-up';

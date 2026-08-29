@@ -10,27 +10,27 @@
         <span class="home-hero__line">
           <span>{{ heroClaimLines()[0].before }}</span>
           <span class="home-hero__slot home-hero__slot--one" aria-hidden="true">
-            <span class="home-hero__symbol home-hero__symbol--grid is-phase-0"></span>
-            <span class="home-hero__symbol home-hero__symbol--code is-phase-2">&lt;/&gt;</span>
-            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-1"><i></i><i></i><i></i><i></i></span>
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-0" [attr.data-animation]="heroSymbolAnimations[0][0]"></span>
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-2" [attr.data-animation]="heroSymbolAnimations[0][1]">&lt;/&gt;</span>
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-1" [attr.data-animation]="heroSymbolAnimations[0][2]"><i></i><i></i><i></i><i></i></span>
           </span>
           <span>{{ heroClaimLines()[0].after }}</span>
         </span>
         <span class="home-hero__line">
           <span>{{ heroClaimLines()[1].before }}</span>
           <span class="home-hero__slot home-hero__slot--two" aria-hidden="true">
-            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-0"><i></i><i></i><i></i><i></i></span>
-            <span class="home-hero__symbol home-hero__symbol--grid is-phase-2"></span>
-            <span class="home-hero__symbol home-hero__symbol--code is-phase-1">&lt;/&gt;</span>
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-0" [attr.data-animation]="heroSymbolAnimations[1][0]"><i></i><i></i><i></i><i></i></span>
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-2" [attr.data-animation]="heroSymbolAnimations[1][1]"></span>
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-1" [attr.data-animation]="heroSymbolAnimations[1][2]">&lt;/&gt;</span>
           </span>
           <span>{{ heroClaimLines()[1].after }}</span>
         </span>
         <span class="home-hero__line home-hero__line--accent">
           <span>{{ heroClaimLines()[2].before }}</span>
           <span class="home-hero__slot home-hero__slot--three" aria-hidden="true">
-            <span class="home-hero__symbol home-hero__symbol--code is-phase-0">&lt;/&gt;</span>
-            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-2"><i></i><i></i><i></i><i></i></span>
-            <span class="home-hero__symbol home-hero__symbol--grid is-phase-1"></span>
+            <span class="home-hero__symbol home-hero__symbol--code is-phase-0" [attr.data-animation]="heroSymbolAnimations[2][0]">&lt;/&gt;</span>
+            <span class="home-hero__symbol home-hero__symbol--cluster is-phase-2" [attr.data-animation]="heroSymbolAnimations[2][1]"><i></i><i></i><i></i><i></i></span>
+            <span class="home-hero__symbol home-hero__symbol--grid is-phase-1" [attr.data-animation]="heroSymbolAnimations[2][2]"></span>
           </span>
           <span>{{ heroClaimLines()[2].after }}</span>
         </span>

@@ -43,7 +43,7 @@
 
           <nav [attr.aria-label]="content().footer.servicesTitle">
             @for (service of content().services; track service.slug) {
-              <a routerLink="/leistungen" fragment="service-index">{{ service.shortTitle }}</a>
+              <a routerLink="/leistungen" [fragment]="'service-' + service.slug">{{ service.shortTitle }}</a>
             }
           </nav>
         </div>
@@ -59,7 +59,7 @@
           <a routerLink="/impressum">{{ ui().notice }}</a>
           <a routerLink="/datenschutz">{{ ui().privacy }}</a>
           <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
-          <a href="https://design-code-repeat.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
+          <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
         </div>
       </section>
 

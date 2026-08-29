@@ -6,7 +6,7 @@
 import { StudioContent, StudioLanguage } from '../models/studio.models';
 
 /** Öffentliche Portfolio-Domain für vertiefende Case Studies. */
-const PORTFOLIO_BASE_URL = 'https://design-code-repeat.de';
+const PORTFOLIO_BASE_URL = 'https://b2folio.de';
 
 /** Deutsche Inhalte. */
 const de: StudioContent = {
@@ -76,7 +76,7 @@ const de: StudioContent = {
     faq: {
       eyebrow: 'faq.query',
       title: 'Fragen, bevor sie zum Ticket werden.',
-      text: 'Kurz beantwortet: Zusammenarbeit, Technik, Hosting und was zum Projektstart wirklich gebraucht wird.',
+      text: '',
     },
     contact: {
       eyebrow: 'connection.ready',
@@ -151,6 +151,12 @@ const de: StudioContent = {
       'Ich begleite Projekte nicht nur bis zum hübschen Screen. Struktur, Frontend, Backend, Daten, Deployment und spätere Wartbarkeit werden als ein zusammenhängendes Produkt betrachtet.',
       'Die Zusammenarbeit bleibt bewusst direkt: Anforderungen werden verständlich übersetzt, technische Entscheidungen transparent gemacht und unnötige Komplexität vermieden.',
     ],
+    vita: {
+      eyebrow: 'vita.log // ben',
+      title: 'Entwicklung und Design seit über 10 Jahren.',
+      text: 'Ich bin Ben, staatlich geprüfter Medieninformatiker (Multimedia) und zertifizierter Web Developer Full Stack. Mein Schwerpunkt liegt dort, wo Gestaltung und Technik zusammenkommen: von UI/UX und visuellen Systemen bis zu Full-Stack-Anwendungen, Datenlogik und produktivem Betrieb.',
+      facts: ['Medieninformatik · Multimedia', 'Web Developer · Full Stack', 'Design · UI/UX · Software'],
+    },
     principlesHeading: {
       eyebrow: 'principles.cfg',
       title: 'Wie ich Projekte entscheide.',
@@ -424,10 +430,10 @@ const de: StudioContent = {
     {
       slug: 'intranet',
       name: 'Intranet',
-      type: 'Business Application',
+      type: 'Modular Business Platform',
       year: '2025–2026',
       accent: 'primary',
-      summary: 'Mehrere interne Apps, ein gemeinsamer Rechtekern und ein zusammenhängendes Backend für reale Unternehmensabläufe.',
+      summary: 'Modulares Intranet mit Projektmanagement, automatisierter Auftragsverwaltung, Document Share, Admin Panel, Qualitäts- und Reklamationsmanagement u. v. m. – verbunden über einen gemeinsamen Rechte- und Datenkern.',
       stack: ['Angular', 'Django', 'PostgreSQL', 'Channels'],
       portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/intranet`,
     },
@@ -437,27 +443,27 @@ const de: StudioContent = {
       type: 'Project Management',
       year: '2026',
       accent: 'violet',
-      summary: 'Kanban, Aufgaben, Kommentare, Anhänge und Live-Updates als eigenständiges Projektmanagement-Produkt.',
+      summary: 'Projektmanagement-App mit Kanban, Aufgaben, Kommentaren, Anhängen und Live-Kollaboration – ergänzt um eine spielerische Tamagotchi-Note durch das interaktive Maskottchen Carly.',
       stack: ['Angular', 'Django', 'WebSockets', 'Redis'],
       portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/kanban-klon`,
     },
     {
       slug: 'dein-fussabdruck',
       name: 'Dein Fußabdruck',
-      type: 'Interactive Application',
+      type: 'Interactive Simulation',
       year: '2026',
       accent: 'lime',
-      summary: 'Clientseitige Ökosystem-Simulation, in der Entscheidungen zeitversetzt sichtbare Folgen erzeugen.',
+      summary: 'Interaktive Ökosystem-Simulation, die persönliche Entscheidungen in zeitversetzte, sichtbare Folgen übersetzt und komplexe Zusammenhänge spielerisch erfahrbar macht.',
       stack: ['Angular', 'TypeScript', 'Simulation', 'Motion'],
       portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/dein-fussabdruck`,
     },
     {
       slug: 'globi-flow',
       name: 'Globi Flow',
-      type: 'Data Workflow',
+      type: 'Fiktive Product Case Study',
       year: '2026',
       accent: 'primary',
-      summary: 'Lokaler OCR- und Laborwerte-Workflow mit prüfbaren Erkennungen und getrennten Arzt-/Patientenansichten.',
+      summary: 'Fiktive Product Case Study: Aus der Frage, wie Blutergebnisse für Patienten verständlicher werden, entstand eine eigene Business-Logik für OCR-Import, Prüfung, Verlauf und patientengerechte Aufbereitung von Laborwerten.',
       stack: ['Angular', 'Django', 'OCR', 'Celery'],
       image: 'assets/images/projects/globi-flow.webp',
       imageAlt: 'Globi Flow Dashboard mit Statuskarten und Arbeitsübersicht',
@@ -469,7 +475,7 @@ const de: StudioContent = {
       type: 'Graphic Design / Editorial',
       year: '2017–2023',
       accent: 'pink',
-      summary: 'Kuratierte Sammlung aus Editorial, Retusche, Composing und experimenteller visueller Gestaltung.',
+      summary: 'Interaktiver Designkatalog als kuratierte Reise durch Editorial, Retusche, Composing und experimentelle visuelle Arbeiten aus mehreren Jahren.',
       stack: ['Photoshop', 'Lightroom', 'Editorial', 'WebP'],
       image: 'assets/images/projects/design-archive.webp',
       imageAlt: 'Coveransicht des kuratierten Design-Archivs',
@@ -477,10 +483,10 @@ const de: StudioContent = {
     },
   ],
   deliveredProjects: [
-    { name: 'glashelden24.de', url: 'https://glashelden24.de', label: 'Website / Direkt, schlank, schnell', stack: ['HTML', 'JavaScript', 'CSS'] },
-    { name: 'Sk-uvgele.de', url: 'https://sk-uvgele.de', label: 'Unternehmen / WordPress-Präsenz', stack: ['WordPress', 'Elementor', 'HTML', 'CSS'] },
-    { name: 'beautynailresort.de', url: 'https://beautynailresort.de', label: 'Wellness & Spa / Website + Shop', stack: ['WordPress', 'WooCommerce', 'Elementor', 'HTML', 'CSS'] },
-    { name: 'KGV1925', url: `${PORTFOLIO_BASE_URL}/angular-projects/1925/`, label: 'Kleingartenverein / Angular + Mini-CMS', stack: ['Angular', 'Django', 'REST API', 'PostgreSQL'] },
+    { name: 'glashelden24.de', url: 'https://glashelden24.de', label: 'Website / Direkt, schlank, schnell', stack: ['HTML', 'JavaScript', 'CSS'], image: 'assets/images/projects/clients/glashelden24.webp', imageAlt: 'Startseite von glashelden24.de mit Hero, Preisübersicht und Servicebereichen' },
+    { name: 'Sk-uvgele.de', url: 'https://sk-uvgele.de', label: 'Unternehmen / WordPress-Präsenz', stack: ['WordPress', 'Elementor', 'HTML', 'CSS'], image: 'assets/images/projects/clients/sk-uvgele.webp', imageAlt: 'Startseite von Sk-uvgele.de mit Produktbereichen, Beratung und News' },
+    { name: 'beautynailresort.de', url: 'https://beautynailresort.de', label: 'Wellness & Spa / Website + Shop', stack: ['WordPress', 'WooCommerce', 'Elementor', 'HTML', 'CSS'], image: 'assets/images/projects/clients/beautynailresort.webp', imageAlt: 'Startseite von beautynailresort.de mit Behandlungen, Empfehlungen und Shop-Elementen' },
+    { name: 'KGV1925', url: `${PORTFOLIO_BASE_URL}/angular-projects/1925/`, label: 'Kleingartenverein / Angular + Mini-CMS', stack: ['Angular', 'Django', 'REST API', 'PostgreSQL'], image: 'assets/images/projects/clients/kgv1925.webp', imageAlt: 'Startseite des Kleingartenvereins mit Vereinsinfos, Terminen und Gartenwissen' },
   ],
   process: [
     { index: '01', title: 'Verstehen', text: 'Ziel, Nutzer, bestehende Systeme und echte Einschränkungen werden geklärt.', command: 'scope --problem-first' },
@@ -568,7 +574,7 @@ const en: StudioContent = {
     faq: {
       eyebrow: 'faq.query',
       title: 'Questions before they become tickets.',
-      text: 'Short answers about collaboration, technology, hosting and what is actually needed to get started.',
+      text: '',
     },
     contact: {
       eyebrow: 'connection.ready',
@@ -643,6 +649,12 @@ const en: StudioContent = {
       'I do not stop at the polished screen. Structure, frontend, backend, data, deployment and maintainability are treated as one connected product.',
       'Collaboration stays direct: requirements are translated into understandable decisions, technical trade-offs stay visible and unnecessary complexity is avoided.',
     ],
+    vita: {
+      eyebrow: 'vita.log // ben',
+      title: 'Development and design for more than 10 years.',
+      text: 'I am Ben, a state-certified media IT specialist in multimedia and a certified Full Stack Web Developer. My focus is where design and technology meet: from UI/UX and visual systems to full-stack applications, data logic and production operations.',
+      facts: ['Media IT · Multimedia', 'Web Developer · Full Stack', 'Design · UI/UX · Software'],
+    },
     principlesHeading: {
       eyebrow: 'principles.cfg',
       title: 'How project decisions are made.',
@@ -799,17 +811,17 @@ const en: StudioContent = {
     { name: 'Priority Care', price: '€79 / month', text: 'For projects with more frequent small tasks.', features: ['prioritized changes', 'monitoring checks', 'short technical consulting'] },
   ],
   references: [
-    { ...de.references[0], type: 'Business Application', summary: 'Multiple internal apps, one permission core and a connected backend for real company workflows.' },
-    { ...de.references[1], type: 'Project Management', summary: 'Kanban, tasks, comments, attachments and live updates as a distinct project management product.' },
-    { ...de.references[2], type: 'Interactive Application', summary: 'Client-side ecosystem simulation where decisions create delayed, visible consequences.' },
-    { ...de.references[3], type: 'Data Workflow', summary: 'Local OCR and lab-data workflow with reviewable detections and separate physician/patient views.' },
-    { ...de.references[4], type: 'Graphic Design / Editorial', summary: 'Curated collection of editorial design, retouching, compositing and experimental visual work.' },
+    { ...de.references[0], type: 'Modular Business Platform', summary: 'Modular intranet with project management, automated order handling, Document Share, admin panel, quality management, complaint management and more on one shared permission and data core.' },
+    { ...de.references[1], type: 'Project Management', summary: 'Project management app with Kanban, tasks, comments, attachments and live collaboration, plus a playful Tamagotchi-like layer built around the interactive mascot Carly.' },
+    { ...de.references[2], type: 'Interactive Simulation', summary: 'Interactive ecosystem simulation that turns personal choices into delayed, visible consequences and makes complex relationships tangible through play.' },
+    { ...de.references[3], type: 'Fictional Product Case Study', summary: 'Fictional product case study: starting from the question of how blood results can become easier for patients to understand, a custom business logic was designed for OCR import, review, trends and patient-friendly presentation of lab values.' },
+    { ...de.references[4], type: 'Graphic Design / Editorial', summary: 'Interactive design catalogue presenting editorial work, retouching, compositing and experimental visual pieces from several years.' },
   ],
   deliveredProjects: [
-    { name: 'glashelden24.de', url: 'https://glashelden24.de', label: 'Website / Direct, lean, fast', stack: ['HTML', 'JavaScript', 'CSS'] },
-    { name: 'Sk-uvgele.de', url: 'https://sk-uvgele.de', label: 'Company / WordPress presence', stack: ['WordPress', 'Elementor', 'HTML', 'CSS'] },
-    { name: 'beautynailresort.de', url: 'https://beautynailresort.de', label: 'Wellness & Spa / Website + shop', stack: ['WordPress', 'WooCommerce', 'Elementor', 'HTML', 'CSS'] },
-    { name: 'KGV1925', url: `${PORTFOLIO_BASE_URL}/angular-projects/1925/`, label: 'Allotment association / Angular + mini CMS', stack: ['Angular', 'Django', 'REST API', 'PostgreSQL'] },
+    { ...de.deliveredProjects[0], label: 'Website / Direct, lean, fast', imageAlt: 'Homepage of glashelden24.de with hero, pricing overview and service sections' },
+    { ...de.deliveredProjects[1], label: 'Company / WordPress presence', imageAlt: 'Homepage of Sk-uvgele.de with product areas, consulting and news' },
+    { ...de.deliveredProjects[2], label: 'Wellness & Spa / Website + shop', imageAlt: 'Homepage of beautynailresort.de with treatments, recommendations and shop elements' },
+    { ...de.deliveredProjects[3], label: 'Allotment association / Angular + mini CMS', imageAlt: 'Homepage of the allotment association with club information, events and gardening content' },
   ],
   process: [
     { index: '01', title: 'Understand', text: 'Goal, users, existing systems and real constraints are clarified.', command: 'scope --problem-first' },

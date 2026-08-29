@@ -402,6 +402,7 @@
 }
 
 .service-console__tabs button {
+  scroll-margin-top: calc(var(--dcr-header-height) + 1.5rem);
   --row-accent: var(--dcr-color-primary);
   --row-on-accent: var(--dcr-color-on-primary);
   display: grid;
@@ -637,6 +638,7 @@
 
 .ops-section {
   --dcr-section-bg: var(--services-transition-color);
+  --dcr-section-text-color: var(--services-transition-on-color);
   --dcr-section-next-bg: var(--dcr-color-contrast-dark);
   color: var(--services-transition-on-color);
   padding-top: calc(var(--dcr-section-y) * 2);

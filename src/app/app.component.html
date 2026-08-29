@@ -27,9 +27,9 @@
   <dcr-header />
   <dcr-accessibility-panel />
   <dcr-cookie-banner />
-  <div id="main-content" tabindex="-1">
+  <div id="main-content" tabindex="-1" [class.is-route-changing]="isRouteChanging()">
     <router-outlet />
   </div>
-  <dcr-footer />
+  <dcr-footer [class.is-route-changing]="isRouteChanging()" />
   <dcr-scroll-to-top />
 }

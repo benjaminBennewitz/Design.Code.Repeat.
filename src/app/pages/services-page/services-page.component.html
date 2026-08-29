@@ -97,7 +97,7 @@
           @for (service of content().services; track service.slug; let index = $index) {
             <button
               type="button"
-              [id]="'service-selector-' + service.slug"
+              [id]="'service-' + service.slug"
               aria-controls="service-console-panel"
               [attr.aria-pressed]="selectedServiceIndex() === index"
               [class.is-active]="selectedServiceIndex() === index"
@@ -119,7 +119,7 @@
             class="service-console__panel"
             id="service-console-panel"
             aria-live="polite"
-            [attr.aria-labelledby]="'service-selector-' + service.slug"
+            [attr.aria-labelledby]="'service-' + service.slug"
             [attr.data-accent]="service.accent">
             <div class="service-console__panel-top">
               <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>

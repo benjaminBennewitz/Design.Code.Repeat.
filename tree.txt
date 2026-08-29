@@ -162,6 +162,11 @@ Deign.Code.Repeat/
 │   │   │   └── README.md
 │   │   ├── images/
 │   │   │   ├── projects/
+│   │   │   │   ├── clients/
+│   │   │   │   │   ├── beautynailresort.webp
+│   │   │   │   │   ├── glashelden24.webp
+│   │   │   │   │   ├── kgv1925.webp
+│   │   │   │   │   └── sk-uvgele.webp
 │   │   │   │   ├── design-archive.webp
 │   │   │   │   └── globi-flow.webp
 │   │   │   └── studio/

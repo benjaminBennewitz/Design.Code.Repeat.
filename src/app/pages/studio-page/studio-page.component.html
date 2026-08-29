@@ -39,8 +39,19 @@
           </article>
         }
 
+        <aside class="studio-intro__vita" aria-labelledby="studio-vita-title">
+          <p class="studio-intro__vita-eyebrow">{{ content().studioPage.vita.eyebrow }}</p>
+          <h2 id="studio-vita-title">{{ content().studioPage.vita.title }}</h2>
+          <p>{{ content().studioPage.vita.text }}</p>
+          <ul>
+            @for (fact of content().studioPage.vita.facts; track fact) {
+              <li>{{ fact }}</li>
+            }
+          </ul>
+        </aside>
+
         <div class="studio-intro__action">
-          <dcr-action-button label="Portfolio" href="https://design-code-repeat.de" target="_blank" variant="dark" icon="arrow_outward" />
+          <dcr-action-button label="Portfolio" href="https://b2folio.de" target="_blank" variant="dark" icon="arrow_outward" />
         </div>
       </div>
     </div>

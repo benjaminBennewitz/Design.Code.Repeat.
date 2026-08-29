@@ -79,11 +79,14 @@
 
 .dcr-field__error {
   color: var(--dcr-color-danger);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.75rem;
   font-weight: 750;
+  line-height: 1.4;
 }
 
 .dcr-field__error--block {
-  margin-top: -0.8rem;
+  margin-top: 0;
 }
 
 .contact-form__message-meta {
@@ -152,6 +155,10 @@
 .contact-form--compact .contact-form__required,
 .contact-form--compact .contact-form__message-meta,
 .contact-form--compact .contact-form__status {
+  font-size: 0.66rem;
+}
+
+.contact-form--compact .dcr-field__error {
   font-size: 0.66rem;
 }
 

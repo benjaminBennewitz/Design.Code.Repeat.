@@ -3,7 +3,9 @@
  * @description Bündelt Preisrahmen, interaktive Leistungs-Quickinfos, Betreuung und Managed Operations auf einer Route.
  */
 
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
@@ -35,6 +37,12 @@ export class ServicesPageComponent {
 
   /** SEO-Metadaten der Route. */
   private readonly seoService = inject(SeoService);
+
+  /** Aktuelle Route für die direkte Auswahl eines Leistungsmoduls per Fragment. */
+  private readonly route = inject(ActivatedRoute);
+
+  /** Lifecycle-Handle für die Fragment-Subscription. */
+  private readonly destroyRef = inject(DestroyRef);
 
   /** Vollständiger sprachabhängiger Content. */
   readonly content = computed(() => this.languageService.content());
@@ -92,6 +100,10 @@ export class ServicesPageComponent {
 
   constructor() {
     effect(() => this.seoService.setPage(this.content().servicesPage.seo, '/leistungen'));
+
+    this.route.fragment
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((fragment) => this.selectServiceFromFragment(fragment));
   }
 
   /** Aktiviert ein Service-Modul ohne Route oder Seitenwechsel. */
@@ -101,5 +113,19 @@ export class ServicesPageComponent {
     }
 
     this.selectedServiceIndex.set(index);
+  }
+
+  /** Aktiviert das über einen Footer- oder Deep-Link adressierte Leistungsmodul. */
+  private selectServiceFromFragment(fragment: string | null): void {
+    if (!fragment?.startsWith('service-')) {
+      return;
+    }
+
+    const slug = fragment.slice('service-'.length);
+    const index = this.content().services.findIndex((service) => service.slug === slug);
+
+    if (index >= 0) {
+      this.selectedServiceIndex.set(index);
+    }
   }
 }

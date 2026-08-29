@@ -110,7 +110,7 @@
   height: auto;
   opacity: 0.42;
   filter: drop-shadow(7px 8px 0 color-mix(in srgb, var(--dcr-color-on-lime) 16%, transparent));
-  transition: opacity 260ms ease, transform 480ms var(--dcr-ease-out);
+  transition: opacity 260ms ease;
 }
 
 .site-footer__character--fuelli {
@@ -119,8 +119,7 @@
   transform: rotate(2deg) translateY(2%);
 }
 
-.site-footer__stage:hover .site-footer__character { opacity: 0.62; }
-.site-footer__stage:hover .site-footer__character--fuelli { transform: rotate(0deg) translateY(-2%); }
+.site-footer__stage:hover .site-footer__character { opacity: 1; }
 
 .site-footer__panel-copy {
   position: relative;

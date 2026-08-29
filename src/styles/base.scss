@@ -9,6 +9,10 @@ html {
   background: var(--dcr-color-bg);
 }
 
+html.dcr-route-is-changing {
+  scroll-behavior: auto;
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;

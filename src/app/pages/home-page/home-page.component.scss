@@ -176,7 +176,7 @@
 }
 
 .reference-card__placeholder span:first-child { font-family: var(--dcr-font-display); font-size: clamp(2rem, 4vw, 4.6rem); line-height: 0.82; letter-spacing: -0.06em; }
-.reference-card__placeholder span:last-child { font-family: var(--dcr-font-mono); font-size: 0.7rem; }
+.reference-card__placeholder span:last-child { width: fit-content; padding: 0.3rem 0.45rem; background: var(--ref-accent); font-family: var(--dcr-font-mono); font-size: 0.7rem; font-weight: 850; line-height: 1.35; }
 
 .reference-card__content {
   display: grid;

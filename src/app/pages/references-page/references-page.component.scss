@@ -81,6 +81,10 @@
   object-fit: cover;
 }
 
+.reference-row[data-reference='design-archive'] .reference-row__visual img {
+  object-position: left top;
+}
+
 .reference-row__visual > span {
   display: flex;
   align-items: end;
@@ -284,7 +288,13 @@
 
 .delivered-card__preview img {
   object-fit: cover;
-  object-position: top center;
+  object-position: top left;
+  filter: brightness(0.72) saturate(0.72) contrast(1.02);
+  transition: filter 220ms ease;
+}
+
+.delivered-card:is(:hover, :focus-within) .delivered-card__preview img {
+  filter: brightness(1) saturate(1) contrast(1);
 }
 
 .delivered-card__preview-fallback {

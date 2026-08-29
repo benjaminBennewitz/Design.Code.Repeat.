@@ -179,7 +179,7 @@
   display: none;
 }
 
-/* Der Services-Hero nutzt die neue Maschinenanimation statt des alten Scanner-Balkens. */
-.ambient-field[data-variant='services'] .ambient-field__scan {
+/* Der Services-Hero nutzt die neue Maschinenanimation statt Scanner und Orbit-Halbkreisen. */
+.ambient-field[data-variant='services'] :is(.ambient-field__scan, .ambient-field__orbit) {
   display: none;
 }

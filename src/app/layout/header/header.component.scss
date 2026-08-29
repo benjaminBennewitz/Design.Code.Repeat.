@@ -26,6 +26,14 @@
 .site-header__status { justify-self: center; font: 800 0.58rem/1 var(--dcr-font-mono); letter-spacing: 0.1em; }
 .site-header__status i { display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.5rem; border-radius: 50%; background: var(--dcr-color-lime); box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--dcr-color-lime) 15%, transparent); }
 
+:host-context(:root[data-theme='light']) .site-header__status i {
+  border: 1px solid color-mix(in srgb, var(--dcr-color-contrast-dark) 78%, transparent);
+  background: color-mix(in srgb, var(--dcr-color-lime) 82%, var(--dcr-color-contrast-dark));
+  box-shadow:
+    0 0 0 0.2rem color-mix(in srgb, var(--dcr-color-lime) 24%, transparent),
+    0 1px 3px color-mix(in srgb, var(--dcr-color-contrast-dark) 44%, transparent);
+}
+
 .site-header__controls { display: flex; gap: 0.4rem; align-items: center; justify-self: end; }
 .site-header__menu-button { display: inline-flex; gap: 0.75rem; align-items: center; min-height: 2.65rem; border: 1px solid var(--dcr-color-border-strong); padding: 0.65rem 0.85rem; background: var(--dcr-color-surface-solid); color: var(--dcr-color-text); font: 900 0.64rem/1 var(--dcr-font-mono); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms var(--dcr-ease-out); }
 .site-header__menu-button b { font-size: 1.15rem; line-height: 0.7; }

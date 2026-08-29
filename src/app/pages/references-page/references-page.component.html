@@ -16,7 +16,7 @@
       class="case-study dcr-section dcr-viewport-section dcr-section-flow"
       [attr.data-accent]="reference.accent">
       <div class="dcr-container">
-        <article class="reference-row" data-case-study-card>
+        <article class="reference-row" data-case-study-card [attr.data-reference]="reference.slug">
           <div class="reference-row__number" aria-hidden="true">0{{ index + 1 }}</div>
           <div class="reference-row__visual">
             @if (reference.image) {

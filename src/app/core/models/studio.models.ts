@@ -189,6 +189,12 @@ export interface StudioContent {
     readonly seo: SeoPageContent;
     readonly heading: SectionHeadingContent;
     readonly intro: readonly string[];
+    readonly vita: {
+      readonly eyebrow: string;
+      readonly title: string;
+      readonly text: string;
+      readonly facts: readonly string[];
+    };
     readonly principlesHeading: SectionHeadingContent;
     readonly principles: readonly { readonly title: string; readonly text: string }[];
     readonly stackHeading: SectionHeadingContent;
