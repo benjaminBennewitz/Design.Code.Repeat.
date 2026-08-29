@@ -17,28 +17,24 @@
   let appReady = false;
   let finishing = false;
 
-  /** Kritische Textfonts werden hinter dem Loader geladen, damit beim Reveal kein Font-Swap mehr stattfindet. */
-  let criticalFontsReady = Promise.resolve();
+  /**
+   * Startet die kritischen Textfonts früh im Hintergrund, ohne den Loader-Abschluss
+   * von einem Netzwerkrequest abhängig zu machen.
+   */
+  const requestCriticalFonts = () => {
+    if (!document.fonts?.load) return;
 
-  const waitForCriticalFonts = () => {
-    if (!document.fonts?.load) return Promise.resolve();
-
-    return Promise.allSettled([
+    void Promise.allSettled([
       document.fonts.load('400 1rem Inter', 'Design Code Repeat'),
       document.fonts.load('700 1rem "JetBrains Mono"', 'INITIALIZING EXPERIENCE'),
-    ]).then(() => undefined);
+    ]);
   };
 
   /**
-   * Wartet höchstens kurz auf Fonts. Sind sie danach noch nicht verfügbar,
-   * bleibt diese Sitzung bewusst auf metrisch stabilen System-Fallbacks.
+   * Fixiert vor dem Reveal die bereits verfügbare Font-Variante. Ein langsamer
+   * Erstaufruf kann dadurch nachträglich keinen sichtbaren Font-Swap auslösen.
    */
-  const stabilizeFonts = async () => {
-    await Promise.race([
-      criticalFontsReady,
-      new Promise((resolve) => window.setTimeout(resolve, 650)),
-    ]);
-
+  const stabilizeFontChoice = () => {
     if (!document.fonts?.check) return;
 
     const bodyFontReady = document.fonts.check('400 1rem Inter', 'Design Code Repeat');
@@ -54,19 +50,18 @@
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
         root.classList.remove('dcr-app-hidden');
-        loader.classList.add('is-finished');
         loader.setAttribute('aria-hidden', 'true');
         loader.setAttribute('aria-busy', 'false');
-        window.setTimeout(() => loader.remove(), 260);
+        loader.remove();
       });
     });
   };
 
-  const finish = async () => {
+  const finish = () => {
     if (finishing || !minimumElapsed || !appReady) return;
 
     finishing = true;
-    await stabilizeFonts();
+    stabilizeFontChoice();
 
     // Scroll-Lock zuerst lösen. Die App bleibt noch verborgen, sodass die neue
     // Scrollbarbreite keinen sichtbaren Layout Shift auslösen kann.
@@ -76,12 +71,12 @@
 
   window.addEventListener('dcr:app-ready', () => {
     appReady = true;
-    criticalFontsReady = waitForCriticalFonts();
-    void finish();
+    requestCriticalFonts();
+    finish();
   }, { once: true });
 
   window.setTimeout(() => {
     minimumElapsed = true;
-    void finish();
+    finish();
   }, 3000);
 })();

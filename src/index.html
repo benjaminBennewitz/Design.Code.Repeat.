@@ -41,10 +41,7 @@
       color: #fff;
       opacity: 1;
       visibility: visible;
-      transition: opacity 220ms ease;
     }
-
-    .site-loader.is-finished { opacity: 0; pointer-events: none; }
     .site-loader::before {
       position: absolute;
       inset: 0;
@@ -86,7 +83,7 @@
     }
 
     .site-loader__word { display: block; opacity: 0; transform: translateY(65%) skewY(7deg); animation: dcr-loader-word 720ms cubic-bezier(.22,1,.36,1) forwards; }
-    .site-loader__word:nth-child(1) { animation-delay: 250ms; }
+    .site-loader__word--lcp { opacity: 1; transform: none; animation: none; }
     .site-loader__word:nth-child(3) { animation-delay: 500ms; }
     .site-loader__word--accent { grid-column: 1 / -1; justify-self: center; color: #67a2ff; animation-delay: 760ms; }
     .site-loader__mark {
@@ -125,7 +122,6 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .site-loader { transition: none; }
       .site-loader::before,
       .site-loader__mark { animation: none; }
       .site-loader__word { opacity: 1; transform: none; animation: none; }
@@ -142,7 +138,7 @@
     </div>
 
     <div class="site-loader__core" aria-hidden="true">
-      <span class="site-loader__word">DESIGN.</span>
+      <span class="site-loader__word site-loader__word--lcp">DESIGN.</span>
       <span class="site-loader__mark"><i></i><i></i><i></i><i></i></span>
       <span class="site-loader__word">CODE.</span>
       <span class="site-loader__word site-loader__word--accent">REPEAT.</span>

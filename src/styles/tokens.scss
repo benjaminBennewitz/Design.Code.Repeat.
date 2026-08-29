@@ -18,7 +18,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
-  font-display: fallback;
+  font-display: optional;
   src: url('/assets/fonts/inter-variable.ttf') format('truetype');
 }
 
@@ -26,7 +26,7 @@
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 100 800;
-  font-display: fallback;
+  font-display: optional;
   src: url('/assets/fonts/jetbrains-mono-variable.ttf') format('truetype');
 }
 
