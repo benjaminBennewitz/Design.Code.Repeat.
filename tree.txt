@@ -20,6 +20,8 @@ Deign.Code.Repeat/
 │   ├── .env.production.example
 │   ├── manage.py
 │   └── requirements.txt
+├── dist/
+│   └── ...
 ├── docs/
 │   ├── readme/
 │   │   └── dcr-readme-banner.svg
@@ -42,6 +44,7 @@ Deign.Code.Repeat/
 │   │   │   ├── models/
 │   │   │   │   └── studio.models.ts
 │   │   │   └── services/
+│   │   │       ├── accessibility-panel.service.ts
 │   │   │       ├── accessibility-preference.service.ts
 │   │   │       ├── contact-api.service.ts
 │   │   │       ├── cookie-consent.service.ts

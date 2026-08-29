@@ -369,14 +369,52 @@
 .reference-track .reference-card a { align-self: end; }
 
 @media (max-width: 900px) {
-  .home-references { min-height: calc(100svh - var(--dcr-header-height)); }
-  .home-references__sticky { min-height: 0; padding-block: 2rem; overflow: visible; }
-  .home-references__head { grid-template-columns: 1fr; align-items: start; }
+  .home-references {
+    width: 100%;
+    max-width: 100vw;
+    min-height: calc(100svh - var(--dcr-header-height));
+    overflow-x: clip;
+  }
+
+  .home-references__sticky {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 0;
+    padding-block: 2rem;
+    overflow: hidden;
+  }
+
+  .home-references__head { grid-template-columns: minmax(0, 1fr); align-items: start; }
   .home-references__control { justify-items: start; text-align: left; }
-  .reference-track { height: auto; min-height: 60vh; }
-  .reference-track .reference-card { flex-basis: 88vw; grid-template-columns: 1fr; grid-template-rows: minmax(240px, 1fr) auto; height: auto; }
-  .reference-track .reference-card__content { padding: 1.25rem; }
-  .reference-track .reference-card h3 { font-size: 2.7rem; }
+
+  .reference-track {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    min-height: 0;
+    padding-inline: var(--dcr-page-gutter);
+    scroll-padding-inline: var(--dcr-page-gutter);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .reference-track .reference-card {
+    flex: 0 0 calc(100vw - (var(--dcr-page-gutter) * 2));
+    width: calc(100vw - (var(--dcr-page-gutter) * 2));
+    max-width: calc(100vw - (var(--dcr-page-gutter) * 2));
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(220px, 42svh) auto;
+    height: auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .reference-track .reference-card__content { min-width: 0; padding: 1.25rem; }
+  .reference-track .reference-card h3 { max-width: 100%; font-size: clamp(2.15rem, 10vw, 2.7rem); }
+  .reference-track .reference-card p,
+  .reference-track .reference-card li,
+  .reference-track .reference-card a { max-width: 100%; overflow-wrap: anywhere; }
 }
 
 @media (min-width: 901px) and (min-height: 800px) {

@@ -252,7 +252,7 @@
 }
 
 @media (max-width: 760px) {
-  .access-panel__status {
+  .access-panel__trigger {
     display: none;
   }
 
@@ -264,20 +264,8 @@
 }
 
 @media (max-width: 480px) {
-  :host {
-    right: 0.75rem;
-    bottom: 0.75rem;
-  }
-
   .access-panel__quick-actions,
   .access-panel__chips--grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 560px) {
-  :host {
-    right: 0.75rem;
-    bottom: 5rem;
   }
 }

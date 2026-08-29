@@ -8,10 +8,10 @@
   <div class="site-header__status" aria-hidden="true"><i></i> AVAILABLE FOR SELECTED PROJECTS</div>
 
   <div class="site-header__controls">
-    <button class="site-header__icon-button" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
+    <button class="site-header__icon-button site-header__desktop-tool" type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
       <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
     </button>
-    <button class="site-header__language" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
+    <button class="site-header__language site-header__desktop-tool" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
       {{ languageService.language() === 'de' ? 'EN' : 'DE' }}
     </button>
     <button class="site-header__menu-button" type="button" [attr.aria-label]="content().menuLabel"
@@ -39,6 +39,21 @@
       <strong>MG — 51.1805° N<br>06.4428° E</strong>
       <span>INDEPENDENT DIGITAL STUDIO</span>
     </aside>
+
+    <div class="site-header__menu-tools">
+      <button type="button" [attr.aria-label]="content().themeLabel" (click)="themeService.toggleTheme()">
+        <span class="material-symbols-outlined" aria-hidden="true">{{ themeService.isLight() ? 'dark_mode' : 'light_mode' }}</span>
+        <span>{{ content().themeLabel }}</span>
+      </button>
+      <button type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
+        <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+        <span>{{ languageService.language() === 'de' ? 'EN' : 'DE' }}</span>
+      </button>
+      <button type="button" [attr.aria-label]="accessibilityLabel()" (click)="openAccessibilityPanel()">
+        <span class="material-symbols-outlined" aria-hidden="true">accessibility_new</span>
+        <span>{{ accessibilityLabel() }}</span>
+      </button>
+    </div>
 
     <div class="site-header__menu-wordmark" aria-hidden="true">DESIGN. CODE. REPEAT.</div>
   </div>

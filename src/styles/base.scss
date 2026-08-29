@@ -5,6 +5,8 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
   background: var(--dcr-color-bg);
 }
@@ -14,10 +16,11 @@ html.dcr-route-is-changing {
 }
 
 body {
+  max-width: 100%;
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--dcr-color-bg);
   color: var(--dcr-color-text);
   font-family: var(--dcr-font-body);
@@ -35,6 +38,14 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+:is(h1, h2, h3, h4, h5, h6, p, li, a, button, label, small, strong, code) {
+  overflow-wrap: anywhere;
+}
+
+article {
+  min-width: 0;
 }
 
 button,

@@ -253,7 +253,7 @@
   position: relative;
   z-index: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
 }
 
@@ -344,7 +344,10 @@
   }
 
   .site-footer__wordmark-state {
-    white-space: normal;
+    bottom: 0;
+    font-size: clamp(2.9rem, 13.5vw, 5.2rem);
+    line-height: 0.9;
+    white-space: nowrap;
   }
 }
 

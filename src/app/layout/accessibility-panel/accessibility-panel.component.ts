@@ -3,7 +3,7 @@
  * @description Bietet persistente Einstellungen für Motion, visuelle Komplexität, Kontrast und Farbseh-Anpassungen.
  */
 
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, computed, effect, inject } from '@angular/core';
 import {
   AccessibilityPreferenceService,
   ColorVisionMode,
@@ -11,6 +11,7 @@ import {
   ContrastMode,
   MotionMode,
 } from '../../core/services/accessibility-preference.service';
+import { AccessibilityPanelService } from '../../core/services/accessibility-panel.service';
 import { LanguageService } from '../../core/services/language.service';
 
 /** Übersetzte Texte des Accessibility-Panels. */
@@ -48,6 +49,9 @@ export class AccessibilityPanelComponent {
   /** Persistierte Accessibility-Einstellungen. */
   readonly accessibility = inject(AccessibilityPreferenceService);
 
+  /** UI-Controller für zusätzliche Trigger außerhalb dieser Komponente. */
+  private readonly panelService = inject(AccessibilityPanelService);
+
   /** Sprachservice für DE/EN-Texte. */
   private readonly languageService = inject(LanguageService);
 
@@ -65,6 +69,17 @@ export class AccessibilityPanelComponent {
 
   /** Übersetzte Texte der aktiven Sprache. */
   readonly texts = computed<AccessibilityPanelTexts>(() => PANEL_TEXTS[this.languageService.language()]);
+
+  constructor() {
+    effect(() => {
+      const request = this.panelService.openRequest();
+      if (request === 0) {
+        return;
+      }
+
+      queueMicrotask(() => this.open());
+    });
+  }
 
   /** Kompakter Status für den festen Trigger. */
   readonly statusText = computed<string>(() => {
