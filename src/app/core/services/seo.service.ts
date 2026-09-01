@@ -105,7 +105,7 @@ export class SeoService {
       name: 'Design. Code. Repeat.',
       description: 'Webentwicklung, Softwareentwicklung, UI/UX, Wartung und Managed Hosting.',
       url: this.siteOrigin(),
-      email: 'mailto:kontakt@bennewitz.de',
+      email: 'mailto:kontakt@design-code-repeat.de',
       founder: {
         '@type': 'Person',
         name: 'Benjamin Bennewitz',

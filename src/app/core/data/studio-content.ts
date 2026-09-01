@@ -189,7 +189,7 @@ const de: StudioContent = {
     directTitle: 'Lieber direkt per E-Mail?',
     directText: 'Kein Problem. Sensible Unterlagen bitte trotzdem nicht unverschlüsselt im Erstkontakt mitsenden.',
     emailLabel: 'E-Mail senden',
-    email: 'kontakt@bennewitz.de',
+    email: 'kontakt@design-code-repeat.de',
   },
   contactForm: {
     nameLabel: 'Name',
@@ -246,38 +246,62 @@ const de: StudioContent = {
     noticeSections: [
       {
         title: 'Angaben gemäß § 5 DDG',
-        lines: ['Benjamin Bennewitz', 'Deutschland'],
+        lines: ['Design. Code. Repeat.', 'Benjamin Bennewitz', 'c/o', 'Linzer Straße 45', '53604 Bad Honnef', 'Deutschland'],
       },
       {
         title: 'Kontakt',
-        lines: ['E-Mail: kontakt@bennewitz.de'],
+        lines: ['E-Mail: kontakt@design-code-repeat.de', 'Telefon: +49 162 9038166', 'Weitere schnelle Kontaktaufnahme: Kontaktformular im Bereich Kontakt'],
+      },
+      {
+        title: 'Haftung für Inhalte und Links',
+        lines: ['Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für externe Links wird keine Haftung übernommen; für deren Inhalte sind ausschließlich die jeweiligen Betreiber verantwortlich.'],
       },
     ],
     privacyTitle: 'Datenschutz',
     privacySections: [
       {
         title: 'Verantwortlicher',
-        paragraphs: ['Verantwortlich für die Verarbeitung personenbezogener Daten ist Benjamin Bennewitz. Kontakt: kontakt@bennewitz.de.'],
+        paragraphs: ['Verantwortlich für die Verarbeitung personenbezogener Daten ist Benjamin Bennewitz, Design. Code. Repeat., c/o Linzer Straße 45, 53604 Bad Honnef, Deutschland. Kontakt: kontakt@design-code-repeat.de, Telefon: +49 162 9038166.'],
       },
       {
-        title: 'Grundsatz',
-        paragraphs: ['Aktuell werden keine Analyse-, Marketing- oder Trackingdaten erhoben und keine Nutzerprofile erstellt. Personenbezogene Daten werden nur verarbeitet, wenn du sie aktiv über das Kontaktformular mitteilst oder direkt per E-Mail Kontakt aufnimmst.', 'Technisch notwendige Daten, die beim Abruf einer Website üblicherweise durch Server und Sicherheitssysteme entstehen können, bleiben davon unberührt und dienen ausschließlich Betrieb, Sicherheit und Fehleranalyse.'],
+        title: 'Grundsatz und Rechtsgrundlagen',
+        paragraphs: ['Es werden keine Analyse-, Marketing- oder Trackingprofile erstellt. Personenbezogene Daten werden nur verarbeitet, soweit dies für den technischen Betrieb der Website, die Sicherheit oder die Bearbeitung einer von dir ausgelösten Kontaktaufnahme erforderlich ist.', 'Kontaktanfragen zu möglichen oder bestehenden Leistungen werden gemäß Art. 6 Abs. 1 lit. b DSGVO zur Durchführung vorvertraglicher Maßnahmen beziehungsweise zur Vertragskommunikation verarbeitet. Soweit eine Verarbeitung für den sicheren und stabilen technischen Betrieb erforderlich ist, erfolgt sie gemäß Art. 6 Abs. 1 lit. f DSGVO auf Grundlage des berechtigten Interesses an einer sicheren, funktionsfähigen Website und Infrastruktur.'],
       },
       {
-        title: 'Kontaktformular',
-        paragraphs: ['Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, optional Unternehmen/Organisation, gewähltes Thema und Nachricht verarbeitet, um deine Anfrage zu bearbeiten. Die Angaben werden ausschließlich für die Bearbeitung deiner Anfrage genutzt und nicht für Werbung, Newsletter oder Profilbildung verwendet.', 'Die Daten werden an den eigenen, serverseitig geschützten Kontakt-Endpunkt übertragen. Das Frontend begrenzt Eingaben und validiert Formate. Maßgeblich bleibt die serverseitige Validierung mit Spam-Schutz, Rate Limiting und CSRF-Prüfung.'],
+        title: 'Kontaktformular und Infrastructure API',
+        paragraphs: ['Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, optional Unternehmen/Organisation, gewähltes Thema und Nachricht verarbeitet, um deine Anfrage zu bearbeiten. Unternehmen und Thema dienen der Einordnung der Anfrage und werden für die Übermittlung in die Nachricht integriert. An die zentrale Same-Origin Infrastructure API werden ausschließlich Name, E-Mail-Adresse, Nachricht und das technische Honeypot-Feld übermittelt.', 'Vor dem Versand wird über /api/csrf/ ein technisch notwendiger CSRF-Schutz aufgebaut. Dabei setzt der Server einen Secure-, HttpOnly- und SameSite=Lax-Cookie und liefert zusätzlich einen CSRF-Token für den nachfolgenden Request. Die API nutzt außerdem serverseitige Validierung, Honeypot-Schutz und Rate Limiting. Diese Mechanismen dienen ausschließlich der Sicherheit und Missbrauchsabwehr.', 'Erfolgreiche Anfragen werden über die eigene Server- und Mailinfrastruktur an kontakt@design-code-repeat.de zugestellt. Die Angaben werden nicht für Werbung, Newsletter oder Profilbildung verwendet.'],
       },
       {
-        title: 'Lokale Hinweise und notwendige Technik',
-        paragraphs: ['Die Website kann lokal in deinem Browser speichern, dass der Datenschutz-/Cookie-Hinweis bestätigt wurde. Diese Information bleibt auf deinem Gerät und wird nicht für Tracking verwendet.'],
+        title: 'Direkte Kontaktaufnahme per E-Mail',
+        paragraphs: ['Wenn du direkt per E-Mail Kontakt aufnimmst, werden Absenderadresse, Nachrichteninhalt und die dabei technisch anfallenden Mail-Metadaten verarbeitet, soweit dies zur Bearbeitung und Beantwortung deiner Anfrage erforderlich ist. Sensible Unterlagen sollten im Erstkontakt nicht unverschlüsselt versendet werden.'],
+      },
+      {
+        title: 'Lokale Speicherung und notwendige Cookies',
+        paragraphs: ['Die Website kann lokal in deinem Browser speichern, dass Datenschutz-/Cookie-Einstellungen bestätigt wurden. Diese Information bleibt auf deinem Gerät und wird nicht für Tracking verwendet.', 'Für das Kontaktformular wird ein technisch notwendiger CSRF-Cookie eingesetzt. Er dient ausschließlich dem Schutz vor Cross-Site-Request-Forgery und kann wegen HttpOnly nicht durch JavaScript ausgelesen werden.'],
+      },
+      {
+        title: 'Hosting und Serverbetrieb',
+        paragraphs: ['Die Website sowie die serverseitige Infrastructure API werden auf angemieteter Serverinfrastruktur der netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe, Deutschland, betrieben. Dabei können technisch erforderliche Verbindungsdaten verarbeitet werden. Der Server, die Webanwendung und die Maildienste werden innerhalb dieser Infrastruktur eigenständig administriert.'],
       },
       {
         title: 'Server-Logs',
-        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden, zum Beispiel IP-Adresse, Zeitpunkt des Abrufs, angefragte URL, User-Agent und technische Statusinformationen. Sie dienen dem sicheren und stabilen Betrieb sowie der Fehleranalyse.'],
+        paragraphs: ['Beim Aufruf der Website können technisch erforderliche Server-Logdaten verarbeitet werden, zum Beispiel IP-Adresse, Zeitpunkt des Abrufs, angefragte URL, User-Agent und technische Statusinformationen. Diese Daten dienen ausschließlich dem sicheren und stabilen Betrieb, der Missbrauchsabwehr sowie der Fehleranalyse. Formularinhalte und E-Mail-Adressen werden nicht in den technischen API-Logs protokolliert.'],
       },
       {
-        title: 'Externe Dienste',
-        paragraphs: ['Die Website lädt Material Symbols, Inter und JetBrains Mono lokal und verwendet keine extern eingebundenen Tracking-Skripte oder Social-Media-Widgets.'],
+        title: 'Externe Dienste und Empfänger',
+        paragraphs: ['Material Symbols, Inter und JetBrains Mono werden lokal ausgeliefert. Die Website bindet keine externen Tracking-Skripte oder Social-Media-Widgets ein.', 'Personenbezogene Daten werden nur an technische Empfänger weitergegeben, soweit dies für Betrieb, Kommunikation oder gesetzliche Pflichten erforderlich ist. Eine Weitergabe zu Werbezwecken oder ein Verkauf personenbezogener Daten findet nicht statt.'],
+      },
+      {
+        title: 'Speicherdauer',
+        paragraphs: ['Personenbezogene Daten aus Kontaktanfragen werden nur so lange gespeichert, wie dies für die Bearbeitung, anschließende Kommunikation und gegebenenfalls bestehende gesetzliche Aufbewahrungspflichten erforderlich ist. Technische Logdaten werden nur im Rahmen der für Betrieb, Sicherheit und Fehleranalyse erforderlichen Fristen vorgehalten.'],
+      },
+      {
+        title: 'Deine Rechte',
+        paragraphs: ['Du hast im Rahmen der gesetzlichen Voraussetzungen insbesondere Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Erteilte Einwilligungen können mit Wirkung für die Zukunft widerrufen werden.', 'Du hast außerdem das Recht, dich bei einer zuständigen Datenschutzaufsichtsbehörde über die Verarbeitung deiner personenbezogenen Daten zu beschweren. Für Datenschutzanfragen kannst du dich an kontakt@design-code-repeat.de wenden.'],
+      },
+      {
+        title: 'Stand',
+        paragraphs: ['Stand dieser Datenschutzhinweise: 01.09.2026.'],
       },
     ],
   },
@@ -693,7 +717,7 @@ const en: StudioContent = {
     directTitle: 'Prefer direct email?',
     directText: 'No problem. Please do not send sensitive documents unencrypted in the first contact.',
     emailLabel: 'Send email',
-    email: 'kontakt@bennewitz.de',
+    email: 'kontakt@design-code-repeat.de',
   },
   contactForm: {
     nameLabel: 'Name',
@@ -748,17 +772,23 @@ const en: StudioContent = {
     },
     noticeTitle: 'Legal Notice',
     noticeSections: [
-      { title: 'Provider information', lines: ['Benjamin Bennewitz', 'Germany'] },
-      { title: 'Contact', lines: ['Email: kontakt@bennewitz.de'] },
+      { title: 'Information according to § 5 DDG', lines: ['Design. Code. Repeat.', 'Benjamin Bennewitz', 'c/o', 'Linzer Straße 45', '53604 Bad Honnef', 'Germany'] },
+      { title: 'Contact', lines: ['Email: kontakt@design-code-repeat.de', 'Phone: +49 162 9038166', 'Additional fast contact option: contact form in the contact section'] },
+      { title: 'Liability for content and links', lines: ['The content of this website is prepared with care. No liability is assumed for external links; their respective operators are solely responsible for their content.'] },
     ],
     privacyTitle: 'Privacy',
     privacySections: [
-      { title: 'Controller', paragraphs: ['Benjamin Bennewitz is responsible for processing personal data. Contact: kontakt@bennewitz.de.'] },
-      { title: 'Principle', paragraphs: ['No analytics, marketing or tracking data is currently collected and no user profiles are created. Personal data is processed only when you actively provide it through the contact form or contact me directly by email.', 'Technically necessary data that can normally arise when a website is accessed by servers and security systems is reserved for operation, security and error analysis only.'] },
-      { title: 'Contact form', paragraphs: ['When you use the contact form, name, email address, optional company/organization, selected topic and message are processed to handle your inquiry. The information is used only to process your inquiry and not for advertising, newsletters or profiling.', 'Data is sent to the site’s own server-side protected contact endpoint. The frontend limits input and validates formats. Server-side validation remains authoritative and includes spam protection, rate limiting and CSRF validation.'] },
-      { title: 'Local notices and necessary technology', paragraphs: ['The website may store locally in your browser that the privacy/cookie notice has been confirmed. This information remains on your device and is not used for tracking.'] },
-      { title: 'Server logs', paragraphs: ['Technical server log data may be processed when the website is accessed, for example IP address, request time, requested URL, user agent and technical status information. It is used to keep the service secure and stable and to diagnose errors.'] },
-      { title: 'External services', paragraphs: ['Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets.'] },
+      { title: 'Controller', paragraphs: ['The controller responsible for processing personal data is Benjamin Bennewitz, Design. Code. Repeat., c/o Linzer Straße 45, 53604 Bad Honnef, Germany. Contact: kontakt@design-code-repeat.de, phone: +49 162 9038166.'] },
+      { title: 'Principles and legal bases', paragraphs: ['No analytics, marketing or tracking profiles are created. Personal data is processed only where necessary for the technical operation and security of the website or to handle contact initiated by you.', 'Inquiries relating to potential or existing services are processed under Art. 6(1)(b) GDPR for pre-contractual measures or contractual communication. Processing required for secure and stable technical operation is based on Art. 6(1)(f) GDPR and the legitimate interest in operating a secure and functional website and infrastructure.'] },
+      { title: 'Contact form and Infrastructure API', paragraphs: ['When you use the contact form, your name, email address, optional company/organization, selected topic and message are processed to handle your inquiry. Company and topic are used to classify the inquiry and are integrated into the message before transmission. Only name, email address, message and the technical honeypot field are sent to the central same-origin Infrastructure API.', 'Before submission, /api/csrf/ establishes the technically necessary CSRF protection. The server sets a Secure, HttpOnly and SameSite=Lax cookie and returns a CSRF token for the following request. The API also uses server-side validation, honeypot protection and rate limiting. These mechanisms are used exclusively for security and abuse prevention.', 'Successful inquiries are delivered through the self-managed server and mail infrastructure to kontakt@design-code-repeat.de. The information is not used for advertising, newsletters or profiling.'] },
+      { title: 'Direct contact by email', paragraphs: ['If you contact me directly by email, the sender address, message content and technically required mail metadata are processed to the extent necessary to handle and answer your inquiry. Sensitive documents should not be sent unencrypted in the initial contact.'] },
+      { title: 'Local storage and necessary cookies', paragraphs: ['The website may store your privacy/cookie settings locally in your browser. This information remains on your device and is not used for tracking.', 'The contact form uses a technically necessary CSRF cookie. It is used exclusively to protect against cross-site request forgery and cannot be read by JavaScript because it is HttpOnly.'] },
+      { title: 'Hosting and server operation', paragraphs: ['The website and the server-side Infrastructure API are operated on rented server infrastructure provided by netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe, Germany. Technically necessary connection data may be processed in this context. The server, web application and mail services are administered independently within this infrastructure.'] },
+      { title: 'Server logs', paragraphs: ['When the website is accessed, technically necessary server log data may be processed, such as IP address, request time, requested URL, user agent and technical status information. This data is used only for secure and stable operation, abuse prevention and error analysis. Form content and email addresses are not written to the technical API logs.'] },
+      { title: 'External services and recipients', paragraphs: ['Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets.', 'Personal data is disclosed only to technical recipients where necessary for operation, communication or legal obligations. Personal data is not shared for advertising purposes or sold.'] },
+      { title: 'Storage period', paragraphs: ['Personal data from contact inquiries is retained only for as long as necessary to process the inquiry, continue the resulting communication and comply with any applicable statutory retention obligations. Technical log data is retained only for the periods required for operation, security and error analysis.'] },
+      { title: 'Your rights', paragraphs: ['Subject to the applicable legal requirements, you have rights including access, rectification, erasure, restriction of processing, data portability and objection. Consent that has been given can be withdrawn with effect for the future.', 'You also have the right to lodge a complaint with a competent data protection supervisory authority. Privacy-related requests can be sent to kontakt@design-code-repeat.de.'] },
+      { title: 'Last updated', paragraphs: ['Last updated: 1 September 2026.'] },
     ],
   },
   footer: {
