@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, computed, inject, input
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ContactTopic } from '../../core/models/studio.models';
-import { ContactApiService, ContactRequest } from '../../core/services/contact-api.service';
+import { ContactApiError, ContactApiService, ContactRequest } from '../../core/services/contact-api.service';
 import { ActionButtonComponent } from '../action-button/action-button.component';
 import { LanguageService } from '../../core/services/language.service';
 
@@ -81,7 +81,7 @@ export class ContactFormComponent {
   /** Sprachabhängige Labels und Fehlertexte. */
   readonly content = computed(() => this.languageService.content().contactForm);
 
-  /** Unsichtbares Honeypot-Feld; wird bewusst nicht in den Request übernommen. */
+  /** Unsichtbares Honeypot-Feld; wird unverändert an die serverseitige Spam-Prüfung übertragen. */
   readonly website = signal('');
 
   /** Requeststatus. */
@@ -161,18 +161,16 @@ export class ContactFormComponent {
     return this.content().errors.privacy;
   }
 
-  /** Sendet nur valide, normalisierte und whitelisted Daten. */
+  /** Sendet nur valide, normalisierte und für die Infrastructure API freigegebene Daten. */
   async submit(): Promise<void> {
-    this.form.markAllAsTouched();
-    this.status.set('');
-
-    if (this.website().trim()) {
-      // Bots erhalten keine verwertbare Rückmeldung darüber, dass das Honeypot-Feld erkannt wurde.
-      await this.router.navigate(['/danke']);
+    if (this.isSubmitting()) {
       return;
     }
 
-    if (performance.now() - this.createdAt < MINIMUM_FILL_TIME_MS) {
+    this.form.markAllAsTouched();
+    this.status.set('');
+
+    if (!this.website().trim() && performance.now() - this.createdAt < MINIMUM_FILL_TIME_MS) {
       this.status.set(this.content().errors.tooFast);
       return;
     }
@@ -185,7 +183,7 @@ export class ContactFormComponent {
     const payload = this.createPayload();
 
     if (!payload) {
-      this.status.set(this.content().errors.server);
+      this.status.set(this.content().errors.validation);
       return;
     }
 
@@ -194,29 +192,65 @@ export class ContactFormComponent {
     try {
       await this.api.send(payload);
       this.form.reset({ name: '', email: '', company: '', topic: '', message: '', privacy: false });
+      this.website.set('');
       await this.router.navigate(['/danke']);
-    } catch {
-      this.status.set(this.content().errors.server);
+    } catch (error) {
+      this.status.set(this.apiErrorMessage(error));
     } finally {
       this.isSubmitting.set(false);
     }
   }
 
-  /** Erzeugt den Request-Body ohne Honeypot, Checkbox oder zusätzliche DOM-Werte. */
+  /**
+   * Erzeugt exakt den vier Felder umfassenden API-Body.
+   * Company und Topic bleiben UI-Felder und werden für den Empfänger lesbar in `message` integriert.
+   */
   private createPayload(): ContactRequest | null {
     const raw = this.form.getRawValue();
+    const topic = raw.topic as ContactTopic;
 
-    if (!ALLOWED_TOPICS.has(raw.topic as ContactTopic)) {
+    if (!ALLOWED_TOPICS.has(topic)) {
       return null;
     }
+
+    const topicLabel = this.content().topics.find((option) => option.value === topic)?.label ?? topic;
+    const metadata = [
+      `${this.languageService.language() === 'de' ? 'Thema' : 'Topic'}: ${topicLabel}`,
+      raw.company.trim()
+        ? `${this.languageService.language() === 'de' ? 'Unternehmen' : 'Company'}: ${raw.company.trim()}`
+        : '',
+    ].filter(Boolean);
 
     return {
       name: raw.name.trim(),
       email: raw.email.trim().toLowerCase(),
-      company: raw.company.trim(),
-      topic: raw.topic as ContactTopic,
-      message: raw.message.trim(),
+      message: `${metadata.join('\n')}\n\n${raw.message.trim()}`,
+      website: this.website(),
     };
+  }
+
+  /** Übersetzt stabile API-Fehlerklassen in vorhandene lokalisierte UI-Texte. */
+  private apiErrorMessage(error: unknown): string {
+    if (!(error instanceof ContactApiError)) {
+      return this.content().errors.server;
+    }
+
+    switch (error.code) {
+      case 'validation':
+        return this.content().errors.validation;
+      case 'csrf':
+        return this.content().errors.csrf;
+      case 'payload-too-large':
+        return this.content().errors.payloadTooLarge;
+      case 'rate-limit':
+        return this.content().errors.rateLimit;
+      case 'unavailable':
+        return this.content().errors.unavailable;
+      case 'network':
+        return this.content().errors.network;
+      default:
+        return this.content().errors.server;
+    }
   }
 
   /** Fokussiert das erste fehlerhafte Feld, ohne die Tastaturreihenfolge zu verändern. */

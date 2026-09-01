@@ -231,6 +231,12 @@ export interface StudioContent {
       readonly messageLength: string;
       readonly messageMaxLength: string;
       readonly privacy: string;
+      readonly validation: string;
+      readonly csrf: string;
+      readonly payloadTooLarge: string;
+      readonly rateLimit: string;
+      readonly unavailable: string;
+      readonly network: string;
       readonly server: string;
       readonly tooFast: string;
     };

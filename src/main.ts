@@ -1,9 +1,9 @@
 /**
  * @file Bootstrap der Studio-Anwendung.
- * @description Startet Angular 22 zoneless und stellt Router sowie HttpClient mit Django-kompatibler XSRF-Konfiguration bereit.
+ * @description Startet Angular 22 zoneless und stellt Router sowie HttpClient bereit. Der CSRF-Flow der Infrastructure API liegt explizit im ContactApiService.
  */
 
-import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
@@ -20,12 +20,7 @@ const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
-    provideHttpClient(
-      withXsrfConfiguration({
-        cookieName: 'csrftoken',
-        headerName: 'X-CSRFToken',
-      }),
-    ),
+    provideHttpClient(),
   ],
 };
 
