@@ -17,7 +17,7 @@ Das Angular-Formular übernimmt ausschließlich UX-Aufgaben:
 
 Diese Prüfungen dürfen serverseitig niemals vorausgesetzt werden.
 
-### Backend
+### Zentrale Infrastructure API
 
 Das Django-API erzwingt unabhängig vom Frontend:
 

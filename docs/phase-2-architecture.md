@@ -36,4 +36,4 @@ DE/EN liegen in einem streng typisierten zentralen Contentmodell. Dadurch bleibe
 
 ## Formular
 
-Das Angular-Frontend und Django-Backend teilen dasselbe Feldmodell semantisch, bleiben aber technisch unabhängig. Das Backend vertraut keinem Frontend-Validator und akzeptiert keine unbekannten Felder.
+Das Angular-Frontend und die zentrale Infrastructure API teilen dasselbe Feldmodell semantisch, bleiben aber technisch und repository-seitig unabhängig. Die API vertraut keinem Frontend-Validator und akzeptiert keine unbekannten Felder.

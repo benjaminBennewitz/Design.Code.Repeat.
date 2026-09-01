@@ -7,8 +7,3 @@ coverage
 .DS_Store
 Thumbs.db
 *.log
-backend/.venv/
-backend/db.sqlite3
-backend/**/__pycache__/
-backend/**/*.pyc
-backend/.env

@@ -18,7 +18,7 @@ Der auszuliefernde Frontend-Build liegt danach unter:
 dist\design-code-repeat-studio\browser
 ```
 
-Nur der Inhalt dieses `browser`-Ordners wird spaeter auf den Server nach `/home/users/dcr/www/design-code-repeat.de/` gespiegelt. Repository-Dateien wie `README.md`, `LICENSE`, `src/`, `backend/`, `.git/` oder `node_modules/` werden nicht in den Webspace ausgeliefert.
+Nur der Inhalt dieses `browser`-Ordners wird spaeter auf den Server nach `/home/users/dcr/www/design-code-repeat.de/` gespiegelt. Repository-Dateien wie `README.md`, `LICENSE`, `src/`, `.git/` oder `node_modules/` werden nicht in den Webspace ausgeliefert.
 
 `src/robots.txt` wird dagegen explizit durch Angular in den Build kopiert. Der aktuelle Vorab-Stand blockiert Crawler (`Disallow: /`) und setzt zusaetzlich `noindex, nofollow` ueber den SEO-Service. Vor dem Launch muss das bewusst auf `Allow: /` beziehungsweise `index, follow` geaendert werden.
 
@@ -96,7 +96,7 @@ Lokal:  git pull -> npm ci -> npm run build:production -> tar.gz -> scp
 Server: tar.gz entpacken -> rsync in Webroot -> chown dcr:dcr -> Rechte setzen
 ```
 
-`README.md`, `LICENSE`, `src/`, `backend/`, `.git/` und `node_modules/` werden dabei nicht ausgeliefert. Im Webroot landet nur der Inhalt des Angular-Build-Ordners.
+`README.md`, `LICENSE`, `src/`, `.git/` und `node_modules/` werden dabei nicht ausgeliefert. Im Webroot landet nur der Inhalt des Angular-Build-Ordners.
 
 ## Angular-Deep-Links unter Apache / KeyHelp
 

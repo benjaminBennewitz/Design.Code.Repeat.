@@ -49,19 +49,6 @@ Der Fokus liegt nicht auf einer experimentellen Portfolio-Experience, sondern au
 - lokale Fonts und Material Symbols
 - WebGL-/Dither-Effekte ohne React-/Tailwind-Abhängigkeit
 
-### Backend
-
-- Django 6.1
-- schlankes Kontakt-API
-- CSRF-Schutz
-- serverseitige Whitelist-Validierung
-- Rate Limiting
-- optional Redis für geteilte Rate-Limit-Zähler
-- SMTP-Konfiguration ausschließlich über Environment-Variablen
-- keine Persistierung von Kontaktanfragen
-
----
-
 ## `design.system`
 
 Das Designsystem liegt zentral in `src/styles/tokens.scss`. Komponenten sollen keine eigenen festen Farbwerte einführen, sondern ausschließlich semantische Tokens verwenden.
@@ -111,7 +98,6 @@ Animationen sind Teil der Gestaltung, dürfen aber keine Voraussetzung für Bedi
 
 ```text
 .
-├── backend/
 │   ├── config/                 # Django-Konfiguration
 │   ├── contact/                # Kontakt-API, Validierung und Mailversand
 │   ├── .env.example            # Development-Template
@@ -158,17 +144,6 @@ export const environment = {
 
 ```ts
 siteUrl: 'https://design-code-repeat.de'
-```
-
-`apiBaseUrl` bleibt standardmäßig `/api`, weil das Django-Backend in Produktion vorzugsweise über denselben Host und einen Reverse Proxy bereitgestellt wird.
-
-### Django Development
-
-```bash
-cd backend
-python -m venv .venv
-```
-
 Windows:
 
 ```powershell
@@ -182,7 +157,7 @@ Die Development-Konfiguration schreibt E-Mails standardmäßig in die Konsole, s
 
 ### Django Production
 
-`backend/.env.production.example` nach `.env` kopieren und **alle Platzhalter sowie Secrets vor dem Start ersetzen**.
+Die produktive Konfiguration der zentralen Infrastructure API wird in deren eigenem Repository und ausschließlich über serverseitige Environment-Variablen gepflegt.
 
 Besonders relevant:
 
@@ -234,7 +209,7 @@ Output für das statische Frontend-Deployment:
 dist/design-code-repeat-studio/browser/
 ```
 
-Nur der Inhalt des `browser`-Ordners wird in den öffentlichen KeyHelp-Webspace kopiert. Repository-Dateien wie `README.md`, `LICENSE`, `src/`, `backend/`, `.git/` oder `node_modules/` werden nicht ausgeliefert.
+Nur der Inhalt des `browser`-Ordners wird in den öffentlichen KeyHelp-Webspace kopiert. Repository-Dateien wie `README.md`, `LICENSE`, `src/`, `.git/` oder `node_modules/` werden nicht ausgeliefert.
 
 Die aktuelle Vorab-Konfiguration blockiert Suchmaschinen über `src/robots.txt` und setzt zusätzlich `noindex, nofollow` über den SEO-Service. Vor dem öffentlichen Launch müssen `src/robots.txt` und die `robots`-Werte in den Environment-Dateien bewusst auf Indexierung umgestellt werden.
 
@@ -258,14 +233,14 @@ Bei Änderungen sollten mindestens folgende Punkte geprüft werden:
 - Responsive Layouts inklusive niedriger Viewport-Höhen
 - Kontrast der verwendeten Token-Paare
 - Angular Build und Tests
-- Kontaktformular gegen Frontend- **und** Backend-Validierung
+- Kontaktformular mit Frontend-Validierung und zusätzlicher serverseitiger Validierung durch die zentrale Infrastructure API
 - keine Secrets oder produktiven Zugangsdaten im Repository
 
 ---
 
 ## `security`
 
-Das Frontend wird nicht als Sicherheitsgrenze betrachtet. Das Django-Backend validiert alle Kontaktanfragen erneut, akzeptiert nur definierte Felder und übernimmt CSRF-, Rate-Limit- und Mail-Sicherheitslogik.
+Das Frontend wird nicht als Sicherheitsgrenze betrachtet. Die zentrale Infrastructure API validiert alle Kontaktanfragen erneut, akzeptiert nur definierte Felder und übernimmt CSRF-, Rate-Limit- und Mail-Sicherheitslogik.
 
 Weitere Details: [`docs/security.md`](docs/security.md)
 
