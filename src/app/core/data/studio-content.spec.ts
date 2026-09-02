@@ -61,4 +61,16 @@ describe('STUDIO_TRANSLATIONS', () => {
       }
     }
   });
+
+  it('verlinkt Carly Managed in beiden Sprachen auf die DCR-Case-Domain', () => {
+    for (const language of ['de', 'en'] as const) {
+      const carlyManaged = STUDIO_TRANSLATIONS[language].references.find(
+        (reference) => reference.slug === 'carly-managed',
+      );
+
+      expect(carlyManaged?.portfolioUrl).toBe('https://cases.design-code-repeat.de');
+      expect(carlyManaged?.portfolioUrl).not.toContain('b2folio.de');
+    }
+  });
+
 });

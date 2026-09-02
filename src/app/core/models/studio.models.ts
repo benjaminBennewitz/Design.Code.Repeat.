@@ -94,6 +94,10 @@ export interface StudioReference {
   readonly stack: readonly string[];
   readonly image?: string;
   readonly imageAlt?: string;
+  /** Optionaler projektspezifischer Hinweis für den externen Deep-Dive-Link. */
+  readonly linkHint?: string;
+  /** Optionales projektspezifisches CTA-Label für den externen Link. */
+  readonly ctaLabel?: string;
   readonly portfolioUrl: string;
 }
 

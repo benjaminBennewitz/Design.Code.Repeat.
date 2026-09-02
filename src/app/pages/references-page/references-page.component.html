@@ -32,9 +32,9 @@
             <ul [attr.aria-label]="techStackLabel()">
               @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
             </ul>
-            <small>{{ content().referencesPage.portfolioHint }}</small>
+            <small>{{ reference.linkHint ?? content().referencesPage.portfolioHint }}</small>
             <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">
-              {{ content().referencesPage.cta }} <span aria-hidden="true">↗</span>
+              {{ reference.ctaLabel ?? content().referencesPage.cta }} <span aria-hidden="true">↗</span>
             </a>
           </div>
         </article>

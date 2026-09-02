@@ -8,6 +8,9 @@ import { StudioContent, StudioLanguage } from '../models/studio.models';
 /** Öffentliche Portfolio-Domain für vertiefende Case Studies. */
 const PORTFOLIO_BASE_URL = 'https://b2folio.de';
 
+/** Öffentliche Carly-Managed-Case-Study des DCR-Hosts. */
+const CARLY_MANAGED_CASE_URL = 'https://cases.design-code-repeat.de';
+
 /** Deutsche Inhalte. */
 const de: StudioContent = {
   meta: {
@@ -475,7 +478,9 @@ const de: StudioContent = {
       accent: 'violet',
       summary: 'Projektmanagement-App mit Kanban, Aufgaben, Kommentaren, Anhängen und Live-Kollaboration – ergänzt um eine spielerische Tamagotchi-Note durch das interaktive Maskottchen Carly.',
       stack: ['Angular', 'Django', 'WebSockets', 'Redis'],
-      portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/kanban-klon`,
+      linkHint: 'Die kontrollierte öffentliche Demo zeigt Carly Managed mit vorbereiteten Projekten und sicheren Testdaten.',
+      ctaLabel: 'Live-Demo öffnen',
+      portfolioUrl: CARLY_MANAGED_CASE_URL,
     },
     {
       slug: 'dein-fussabdruck',
@@ -854,7 +859,7 @@ const en: StudioContent = {
   ],
   references: [
     { ...de.references[0], type: 'Modular Business Platform', summary: 'Modular intranet with project management, automated order handling, Document Share, admin panel, quality management, complaint management and more on one shared permission and data core.' },
-    { ...de.references[1], type: 'Project Management', summary: 'Project management app with Kanban, tasks, comments, attachments and live collaboration, plus a playful Tamagotchi-like layer built around the interactive mascot Carly.' },
+    { ...de.references[1], type: 'Project Management', summary: 'Project management app with Kanban, tasks, comments, attachments and live collaboration, plus a playful Tamagotchi-like layer built around the interactive mascot Carly.', linkHint: 'The controlled public demo shows Carly Managed with prepared projects and safe test data.', ctaLabel: 'Open live demo' },
     { ...de.references[2], type: 'Interactive Simulation', summary: 'Interactive ecosystem simulation that turns personal choices into delayed, visible consequences and makes complex relationships tangible through play.' },
     { ...de.references[3], type: 'Fictional Product Case Study', summary: 'Fictional product case study: starting from the question of how blood results can become easier for patients to understand, a custom business logic was designed for OCR import, review, trends and patient-friendly presentation of lab values.' },
     { ...de.references[4], type: 'Graphic Design / Editorial', summary: 'Interactive design catalogue presenting editorial work, retouching, compositing and experimental visual pieces from several years.' },
