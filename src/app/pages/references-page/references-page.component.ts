@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { RouterLink } from '@angular/router';
 import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-scroll.directive';
 import { HorizontalScrollHintComponent } from '../../shared/horizontal-scroll-hint/horizontal-scroll-hint.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
@@ -25,7 +26,7 @@ import { SystemGridComponent } from '../../shared/system-grid/system-grid.compon
 @Component({
   selector: 'dcr-references-page',
   standalone: true,
-  imports: [HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent, SignalDividerComponent, SystemGridComponent],
+  imports: [RouterLink, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent, SignalDividerComponent, SystemGridComponent],
   templateUrl: './references-page.component.html',
   styleUrl: './references-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -92,12 +92,17 @@ export interface StudioReference {
   readonly accent: AccentTone;
   readonly summary: string;
   readonly stack: readonly string[];
+  /** Zusätzliche Kernpunkte für breitere Referenzkarten. */
+  readonly details?: readonly string[];
   readonly image?: string;
   readonly imageAlt?: string;
-  /** Optionaler projektspezifischer Hinweis für den externen Deep-Dive-Link. */
+  /** Optionaler projektspezifischer Hinweis für den Deep-Dive-Link. */
   readonly linkHint?: string;
-  /** Optionales projektspezifisches CTA-Label für den externen Link. */
+  /** Optionales projektspezifisches CTA-Label für den Link. */
   readonly ctaLabel?: string;
+  /** Interne Route, falls die Referenz direkt in der Studio-Seite vertieft wird. */
+  readonly internalRoute?: string;
+  /** Externer Portfolio-Link für Live-Demos oder tiefergehende Case Studies. */
   readonly portfolioUrl: string;
 }
 

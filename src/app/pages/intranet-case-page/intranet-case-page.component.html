@@ -1,0 +1,120 @@
+<main class="intranet-case">
+  <section class="intranet-case__hero dcr-section dcr-viewport-section" aria-labelledby="intranet-case-title">
+    <div class="dcr-container intranet-case__hero-grid">
+      <div class="intranet-case__hero-copy">
+        <a class="intranet-case__back-link" routerLink="/referenzen">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          {{ content().backLabel }}
+        </a>
+
+        <p class="intranet-case__eyebrow">{{ content().eyebrow }}</p>
+        <h1 id="intranet-case-title">{{ content().title }}</h1>
+        <p class="intranet-case__summary">{{ content().summary }}</p>
+        <p class="intranet-case__lead">{{ content().lead }}</p>
+
+        <div class="intranet-case__hero-actions">
+          <a routerLink="/referenzen">{{ content().backLabel }}</a>
+          <a [href]="portfolioUrl" target="_blank" rel="noopener noreferrer">
+            {{ content().portfolioLabel }}
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+          </a>
+        </div>
+      </div>
+
+      <figure class="intranet-case__hero-visual bp-card">
+        <img src="assets/images/projects/intranet/intranet-dashboard.webp" alt="Intranet-Dashboard mit Kennzahlen und Schnellzugriffen" width="1600" height="980" loading="eager" decoding="async" />
+        <figcaption>
+          <strong>{{ content().noteTitle }}</strong>
+          <p>{{ content().noteText }}</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="dcr-section dcr-section-flow" aria-labelledby="intranet-metrics-title">
+    <div class="dcr-container intranet-case__metric-block">
+      <dcr-section-heading
+        [eyebrow]="content().metricHeading.eyebrow"
+        [title]="content().metricHeading.title"
+        [text]="content().metricHeading.text"
+        titleId="intranet-metrics-title" />
+
+      <div class="intranet-case__metrics-grid">
+        @for (metric of content().metrics; track metric.label) {
+          <article class="intranet-case__metric-card">
+            <span>{{ metric.value }}</span>
+            <h2>{{ metric.label }}</h2>
+            <p>{{ metric.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dcr-section dcr-section-flow intranet-case__module-section" aria-labelledby="intranet-modules-title">
+    <div class="dcr-container">
+      <dcr-section-heading
+        [eyebrow]="content().moduleHeading.eyebrow"
+        [title]="content().moduleHeading.title"
+        [text]="content().moduleHeading.text"
+        titleId="intranet-modules-title" />
+
+      <div class="intranet-case__module-grid">
+        @for (module of content().modules; track module.title) {
+          <article class="intranet-case__module-card bp-card">
+            <p>{{ module.eyebrow }}</p>
+            <h2>{{ module.title }}</h2>
+            <p>{{ module.text }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dcr-section dcr-section-flow" aria-labelledby="intranet-architecture-title">
+    <div class="dcr-container">
+      <dcr-section-heading
+        [eyebrow]="content().chapterHeading.eyebrow"
+        [title]="content().chapterHeading.title"
+        [text]="content().chapterHeading.text"
+        titleId="intranet-architecture-title" />
+
+      <div class="intranet-case__chapter-grid">
+        @for (chapter of content().chapters; track chapter.title) {
+          <article class="intranet-case__chapter-card bp-card">
+            <p>{{ chapter.eyebrow }}</p>
+            <h2>{{ chapter.title }}</h2>
+            <p>{{ chapter.text }}</p>
+            <ul>
+              @for (point of chapter.points; track point) {
+                <li>{{ point }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dcr-section dcr-section-flow intranet-case__gallery-section" aria-labelledby="intranet-gallery-title">
+    <div class="dcr-container">
+      <dcr-section-heading
+        [eyebrow]="content().galleryHeading.eyebrow"
+        [title]="content().galleryHeading.title"
+        [text]="content().galleryHeading.text"
+        titleId="intranet-gallery-title" />
+
+      <div class="intranet-case__gallery-grid">
+        @for (shot of content().shots; track shot.image) {
+          <figure class="intranet-case__gallery-card bp-card">
+            <img [src]="shot.image" [alt]="shot.alt" width="1600" height="980" loading="lazy" decoding="async" />
+            <figcaption>
+              <h2>{{ shot.title }}</h2>
+              <p>{{ shot.text }}</p>
+            </figcaption>
+          </figure>
+        }
+      </div>
+    </div>
+  </section>
+</main>

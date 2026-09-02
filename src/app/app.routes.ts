@@ -11,6 +11,7 @@ export const routes: Routes = [
   { path: 'leistungen', loadComponent: () => import('./pages/services-page/services-page.component').then((m) => m.ServicesPageComponent) },
   { path: 'leistungen/:slug', loadComponent: () => import('./pages/service-detail-page/service-detail-page.component').then((m) => m.ServiceDetailPageComponent) },
   { path: 'referenzen', loadComponent: () => import('./pages/references-page/references-page.component').then((m) => m.ReferencesPageComponent) },
+  { path: 'referenzen/intranet', loadComponent: () => import('./pages/intranet-case-page/intranet-case-page.component').then((m) => m.IntranetCasePageComponent) },
   { path: 'studio', loadComponent: () => import('./pages/studio-page/studio-page.component').then((m) => m.StudioPageComponent) },
   { path: 'kontakt', loadComponent: () => import('./pages/contact-page/contact-page.component').then((m) => m.ContactPageComponent) },
   { path: 'danke', loadComponent: () => import('./pages/thank-you-page/thank-you-page.component').then((m) => m.ThankYouPageComponent) },

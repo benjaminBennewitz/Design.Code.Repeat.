@@ -1,25 +1,6 @@
-Deign.Code.Repeat/
+Design.Code.Repeat/
 ├── .angular/
 │   └── ...
-├── backend/
-│   ├── config/
-│   │   ├── __init__.py
-│   │   ├── asgi.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── contact/
-│   │   ├── __init__.py
-│   │   ├── apps.py
-│   │   ├── forms.py
-│   │   ├── services.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── .env.example
-│   ├── .env.production.example
-│   ├── manage.py
-│   └── requirements.txt
 ├── dist/
 │   └── ...
 ├── docs/
@@ -31,8 +12,6 @@ Deign.Code.Repeat/
 │   └── ...
 ├── scripts/
 │   ├── copy-fonts.ps1
-│   ├── deploy-dcr-backend-local.cmd
-│   ├── deploy-dcr-backend-server.sh
 │   ├── deploy-dcr-local.cmd
 │   └── deploy-dcr-server.sh
 ├── src/
@@ -46,6 +25,7 @@ Deign.Code.Repeat/
 │   │   │   └── services/
 │   │   │       ├── accessibility-panel.service.ts
 │   │   │       ├── accessibility-preference.service.ts
+│   │   │       ├── contact-api.service.spec.ts
 │   │   │       ├── contact-api.service.ts
 │   │   │       ├── cookie-consent.service.ts
 │   │   │       ├── language.service.ts
@@ -83,6 +63,10 @@ Deign.Code.Repeat/
 │   │   │   │   ├── home-page.component.html
 │   │   │   │   ├── home-page.component.scss
 │   │   │   │   └── home-page.component.ts
+│   │   │   ├── intranet-case-page/
+│   │   │   │   ├── intranet-case-page.component.html
+│   │   │   │   ├── intranet-case-page.component.scss
+│   │   │   │   └── intranet-case-page.component.ts
 │   │   │   ├── legal-notice-page/
 │   │   │   │   ├── legal-notice-page.component.html
 │   │   │   │   ├── legal-notice-page.component.scss
@@ -169,11 +153,20 @@ Deign.Code.Repeat/
 │   │   │   └── README.md
 │   │   ├── images/
 │   │   │   ├── projects/
+│   │   │   │   ├── carly-managed/
+│   │   │   │   │   └── dashboard.webp
 │   │   │   │   ├── clients/
 │   │   │   │   │   ├── beautynailresort.webp
 │   │   │   │   │   ├── glashelden24.webp
 │   │   │   │   │   ├── kgv1925.webp
 │   │   │   │   │   └── sk-uvgele.webp
+│   │   │   │   ├── intranet/
+│   │   │   │   │   ├── document-share.webp
+│   │   │   │   │   ├── intranet-app-overview.webp
+│   │   │   │   │   ├── intranet-control-panel.webp
+│   │   │   │   │   ├── intranet-dashboard.webp
+│   │   │   │   │   ├── intranet-order-status.webp
+│   │   │   │   │   └── projects-board.webp
 │   │   │   │   ├── design-archive.webp
 │   │   │   │   └── globi-flow.webp
 │   │   │   └── studio/

@@ -17,25 +17,54 @@
       [attr.data-accent]="reference.accent">
       <div class="dcr-container">
         <article class="reference-row" data-case-study-card [attr.data-reference]="reference.slug">
-          <div class="reference-row__number" aria-hidden="true">0{{ index + 1 }}</div>
           <div class="reference-row__visual">
+            <span class="reference-row__index" aria-hidden="true">0{{ index + 1 }}</span>
+
             @if (reference.image) {
-              <img [src]="reference.image" [alt]="reference.imageAlt ?? ''" width="900" height="540" loading="lazy" decoding="async">
+              <img [src]="reference.image" [alt]="reference.imageAlt ?? reference.name" width="1200" height="900" loading="lazy" decoding="async">
             } @else {
-              <span>{{ reference.name }}</span>
+              <div class="reference-row__visual-fallback" aria-hidden="true">
+                <span>{{ reference.type }}</span>
+                <strong>{{ reference.name }}</strong>
+              </div>
             }
+
+            <div class="reference-row__visual-raster" aria-hidden="true"></div>
+            <div class="reference-row__title-rail" aria-hidden="true">
+              <span>{{ reference.type }}</span>
+              <strong>{{ reference.name }}</strong>
+            </div>
           </div>
+
           <div class="reference-row__content">
             <div class="reference-row__meta"><span>{{ reference.type }}</span><span>{{ reference.year }}</span></div>
             <h2>{{ reference.name }}</h2>
             <p>{{ reference.summary }}</p>
+
+            @if (reference.details?.length) {
+              <ul class="reference-row__details">
+                @for (detail of reference.details; track detail) {
+                  <li>{{ detail }}</li>
+                }
+              </ul>
+            }
+
             <ul [attr.aria-label]="techStackLabel()">
               @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
             </ul>
             <small>{{ reference.linkHint ?? content().referencesPage.portfolioHint }}</small>
-            <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">
-              {{ reference.ctaLabel ?? content().referencesPage.cta }} <span aria-hidden="true">↗</span>
-            </a>
+
+            @if (reference.internalRoute) {
+              <a [routerLink]="reference.internalRoute">
+                {{ reference.ctaLabel ?? content().referencesPage.cta }}
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            } @else {
+              <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">
+                {{ reference.ctaLabel ?? content().referencesPage.cta }}
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+              </a>
+            }
           </div>
         </article>
       </div>
