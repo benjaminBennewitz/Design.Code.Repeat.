@@ -68,7 +68,7 @@ describe('STUDIO_TRANSLATIONS', () => {
         (reference) => reference.slug === 'carly-managed',
       );
 
-      expect(carlyManaged?.portfolioUrl).toBe('https://cases.design-code-repeat.de/carly-managed/auth/login/');
+      expect(carlyManaged?.portfolioUrl).toBe('https://carly-managed-demo.design-code-repeat.de');
       expect(carlyManaged?.portfolioUrl).not.toContain('b2folio.de');
     }
   });
