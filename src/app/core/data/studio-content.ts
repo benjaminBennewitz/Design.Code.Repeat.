@@ -528,7 +528,7 @@ const de: StudioContent = {
       summary: 'Interaktiver Designkatalog als kuratierte Reise durch Editorial, Retusche, Composing und experimentelle visuelle Arbeiten aus mehreren Jahren.',
       stack: ['Photoshop', 'Lightroom', 'Editorial', 'WebP'],
       details: ['Interaktiver Reader statt statischer PDF-Vorschau', 'Editorial, Retusche und Composing über mehrere Jahre', 'Kuratiertes Archiv mit echter WebP-Galerie'],
-      image: 'assets/images/projects/design-catalog/catalog-page-01.webp',
+      image: 'assets/images/projects/design-catalog/en/catalog-page-01.webp',
       imageAlt: 'Coveransicht des kuratierten Design-Archivs',
       internalRoute: '/referenzen/design-archiv',
     },
