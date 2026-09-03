@@ -1,5 +1,4 @@
 <!-- src/app/pages/project-detail-page/project-detail-page.component.html -->
-<dcr-reference-case-styles />
 <main class="project-detail bp-scroll-main" [attr.data-project]="project()?.slug ?? null">
   @if (project(); as activeProject) {
   <article>
@@ -314,7 +313,7 @@
       </div>
     </section>
 
-    @if (activeProject.architecture?.length) {
+    @if ((activeProject.architecture ?? []).length > 0) {
     <section id="project-deep-dive" [class]="'project-detail__mode bp-section project-detail__mode--' + activeProject.detailMode" bpReveal>
       <div class="bp-container">
         <div class="project-detail__section-head">
@@ -322,7 +321,7 @@
           <h2>{{ content().projectsIntro.insightsLabel }}</h2>
         </div>
 
-        @if (activeProject.architecture?.length) {
+        @if ((activeProject.architecture ?? []).length > 0) {
         <section class="project-detail__architecture" [attr.aria-label]="content().projectsIntro.architectureLabel">
           <div class="project-detail__architecture-head">
             <h3>{{ content().projectsIntro.architectureLabel }}</h3>

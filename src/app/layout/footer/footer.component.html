@@ -55,11 +55,28 @@
           <h2>privacy / legal / control</h2>
         </div>
 
-        <div class="site-footer__legal-grid">
-          <a routerLink="/impressum">{{ ui().notice }}</a>
-          <a routerLink="/datenschutz">{{ ui().privacy }}</a>
-          <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
-          <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
+        <div class="site-footer__legal-layout">
+          <div class="site-footer__legal-grid">
+            <a routerLink="/impressum">{{ ui().notice }}</a>
+            <a routerLink="/datenschutz">{{ ui().privacy }}</a>
+            <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
+            <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
+          </div>
+
+          <nav class="site-footer__socials" [attr.aria-label]="ui().social">
+            <a href="https://www.linkedin.com/in/benjamin-bennewitz-116a12306" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 8.1H3.2V21h3.3V8.1ZM4.8 3A1.9 1.9 0 1 0 4.8 6.8 1.9 1.9 0 0 0 4.8 3ZM21 13.6c0-3.9-2.1-5.8-4.9-5.8-2.3 0-3.3 1.2-3.9 2.1V8.1H8.9V21h3.3v-6.4c0-1.7.3-3.4 2.5-3.4 2.1 0 2.2 2 2.2 3.5V21H21v-7.4Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://www.xing.com/profile/Benjamin_Bennewitz" target="_blank" rel="noopener noreferrer" aria-label="Xing">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.2 6.3c-.3 0-.5.1-.7.4l-2.6 4.6c-.1.2-.1.5 0 .7l1.7 3c.1.3.4.4.7.4h2.4c.5 0 .7-.4.5-.8l-1.7-3 2.6-4.5c.2-.4 0-.8-.5-.8H5.2Zm11-3.3c-.4 0-.6.2-.8.5L9.7 13.6c-.1.2-.1.5 0 .8l3.7 6.1c.2.3.4.5.8.5h2.4c.5 0 .7-.4.5-.8l-3.7-6.2L19 3.8c.2-.4 0-.8-.5-.8h-2.3Z"/></svg>
+              <span>Xing</span>
+            </a>
+            <a href="https://github.com/benjaminBennewitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.1-4.7-5A3.9 3.9 0 0 1 6.8 8.6c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1.1 2.8c0 3.9-2.4 4.7-4.7 5 .4.3.7 1 .7 2V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
+              <span>GitHub</span>
+            </a>
+          </nav>
         </div>
       </section>
 
@@ -73,9 +90,6 @@
     <div class="site-footer__meta">
       <span>© {{ year }} Design. Code. Repeat.</span>
       <a href="mailto:kontakt@design-code-repeat.de">kontakt&#64;design-code-repeat.de</a>
-      <a href="https://www.linkedin.com/in/benjamin-bennewitz/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      <a href="https://www.xing.com/profile/Benjamin_Bennewitz" target="_blank" rel="noopener noreferrer">Xing ↗</a>
-      <a href="https://github.com/benjaminBennewitz" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </div>
   </div>
 </footer>

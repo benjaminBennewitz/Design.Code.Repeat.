@@ -13,7 +13,6 @@ import { ProjectAppModule, ProjectBloodGuideModeKey, ProjectCatalogPage, Project
 import { RevealOnScrollDirective } from '../reference-reveal-on-scroll.directive';
 import { SystemDialogComponent } from '../reference-system-dialog/reference-system-dialog.component';
 import { ProjectTelemetryComponent } from '../reference-project-telemetry/reference-project-telemetry.component';
-import { ReferenceCaseStylesComponent } from './reference-case-styles.component';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 
@@ -68,7 +67,7 @@ interface CatalogLoupeState {
 @Component({
   selector: 'dcr-reference-case-study',
   standalone: true,
-  imports: [RouterLink, RevealOnScrollDirective, SystemDialogComponent, ProjectTelemetryComponent, ReferenceCaseStylesComponent],
+  imports: [RouterLink, RevealOnScrollDirective, SystemDialogComponent, ProjectTelemetryComponent],
   templateUrl: './reference-case-study.component.html',
   styleUrls: [
     './reference-case-study.component.scss',
@@ -135,9 +134,6 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
 
   /** Timeout-ID für das Zurücksetzen der Lightbox-Fade-Phase. */
   private galleryLightboxSwitchTimeoutId: ReturnType<typeof setTimeout> | undefined;
-
-  /** Geplante Animation-Frames für das zuverlässige Zurücksetzen der Detailseiten-Scrollposition. */
-  private readonly projectScrollResetFrameIds: number[] = [];
 
   /** Dauer der ausblendenden Lightbox-Wechselphase in Millisekunden. */
   private readonly galleryLightboxFadeOutDuration = 120;
@@ -319,7 +315,6 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
     this.cancelGalleryLightboxFocusFrame();
     this.galleryLightboxReturnFocus = null;
     this.cancelCatalogMenuFocusFrame();
-    this.clearProjectScrollResetFrames();
   }
 
   /** Setzt den aktuell sichtbaren Architektur-Knoten. */
@@ -1054,7 +1049,10 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
 
   /** Aktualisiert den Slug und setzt Detailseiten-Zustände zurück. */
   private updateSlug(slug: string): void {
-    this.scrollProjectToTop();
+    if (this.slug() === slug) {
+      return;
+    }
+
     this.slug.set(slug);
     this.selectedArchitectureNodeId.set('');
     this.selectedAppModuleId.set('');
@@ -1073,45 +1071,6 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
     this.isCaseNoteVisible.set(true);
   }
 
-
-  /** Setzt die Body-Scrollposition beim Öffnen oder Wechseln einer Case Study zuverlässig zurück. */
-  private scrollProjectToTop(): void {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    this.clearProjectScrollResetFrames();
-
-    const resetScroll = (): void => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
-
-    resetScroll();
-
-    const firstFrameId = window.requestAnimationFrame(() => {
-      resetScroll();
-
-      const secondFrameId = window.requestAnimationFrame(resetScroll);
-      this.projectScrollResetFrameIds.push(secondFrameId);
-    });
-
-    this.projectScrollResetFrameIds.push(firstFrameId);
-  }
-
-  /** Verwirft noch ausstehende Scroll-Reset-Frames bei schnellen Routenwechseln. */
-  private clearProjectScrollResetFrames(): void {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    for (const frameId of this.projectScrollResetFrameIds) {
-      window.cancelAnimationFrame(frameId);
-    }
-
-    this.projectScrollResetFrameIds.length = 0;
-  }
 
   /** Ermittelt den gültigen Katalog-Index für aktuelle Projektdaten. */
   private getNormalizedCatalogSpreadIndex(): number {

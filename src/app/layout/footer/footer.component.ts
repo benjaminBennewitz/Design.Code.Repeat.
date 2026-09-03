@@ -48,6 +48,7 @@ export class FooterComponent {
         process: 'Prozess',
         faq: 'FAQ',
         portfolio: 'Portfolio',
+        social: 'Social',
       }
     : {
         previous: 'Previous footer section',
@@ -62,6 +63,7 @@ export class FooterComponent {
         process: 'Process',
         faq: 'FAQ',
         portfolio: 'Portfolio',
+        social: 'Social',
       });
 
   /** Aktiviert den vorherigen Panel-Index zyklisch. */

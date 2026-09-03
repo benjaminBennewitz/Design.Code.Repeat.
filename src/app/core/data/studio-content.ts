@@ -9,7 +9,13 @@ import { StudioContent, StudioLanguage } from '../models/studio.models';
 const PORTFOLIO_BASE_URL = 'https://b2folio.de';
 
 /** Öffentliche Carly-Managed-Case-Study des DCR-Hosts. */
-const CARLY_MANAGED_CASE_URL = 'https://cases.design-code-repeat.de/carly-managed/auth/login/';
+const CARLY_MANAGED_CASE_URL = 'https://carly-managed-demo.design-code-repeat.de';
+
+/** Öffentliche Globi-Flow-Demo auf dem DCR-Host. */
+const GLOBI_FLOW_CASE_URL = 'https://globi-flow-demo.design-code-repeat.de';
+
+/** Öffentliche Dein-Fußabdruck-Demo auf dem DCR-Host. */
+const FOOTPRINT_CASE_URL = 'https://dein-fussabdruck-demo.design-code-repeat.de';
 
 /** Deutsche Inhalte. */
 const de: StudioContent = {
@@ -502,9 +508,9 @@ const de: StudioContent = {
       summary: 'Interaktive Ökosystem-Simulation, die persönliche Entscheidungen in zeitversetzte, sichtbare Folgen übersetzt und komplexe Zusammenhänge spielerisch erfahrbar macht.',
       stack: ['Angular', 'TypeScript', 'Simulation', 'Motion'],
       details: ['Drei reagierende Ökosysteme', 'Zeitversetzte Folgen statt Sofort-Effekte', 'Vollständig clientseitige Simulation im Browser'],
-      linkHint: 'Die öffentliche Case Study wird aktuell für den DCR-Domainspace vorbereitet.',
-      ctaLabel: 'Demnächst verfügbar',
-      availability: 'coming-soon',
+      linkHint: 'Die öffentliche Demo läuft isoliert im DCR-Domainspace.',
+      ctaLabel: 'Live-Demo öffnen',
+      portfolioUrl: FOOTPRINT_CASE_URL,
     },
     {
       slug: 'globi-flow',
@@ -517,9 +523,9 @@ const de: StudioContent = {
       details: ['OCR-Import, Prüfung und patientengerechte Ergebnisdarstellung', 'Verlauf, Laborwerte und Aufbereitung in einem Produktfluss', 'Fiktive Case Study mit echter fachlicher Business-Logik'],
       image: 'assets/images/projects/globi-flow.webp',
       imageAlt: 'Globi Flow Dashboard mit Statuskarten und Arbeitsübersicht',
-      linkHint: 'Die öffentliche Case Study wird aktuell für den DCR-Domainspace vorbereitet.',
-      ctaLabel: 'Demnächst verfügbar',
-      availability: 'coming-soon',
+      linkHint: 'Die öffentliche Demo läuft isoliert im DCR-Domainspace.',
+      ctaLabel: 'Live-Demo öffnen',
+      portfolioUrl: GLOBI_FLOW_CASE_URL,
     },
     {
       slug: 'design-archive',
@@ -881,8 +887,8 @@ const en: StudioContent = {
   references: [
     { ...de.references[0], type: 'Modular Business Platform', summary: 'Modular intranet with project management, automated order handling, Document Share, admin panel, quality management, complaint management and more on one shared permission and data core.', details: ['Central auth, permissions and data core', 'Multiple business apps inside one connected system', 'Private case study with screenshots instead of a live demo'], linkHint: 'No public live demo: the dedicated DCR page shows structured screenshots and the system logic.', ctaLabel: 'View screenshots' },
     { ...de.references[1], type: 'Project Management', summary: 'Project management app with Kanban, tasks, comments, attachments and live collaboration, plus a playful Tamagotchi-like layer built around the interactive mascot Carly.', details: ['Board, inbox, pool and team views', 'Live sync, comments and attachments directly on each task', 'Carly as an optional mascot-UX and gamification layer'], linkHint: 'The controlled public demo shows Carly Managed with prepared projects and safe test data.', ctaLabel: 'Open live demo' },
-    { ...de.references[2], type: 'Interactive Simulation', summary: 'Interactive ecosystem simulation that turns personal choices into delayed, visible consequences and makes complex relationships tangible through play.', details: ['Three reactive ecosystems', 'Delayed consequences instead of instant effects', 'Fully client-side simulation in the browser'], linkHint: 'The public case study is currently being prepared for the DCR domain space.', ctaLabel: 'Coming soon' },
-    { ...de.references[3], type: 'Fictional Product Case Study', summary: 'Fictional product case study: starting from the question of how blood results can become easier for patients to understand, a custom business logic was designed for OCR import, review, trends and patient-friendly presentation of lab values.', details: ['OCR import, review and patient-friendly result presentation', 'Trends, lab values and interpretation inside one product flow', 'Fictional case study with real business-logic thinking'], linkHint: 'The public case study is currently being prepared for the DCR domain space.', ctaLabel: 'Coming soon' },
+    { ...de.references[2], type: 'Interactive Simulation', summary: 'Interactive ecosystem simulation that turns personal choices into delayed, visible consequences and makes complex relationships tangible through play.', details: ['Three reactive ecosystems', 'Delayed consequences instead of instant effects', 'Fully client-side simulation in the browser'], linkHint: 'The public demo runs in an isolated DCR domain space.', ctaLabel: 'Open live demo' },
+    { ...de.references[3], type: 'Fictional Product Case Study', summary: 'Fictional product case study: starting from the question of how blood results can become easier for patients to understand, a custom business logic was designed for OCR import, review, trends and patient-friendly presentation of lab values.', details: ['OCR import, review and patient-friendly result presentation', 'Trends, lab values and interpretation inside one product flow', 'Fictional case study with real business-logic thinking'], linkHint: 'The public demo runs in an isolated DCR domain space.', ctaLabel: 'Open live demo' },
     { ...de.references[4], type: 'Graphic Design / Editorial', summary: 'Interactive design catalogue presenting editorial work, retouching, compositing and experimental visual pieces from several years.', details: ['Interactive reader instead of a static PDF preview', 'Editorial, retouching and compositing across several years', 'Curated archive with a real WebP gallery'] },
   ],
   deliveredProjects: [
