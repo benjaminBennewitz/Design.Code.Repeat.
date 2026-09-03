@@ -9,7 +9,13 @@ import { StudioContent, StudioLanguage } from '../models/studio.models';
 const PORTFOLIO_BASE_URL = 'https://b2folio.de';
 
 /** Öffentliche Carly-Managed-Case-Study des DCR-Hosts. */
-const CARLY_MANAGED_CASE_URL = 'https://cases.design-code-repeat.de';
+const CARLY_MANAGED_CASE_URL = 'https://carly-managed-demo.design-code-repeat.de';
+
+/** Öffentliche Demo-Domain der Ökosystem-Simulation auf dem DCR-Host. */
+const FOOTPRINT_CASE_URL = 'https://dein-fussabdruck-demo.design-code-repeat.de';
+
+/** Öffentliche Globi-Flow-Demo auf dem DCR-Host. */
+const GLOBI_FLOW_CASE_URL = 'https://globi-flow-demo.design-code-repeat.de';
 
 /** Deutsche Inhalte. */
 const de: StudioContent = {
@@ -500,7 +506,9 @@ const de: StudioContent = {
       summary: 'Interaktive Ökosystem-Simulation, die persönliche Entscheidungen in zeitversetzte, sichtbare Folgen übersetzt und komplexe Zusammenhänge spielerisch erfahrbar macht.',
       stack: ['Angular', 'TypeScript', 'Simulation', 'Motion'],
       details: ['Drei reagierende Ökosysteme', 'Zeitversetzte Folgen statt Sofort-Effekte', 'Vollständig clientseitige Simulation im Browser'],
-      portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/dein-fussabdruck`,
+      linkHint: 'Die öffentliche Demo läuft vollständig clientseitig und isoliert mit lokalen Beispieldaten.',
+      ctaLabel: 'Live-Demo öffnen',
+      portfolioUrl: FOOTPRINT_CASE_URL,
     },
     {
       slug: 'globi-flow',
@@ -513,7 +521,9 @@ const de: StudioContent = {
       details: ['OCR-Import, Prüfung und patientengerechte Ergebnisdarstellung', 'Verlauf, Laborwerte und Aufbereitung in einem Produktfluss', 'Fiktive Case Study mit echter fachlicher Business-Logik'],
       image: 'assets/images/projects/globi-flow.webp',
       imageAlt: 'Globi Flow Dashboard mit Statuskarten und Arbeitsübersicht',
-      portfolioUrl: `${PORTFOLIO_BASE_URL}/projects/blutanalyse`,
+      linkHint: 'Die öffentliche Demo nutzt ausschließlich synthetische Testdaten und bleibt klar als nicht-medizinische Portfolio-Case-Study eingeordnet.',
+      ctaLabel: 'Live-Demo öffnen',
+      portfolioUrl: GLOBI_FLOW_CASE_URL,
     },
     {
       slug: 'design-archive',
