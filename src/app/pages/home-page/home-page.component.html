@@ -163,7 +163,7 @@
       <div #workSticky class="home-references__sticky">
         <div #workTrack class="reference-track" tabindex="0" [attr.aria-label]="content().home.references.title">
           @for (reference of content().references.slice(0, 4); track reference.slug) {
-            <article class="reference-card" [attr.data-accent]="reference.accent">
+            <article class="reference-card" [class.is-coming-soon]="reference.availability === 'coming-soon'" [attr.data-accent]="reference.accent">
               <div class="reference-card__visual">
                 <div class="reference-card__browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>PROJECT / {{ reference.year }}</span></div>
                 @if (reference.image) {
@@ -179,8 +179,23 @@
                 <ul [attr.aria-label]="techStackLabel()">
                   @for (tech of reference.stack; track tech) { <li>{{ tech }}</li> }
                 </ul>
-                <a [href]="reference.portfolioUrl" target="_blank" rel="noopener">{{ content().referencesPage.cta }} <span aria-hidden="true">↗</span></a>
+                @if (reference.availability === 'coming-soon') {
+                  <span class="reference-card__status" aria-disabled="true">{{ content().referencesPage.comingSoonLabel }}</span>
+                } @else if (reference.internalRoute) {
+                  <a [routerLink]="reference.internalRoute">{{ reference.ctaLabel ?? content().referencesPage.cta }} <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+                } @else if (reference.portfolioUrl) {
+                  <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">{{ reference.ctaLabel ?? content().referencesPage.cta }} <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+                }
               </div>
+              @if (reference.availability === 'coming-soon') {
+                <div class="reference-card__availability" aria-hidden="true">
+                  <div class="reference-card__availability-panel">
+                    <span>{{ content().referencesPage.comingSoonEyebrow }}</span>
+                    <strong>{{ content().referencesPage.comingSoonLabel }}</strong>
+                    <small>{{ content().referencesPage.comingSoonText }}</small>
+                  </div>
+                </div>
+              }
             </article>
           }
         </div>

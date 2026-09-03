@@ -68,8 +68,32 @@ describe('STUDIO_TRANSLATIONS', () => {
         (reference) => reference.slug === 'carly-managed',
       );
 
-      expect(carlyManaged?.portfolioUrl).toBe('https://cases.design-code-repeat.de');
+      expect(carlyManaged?.portfolioUrl).toBe('https://cases.design-code-repeat.de/carly-managed/auth/login/');
       expect(carlyManaged?.portfolioUrl).not.toContain('b2folio.de');
+    }
+  });
+
+
+  it('hält nicht veröffentlichte Case Studies ohne ausgehenden Link gesperrt', () => {
+    for (const language of ['de', 'en'] as const) {
+      for (const slug of ['dein-fussabdruck', 'globi-flow']) {
+        const reference = STUDIO_TRANSLATIONS[language].references.find((item) => item.slug === slug);
+
+        expect(reference?.availability).toBe('coming-soon');
+        expect(reference?.portfolioUrl).toBeUndefined();
+        expect(reference?.internalRoute).toBeUndefined();
+      }
+    }
+  });
+
+  it('hält Intranet und Design Archiv vollständig im DCR-Domainspace', () => {
+    for (const language of ['de', 'en'] as const) {
+      const references = STUDIO_TRANSLATIONS[language].references;
+
+      expect(references.find((item) => item.slug === 'intranet')?.internalRoute).toBe('/referenzen/intranet');
+      expect(references.find((item) => item.slug === 'design-archive')?.internalRoute).toBe('/referenzen/design-archiv');
+      expect(references.find((item) => item.slug === 'intranet')?.portfolioUrl).toBeUndefined();
+      expect(references.find((item) => item.slug === 'design-archive')?.portfolioUrl).toBeUndefined();
     }
   });
 

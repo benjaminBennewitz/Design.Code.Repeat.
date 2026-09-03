@@ -76,7 +76,7 @@
   display: block;
   object-fit: cover;
   object-position: top left;
-  filter: saturate(0.86) brightness(0.56) contrast(1.04);
+  filter: saturate(0.94) brightness(0.84) contrast(1.03);
   transition: transform 240ms var(--dcr-ease-out), filter 240ms ease;
 }
 
@@ -86,7 +86,7 @@
 
 .reference-row:is(:hover, :focus-within) .reference-row__visual img {
   transform: scale(1.025);
-  filter: saturate(0.96) brightness(0.68) contrast(1.05);
+  filter: saturate(1.02) brightness(0.94) contrast(1.04);
 }
 
 .reference-row__visual-fallback {
@@ -137,8 +137,13 @@
 .reference-row__visual::after {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.4) 38%, rgba(0, 0, 0, 0.08) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.72));
+    linear-gradient(100deg,
+      color-mix(in srgb, var(--reference-accent) 42%, transparent) 0%,
+      color-mix(in srgb, var(--reference-accent) 18%, transparent) 42%,
+      transparent 78%),
+    linear-gradient(180deg,
+      transparent 46%,
+      color-mix(in srgb, var(--reference-accent) 26%, var(--dcr-color-bg) 24%) 100%);
 }
 
 .reference-row__index {
@@ -668,4 +673,48 @@
   filter: none;
   transform: none;
   transition: none;
+}
+
+.reference-row__availability {
+  position: absolute;
+  z-index: 4;
+  inset: 50% auto auto 50%;
+  display: grid;
+  gap: 0.35rem;
+  width: min(calc(100% - 3rem), 22rem);
+  border: 2px solid var(--reference-accent);
+  padding: 1rem 1.15rem;
+  background: color-mix(in srgb, var(--dcr-color-surface-solid) 86%, var(--reference-accent) 14%);
+  box-shadow: 7px 7px 0 color-mix(in srgb, var(--reference-accent) 46%, transparent);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.reference-row__availability span {
+  color: var(--reference-accent);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reference-row__availability strong {
+  color: var(--dcr-color-text);
+  font-family: var(--dcr-font-display);
+  font-size: clamp(1.35rem, 3vw, 2.3rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.reference-row__status {
+  display: inline-flex;
+  width: fit-content;
+  border: 2px solid var(--reference-accent);
+  padding: 0.5rem 0.7rem;
+  color: var(--dcr-color-text-muted);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }

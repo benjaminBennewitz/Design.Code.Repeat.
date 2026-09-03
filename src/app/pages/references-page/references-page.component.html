@@ -16,7 +16,7 @@
       class="case-study dcr-section dcr-viewport-section dcr-section-flow"
       [attr.data-accent]="reference.accent">
       <div class="dcr-container">
-        <article class="reference-row" data-case-study-card [attr.data-reference]="reference.slug">
+        <article class="reference-row" [class.is-coming-soon]="reference.availability === 'coming-soon'" data-case-study-card [attr.data-reference]="reference.slug">
           <div class="reference-row__visual">
             <span class="reference-row__index" aria-hidden="true">0{{ index + 1 }}</span>
 
@@ -30,6 +30,12 @@
             }
 
             <div class="reference-row__visual-raster" aria-hidden="true"></div>
+            @if (reference.availability === 'coming-soon') {
+              <div class="reference-row__availability" aria-hidden="true">
+                <span>{{ content().referencesPage.comingSoonEyebrow }}</span>
+                <strong>{{ content().referencesPage.comingSoonLabel }}</strong>
+              </div>
+            }
             <div class="reference-row__title-rail" aria-hidden="true">
               <span>{{ reference.type }}</span>
               <strong>{{ reference.name }}</strong>
@@ -54,12 +60,16 @@
             </ul>
             <small>{{ reference.linkHint ?? content().referencesPage.portfolioHint }}</small>
 
-            @if (reference.internalRoute) {
+            @if (reference.availability === 'coming-soon') {
+              <span class="reference-row__status" aria-disabled="true">
+                {{ content().referencesPage.comingSoonLabel }}
+              </span>
+            } @else if (reference.internalRoute) {
               <a [routerLink]="reference.internalRoute">
                 {{ reference.ctaLabel ?? content().referencesPage.cta }}
                 <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
               </a>
-            } @else {
+            } @else if (reference.portfolioUrl) {
               <a [href]="reference.portfolioUrl" target="_blank" rel="noopener noreferrer">
                 {{ reference.ctaLabel ?? content().referencesPage.cta }}
                 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>

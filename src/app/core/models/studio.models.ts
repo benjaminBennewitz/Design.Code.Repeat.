@@ -100,10 +100,12 @@ export interface StudioReference {
   readonly linkHint?: string;
   /** Optionales projektspezifisches CTA-Label für den Link. */
   readonly ctaLabel?: string;
+  /** Veröffentlichungsstatus der Case Study. Fehlender Wert bedeutet verfügbar. */
+  readonly availability?: 'available' | 'coming-soon';
   /** Interne Route, falls die Referenz direkt in der Studio-Seite vertieft wird. */
   readonly internalRoute?: string;
-  /** Externer Portfolio-Link für Live-Demos oder tiefergehende Case Studies. */
-  readonly portfolioUrl: string;
+  /** Externer Link für Live-Demos oder ausgelagerte Case-Study-Anwendungen. */
+  readonly portfolioUrl?: string;
 }
 
 /** Prozessschritt. */
@@ -190,6 +192,9 @@ export interface StudioContent {
     readonly heading: SectionHeadingContent;
     readonly portfolioHint: string;
     readonly cta: string;
+    readonly comingSoonEyebrow: string;
+    readonly comingSoonLabel: string;
+    readonly comingSoonText: string;
     readonly deliveredHeading: SectionHeadingContent;
     readonly deliveredCta: string;
     readonly deliveredAriaLabel: string;

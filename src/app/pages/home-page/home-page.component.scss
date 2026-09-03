@@ -768,3 +768,67 @@
   min-height: clamp(3.5rem, 7vw, 6rem);
   background: var(--dcr-color-bg);
 }
+
+.reference-card {
+  position: relative;
+}
+
+.reference-card__status {
+  width: fit-content;
+  border: 2px solid var(--ref-accent);
+  padding: 0.45rem 0.6rem;
+  color: var(--dcr-color-text-muted);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.reference-card__availability {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  pointer-events: none;
+  background: color-mix(in srgb, var(--dcr-color-bg) 54%, transparent);
+  backdrop-filter: blur(3px) saturate(0.78);
+}
+
+.reference-card__availability-panel {
+  display: grid;
+  gap: 0.45rem;
+  width: min(100%, 29rem);
+  border: 2px solid var(--ref-accent);
+  padding: clamp(1rem, 2.6vw, 1.5rem);
+  background: color-mix(in srgb, var(--dcr-color-surface-solid) 88%, var(--ref-accent) 12%);
+  box-shadow: 8px 8px 0 color-mix(in srgb, var(--ref-accent) 42%, transparent);
+}
+
+.reference-card__availability-panel span,
+.reference-card__availability-panel small {
+  font-family: var(--dcr-font-mono);
+}
+
+.reference-card__availability-panel span {
+  color: var(--ref-accent);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reference-card__availability-panel strong {
+  color: var(--dcr-color-text);
+  font-family: var(--dcr-font-display);
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.reference-card__availability-panel small {
+  color: var(--dcr-color-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
