@@ -57,22 +57,9 @@ export class HomePageComponent {
     effect(() => this.seoService.setPage(this.content().home.seo, '/'));
   }
 
-  /**
-   * Hält das FAQ als exklusives Accordion: Beim Öffnen eines Eintrags werden
-   * alle übrigen Einträge über den zentralen Signalzustand geschlossen.
-   */
-  onFaqToggle(index: number, event: Event): void {
-    const details = event.currentTarget as HTMLDetailsElement | null;
-    if (!details) return;
-
-    if (details.open) {
-      this.openFaqIndex.set(index);
-      return;
-    }
-
-    if (this.openFaqIndex() === index) {
-      this.openFaqIndex.set(-1);
-    }
+  /** Schaltet einen FAQ-Eintrag um und hält das Accordion exklusiv. */
+  toggleFaq(index: number): void {
+    this.openFaqIndex.update((currentIndex) => currentIndex === index ? -1 : index);
   }
 
   /**

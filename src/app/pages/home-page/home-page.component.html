@@ -239,12 +239,30 @@
   
         <div class="faq-list">
           @for (item of content().faq; track item.question; let index = $index) {
-            <details [open]="openFaqIndex() === index" (toggle)="onFaqToggle(index, $event)">
-              <summary><span>0{{ index + 1 }}</span>{{ item.question }}<span class="material-symbols-outlined" aria-hidden="true">add</span></summary>
-              <div class="faq-list__content">
-                <p>{{ item.answer }}</p>
+            <div class="faq-list__item" [class.is-open]="openFaqIndex() === index">
+              <button
+                type="button"
+                class="faq-list__trigger"
+                [id]="'faq-trigger-' + index"
+                [attr.aria-expanded]="openFaqIndex() === index"
+                [attr.aria-controls]="'faq-panel-' + index"
+                (click)="toggleFaq(index)">
+                <span>0{{ index + 1 }}</span>
+                <span>{{ item.question }}</span>
+                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+              </button>
+              <div
+                class="faq-list__content"
+                [class.is-open]="openFaqIndex() === index"
+                [id]="'faq-panel-' + index"
+                role="region"
+                [attr.aria-labelledby]="'faq-trigger-' + index"
+                [attr.aria-hidden]="openFaqIndex() !== index">
+                <div class="faq-list__content-inner">
+                  <p>{{ item.answer }}</p>
+                </div>
               </div>
-            </details>
+            </div>
           }
         </div>
       </div>
