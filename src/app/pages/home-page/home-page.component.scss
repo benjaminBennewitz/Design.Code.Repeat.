@@ -96,6 +96,7 @@
 
 .hosting-strip {
   --dcr-section-text-color: currentColor;
+  --dcr-heading-accent-text: var(--dcr-color-on-lime);
   background: var(--dcr-color-lime);
   color: var(--dcr-color-on-lime);
 }
@@ -108,6 +109,7 @@
 }
 
 .hosting-strip :is(.section-heading__text) { color: inherit; }
+.hosting-strip__mail .dcr-eyebrow { color: var(--dcr-color-contrast-light); }
 
 .hosting-strip__points {
   display: grid;
@@ -145,16 +147,17 @@
 .reference-card {
   --ref-accent: var(--dcr-color-primary);
   --ref-on-accent: var(--dcr-color-on-primary);
+  --ref-accent-text: var(--dcr-color-primary-text);
   display: grid;
   grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.25fr);
   border: 2px solid var(--dcr-color-border-strong);
   overflow: hidden;
   background: var(--dcr-color-surface-solid);
 }
-.reference-card[data-accent='lime'] { --ref-accent: var(--dcr-color-lime); --ref-on-accent: var(--dcr-color-on-lime); }
-.reference-card[data-accent='pink'] { --ref-accent: var(--dcr-color-pink); --ref-on-accent: var(--dcr-color-on-pink); }
-.reference-card[data-accent='violet'] { --ref-accent: var(--dcr-color-violet); --ref-on-accent: var(--dcr-color-on-violet); }
-.reference-card[data-accent='orange'] { --ref-accent: var(--dcr-color-orange); --ref-on-accent: var(--dcr-color-on-orange); }
+.reference-card[data-accent='lime'] { --ref-accent: var(--dcr-color-lime); --ref-accent-text: var(--dcr-color-lime-text); --ref-on-accent: var(--dcr-color-on-lime); }
+.reference-card[data-accent='pink'] { --ref-accent: var(--dcr-color-pink); --ref-accent-text: var(--dcr-color-pink-text); --ref-on-accent: var(--dcr-color-on-pink); }
+.reference-card[data-accent='violet'] { --ref-accent: var(--dcr-color-violet); --ref-accent-text: var(--dcr-color-violet-text); --ref-on-accent: var(--dcr-color-on-violet); }
+.reference-card[data-accent='orange'] { --ref-accent: var(--dcr-color-orange); --ref-accent-text: var(--dcr-color-orange-text); --ref-on-accent: var(--dcr-color-on-orange); }
 
 .reference-card img,
 .reference-card__placeholder {
@@ -220,7 +223,7 @@
   padding: 1.4rem 0;
 }
 .process-list li:last-child { border-bottom: 1px solid var(--dcr-color-border); }
-.process-list__index { color: var(--dcr-color-primary); font-family: var(--dcr-font-display); font-size: 2rem; }
+.process-list__index { color: var(--dcr-color-primary-text); font-family: var(--dcr-font-display); font-size: 2rem; }
 .process-list h3 { margin: 0 0 0.35rem; font-family: var(--dcr-font-display); font-size: 1.5rem; }
 .process-list p { margin: 0; color: var(--dcr-color-text-muted); line-height: 1.55; }
 .process-list code { color: var(--dcr-color-text-muted); font-size: 0.7rem; }
@@ -247,9 +250,32 @@
   list-style: none;
 }
 .faq-list summary::-webkit-details-marker { display: none; }
-.faq-list summary > span:first-child { color: var(--dcr-color-primary); font-family: var(--dcr-font-mono); font-size: 0.7rem; }
+.faq-list summary > span:first-child { color: var(--dcr-color-primary-text); font-family: var(--dcr-font-mono); font-size: 0.7rem; }
+.faq-list summary .material-symbols-outlined { transition: transform 240ms var(--dcr-ease-out); }
 .faq-list details[open] summary .material-symbols-outlined { transform: rotate(45deg); }
-.faq-list p { margin: 0 2rem 1.4rem 3.2rem; color: var(--dcr-color-text-muted); line-height: 1.65; }
+.faq-list__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms var(--dcr-ease-out), opacity 200ms ease;
+}
+.faq-list__content > * {
+  overflow: hidden;
+}
+.faq-list details[open] .faq-list__content {
+  grid-template-rows: 1fr;
+}
+.faq-list p {
+  margin: 0 2rem 1.4rem 3.2rem;
+  opacity: 0;
+  transform: translateY(-0.2rem);
+  color: var(--dcr-color-text-muted);
+  line-height: 1.65;
+  transition: opacity 220ms ease, transform 240ms var(--dcr-ease-out);
+}
+.faq-list details[open] p {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .home-contact {
   background:
@@ -465,7 +491,7 @@
   --dcr-section-bg: color-mix(in srgb, var(--dcr-color-primary) 7%, var(--dcr-color-bg-soft));
   --dcr-section-next-bg: var(--dcr-color-bg);
   --dcr-section-text-color: var(--dcr-color-text-muted);
-  --dcr-heading-accent: var(--dcr-color-primary);
+  --dcr-heading-accent-text: var(--dcr-color-primary-text);
   background: var(--dcr-section-bg);
   color: var(--dcr-color-text);
 }
@@ -499,7 +525,7 @@
   --dcr-section-bg: var(--dcr-color-lime);
   --dcr-section-next-bg: var(--dcr-color-contrast-dark);
   --dcr-section-text-color: var(--dcr-color-on-lime);
-  --dcr-heading-accent: var(--dcr-color-on-lime);
+  --dcr-heading-accent-text: var(--dcr-color-on-lime);
   background:
     radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--dcr-color-on-lime) 12%, transparent) 1px, transparent 1.2px) 0 0 / 14px 14px,
     var(--dcr-section-bg);
@@ -577,7 +603,7 @@
 }
 
 .home-faq .faq-list summary > span:first-child {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
 }
 
 .home-faq .faq-list p {
@@ -812,7 +838,7 @@
 }
 
 .reference-card__availability-panel span {
-  color: var(--ref-accent);
+  color: var(--ref-accent-text);
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.12em;

@@ -241,7 +241,9 @@
           @for (item of content().faq; track item.question; let index = $index) {
             <details [open]="openFaqIndex() === index" (toggle)="onFaqToggle(index, $event)">
               <summary><span>0{{ index + 1 }}</span>{{ item.question }}<span class="material-symbols-outlined" aria-hidden="true">add</span></summary>
-              <p>{{ item.answer }}</p>
+              <div class="faq-list__content">
+                <p>{{ item.answer }}</p>
+              </div>
             </details>
           }
         </div>

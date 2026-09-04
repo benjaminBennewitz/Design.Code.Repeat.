@@ -40,9 +40,9 @@
   white-space: nowrap;
 }
 
-.marquee span:nth-child(3n + 1) { color: var(--dcr-color-primary); }
-.marquee span:nth-child(3n + 2) { color: var(--dcr-color-lime); }
-.marquee span:nth-child(3n) { color: var(--dcr-color-pink); }
+.marquee span:nth-child(3n + 1) { color: var(--dcr-color-primary-text); }
+.marquee span:nth-child(3n + 2) { color: var(--dcr-color-lime-text); }
+.marquee span:nth-child(3n) { color: var(--dcr-color-pink-text); }
 
 .marquee[data-tone='primary'],
 .marquee[data-tone='pink'] {

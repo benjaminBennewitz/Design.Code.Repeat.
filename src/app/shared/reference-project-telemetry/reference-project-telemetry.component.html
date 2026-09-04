@@ -1,7 +1,12 @@
 <!-- src/app/shared/project-telemetry/project-telemetry.component.html -->
 @if (project.telemetry; as telemetry) {
-<section id="project-telemetry" class="project-telemetry" [attr.data-accent]="project.accent" bpReveal>
-  <div class="project-telemetry__shell">
+<section
+  id="project-telemetry"
+  class="project-telemetry"
+  [attr.data-accent]="project.accent"
+  [attr.data-project]="project.slug"
+  bpReveal>
+  <div class="project-telemetry__shell" [class.project-telemetry__shell--archive]="isArchiveTelemetryProject">
     <header class="project-telemetry__head">
       <div>
         <p class="bp-eyebrow">{{ telemetry.eyebrow }}</p>
@@ -12,13 +17,13 @@
         <strong>{{ telemetry.statusValue }}</strong>
         <small>{{ telemetry.source }}</small>
       </div>
-      @if (telemetry.subtitle) {
+      @if (!isArchiveTelemetryProject && telemetry.subtitle) {
       <p>{{ telemetry.subtitle }}</p>
       }
     </header>
 
     <div class="project-telemetry__kpis" [attr.aria-label]="telemetry.kpiAriaLabel">
-      @for (metric of project.metrics.slice(0, 4); track metric.label; let index = $index) {
+      @for (metric of telemetryMetrics; track metric.label; let index = $index) {
       <article class="project-telemetry__kpi" [style.--telemetry-index]="index">
         <span>0{{ index + 1 }}</span>
         <strong>{{ metric.value }}</strong>
@@ -30,6 +35,16 @@
       }
     </div>
 
+    @if (isArchiveTelemetryProject) {
+    <div class="project-telemetry__highlights" aria-label="Archiv-Highlights">
+      @for (highlight of archiveTelemetryHighlights; track highlight; let index = $index) {
+      <article class="project-telemetry__highlight">
+        <span class="project-telemetry__highlight-icon material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+        <h3>{{ highlight }}</h3>
+      </article>
+      }
+    </div>
+    } @else {
     <div class="project-telemetry__charts">
       @for (chart of telemetry.charts; track chart.id; let index = $index) {
       <bp-telemetry-chart
@@ -45,6 +60,7 @@
         [chartId]="project.slug + '-telemetry-' + index" />
       }
     </div>
+    }
   </div>
 </section>
 }

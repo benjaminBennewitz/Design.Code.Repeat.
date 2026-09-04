@@ -8,6 +8,7 @@
   --case-reveal-rotate-y: 24deg;
   --case-reveal-rotate-z: -8deg;
   --reference-on-accent: var(--dcr-color-on-primary);
+  --reference-accent-text: var(--dcr-color-primary-text);
   --dcr-section-bg: var(--dcr-color-bg-soft);
   --dcr-section-next-bg: var(--dcr-color-bg);
   display: grid;
@@ -22,10 +23,10 @@
   --case-reveal-rotate-z: 8deg;
 }
 
-.case-study[data-accent='lime'] { --reference-accent: var(--dcr-color-lime); --reference-on-accent: var(--dcr-color-on-lime); }
-.case-study[data-accent='pink'] { --reference-accent: var(--dcr-color-pink); --reference-on-accent: var(--dcr-color-on-pink); }
-.case-study[data-accent='violet'] { --reference-accent: var(--dcr-color-violet); --reference-on-accent: var(--dcr-color-on-violet); }
-.case-study[data-accent='orange'] { --reference-accent: var(--dcr-color-orange); --reference-on-accent: var(--dcr-color-on-orange); }
+.case-study[data-accent='lime'] { --reference-accent: var(--dcr-color-lime); --reference-accent-text: var(--dcr-color-lime-text); --reference-on-accent: var(--dcr-color-on-lime); }
+.case-study[data-accent='pink'] { --reference-accent: var(--dcr-color-pink); --reference-accent-text: var(--dcr-color-pink-text); --reference-on-accent: var(--dcr-color-on-pink); }
+.case-study[data-accent='violet'] { --reference-accent: var(--dcr-color-violet); --reference-accent-text: var(--dcr-color-violet-text); --reference-on-accent: var(--dcr-color-on-violet); }
+.case-study[data-accent='orange'] { --reference-accent: var(--dcr-color-orange); --reference-accent-text: var(--dcr-color-orange-text); --reference-on-accent: var(--dcr-color-on-orange); }
 
 .reference-row {
   display: grid;
@@ -160,7 +161,7 @@
   left: 1rem;
   border: 1px solid color-mix(in srgb, var(--reference-on-accent) 24%, transparent);
   padding: 0.34rem 0.46rem;
-  background: color-mix(in srgb, var(--reference-accent) 80%, black 20%);
+  background: var(--reference-accent);
   color: var(--reference-on-accent);
   font-family: var(--dcr-font-mono);
   font-size: 0.64rem;
@@ -445,15 +446,6 @@
   padding: clamp(1.3rem, 3vw, 2.2rem);
 }
 
-.delivered-card__index {
-  position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
-  color: color-mix(in srgb, var(--dcr-color-text) 12%, transparent);
-  font-family: var(--dcr-font-display);
-  font-size: clamp(3.5rem, 6vw, 6rem);
-  line-height: 0.8;
-}
 
 .delivered-card__body > p {
   position: relative;
@@ -505,13 +497,27 @@
   gap: 0.5rem;
   align-items: center;
   width: fit-content;
+  padding-bottom: 0.18rem;
+  border-bottom: 2px solid var(--dcr-color-primary);
   color: var(--dcr-color-text);
   font-family: var(--dcr-font-mono);
   font-size: 0.68rem;
   font-weight: 900;
-  text-decoration: underline 2px var(--dcr-color-primary);
-  text-underline-offset: 0.28em;
+  text-decoration: none;
   text-transform: uppercase;
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.delivered-card a .material-symbols-outlined {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.delivered-card a:hover,
+.delivered-card a:focus-visible {
+  color: var(--dcr-color-primary-text);
+  border-bottom-color: var(--dcr-color-primary-text);
+  transform: translateX(2px);
 }
 
 .delivered-projects__end {
@@ -650,7 +656,7 @@
 }
 
 .reference-row__availability span {
-  color: var(--reference-accent);
+  color: var(--reference-accent-text);
   font-family: var(--dcr-font-mono);
   font-size: 0.62rem;
   font-weight: 900;

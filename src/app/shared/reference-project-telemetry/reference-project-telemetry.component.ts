@@ -18,4 +18,19 @@ import { TelemetryChartComponent } from '../reference-telemetry-chart/reference-
 export class ProjectTelemetryComponent {
   /** Projekt inklusive lokalisierter Telemetriedaten. */
   @Input({ required: true }) project!: PortfolioProject;
+
+  /** Archivansicht mit verdichteter Telemetry ohne Charts. */
+  get isArchiveTelemetryProject(): boolean {
+    return this.project.slug === 'grafikdesign-katalog';
+  }
+
+  /** Sichtbare KPI-Karten in der Telemetry. */
+  get telemetryMetrics() {
+    return this.project.metrics.slice(0, 4);
+  }
+
+  /** Verdichtete Highlight-Karten für das Design-Archiv. */
+  get archiveTelemetryHighlights() {
+    return this.project.highlights.slice(0, 4);
+  }
 }

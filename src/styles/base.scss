@@ -90,7 +90,9 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--dcr-color-primary);
+  --dcr-focus-ring-color: var(--dcr-color-primary);
+  outline: var(--dcr-focus-ring-width) solid var(--dcr-focus-ring-color);
+  outline-offset: var(--dcr-focus-ring-offset);
 }
 
 img,

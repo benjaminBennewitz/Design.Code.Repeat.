@@ -51,6 +51,21 @@
   --dcr-color-contrast-dark: #080808;
   --dcr-color-contrast-light: #ffffff;
   --dcr-shadow-hard: 9px 9px 0 color-mix(in srgb, var(--dcr-color-text) 13%, transparent);
+
+  /* Semantische Vordergrundrollen: Akzentfläche und Akzenttext bleiben getrennt steuerbar. */
+  --dcr-color-primary-text: var(--dcr-color-primary);
+  --dcr-color-lime-text: var(--dcr-color-lime);
+  --dcr-color-pink-text: var(--dcr-color-pink);
+  --dcr-color-violet-text: var(--dcr-color-violet);
+  --dcr-color-orange-text: var(--dcr-color-orange);
+  --dcr-color-danger-text: var(--dcr-color-danger);
+  --dcr-color-lime-text-on-dark: var(--dcr-color-lime);
+
+  /* Interaktionsrollen. Komponenten binden diese im lokalen Scope erneut, wenn sie Akzente überschreiben. */
+  --dcr-focus-ring-color: var(--dcr-color-primary);
+  --dcr-focus-ring-width: 3px;
+  --dcr-focus-ring-offset: 4px;
+  --dcr-disabled-opacity: 0.52;
 }
 
 :root,
@@ -70,6 +85,13 @@
   --dcr-color-violet: #9b74ff;
   --dcr-color-orange: #ff9a32;
   --dcr-color-danger: #ff5c7c;
+  --dcr-color-primary-text: #67a2ff;
+  --dcr-color-lime-text: #adff2f;
+  --dcr-color-pink-text: #ff4ca5;
+  --dcr-color-violet-text: #9f79ff;
+  --dcr-color-orange-text: #ff9a32;
+  --dcr-color-danger-text: #ff5c7c;
+  --dcr-color-lime-text-on-dark: #adff2f;
   --dcr-color-on-danger: #080808;
   --dcr-color-on-primary: #080808;
   --dcr-color-on-lime: #080808;
@@ -100,12 +122,19 @@
   --dcr-color-violet: #7246e8;
   --dcr-color-orange: #d96500;
   --dcr-color-danger: #a8002d;
+  --dcr-color-primary-text: #0054d0;
+  --dcr-color-lime-text: #4f6a00;
+  --dcr-color-pink-text: #b81966;
+  --dcr-color-violet-text: #6334d0;
+  --dcr-color-orange-text: #9f4b00;
+  --dcr-color-danger-text: #a8002d;
+  --dcr-color-lime-text-on-dark: #adff2f;
   --dcr-color-on-danger: #ffffff;
   --dcr-color-on-primary: #ffffff;
   --dcr-color-on-lime: #101112;
-  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-pink: #101112;
   --dcr-color-on-violet: #ffffff;
-  --dcr-color-on-orange: #ffffff;
+  --dcr-color-on-orange: #101112;
   --dcr-color-on-surface-strong: #101112;
   --dcr-color-card-hover: var(--dcr-color-primary);
   --dcr-color-on-card-hover: var(--dcr-color-on-primary);
@@ -125,7 +154,7 @@
   --dcr-color-border-strong: rgba(255, 255, 255, 0.82);
   --dcr-color-shadow: rgba(0, 0, 0, 0.78);
   --dcr-color-card-hover: #ffffff;
-  --dcr-color-on-card-hover: #000000;
+  --dcr-color-on-card-hover: #080808;
 }
 
 :root[data-theme='light'][data-contrast='high'] {
@@ -144,6 +173,23 @@
   --dcr-color-pink: #cc79a7;
   --dcr-color-violet: #56b4e9;
   --dcr-color-orange: #f0e442;
+  --dcr-color-lime-text-on-dark: #e69f00;
+}
+
+:root[data-theme='dark'][data-color-vision='deuteranopia'] {
+  --dcr-color-primary-text: #4298c8;
+  --dcr-color-lime-text: #e69f00;
+  --dcr-color-pink-text: #cc79a7;
+  --dcr-color-violet-text: #56b4e9;
+  --dcr-color-orange-text: #f0e442;
+}
+
+:root[data-theme='light'][data-color-vision='deuteranopia'] {
+  --dcr-color-primary-text: #005f95;
+  --dcr-color-lime-text: #805500;
+  --dcr-color-pink-text: #98466f;
+  --dcr-color-violet-text: #216588;
+  --dcr-color-orange-text: #665f00;
 }
 
 :root[data-color-vision='protanopia'] {
@@ -152,6 +198,23 @@
   --dcr-color-pink: #0072b2;
   --dcr-color-violet: #56b4e9;
   --dcr-color-orange: #e69f00;
+  --dcr-color-lime-text-on-dark: #f0e442;
+}
+
+:root[data-theme='dark'][data-color-vision='protanopia'] {
+  --dcr-color-primary-text: #0aa77b;
+  --dcr-color-lime-text: #f0e442;
+  --dcr-color-pink-text: #4298c8;
+  --dcr-color-violet-text: #56b4e9;
+  --dcr-color-orange-text: #e69f00;
+}
+
+:root[data-theme='light'][data-color-vision='protanopia'] {
+  --dcr-color-primary-text: #006a4e;
+  --dcr-color-lime-text: #665f00;
+  --dcr-color-pink-text: #005f95;
+  --dcr-color-violet-text: #216588;
+  --dcr-color-orange-text: #805500;
 }
 
 :root[data-color-vision='tritanopia'] {
@@ -160,6 +223,23 @@
   --dcr-color-pink: #cc79a7;
   --dcr-color-violet: #0072b2;
   --dcr-color-orange: #f0e442;
+  --dcr-color-lime-text-on-dark: #009e73;
+}
+
+:root[data-theme='dark'][data-color-vision='tritanopia'] {
+  --dcr-color-primary-text: #df741f;
+  --dcr-color-lime-text: #0aa77b;
+  --dcr-color-pink-text: #cc79a7;
+  --dcr-color-violet-text: #4298c8;
+  --dcr-color-orange-text: #f0e442;
+}
+
+:root[data-theme='light'][data-color-vision='tritanopia'] {
+  --dcr-color-primary-text: #9f4500;
+  --dcr-color-lime-text: #006a4e;
+  --dcr-color-pink-text: #98466f;
+  --dcr-color-violet-text: #005f95;
+  --dcr-color-orange-text: #665f00;
 }
 
 :root[data-color-vision='achromatopsia'] {
@@ -169,6 +249,13 @@
   --dcr-color-violet: #969696;
   --dcr-color-orange: #737373;
   --dcr-color-danger: #d0d0d0;
+  --dcr-color-primary-text: #f0f0f0;
+  --dcr-color-lime-text: #d4d4d4;
+  --dcr-color-pink-text: #b8b8b8;
+  --dcr-color-violet-text: #a0a0a0;
+  --dcr-color-orange-text: #929292;
+  --dcr-color-danger-text: #d0d0d0;
+  --dcr-color-lime-text-on-dark: #d4d4d4;
 }
 
 :root[data-theme='light'][data-color-vision='achromatopsia'] {
@@ -178,4 +265,117 @@
   --dcr-color-violet: #686868;
   --dcr-color-orange: #7d7d7d;
   --dcr-color-danger: #222222;
+  --dcr-color-primary-text: #101010;
+  --dcr-color-lime-text: #333333;
+  --dcr-color-pink-text: #4f4f4f;
+  --dcr-color-violet-text: #626262;
+  --dcr-color-orange-text: #5f5f5f;
+  --dcr-color-danger-text: #222222;
+  --dcr-color-lime-text-on-dark: #d4d4d4;
+}
+
+
+/* ==========================================================================
+   Static semantic foregrounds
+   ========================================================================== */
+
+/*
+ * Die `on-*`-Tokens sind bewusst statisch definiert. Ihre Werte entsprechen
+ * dem geprüften Live-Golden-Master und ersetzen die frühere Runtime-
+ * Kontrastberechnung. Dadurch bleiben Theme- und Accessibility-Farben
+ * deterministisch und vollständig im Designsystem nachvollziehbar.
+ */
+
+:root[data-theme='dark'][data-color-vision='deuteranopia'] {
+  --dcr-color-on-primary: #f7f2e9;
+}
+
+:root[data-theme='dark'][data-color-vision='protanopia'] {
+  --dcr-color-on-pink: #f7f2e9;
+}
+
+:root[data-theme='dark'][data-color-vision='tritanopia'] {
+  --dcr-color-on-violet: #f7f2e9;
+}
+
+:root[data-theme='dark'][data-color-vision='achromatopsia'] {
+  --dcr-color-on-orange: #ffffff;
+}
+
+:root[data-theme='light'][data-color-vision='deuteranopia'] {
+  --dcr-color-on-violet: #101112;
+}
+
+:root[data-theme='light'][data-color-vision='protanopia'] {
+  --dcr-color-on-primary: #101112;
+  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-violet: #101112;
+  --dcr-color-on-card-hover: #101112;
+}
+
+:root[data-theme='light'][data-color-vision='tritanopia'] {
+  --dcr-color-on-primary: #101112;
+  --dcr-color-on-violet: #ffffff;
+  --dcr-color-on-card-hover: #101112;
+}
+
+:root[data-theme='light'][data-color-vision='achromatopsia'] {
+  --dcr-color-on-primary: #ffffff;
+  --dcr-color-on-lime: #ffffff;
+  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-violet: #ffffff;
+  --dcr-color-on-orange: #101112;
+  --dcr-color-on-card-hover: #ffffff;
+}
+
+:root[data-theme='dark'][data-contrast='high'] {
+  --dcr-color-on-surface-strong: #ffffff;
+  --dcr-color-on-card-hover: #080808;
+}
+
+:root[data-theme='dark'][data-contrast='high'][data-color-vision='deuteranopia'] {
+  --dcr-color-on-primary: #ffffff;
+}
+
+:root[data-theme='dark'][data-contrast='high'][data-color-vision='protanopia'] {
+  --dcr-color-on-pink: #ffffff;
+}
+
+:root[data-theme='dark'][data-contrast='high'][data-color-vision='tritanopia'] {
+  --dcr-color-on-violet: #ffffff;
+}
+
+:root[data-theme='light'][data-contrast='high'] {
+  --dcr-color-on-primary: #ffffff;
+  --dcr-color-on-lime: #050505;
+  --dcr-color-on-pink: #050505;
+  --dcr-color-on-violet: #ffffff;
+  --dcr-color-on-orange: #050505;
+  --dcr-color-on-danger: #ffffff;
+  --dcr-color-on-surface-strong: #050505;
+  --dcr-color-on-card-hover: #ffffff;
+  --dcr-color-on-neutral-panel: #050505;
+}
+
+:root[data-theme='light'][data-contrast='high'][data-color-vision='deuteranopia'] {
+  --dcr-color-on-violet: #050505;
+}
+
+:root[data-theme='light'][data-contrast='high'][data-color-vision='protanopia'] {
+  --dcr-color-on-primary: #050505;
+  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-violet: #050505;
+}
+
+:root[data-theme='light'][data-contrast='high'][data-color-vision='tritanopia'] {
+  --dcr-color-on-primary: #050505;
+  --dcr-color-on-violet: #ffffff;
+}
+
+:root[data-theme='light'][data-contrast='high'][data-color-vision='achromatopsia'] {
+  --dcr-color-on-primary: #ffffff;
+  --dcr-color-on-lime: #ffffff;
+  --dcr-color-on-pink: #ffffff;
+  --dcr-color-on-violet: #ffffff;
+  --dcr-color-on-orange: #050505;
 }

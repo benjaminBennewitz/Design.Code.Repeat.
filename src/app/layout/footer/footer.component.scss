@@ -55,10 +55,10 @@
   width: 2.8rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 2px solid var(--dcr-color-lime);
+  border: 2px solid var(--dcr-color-lime-text-on-dark);
   border-radius: 50%;
   background: transparent;
-  color: var(--dcr-color-lime);
+  color: var(--dcr-color-lime-text-on-dark);
   cursor: pointer;
   transition: transform 160ms var(--dcr-ease-out), background 160ms ease, color 160ms ease;
 }

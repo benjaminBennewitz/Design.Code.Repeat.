@@ -61,7 +61,7 @@ html:has(dcr-studio-page) {
 
 .dcr-eyebrow {
   margin: 0;
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
   font-family: var(--dcr-font-mono);
   font-size: 0.7rem;
   font-weight: 900;
@@ -70,17 +70,28 @@ html:has(dcr-studio-page) {
 }
 
 .dcr-button {
+  --dcr-action-bg: var(--dcr-color-surface-solid);
+  --dcr-action-fg: var(--dcr-color-text);
+  --dcr-action-border: var(--dcr-color-border-strong);
+  --dcr-action-hover-bg: var(--dcr-action-bg);
+  --dcr-action-hover-fg: var(--dcr-action-fg);
+  --dcr-action-hover-border: var(--dcr-action-border);
+  --dcr-action-focus-bg: var(--dcr-action-hover-bg);
+  --dcr-action-focus-fg: var(--dcr-action-hover-fg);
+  --dcr-action-focus-border: var(--dcr-action-hover-border);
+  --dcr-action-active-bg: var(--dcr-action-hover-bg);
+  --dcr-action-active-fg: var(--dcr-action-hover-fg);
   display: inline-flex;
   gap: 0.6rem;
   align-items: center;
   justify-content: center;
   width: fit-content;
   min-height: 3rem;
-  border: 2px solid var(--dcr-color-border-strong);
+  border: 2px solid var(--dcr-action-border);
   border-radius: 0;
   padding: 0.75rem 1rem;
-  background: var(--dcr-color-surface-solid);
-  color: var(--dcr-color-text);
+  background: var(--dcr-action-bg);
+  color: var(--dcr-action-fg);
   font-family: var(--dcr-font-mono);
   font-size: 0.7rem;
   font-weight: 900;
@@ -91,6 +102,23 @@ html:has(dcr-studio-page) {
   transition: transform 160ms var(--dcr-ease-out), box-shadow 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
+.dcr-button:hover {
+  border-color: var(--dcr-action-hover-border);
+  background: var(--dcr-action-hover-bg);
+  color: var(--dcr-action-hover-fg);
+}
+
+.dcr-button:focus-visible {
+  border-color: var(--dcr-action-focus-border);
+  background: var(--dcr-action-focus-bg);
+  color: var(--dcr-action-focus-fg);
+}
+
+.dcr-button:active:not(:disabled) {
+  background: var(--dcr-action-active-bg);
+  color: var(--dcr-action-active-fg);
+}
+
 .dcr-button:hover,
 .dcr-button:focus-visible {
   transform: translate(-2px, -2px);
@@ -98,25 +126,34 @@ html:has(dcr-studio-page) {
 }
 
 .dcr-button--primary {
-  border-color: var(--dcr-color-primary);
-  background: var(--dcr-color-primary);
-  color: var(--dcr-color-on-primary);
+  --dcr-action-bg: var(--dcr-color-primary);
+  --dcr-action-fg: var(--dcr-color-on-primary);
+  --dcr-action-border: var(--dcr-color-primary);
+  --dcr-action-hover-bg: var(--dcr-color-primary);
+  --dcr-action-hover-fg: var(--dcr-color-on-primary);
+  --dcr-action-hover-border: var(--dcr-color-primary);
 }
 
 .dcr-button--ghost {
-  background: transparent;
+  --dcr-action-bg: transparent;
 }
 
 .dcr-button--dark {
-  border-color: var(--dcr-color-contrast-dark);
-  background: var(--dcr-color-contrast-dark);
-  color: var(--dcr-color-contrast-light);
+  --dcr-action-bg: var(--dcr-color-contrast-dark);
+  --dcr-action-fg: var(--dcr-color-contrast-light);
+  --dcr-action-border: var(--dcr-color-contrast-dark);
+  --dcr-action-hover-bg: var(--dcr-color-contrast-dark);
+  --dcr-action-hover-fg: var(--dcr-color-contrast-light);
+  --dcr-action-hover-border: var(--dcr-color-contrast-dark);
 }
 
 .dcr-button--accent {
-  border-color: var(--dcr-color-lime);
-  background: var(--dcr-color-lime);
-  color: var(--dcr-color-on-lime);
+  --dcr-action-bg: var(--dcr-color-lime);
+  --dcr-action-fg: var(--dcr-color-on-lime);
+  --dcr-action-border: var(--dcr-color-lime);
+  --dcr-action-hover-bg: var(--dcr-color-lime);
+  --dcr-action-hover-fg: var(--dcr-color-on-lime);
+  --dcr-action-hover-border: var(--dcr-color-lime);
 }
 
 .dcr-button--small {
@@ -126,7 +163,7 @@ html:has(dcr-studio-page) {
 }
 
 .dcr-button:disabled {
-  opacity: 0.52;
+  opacity: var(--dcr-disabled-opacity);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;

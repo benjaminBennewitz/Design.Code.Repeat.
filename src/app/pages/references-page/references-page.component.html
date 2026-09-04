@@ -94,7 +94,7 @@
         class="delivered-projects__track"
         tabindex="0"
         [attr.aria-label]="horizontalHint()">
-        @for (project of content().deliveredProjects; track project.name; let index = $index) {
+        @for (project of content().deliveredProjects; track project.name) {
           <article class="delivered-card">
             <div class="delivered-card__preview">
               <div class="delivered-card__browser" aria-hidden="true">
@@ -112,7 +112,6 @@
             </div>
 
             <div class="delivered-card__body">
-              <div class="delivered-card__index" aria-hidden="true">0{{ index + 1 }}</div>
               <p>{{ project.label }}</p>
               <h2>{{ project.name }}</h2>
               <ul [attr.aria-label]="techStackLabel()">

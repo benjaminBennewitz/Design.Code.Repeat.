@@ -87,12 +87,12 @@
   align-items: end;
   width: fit-content;
   margin-left: auto;
-  border-bottom: 2px solid var(--dcr-color-lime);
+  border-bottom: 2px solid var(--dcr-color-primary);
   padding-bottom: 0.4rem;
 }
 
 .studio-hero__badge span {
-  color: var(--dcr-color-lime);
+  color: var(--dcr-color-primary);
   font-family: var(--dcr-font-display);
   font-size: clamp(4rem, 8vw, 8rem);
   line-height: 0.68;
@@ -104,6 +104,10 @@
   font-family: var(--dcr-font-mono);
   font-size: 0.58rem;
   writing-mode: vertical-rl;
+}
+
+.studio-hero .dcr-eyebrow {
+  color: var(--dcr-color-primary);
 }
 
 .studio-intro {
@@ -141,7 +145,7 @@
 .studio-intro__identity {
   position: relative;
   isolation: isolate;
-  min-height: min(64vh, 39rem);
+  min-height: min(66vh, 42rem);
   overflow: hidden;
   border: 2px solid var(--dcr-color-contrast-dark);
   background: var(--dcr-color-contrast-dark);
@@ -191,13 +195,16 @@
 
 .studio-intro__portrait {
   position: absolute;
-  right: 6%;
-  bottom: 4%;
+  right: clamp(-1rem, -1vw, -0.25rem);
+  bottom: 0;
   z-index: 2;
-  width: clamp(7rem, 12vw, 11rem);
+  width: clamp(17rem, 72%, 30rem);
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(12px 14px 0 color-mix(in srgb, var(--dcr-color-lime) 34%, transparent));
-  transform: rotate(5deg);
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(14px 16px 0 color-mix(in srgb, var(--dcr-color-lime) 38%, transparent));
+  transform: rotate(4deg);
   transition: transform 300ms var(--dcr-ease-out);
 }
 
@@ -391,6 +398,10 @@
   --dcr-color-on-surface-strong: var(--dcr-color-contrast-light);
 }
 
+:host-context(:root[data-theme='light']) .studio-hero__badge small {
+  color: color-mix(in srgb, var(--dcr-color-contrast-dark) 72%, var(--dcr-color-contrast-light));
+}
+
 :host-context(:root[data-theme='light']) .studio-hero__signals span {
   border-color: var(--dcr-color-contrast-dark);
   background: var(--dcr-color-contrast-dark);
@@ -445,14 +456,14 @@
 
 @media (max-width: 900px) {
   .studio-intro__portrait {
-    right: 8%;
-    width: clamp(6rem, 20vw, 9rem);
+    right: 2%;
+    width: clamp(14rem, 68%, 24rem);
   }
 }
 
 @media (max-width: 560px) {
   .studio-intro__identity {
-    min-height: 20rem;
+    min-height: 22rem;
   }
 
   .studio-intro__statement {

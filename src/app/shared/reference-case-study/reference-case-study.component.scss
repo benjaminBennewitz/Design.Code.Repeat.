@@ -46,6 +46,7 @@
 
 .project-detail {
   --project-detail-icon-fg: #101010;
+  --project-detail-hero-tag-fg: #000000;
   --project-detail-hero-bg: #08090d;
   --project-detail-hero-panel: rgba(20, 22, 28, 0.86);
   --project-detail-ink: #f6f0e8;
@@ -56,6 +57,7 @@
 
 .project-detail[data-project='blutanalyse'] {
   --bp-color-accent: #ff4d63;
+  --bp-color-accent-text: #ff4d63;
   --bp-color-on-accent: #101010;
   --project-detail-blood-ok: #3ff2a0;
   --project-detail-blood-watch: #ffd166;
@@ -67,6 +69,7 @@
 :host-context(:root[data-theme='light']) .project-detail[data-project='blutanalyse'],
 :host-context([data-theme='light']) .project-detail[data-project='blutanalyse'] {
   --bp-color-accent: #cc3045;
+  --bp-color-accent-text: #cc3045;
   --bp-color-on-accent: #fffaf1;
   --project-detail-blood-ok: #087f5b;
   --project-detail-blood-watch: #9a5f00;
@@ -89,11 +92,18 @@
 :host-context(:root[data-color-vision='achromatopsia']) .project-detail[data-project='blutanalyse'],
 :host-context([data-color-vision='achromatopsia']) .project-detail[data-project='blutanalyse'] {
   --bp-color-accent: #f0f0f0;
+  --bp-color-accent-text: #f0f0f0;
 }
 
 :root[data-theme='light'][data-color-vision='achromatopsia'] .project-detail[data-project='blutanalyse'],
 :host-context([data-theme='light'][data-color-vision='achromatopsia']) .project-detail[data-project='blutanalyse'] {
   --bp-color-accent: #101010;
+  --bp-color-accent-text: #101010;
+}
+
+:root[data-theme='light'][data-color-vision='achromatopsia'] .project-detail:not([data-project='kanban-klon']):not([data-project='grafikdesign-katalog']),
+:host-context([data-theme='light'][data-color-vision='achromatopsia']) .project-detail:not([data-project='kanban-klon']):not([data-project='grafikdesign-katalog']) {
+  --project-detail-hero-tag-fg: #ffffff;
 }
 
 /* ========================================================================== 
@@ -345,7 +355,7 @@
 
 .project-detail__app-focus p {
   margin: 0 0 0.45rem;
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-family: var(--bp-font-mono);
   font-size: 0.68rem;
   font-weight: 950;
@@ -689,7 +699,7 @@
 }
 
 .project-detail__meta dt {
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-family: var(--bp-font-mono);
   font-size: 0.76rem;
   font-weight: 900;
@@ -1317,6 +1327,31 @@
   margin-top: 0.08rem;
   color: var(--bp-color-accent);
   font-size: 1.05rem;
+}
+
+.project-detail[data-project='intranet'] .project-detail__presentation-note-inner {
+  width: min(100%, 760px);
+}
+
+.project-detail[data-project='intranet'] .project-detail__presentation-note-text {
+  font-size: clamp(0.81rem, 0.9vw, 0.9rem);
+}
+
+.project-detail[data-project='intranet'] .project-detail__presentation-note.bp-reveal .project-detail__presentation-note-text,
+.project-detail[data-project='intranet'] .project-detail__presentation-note.bp-reveal .project-detail__presentation-note-inner > div {
+  opacity: 0;
+  transform: translateX(-1.15rem);
+}
+
+.project-detail[data-project='intranet'] .project-detail__presentation-note.bp-reveal--visible .project-detail__presentation-note-text,
+.project-detail[data-project='intranet'] .project-detail__presentation-note.bp-reveal--visible .project-detail__presentation-note-inner > div {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 360ms ease, transform 520ms var(--bp-ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.project-detail[data-project='intranet'] .project-detail__presentation-note.bp-reveal--visible .project-detail__presentation-note-text {
+  transition-delay: 90ms;
 }
 
 .project-detail__live-access {
@@ -1961,7 +1996,7 @@
   border-color: transparent;
   padding: 0.42rem 0.66rem;
   background: color-mix(in srgb, var(--bp-color-accent) 86%, white 14%);
-  color: #101010;
+  color: var(--project-detail-hero-tag-fg);
   box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 20%, transparent);
   transition: border-color 170ms ease, background-color 170ms ease, color 170ms ease, transform 170ms var(--bp-ease-out), box-shadow 170ms ease;
 }
@@ -1983,7 +2018,7 @@
 .project-detail__hero-tags li:hover,
 .project-detail__hero-tags li:focus-within {
   border-color: transparent;
-  color: #101010;
+  color: var(--project-detail-hero-tag-fg);
   box-shadow: 0 14px 34px color-mix(in srgb, var(--bp-color-accent), transparent 76%);
   transform: translateY(-2px);
 }
@@ -1999,23 +2034,6 @@
   animation: project-detail-copy-in 720ms var(--bp-ease-out) 320ms both;
 }
 
-.project-detail__hero-actions .bp-button:hover,
-.project-detail__hero-actions .bp-button:focus-visible,
-.project-detail__hero-actions .bp-button:hover > *,
-.project-detail__hero-actions .bp-button:focus-visible > * {
-  color: #111111 !important;
-}
-
-:root[data-theme='light'] .project-detail__hero-actions .bp-button:hover,
-:root[data-theme='light'] .project-detail__hero-actions .bp-button:focus-visible,
-:root[data-theme='light'] .project-detail__hero-actions .bp-button:hover > *,
-:root[data-theme='light'] .project-detail__hero-actions .bp-button:focus-visible > *,
-:host-context(:root[data-theme='light']) .project-detail__hero-actions .bp-button:hover,
-:host-context(:root[data-theme='light']) .project-detail__hero-actions .bp-button:focus-visible,
-:host-context(:root[data-theme='light']) .project-detail__hero-actions .bp-button:hover > *,
-:host-context(:root[data-theme='light']) .project-detail__hero-actions .bp-button:focus-visible > * {
-  color: #f6f0e8 !important;
-}
 
 .project-detail__hero-stage {
   min-height: clamp(380px, 45vw, 500px);
@@ -2185,7 +2203,7 @@
 .project-detail__stack-dots button.is-active {
   border-color: var(--project-detail-blue);
   background: var(--project-detail-blue);
-  color: #101010;
+  color: var(--bp-color-on-accent);
   transform: translateY(-1px);
 }
 

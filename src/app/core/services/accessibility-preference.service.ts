@@ -5,7 +5,6 @@
 
 import { DOCUMENT } from '@angular/common';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { ThemeContrastService } from './theme-contrast.service';
 
 /** Verfügbare Bewegungsstufen. */
 export type MotionMode = 'full' | 'reduced' | 'off';
@@ -36,9 +35,6 @@ export class AccessibilityPreferenceService {
   /** Browser-Dokument für Data-Attribute und sichere Window-Auflösung. */
   private readonly document = inject(DOCUMENT);
 
-  /** Berechnet semantische Vordergrundfarben nach Kontrast-/Farbsehwechseln neu. */
-  private readonly themeContrastService = inject(ThemeContrastService);
-
   /** Interner Zustand der Accessibility-Einstellungen. */
   private readonly preferencesSignal = signal<AccessibilityPreferences>(this.readInitialPreferences());
 
@@ -66,7 +62,7 @@ export class AccessibilityPreferenceService {
   /** True, wenn die Oberfläche bewusst visuell ruhiger dargestellt werden soll. */
   readonly usesSimpleMode = computed<boolean>(() => this.comfortMode() === 'simple');
 
-  /** Synchronisiert Präferenzen mit CSS, Kontrastberechnung und LocalStorage. */
+  /** Synchronisiert Präferenzen mit CSS und LocalStorage. */
   constructor() {
     effect(() => {
       const preferences = this.preferences();
@@ -77,7 +73,6 @@ export class AccessibilityPreferenceService {
       root.dataset['contrast'] = preferences.contrast;
       root.dataset['colorVision'] = preferences.colorVision;
 
-      queueMicrotask(() => this.themeContrastService.refresh());
       this.writePreferences(preferences);
     });
   }

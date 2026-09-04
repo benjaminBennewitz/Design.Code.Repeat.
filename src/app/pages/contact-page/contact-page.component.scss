@@ -38,7 +38,7 @@
 
 .contact-page__direct h2 { margin: 0 0 0.5rem; font-size: 1rem; }
 .contact-page__direct p { margin: 0 0 0.6rem; color: var(--dcr-color-text-muted); font-size: 0.82rem; line-height: 1.55; }
-.contact-page__direct a { color: var(--dcr-color-primary); font-family: var(--dcr-font-mono); font-size: 0.72rem; font-weight: 900; }
+.contact-page__direct a { color: var(--dcr-color-primary-text); font-family: var(--dcr-font-mono); font-size: 0.72rem; font-weight: 900; }
 
 @media (max-width: 900px) {
   .contact-page__layout { grid-template-columns: 1fr; align-items: start; }

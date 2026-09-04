@@ -43,7 +43,9 @@ body.bp-lightbox-open {
 
 .project-detail[data-project='grafikdesign-katalog'] {
   --bp-color-accent: #ff4fd8;
+  --bp-color-accent-text: #ff4fd8;
   --bp-color-on-accent: #160014;
+  --project-detail-hero-tag-fg: #160014;
   --project-detail-catalog-paper: #fff8ec;
   --project-detail-catalog-ink: #19131a;
   --project-detail-catalog-muted: rgba(25, 19, 26, 0.66);
@@ -57,7 +59,9 @@ body.bp-lightbox-open {
 :host-context(:root[data-theme='light']) .project-detail[data-project='grafikdesign-katalog'],
 :host-context([data-theme='light']) .project-detail[data-project='grafikdesign-katalog'] {
   --bp-color-accent: #b8188f;
+  --bp-color-accent-text: #b8188f;
   --bp-color-on-accent: #fff8ec;
+  --project-detail-hero-tag-fg: #fff8ec;
   --project-detail-catalog-paper: #fffaf2;
   --project-detail-catalog-ink: #1b1521;
   --project-detail-catalog-muted: rgba(27, 21, 33, 0.7);
@@ -642,7 +646,7 @@ body.bp-lightbox-open {
   place-items: center;
   border-radius: 50%;
   background: color-mix(in srgb, var(--bp-color-accent), transparent 82%);
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-weight: 900;
 }
 
@@ -695,7 +699,7 @@ body.bp-lightbox-open {
   place-items: center;
   border-radius: 50%;
   background: color-mix(in srgb, var(--bp-color-accent), transparent 82%);
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-weight: 900;
 }
 
@@ -1104,7 +1108,7 @@ body.bp-lightbox-open {
 }
 
 .project-detail__masonry-placeholder .material-symbols-outlined {
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-size: clamp(2.4rem, 6vw, 4.4rem);
 }
 
@@ -1240,7 +1244,7 @@ body.bp-lightbox-open {
 }
 
 .project-detail__lightbox-placeholder .material-symbols-outlined {
-  color: var(--bp-color-accent);
+  color: var(--bp-color-accent-text);
   font-size: clamp(3rem, 8vw, 6rem);
 }
 

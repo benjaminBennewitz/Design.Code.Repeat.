@@ -64,7 +64,7 @@
 
 .services-hero__jump:hover,
 .services-hero__jump:focus-visible {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
 }
 
 .services-hero__note {
@@ -80,7 +80,7 @@
 
 .services-hero__visual {
   --services-shader-back: var(--dcr-color-contrast-dark);
-  --services-shader-front: var(--dcr-color-pink);
+  --services-shader-front: var(--dcr-color-pink-text);
   position: absolute;
   z-index: 1;
   top: 0;
@@ -95,7 +95,7 @@
 
 :host-context(:root[data-theme='light']) .services-hero__visual {
   --services-shader-back: var(--dcr-color-bg-soft);
-  --services-shader-front: var(--dcr-color-primary);
+  --services-shader-front: var(--dcr-color-primary-text);
 }
 
 .services-hero__shader {
@@ -214,7 +214,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  color: color-mix(in srgb, var(--dcr-color-text) 16%, transparent);
+  color: color-mix(in srgb, var(--dcr-color-text) 44%, transparent);
   font-family: var(--dcr-font-display);
   font-size: clamp(2.6rem, 4vw, 4.4rem);
   line-height: 0.8;
@@ -223,7 +223,7 @@
 }
 
 .service-offer--featured .service-offer__index {
-  color: color-mix(in srgb, var(--dcr-color-on-primary) 18%, transparent);
+  color: color-mix(in srgb, var(--dcr-color-on-primary) 44%, transparent);
 }
 
 .service-offer__badge {
@@ -263,7 +263,7 @@
 }
 
 .service-offer__price {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
   font-family: var(--dcr-font-mono);
   font-size: clamp(1.2rem, 1.8vw, 1.55rem);
   letter-spacing: -0.02em;
@@ -288,7 +288,7 @@
 }
 
 .service-offer--featured .service-offer__description {
-  color: color-mix(in srgb, var(--dcr-color-on-primary) 86%, transparent);
+  color: var(--dcr-color-on-primary);
 }
 
 .service-offer__command {
@@ -325,7 +325,7 @@
 }
 
 .service-offer__details li .material-symbols-outlined {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
   font-size: 1rem;
 }
 
@@ -341,7 +341,7 @@
 }
 
 .service-offer--featured .service-offer__quality {
-  color: color-mix(in srgb, var(--dcr-color-on-primary) 88%, transparent);
+  color: var(--dcr-color-on-primary);
 }
 
 .service-offer dcr-action-button {
@@ -639,6 +639,7 @@
 .ops-section {
   --dcr-section-bg: var(--services-transition-color);
   --dcr-section-text-color: var(--services-transition-on-color);
+  --dcr-heading-accent-text: var(--services-transition-on-color);
   --dcr-section-next-bg: var(--dcr-color-contrast-dark);
   color: var(--services-transition-on-color);
   padding-top: calc(var(--dcr-section-y) * 2);
@@ -656,6 +657,7 @@
     var(--dcr-color-contrast-dark) 100%
   );
 }
+
 
 .ops-section__layout {
   display: grid;

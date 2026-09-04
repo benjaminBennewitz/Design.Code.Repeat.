@@ -67,7 +67,7 @@
 }
 
 .access-panel__status strong {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
   text-transform: uppercase;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .access-panel__head p {
-  color: var(--dcr-color-primary);
+  color: var(--dcr-color-primary-text);
   font-family: var(--dcr-font-mono);
   font-size: 0.7rem;
   font-weight: 900;

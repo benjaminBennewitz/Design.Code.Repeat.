@@ -6,6 +6,55 @@
 ng serve --port 4333
 ```
 
+## Lokale Tools und Audits
+
+Lokale Analyse-, Audit- und Einmal-Tools liegen unter:
+
+```txt
+tools\
+```
+
+Der komplette Ordner ist bewusst ueber `.gitignore` ausgeschlossen. Produktionsrelevante Automatisierung bleibt dagegen unter `scripts/` versioniert.
+
+### Color- und Kontrast-Audit
+
+Der Browser-Audit liest die tatsaechlich gerenderten Farben, Design-Tokens, Textkontraste und Interaktionszustände der DCR-Seite aus. Er wird insbesondere genutzt, um Dark/Light, High Contrast und die Farbseh-Modi gegen das statische Designsystem zu pruefen.
+
+Einmalige Einrichtung:
+
+```cmd
+cd tools\color-audit
+setup-color-audit.cmd
+```
+
+Schneller Smoke-Test gegen die Live-Seite:
+
+```cmd
+.venv\Scripts\python.exe audit_colors.py --base-url https://design-code-repeat.de --profile baseline --route /referenzen --route /datenschutz
+```
+
+Vollstaendiger Live-Audit:
+
+```cmd
+.venv\Scripts\python.exe audit_colors.py --base-url https://design-code-repeat.de
+```
+
+Lokaler Voll-Audit bei Dev-Server auf Port `4333`:
+
+```cmd
+ng serve --port 4333
+cd tools\color-audit
+.venv\Scripts\python.exe audit_colors.py --base-url http://localhost:4333
+```
+
+Die Reports werden unter folgendem Pfad erzeugt:
+
+```txt
+tools\color-audit\output\YYYYMMDD-HHMMSS\
+```
+
+Wichtige Dateien sind `report.html`, `audit.json`, `contrast.csv`, `state-contrast.csv`, `states.csv` und `tokens.json`.
+
 ## Production-Build fuer KeyHelp-Deployment
 
 ```cmd

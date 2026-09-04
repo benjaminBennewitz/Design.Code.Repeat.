@@ -49,15 +49,15 @@
 
 .site-header nav { position: relative; z-index: 1; display: grid; align-content: center; min-width: min(70vw, 72rem); }
 .site-header nav a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; gap: 1rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent); padding: 0.14em 0; color: inherit; font-family: var(--dcr-font-display); font-size: clamp(2.5rem, min(6vw, 9vh), 6.5rem); line-height: 0.9; letter-spacing: -0.065em; text-decoration: none; }
-.site-header nav a small { align-self: start; margin-top: 0.5em; color: var(--dcr-color-lime); font: 800 0.58rem/1 var(--dcr-font-mono); letter-spacing: 0; }
+.site-header nav a small { align-self: start; margin-top: 0.5em; color: var(--dcr-color-lime-text-on-dark); font: 800 0.58rem/1 var(--dcr-font-mono); letter-spacing: 0; }
 .site-header nav a > span { transform: translateX(0); transition: transform 280ms var(--dcr-ease-out); }
 .site-header nav a b { font-family: var(--dcr-font-body); font-size: 0.35em; font-weight: 400; opacity: 0; transform: translate(-0.8rem, 0.8rem); transition: opacity 180ms ease, transform 280ms var(--dcr-ease-out); }
-.site-header nav a:hover, .site-header nav a:focus-visible, .site-header nav a.is-active { color: var(--dcr-color-lime); }
+.site-header nav a:hover, .site-header nav a:focus-visible, .site-header nav a.is-active { color: var(--dcr-color-lime-text-on-dark); }
 .site-header nav a:hover > span, .site-header nav a:focus-visible > span, .site-header nav a.is-active > span { transform: translateX(0.2em); }
 .site-header nav a:hover b, .site-header nav a:focus-visible b, .site-header nav a.is-active b { opacity: 1; transform: none; }
 
 .site-header__menu-aside { position: relative; z-index: 1; display: grid; gap: 0.65rem; align-content: end; padding-bottom: clamp(1rem, 4vh, 3rem); color: color-mix(in srgb, currentColor 58%, transparent); font: 800 0.56rem/1.45 var(--dcr-font-mono); letter-spacing: 0.1em; }
-.site-header__menu-aside strong { color: var(--dcr-color-lime); font-size: clamp(0.8rem, 1vw, 1rem); line-height: 1.4; }
+.site-header__menu-aside strong { color: var(--dcr-color-lime-text-on-dark); font-size: clamp(0.8rem, 1vw, 1rem); line-height: 1.4; }
 
 .site-header__menu-tools {
   position: relative;

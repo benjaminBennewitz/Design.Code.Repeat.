@@ -226,6 +226,9 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
   /** Ausgewähltes Projekt passend zum Route-Slug. */
   readonly project = computed(() => REFERENCE_CASE_PROJECTS[this.languageService.language()].find((project) => project.slug === this.slug()));
 
+  /** Verdichtetes Telemetry-Layout für das Design-Archiv. */
+  readonly isArchiveTelemetryProject = computed(() => this.project()?.slug === 'grafikdesign-katalog');
+
   /** Aktiver Architektur-Knoten mit Fallback auf den ersten Eintrag. */
   readonly activeArchitectureNode = computed(() => {
     const nodes      = this.project()?.architecture ?? [];

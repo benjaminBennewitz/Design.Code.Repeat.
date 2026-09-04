@@ -26,6 +26,7 @@
 .service-detail__cta-layout { display: flex; gap: 2rem; align-items: end; justify-content: space-between; }
 .service-detail__cta h2 { margin: 0.6rem 0; font-family: var(--dcr-font-display); font-size: clamp(2.7rem, 5vw, 5.5rem); line-height: 0.9; }
 .service-detail__cta p { max-width: 48rem; line-height: 1.6; }
+.service-detail__cta .dcr-eyebrow { color: var(--service-on-accent); }
 
 @media (max-width: 900px) {
   .service-detail__hero-layout, .service-detail__columns { grid-template-columns: 1fr; }

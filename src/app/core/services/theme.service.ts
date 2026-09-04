@@ -1,13 +1,12 @@
 /**
  * @file Theme-Verwaltung der Studio-Website.
- * @description Verwaltet Dark-/Light-Mode, Persistenz, Browserfarbe, Kontrast-Tokens und einen kurzen Swipe-Übergang.
+ * @description Verwaltet Dark-/Light-Mode, Persistenz, Browserfarbe und einen kurzen Swipe-Übergang.
  */
 
 import { DOCUMENT } from '@angular/common';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { StudioTheme } from '../models/studio.models';
 import { AccessibilityPreferenceService } from './accessibility-preference.service';
-import { ThemeContrastService } from './theme-contrast.service';
 
 /** Verwaltet das globale Farbschema. */
 @Injectable({ providedIn: 'root' })
@@ -17,9 +16,6 @@ export class ThemeService {
 
   /** Dokumentreferenz für Theme-Attribut und Übergangsklasse. */
   private readonly document = inject(DOCUMENT);
-
-  /** Dynamische semantische Kontrastberechnung. */
-  private readonly contrastService = inject(ThemeContrastService);
 
   /** Globale Motion-Präferenz, damit Theme-Wechsel nicht gegen A11Y-Einstellungen animiert werden. */
   private readonly accessibilityService = inject(AccessibilityPreferenceService);
@@ -36,14 +32,13 @@ export class ThemeService {
   /** True im Light Mode. */
   readonly isLight = computed<boolean>(() => this.theme() === 'light');
 
-  /** Synchronisiert Theme, Browserfarbe und Kontrast-Tokens. */
+  /** Synchronisiert Theme und Browserfarbe. */
   constructor() {
     effect(() => {
       const theme = this.theme();
       this.document.documentElement.dataset['theme'] = theme;
       this.persistTheme(theme);
       this.updateThemeColor();
-      queueMicrotask(() => this.contrastService.refresh());
     });
   }
 
