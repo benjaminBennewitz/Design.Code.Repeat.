@@ -201,9 +201,38 @@ html:has(dcr-home-page) {
   .home-hero__service { max-width: calc(50vw - 1.5rem); white-space: normal; }
   .home-hero__service--web { top: 9%; left: 1rem; text-align: left; }
   .home-hero__service--software { top: 9%; right: 1rem; left: auto; text-align: right; }
-  .home-hero__service--design, .home-hero__service--care { display: none; }
+  .home-hero__service--design { bottom: 18%; left: 1rem; text-align: left; }
+  .home-hero__service--care { right: 1rem; bottom: 18%; left: auto; text-align: right; }
   .home-hero__cta { right: 1rem; bottom: 7%; }
   .home-hero__cta .dcr-button { width: min(15rem, calc(100vw - 2rem)); }
+}
+
+@media (max-width: 360px) {
+  .home-hero__claim {
+    width: calc(100vw - 0.5rem);
+    font-size: clamp(2rem, 9.35vw, 2.45rem);
+    letter-spacing: -0.006em;
+  }
+
+  .home-hero__line {
+    gap: 0.055em;
+  }
+
+  .home-hero__service {
+    max-width: calc(50vw - 1.1rem);
+    font-size: 0.54rem;
+    line-height: 1.2;
+  }
+
+  .home-hero__service--web,
+  .home-hero__service--design {
+    left: 0.75rem;
+  }
+
+  .home-hero__service--software,
+  .home-hero__service--care {
+    right: 0.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -223,6 +223,11 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
   /** Übersetzter Inhalt der aktuellen Sprache. */
   readonly content = computed(() => REFERENCE_CASE_UI[this.languageService.language()]);
 
+  /** Zugängliche Statusmeldung während Katalogseiten vor dem Anzeigen decodiert werden. */
+  readonly catalogLoadingLabel = computed(() => this.languageService.language() === 'de'
+    ? 'Katalog wird geladen'
+    : 'Loading catalogue');
+
   /** Ausgewähltes Projekt passend zum Route-Slug. */
   readonly project = computed(() => REFERENCE_CASE_PROJECTS[this.languageService.language()].find((project) => project.slug === this.slug()));
 
@@ -1072,6 +1077,25 @@ export class ReferenceCaseStudyComponent implements OnDestroy {
     this.hideCatalogLoupe();
     this.isTerminalVisible.set(true);
     this.isCaseNoteVisible.set(true);
+
+    if (slug === 'grafikdesign-katalog') {
+      void this.prepareInitialCatalogSpread();
+    }
+  }
+
+  /** Decodiert den ersten Katalog-Spread vorab und hält bis dahin einen sichtbaren Ladezustand. */
+  private async prepareInitialCatalogSpread(): Promise<void> {
+    const loadToken = this.catalogSpreadSwitchToken;
+
+    this.isCatalogReaderBusy.set(true);
+
+    try {
+      await this.preloadCatalogSpreadAssets(0);
+    } finally {
+      if (loadToken === this.catalogSpreadSwitchToken) {
+        this.isCatalogReaderBusy.set(false);
+      }
+    }
   }
 
 
