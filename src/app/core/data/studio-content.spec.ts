@@ -74,15 +74,16 @@ describe('STUDIO_TRANSLATIONS', () => {
   });
 
 
-  it('hält nicht veröffentlichte Case Studies ohne ausgehenden Link gesperrt', () => {
+  it('hält Dein Fußabdruck gesperrt und Globi Flow veröffentlicht', () => {
     for (const language of ['de', 'en'] as const) {
-      for (const slug of ['dein-fussabdruck', 'globi-flow']) {
-        const reference = STUDIO_TRANSLATIONS[language].references.find((item) => item.slug === slug);
+      const footprint = STUDIO_TRANSLATIONS[language].references.find((item) => item.slug === 'dein-fussabdruck');
+      const globiFlow = STUDIO_TRANSLATIONS[language].references.find((item) => item.slug === 'globi-flow');
 
-        expect(reference?.availability).toBe('coming-soon');
-        expect(reference?.portfolioUrl).toBeUndefined();
-        expect(reference?.internalRoute).toBeUndefined();
-      }
+      expect(footprint?.availability).toBe('coming-soon');
+      expect(footprint?.portfolioUrl).toBeUndefined();
+      expect(globiFlow?.availability).toBeUndefined();
+      expect(globiFlow?.portfolioUrl).toBe('https://globi-flow-demo.design-code-repeat.de');
+      expect(globiFlow?.portfolioUrl).not.toContain('b2folio.de');
     }
   });
 
