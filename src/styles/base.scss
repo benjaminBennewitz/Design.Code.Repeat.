@@ -12,6 +12,36 @@ html {
   background: var(--dcr-color-bg);
 }
 
+:root {
+  --dcr-scrollbar-track: var(--dcr-color-bg);
+  --dcr-scrollbar-thumb: var(--dcr-color-text-muted);
+  --dcr-scrollbar-thumb-hover: var(--dcr-color-primary);
+}
+
+* {
+  scrollbar-color: var(--dcr-scrollbar-thumb) var(--dcr-scrollbar-track);
+}
+
+@supports selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: auto;
+  }
+
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: var(--dcr-scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--dcr-scrollbar-thumb);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--dcr-scrollbar-thumb-hover);
+  }
+}
+
 html.dcr-route-is-changing {
   scroll-behavior: auto;
 }

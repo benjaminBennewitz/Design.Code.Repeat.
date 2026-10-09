@@ -43,7 +43,7 @@
 
           <nav [attr.aria-label]="content().footer.servicesTitle">
             @for (service of content().services; track service.slug) {
-              <a routerLink="/leistungen" [fragment]="'service-' + service.slug">{{ service.shortTitle }}</a>
+              <a [href]="'/leistungen?service=' + service.slug + '#service-index'" (click)="openService($event, service.slug)">{{ service.shortTitle }}</a>
             }
           </nav>
         </div>
@@ -83,12 +83,12 @@
     </div>
 
     <div class="site-footer__wordmark" aria-hidden="true">
-      <span class="site-footer__wordmark-state site-footer__wordmark-state--design" [class.is-active]="activePanel() === 0"><span>DESIGN.</span> <span>CODE.</span></span>
+      <span class="site-footer__wordmark-state site-footer__wordmark-state--design" [class.is-active]="activePanel() === 0"><span>DESIGN<span class="site-footer__dot">.</span></span> <span>CODE<span class="site-footer__dot">.</span></span></span>
       <span class="site-footer__wordmark-state site-footer__wordmark-state--repeat" [class.is-active]="activePanel() !== 0">REPEAT.</span>
     </div>
 
     <div class="site-footer__meta">
-      <span>© {{ year }} Design. Code. Repeat.</span>
+      <span>© {{ year }} Design. Code. Repeat. by Benjamin Bennewitz [B²].</span>
       <a href="mailto:kontakt@design-code-repeat.de">kontakt&#64;design-code-repeat.de</a>
     </div>
   </div>

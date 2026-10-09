@@ -766,8 +766,8 @@
 }
 
 /* Process interaction and responsive composition. */
-.home-process > .dcr-container { grid-template-columns: minmax(250px, 0.52fr) minmax(0, 1.48fr); gap: clamp(3rem, 9vw, 9rem); align-items: center; }
-.home-process dcr-section-heading { --dcr-heading-size: clamp(2.4rem, min(4.3vw, 5.5vh), 4.6rem); align-self: center; min-width: 0; max-width: 100%; }
+.home-process > .dcr-container { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(3rem, 6vw, 6rem); align-items: center; }
+.home-process dcr-section-heading { --dcr-heading-overflow-wrap: normal; --dcr-heading-hyphens: manual; --dcr-heading-size: clamp(2.4rem, min(3.6vw, 5.5vh), 4.6rem); align-self: center; min-width: 0; max-width: 100%; }
 .home-process .process-list { margin-top: 0; }
 .home-process .process-list, .home-process .process-list li, .home-process .process-list li > div { min-width: 0; }
 .process-list li { position: relative; overflow: hidden; transition: padding 260ms var(--dcr-ease-out), color 180ms ease; }
@@ -899,3 +899,5 @@
   font-size: 0.72rem;
   line-height: 1.45;
 }
+
+.home-hero__line--symbol-end { grid-template-columns: max-content var(--hero-symbol-size); }

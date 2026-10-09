@@ -25,14 +25,16 @@
           </span>
           <span>{{ heroClaimLines()[1].after }}</span>
         </span>
-        <span class="home-hero__line home-hero__line--accent">
+        <span class="home-hero__line home-hero__line--accent" [class.home-hero__line--symbol-end]="!heroClaimLines()[2].after">
           <span>{{ heroClaimLines()[2].before }}</span>
           <span class="home-hero__slot home-hero__slot--three" aria-hidden="true">
             <span class="home-hero__symbol home-hero__symbol--code is-phase-0" [attr.data-animation]="heroSymbolAnimations[2][0]">&lt;/&gt;</span>
             <span class="home-hero__symbol home-hero__symbol--cluster is-phase-2" [attr.data-animation]="heroSymbolAnimations[2][1]"><i></i><i></i><i></i><i></i></span>
             <span class="home-hero__symbol home-hero__symbol--grid is-phase-1" [attr.data-animation]="heroSymbolAnimations[2][2]"></span>
           </span>
-          <span>{{ heroClaimLines()[2].after }}</span>
+          @if (heroClaimLines()[2].after) {
+            <span>{{ heroClaimLines()[2].after }}</span>
+          }
         </span>
       </h1>
 
@@ -43,54 +45,35 @@
     <span class="home-hero__baseline" aria-hidden="true"></span>
   </section>
 
-  <section class="home-capabilities dcr-viewport-section" id="intro" aria-labelledby="home-capabilities-title">
-    <a class="home-capabilities__panel home-capabilities__panel--lead" routerLink="/leistungen" fragment="service-index">
-      <span class="home-capabilities__mark home-capabilities__mark--arrow" aria-hidden="true">↗</span>
-      <div class="home-capabilities__lead-copy">
-        <p class="home-capabilities__eyebrow">{{ content().home.hero.eyebrow }}</p>
+  <section class="home-capabilities" id="intro" aria-labelledby="home-capabilities-title">
+    <div class="dcr-container home-capabilities__layout">
+      <div class="home-capabilities__intro">
+        <p class="dcr-eyebrow">{{ content().home.hero.eyebrow }}</p>
         <h2 id="home-capabilities-title">{{ content().home.hero.title }}</h2>
-        <p>{{ content().home.hero.lead }}</p>
+        <p class="home-capabilities__lead">{{ content().home.hero.lead }}</p>
+        <span class="home-capabilities__signature" aria-hidden="true">↗</span>
       </div>
-      <div class="home-capabilities__meta">
-        <span class="home-capabilities__category">{{ content().services[0].kicker }}</span>
-        <p class="home-capabilities__summary">{{ content().services[0].summary }}</p>
+      <div class="home-capabilities__grid">
+        @for (service of content().services.slice(0, 4); track service.slug; let index = $index) {
+          <a class="home-capabilities__item" [class.home-capabilities__item--care]="service.slug === 'wartung'" [attr.aria-describedby]="'home-capability-detail-' + service.slug" routerLink="/leistungen" [queryParams]="{ service: service.slug }" fragment="service-index" [attr.aria-label]="service.title">
+            <div class="home-capabilities__top">
+              <span class="home-capabilities__index">0{{ index + 1 }}</span>
+              <span class="material-symbols-outlined home-capabilities__arrow" aria-hidden="true">arrow_outward</span>
+            </div>
+            <span class="material-symbols-outlined home-capabilities__icon" aria-hidden="true">{{ service.icon }}</span>
+            <div class="home-capabilities__copy">
+              <h3>{{ service.shortTitle }}</h3>
+              <div class="home-capabilities__description">
+                <p class="home-capabilities__kicker">{{ service.kicker }}</p>
+                <p class="home-capabilities__detail" [id]="'home-capability-detail-' + service.slug">{{ service.summary }}</p>
+              </div>
+            </div>
+          </a>
+        }
       </div>
-    </a>
-
-    <div class="home-capabilities__split">
-      <a class="home-capabilities__panel home-capabilities__panel--light" routerLink="/leistungen" fragment="service-index">
-        <span class="home-capabilities__mark home-capabilities__mark--asterisk" aria-hidden="true">✳</span>
-        <div class="home-capabilities__copy">
-          <h3>{{ content().services[2].title }}</h3>
-          <p class="home-capabilities__summary">{{ content().services[2].summary }}</p>
-        </div>
-        <span class="home-capabilities__label">{{ content().services[2].kicker }}</span>
-      </a>
-      <a class="home-capabilities__panel home-capabilities__panel--grey" routerLink="/leistungen" fragment="service-index">
-        <span class="home-capabilities__mark home-capabilities__mark--cluster" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <div class="home-capabilities__copy">
-          <h3>{{ content().services[3].title }}</h3>
-          <p class="home-capabilities__summary">{{ content().services[3].summary }}</p>
-        </div>
-        <span class="home-capabilities__label">{{ content().services[3].kicker }}</span>
-      </a>
     </div>
-
-    <a class="home-capabilities__panel home-capabilities__panel--dark" routerLink="/leistungen" fragment="service-index">
-      <span class="home-capabilities__mark home-capabilities__mark--diamond" aria-hidden="true">✦</span>
-      <div class="home-capabilities__copy">
-        <h3>{{ content().services[1].title }}</h3>
-        <p class="home-capabilities__summary">{{ content().services[1].summary }}</p>
-      </div>
-      <span class="home-capabilities__label">{{ content().services[1].kicker }}</span>
-    </a>
   </section>
 
-  @defer (on viewport) {
-    <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
-  } @placeholder {
-    <div class="home-marquee-placeholder" aria-hidden="true"></div>
-  }
 
 @defer (on viewport) {
     <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
@@ -206,10 +189,12 @@
   <section class="home-references dcr-section dcr-viewport-section home-deferred-placeholder" id="referenzen" aria-hidden="true"></section>
 }
 
+
+
 @defer (on viewport) {
     <section class="home-process dcr-section dcr-viewport-section dcr-section-flow" id="prozess">
       <div class="dcr-container">
-        <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="content().home.process.title" [text]="content().home.process.text" />
+        <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="processHeadingTitle()" [text]="content().home.process.text" />
   
         <ol class="process-list">
           @for (step of content().process; track step.index) {
@@ -227,7 +212,7 @@
 }
 
   @defer (on viewport) {
-    <dcr-infinite-marquee class="home-marquee" [items]="processMarqueeItems()" [ariaLabel]="marqueeLabel()" [reverse]="true" tone="pink" />
+    <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
   } @placeholder {
     <div class="home-marquee-placeholder" aria-hidden="true"></div>
   }

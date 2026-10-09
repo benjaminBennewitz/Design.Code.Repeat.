@@ -10,13 +10,12 @@ import { NavigationItem } from '../../core/models/studio.models';
 import { AccessibilityPanelService } from '../../core/services/accessibility-panel.service';
 import { LanguageService } from '../../core/services/language.service';
 import { ThemeService } from '../../core/services/theme.service';
-import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 
 /** Sticky Header der kommerziellen Website. */
 @Component({
   selector: 'dcr-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, ActionButtonComponent],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

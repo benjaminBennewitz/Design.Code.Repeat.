@@ -5,7 +5,7 @@
 
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
@@ -38,10 +38,13 @@ export class ServicesPageComponent {
   /** SEO-Metadaten der Route. */
   private readonly seoService = inject(SeoService);
 
-  /** Aktuelle Route für die direkte Auswahl eines Leistungsmoduls per Fragment. */
+  /** Aktuelle Route für die Leistungsauswahl per Query-Parameter und ältere Fragmentlinks. */
   private readonly route = inject(ActivatedRoute);
 
-  /** Lifecycle-Handle für die Fragment-Subscription. */
+  /** Erkennt auch erneute Navigationen zur unveränderten Quicklink-URL. */
+  private readonly router = inject(Router);
+
+  /** Lifecycle-Handle für die Routen-Subscription. */
   private readonly destroyRef = inject(DestroyRef);
 
   /** Vollständiger sprachabhängiger Content. */
@@ -101,9 +104,14 @@ export class ServicesPageComponent {
   constructor() {
     effect(() => this.seoService.setPage(this.content().servicesPage.seo, '/leistungen'));
 
-    this.route.fragment
+    this.selectServiceFromRoute();
+    this.router.events
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((fragment) => this.selectServiceFromFragment(fragment));
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.selectServiceFromRoute();
+        }
+      });
   }
 
   /** Aktiviert ein Service-Modul ohne Route oder Seitenwechsel. */
@@ -115,17 +123,15 @@ export class ServicesPageComponent {
     this.selectedServiceIndex.set(index);
   }
 
-  /** Aktiviert das über einen Footer- oder Deep-Link adressierte Leistungsmodul. */
-  private selectServiceFromFragment(fragment: string | null): void {
-    if (!fragment?.startsWith('service-')) {
-      return;
-    }
-
-    const slug = fragment.slice('service-'.length);
+  /** Trennt die Leistungsauswahl vom Scrollziel und unterstützt ältere Fragmentlinks. */
+  private selectServiceFromRoute(): void {
+    const fragment = this.route.snapshot.fragment;
+    const slug = this.route.snapshot.queryParamMap.get('service')
+      ?? (fragment?.startsWith('service-') ? fragment.slice('service-'.length) : null);
     const index = this.content().services.findIndex((service) => service.slug === slug);
 
     if (index >= 0) {
-      this.selectedServiceIndex.set(index);
+      this.selectService(index);
     }
   }
 }

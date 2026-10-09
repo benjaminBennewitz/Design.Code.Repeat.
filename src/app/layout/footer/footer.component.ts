@@ -4,7 +4,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieConsentService } from '../../core/services/cookie-consent.service';
 import { LanguageService } from '../../core/services/language.service';
 
@@ -20,6 +20,9 @@ import { LanguageService } from '../../core/services/language.service';
 export class FooterComponent {
   /** Aktuelle Sprache und Website-Inhalte. */
   private readonly languageService = inject(LanguageService);
+
+  /** Router für wiederholbare Quicklinks zum gemeinsamen Leistungsanker. */
+  private readonly router = inject(Router);
 
   /** Privacy-Control-Zustand für den Cookie-Einstellungslink. */
   readonly cookieConsentService = inject(CookieConsentService);
@@ -65,6 +68,20 @@ export class FooterComponent {
         portfolio: 'Portfolio',
         social: 'Social',
       });
+
+  /** Navigiert auch bei identischer URL erneut; modifizierte Klicks bleiben native Links. */
+  openService(event: MouseEvent, slug: string): void {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    void this.router.navigate(['/leistungen'], {
+      queryParams: { service: slug },
+      fragment: 'service-index',
+      onSameUrlNavigation: 'reload',
+    });
+  }
 
   /** Aktiviert den vorherigen Panel-Index zyklisch. */
   previousPanel(): void {

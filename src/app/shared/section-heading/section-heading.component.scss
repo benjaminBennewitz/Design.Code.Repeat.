@@ -31,6 +31,8 @@
   line-height: 0.92;
   letter-spacing: -0.055em;
   text-wrap: balance;
+  overflow-wrap: var(--dcr-heading-overflow-wrap, anywhere);
+  hyphens: var(--dcr-heading-hyphens, manual);
 }
 
 .section-heading__text {

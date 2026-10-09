@@ -28,14 +28,15 @@ export class HomePageComponent {
   private readonly seoService = inject(SeoService);
   readonly content = computed(() => this.languageService.content());
   readonly techStackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');
-  readonly marqueeLabel = computed(() => this.languageService.language() === 'de' ? 'Leistungen und Arbeitsweise' : 'Services and process');
+  readonly marqueeLabel = computed(() => this.languageService.language() === 'de' ? 'Leistungen' : 'Services');
   readonly servicesMarqueeItems = computed(() => this.content().services.map((service) => service.shortTitle));
-  readonly processMarqueeItems = computed(() => [...this.content().process].reverse().map((step) => `${step.index} ${step.title}`));
+  /** Definiert einen sprachlich korrekten Ersatzumbruch für schmale Prozessüberschriften. */
+  readonly processHeadingTitle = computed(() => this.content().home.process.title.replace('Überraschungen', 'Über\u00adraschungen'));
   readonly heroClaimLines = computed(() => this.languageService.language() === 'de'
     ? [
         { before: 'DIGITALE', after: 'PRODUKTE' },
         { before: 'DIE', after: 'ARBEIT' },
-        { before: 'ERLED', after: 'IGEN' },
+        { before: 'ERLEDIGEN', after: '' },
       ] as const
     : [
         { before: 'DIGITAL', after: 'PRODUCTS' },

@@ -3,7 +3,7 @@
  * @description Stellt globales Layout, Accessibility-, Privacy- und Scroll-Helfer bereit und synchronisiert den inaktiven Tab-Titel.
  */
 
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -44,6 +44,9 @@ export class AppComponent {
   /** Angular Router für einen kontrollierten, nicht animierten Scroll-Reset. */
   private readonly router = inject(Router);
 
+  /** Berücksichtigt den fixierten Header bei allen Router-Ankersprüngen. */
+  private readonly viewportScroller = inject(ViewportScroller);
+
   /** Dokumentzugriff für die temporäre Scroll-Klasse. */
   private readonly document = inject(DOCUMENT);
 
@@ -54,6 +57,8 @@ export class AppComponent {
   private currentRoutePath = this.routePath(this.router.url);
 
   constructor() {
+    this.viewportScroller.setOffset(() => [0, this.document.querySelector<HTMLElement>('.site-header')?.offsetHeight ?? 0]);
+
     effect(() => this.tabTitleService.setHiddenTitle(this.languageService.content().meta.hiddenTitle));
 
     this.router.events
