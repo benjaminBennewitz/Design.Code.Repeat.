@@ -28,13 +28,23 @@ describe('STUDIO_TRANSLATIONS', () => {
       const content = STUDIO_TRANSLATIONS[language];
 
       expect(content.references).toHaveLength(5);
-      expect(content.deliveredProjects).toHaveLength(4);
+      expect(content.deliveredProjects).toHaveLength(5);
       expect(content.deliveredProjects.map((project) => project.name)).toEqual([
         'glashelden24.de',
         'Sk-uvgele.de',
         'beautynailresort.de',
+        'praxis-perspektiefe.de',
         'KGV1925',
       ]);
+    }
+  });
+
+  it('verlinkt Praxis Perspektiefe und hält KGV1925 ohne öffentliche Domain', () => {
+    for (const language of ['de', 'en'] as const) {
+      const projects = STUDIO_TRANSLATIONS[language].deliveredProjects;
+
+      expect(projects.find((project) => project.name === 'praxis-perspektiefe.de')?.url).toBe('https://praxis-perspektiefe.de');
+      expect(projects.find((project) => project.name === 'KGV1925')?.url).toBe('#');
     }
   });
 

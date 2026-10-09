@@ -5,9 +5,6 @@
 
 import { StudioContent, StudioLanguage } from '../models/studio.models';
 
-/** Öffentliche Portfolio-Domain für vertiefende Case Studies. */
-const PORTFOLIO_BASE_URL = 'https://b2folio.de';
-
 /** Öffentliche Carly-Managed-Case-Study des DCR-Hosts. */
 const CARLY_MANAGED_CASE_URL = 'https://carly-managed-demo.design-code-repeat.de';
 
@@ -541,7 +538,8 @@ const de: StudioContent = {
     { name: 'glashelden24.de', url: 'https://glashelden24.de', label: 'Website / Direkt, schlank, schnell', stack: ['HTML', 'JavaScript', 'CSS'], image: 'assets/images/projects/clients/glashelden24.webp', imageAlt: 'Startseite von glashelden24.de mit Hero, Preisübersicht und Servicebereichen' },
     { name: 'Sk-uvgele.de', url: 'https://sk-uvgele.de', label: 'Unternehmen / WordPress-Präsenz', stack: ['WordPress', 'Elementor', 'HTML', 'CSS'], image: 'assets/images/projects/clients/sk-uvgele.webp', imageAlt: 'Startseite von Sk-uvgele.de mit Produktbereichen, Beratung und News' },
     { name: 'beautynailresort.de', url: 'https://beautynailresort.de', label: 'Wellness & Spa / Website + Shop', stack: ['WordPress', 'WooCommerce', 'Elementor', 'HTML', 'CSS'], image: 'assets/images/projects/clients/beautynailresort.webp', imageAlt: 'Startseite von beautynailresort.de mit Behandlungen, Empfehlungen und Shop-Elementen' },
-    { name: 'KGV1925', url: `${PORTFOLIO_BASE_URL}/angular-projects/1925/`, label: 'Kleingartenverein / Angular + Mini-CMS', stack: ['Angular', 'Django', 'REST API', 'PostgreSQL'], image: 'assets/images/projects/clients/kgv1925.webp', imageAlt: 'Startseite des Kleingartenvereins mit Vereinsinfos, Terminen und Gartenwissen' },
+    { name: 'praxis-perspektiefe.de', url: 'https://praxis-perspektiefe.de', label: 'Psychotherapie / Website + SEO', stack: ['Angular', 'TypeScript', 'SCSS', 'SEO'], image: 'assets/images/projects/clients/praxis-perspektiefe.webp', imageAlt: 'Startseite der psychotherapeutischen Praxis mit Behandlungsangebot und Praxisinformationen' },
+    { name: 'KGV1925', url: '#', label: 'Kleingartenverein / Angular + Mini-CMS', stack: ['Angular', 'Django', 'REST API', 'PostgreSQL'], image: 'assets/images/projects/clients/kgv1925.webp', imageAlt: 'Startseite des Kleingartenvereins mit Vereinsinfos, Terminen und Gartenwissen' },
   ],
   process: [
     { index: '01', title: 'Verstehen', text: 'Ziel, Nutzer, bestehende Systeme und echte Einschränkungen werden geklärt.', command: 'scope --problem-first' },
@@ -891,7 +889,8 @@ const en: StudioContent = {
     { ...de.deliveredProjects[0], label: 'Website / Direct, lean, fast', imageAlt: 'Homepage of glashelden24.de with hero, pricing overview and service sections' },
     { ...de.deliveredProjects[1], label: 'Company / WordPress presence', imageAlt: 'Homepage of Sk-uvgele.de with product areas, consulting and news' },
     { ...de.deliveredProjects[2], label: 'Wellness & Spa / Website + shop', imageAlt: 'Homepage of beautynailresort.de with treatments, recommendations and shop elements' },
-    { ...de.deliveredProjects[3], label: 'Allotment association / Angular + mini CMS', imageAlt: 'Homepage of the allotment association with club information, events and gardening content' },
+    { ...de.deliveredProjects[3], label: 'Psychotherapy / Website + SEO', imageAlt: 'Homepage of the psychotherapy practice with treatment information and practice details' },
+    { ...de.deliveredProjects[4], label: 'Allotment association / Angular + mini CMS', imageAlt: 'Homepage of the allotment association with club information, events and gardening content' },
   ],
   process: [
     { index: '01', title: 'Understand', text: 'Goal, users, existing systems and real constraints are clarified.', command: 'scope --problem-first' },
