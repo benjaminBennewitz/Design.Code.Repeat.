@@ -218,6 +218,23 @@ export interface StudioContent {
     readonly deliveredAriaLabel: string;
   };
   readonly studioPage: {
+    readonly identity: {
+      readonly name: string;
+      readonly role: string;
+      readonly location: string;
+      readonly portraitAlt: string;
+      readonly facets: readonly { readonly icon: string; readonly title: string; readonly text: string }[];
+    };
+    readonly collaboration: {
+      readonly heading: SectionHeadingContent;
+      readonly items: readonly { readonly icon: string; readonly title: string; readonly text: string }[];
+    };
+    readonly location: {
+      readonly heading: SectionHeadingContent;
+      readonly regions: readonly { readonly code: string; readonly name: string }[];
+      readonly note: string;
+      readonly cta: string;
+    };
     readonly seo: SeoPageContent;
     readonly heading: SectionHeadingContent;
     readonly intro: readonly string[];

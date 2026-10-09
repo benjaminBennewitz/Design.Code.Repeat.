@@ -411,3 +411,49 @@
 :host-context(:root[data-motion='off']) :is(.system-grid__panel, .system-grid__mark, .system-grid__jump) {
   transition: none;
 }
+
+.system-grid--boxed { gap: 1rem; background: transparent; }
+.system-grid--boxed .system-grid__split { gap: 1rem; }
+
+@media (max-width: 760px), (max-height: 799px) {
+  .system-grid--boxed .system-grid__panel--lead { min-height: 0; }
+  .system-grid--boxed :is(.system-grid__panel--light, .system-grid__panel--neutral) { min-height: 18rem; }
+  .system-grid--boxed .system-grid__panel--dark { min-height: 14rem; }
+}
+
+
+.system-grid__panel.is-reveal-ready {
+  opacity: 0;
+  transform: translate3d(var(--panel-enter-x, 0), var(--panel-enter-y, 0), 0);
+  transition: opacity 650ms ease, transform 800ms var(--dcr-ease-out), background-color 240ms ease, color 240ms ease;
+}
+.system-grid__panel--lead {
+  --panel-enter-y: -2.5rem;
+}
+.system-grid__panel--light {
+  --panel-enter-x: -2.5rem;
+}
+.system-grid__panel--neutral {
+  --panel-enter-x: 2.5rem;
+}
+.system-grid__panel--dark {
+  --panel-enter-y: 2.5rem;
+}
+.system-grid__panel.is-reveal-ready.is-in-view {
+  opacity: 1;
+  transform: none;
+}
+:host-context(:root[data-motion='off']) .system-grid__panel.is-reveal-ready,
+:host-context(:root[data-motion='reduced']) .system-grid__panel.is-reveal-ready,
+:host-context(:root[data-comfort='simple']) .system-grid__panel.is-reveal-ready {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .system-grid__panel.is-reveal-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,35 +1,47 @@
 <main class="studio-page">
   <section id="studio-hero" class="studio-hero dcr-section dcr-viewport-section dcr-section-flow">
-    <dcr-ambient-field variant="studio" />
-    <div class="studio-hero__ghost" aria-hidden="true">B²</div>
+    <div class="studio-hero__grid" aria-hidden="true"></div>
     <div class="dcr-container studio-hero__layout">
       <div class="studio-hero__copy">
         <p class="dcr-eyebrow">{{ content().studioPage.heading.eyebrow }}</p>
         <h1>{{ content().studioPage.heading.title }}</h1>
         <p class="studio-hero__lead">{{ content().studioPage.heading.text }}</p>
-        <div class="studio-hero__signals" aria-hidden="true">
-          <span>FULL STACK</span>
-          <span>DESIGN SYSTEMS</span>
-          <span>OPERATIONS</span>
+        <div class="studio-deployment">
+          <div class="studio-deployment__head">
+            <span aria-hidden="true">CODE → BUILD → LIVE</span>
+          </div>
+          <div class="studio-deployment__track" aria-hidden="true">
+            <span class="studio-deployment__node studio-deployment__node--code"><span class="material-symbols-outlined">data_object</span></span>
+            <span class="studio-deployment__connection"><i></i></span>
+            <span class="studio-deployment__node studio-deployment__node--build"><span class="material-symbols-outlined">deployed_code</span></span>
+            <span class="studio-deployment__connection studio-deployment__connection--live"><i></i></span>
+            <span class="studio-deployment__node studio-deployment__node--live"><span class="material-symbols-outlined">cloud_done</span></span>
+          </div>
         </div>
       </div>
 
-      <div class="studio-hero__console">
-        <div class="studio-hero__badge" aria-hidden="true">
-          <span>B²</span>
-          <small>DEV / DESIGN</small>
-        </div>
-        <dcr-terminal-panel title="identity.cfg" [lines]="['brand=Design.Code.Repeat', 'developer=B²', 'mode=studio', 'portfolio=separate']" />
-      </div>
+      <aside class="studio-hero__identity" [attr.aria-label]="content().studioPage.identity.name">
+        <div class="studio-hero__signature" aria-hidden="true">B²</div>
+        <p class="studio-hero__name">{{ content().studioPage.identity.name }}</p>
+        <p class="studio-hero__location"><span class="material-symbols-outlined" aria-hidden="true">location_on</span>{{ content().studioPage.identity.location }}</p>
+        <ul class="studio-hero__facets">
+          @for (facet of content().studioPage.identity.facets; track facet.icon) {
+            <li><span class="material-symbols-outlined" aria-hidden="true">{{ facet.icon }}</span><div><strong>{{ facet.title }}</strong><p>{{ facet.text }}</p></div></li>
+          }
+        </ul>
+      </aside>
     </div>
   </section>
 
-  <section id="studio-intro" class="studio-intro dcr-section dcr-viewport-section dcr-section-flow">
+  <section id="studio-intro" class="studio-intro dcr-section">
     <div class="dcr-container studio-intro__layout">
-      <div class="studio-intro__identity">
-        <div class="studio-intro__b2" aria-hidden="true">B²</div>
-        <img class="studio-intro__portrait" src="/assets/images/studio/ben-sip.webp" alt="Ben mit Kaffeetasse" width="1200" height="1600" loading="lazy" decoding="async">
-      </div>
+      <figure class="studio-intro__identity">
+        <div class="studio-intro__visual">
+          <span class="studio-intro__b2" aria-hidden="true">B²</span>
+          <img class="studio-intro__portrait" src="assets/images/studio/ben-sip.webp" [alt]="content().studioPage.identity.portraitAlt" width="1122" height="1402" loading="lazy" decoding="async">
+        </div>
+        <figcaption><strong>{{ content().studioPage.identity.name }}</strong><span>{{ content().studioPage.identity.role }}</span></figcaption>
+      </figure>
 
       <div class="studio-intro__copy">
         @for (paragraph of content().studioPage.intro; track paragraph; let index = $index) {
@@ -57,14 +69,50 @@
     </div>
   </section>
 
-  <section id="studio-prinzipien" class="studio-principles dcr-viewport-section" aria-labelledby="studio-principles-title">
-    <dcr-system-grid
-      [eyebrow]="content().studioPage.principlesHeading.eyebrow"
-      [title]="content().studioPage.principlesHeading.title"
-      [text]="content().studioPage.principlesHeading.text"
-      titleId="studio-principles-title"
-      [leadAside]="principlesSystemAside()"
-      [panels]="principlesSystemPanels()" />
+  <section id="studio-zusammenarbeit" class="studio-collaboration dcr-section" aria-labelledby="studio-collaboration-title">
+    <div class="dcr-container studio-collaboration__layout">
+      <div class="studio-collaboration__intro">
+        <p class="dcr-eyebrow">{{ content().studioPage.collaboration.heading.eyebrow }}</p>
+        <h2 id="studio-collaboration-title">{{ content().studioPage.collaboration.heading.title }}</h2>
+        <p>{{ content().studioPage.collaboration.heading.text }}</p>
+      </div>
+      <ul class="studio-collaboration__list">
+        @for (item of content().studioPage.collaboration.items; track item.icon) {
+          <li><span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span><div><h3>{{ item.title }}</h3><p>{{ item.text }}</p></div></li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="studio-prinzipien" class="studio-principles dcr-section dcr-viewport-section" aria-labelledby="studio-principles-title">
+    <div class="dcr-container studio-principles__layout">
+      <dcr-system-grid [boxed]="true" [animatePanels]="true"
+        [eyebrow]="content().studioPage.principlesHeading.eyebrow"
+        [title]="content().studioPage.principlesHeading.title"
+        [text]="content().studioPage.principlesHeading.text"
+        titleId="studio-principles-title"
+        [leadAside]="principlesSystemAside()"
+        [panels]="principlesSystemPanels()" />
+    </div>
+  </section>
+
+  <section id="studio-region" class="studio-region dcr-section" aria-labelledby="studio-region-title">
+    <div class="dcr-container studio-region__layout">
+      <div class="studio-region__copy">
+        <p class="dcr-eyebrow">{{ content().studioPage.location.heading.eyebrow }}</p>
+        <h2 id="studio-region-title">{{ content().studioPage.location.heading.title }}</h2>
+        <p>{{ content().studioPage.location.heading.text }}</p>
+      </div>
+      <div class="studio-region__area">
+        <ul class="studio-region__cities">
+          @for (region of content().studioPage.location.regions; track region.code) {
+            <li><strong dcrScrollReveal aria-hidden="true">{{ region.code }}</strong><span>{{ region.name }}</span></li>
+          }
+        </ul>
+        <p class="studio-region__note">{{ content().studioPage.location.note }}</p>
+        <a class="studio-region__link" routerLink="/referenzen" fragment="kundenprojekte">{{ content().studioPage.location.cta }}<span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+      </div>
+    </div>
   </section>
 
   <section id="studio-stack" class="studio-stack dcr-section dcr-viewport-section dcr-section-flow">

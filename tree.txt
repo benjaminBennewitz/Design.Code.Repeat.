@@ -162,7 +162,8 @@ dcr/
 │   │   │   │   ├── terminal-panel.component.scss
 │   │   │   │   └── terminal-panel.component.ts
 │   │   │   ├── horizontal-wheel-scroll.directive.ts
-│   │   │   └── reference-reveal-on-scroll.directive.ts
+│   │   │   ├── reference-reveal-on-scroll.directive.ts
+│   │   │   └── scroll-reveal.directive.ts
 │   │   ├── app.component.html
 │   │   ├── app.component.scss
 │   │   ├── app.component.ts

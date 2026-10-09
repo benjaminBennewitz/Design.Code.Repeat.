@@ -4,6 +4,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ScrollRevealDirective } from '../scroll-reveal.directive';
 
 /** Inhalt eines einzelnen Panels innerhalb der System-Section. */
 export interface SystemGridItem {
@@ -27,6 +28,7 @@ export interface SystemGridItem {
 @Component({
   selector: 'dcr-system-grid',
   standalone: true,
+  imports: [ScrollRevealDirective],
   templateUrl: './system-grid.component.html',
   styleUrl: './system-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,6 +57,12 @@ export class SystemGridComponent {
 
   /** Blendet Meta-Werte auf Geräten mit Hover erst bei Interaktion ein. */
   readonly revealMetaOnInteraction = input(false);
+
+  /** Stellt die vorhandenen Flächen mit sichtbaren Abständen als Boxen dar. */
+  readonly boxed = input(false);
+
+  /** Aktiviert die einmalige, richtungsabhängige Einfahrt jeder Fläche. */
+  readonly animatePanels = input(false);
 
   /** Die Komponente besitzt bewusst exakt drei Sekundärflächen. */
   readonly visiblePanels = computed(() => this.panels().slice(0, 3));

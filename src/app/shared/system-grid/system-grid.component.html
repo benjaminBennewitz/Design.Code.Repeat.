@@ -1,5 +1,5 @@
-<div class="system-grid" [class.system-grid--meta-reveal]="revealMetaOnInteraction()">
-  <article class="system-grid__panel system-grid__panel--lead" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+<div class="system-grid" [class.system-grid--boxed]="boxed()" [class.system-grid--meta-reveal]="revealMetaOnInteraction()">
+  <article [dcrScrollReveal]="animatePanels()" class="system-grid__panel system-grid__panel--lead" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
     <span class="system-grid__mark system-grid__mark--arrow" aria-hidden="true">↗</span>
 
     <div class="system-grid__lead-copy">
@@ -32,7 +32,7 @@
 
   <div class="system-grid__split">
     @for (panel of visiblePanels().slice(0, 2); track panel.title; let index = $index) {
-      <article class="system-grid__panel" [class.system-grid__panel--light]="index === 0" [class.system-grid__panel--neutral]="index === 1" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+      <article [dcrScrollReveal]="animatePanels()" class="system-grid__panel" [class.system-grid__panel--light]="index === 0" [class.system-grid__panel--neutral]="index === 1" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
         <div class="system-grid__panel-top">
           <span class="system-grid__mark" [class.system-grid__mark--asterisk]="index === 0" [class.system-grid__mark--cluster]="index === 1" aria-hidden="true">
             @if (index === 0) {
@@ -73,7 +73,7 @@
   </div>
 
   @if (visiblePanels()[2]; as panel) {
-    <article class="system-grid__panel system-grid__panel--dark" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
+    <article [dcrScrollReveal]="animatePanels()" class="system-grid__panel system-grid__panel--dark" [attr.tabindex]="revealMetaOnInteraction() ? 0 : null">
       <span class="system-grid__mark system-grid__mark--diamond" aria-hidden="true">✦</span>
 
       <div class="system-grid__content">

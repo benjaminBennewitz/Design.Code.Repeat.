@@ -3,12 +3,12 @@
  * @description Erklärt die persönliche Arbeitsstruktur hinter Design. Code. Repeat. mit eigenständigem Hero und wiederverwendbarem Tech-Marquee.
  */
 
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
-import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.component';
 import { InfiniteMarqueeComponent } from '../../shared/infinite-marquee/infinite-marquee.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
-import { TerminalPanelComponent } from '../../shared/terminal-panel/terminal-panel.component';
 import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
@@ -17,7 +17,7 @@ import { SeoService } from '../../core/services/seo.service';
 @Component({
   selector: 'dcr-studio-page',
   standalone: true,
-  imports: [ActionButtonComponent, AmbientFieldComponent, InfiniteMarqueeComponent, SectionHeadingComponent, TerminalPanelComponent, SystemGridComponent],
+  imports: [ScrollRevealDirective, RouterLink, ActionButtonComponent, InfiniteMarqueeComponent, SectionHeadingComponent, SystemGridComponent],
   templateUrl: './studio-page.component.html',
   styleUrl: './studio-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

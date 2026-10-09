@@ -164,6 +164,39 @@ const de: StudioContent = {
     deliveredAriaLabel: 'Realisierte Kundenprojekte',
   },
   studioPage: {
+    identity: {
+      name: 'Benjamin Bennewitz',
+      role: 'Entwicklung, Design & Betrieb',
+      location: 'Mönchengladbach · Deutschland',
+      portraitAlt: 'Ben mit Kaffeetasse',
+      facets: [
+        { icon: 'data_object', title: 'Full Stack', text: 'Interfaces, Daten und Anwendungen' },
+        { icon: 'design_services', title: 'Design', text: 'Visuelle Systeme und verständliche Bedienung' },
+        { icon: 'dns', title: 'Betrieb', text: 'Vom Deployment bis zur Weiterentwicklung' },
+      ],
+    },
+    collaboration: {
+      heading: {
+        eyebrow: 'Zusammenarbeit',
+        title: 'Du sprichst mit dem Menschen, der es baut.',
+        text: 'Hinter Design. Code. Repeat. stehe ich: Ben. Gestaltung, technische Entscheidungen und Umsetzung greifen bei mir direkt ineinander. Für dich bedeutet das kurze Wege und einen Ansprechpartner, der das Projekt als Ganzes im Blick behält.',
+      },
+      items: [
+        { icon: 'forum', title: 'Direkter Austausch', text: 'Am Anfang stehen dein Ziel, die Menschen hinter dem Projekt und die Abläufe, die es unterstützen soll. Auch ohne fertiges Konzept können wir damit gemeinsam eine Richtung finden.' },
+        { icon: 'account_tree', title: 'Entscheidungen, die du nachvollziehen kannst', text: 'Ich erkläre, welche Lösung ich vorschlage und warum. Umfang, technische Abhängigkeiten und Abwägungen sollen verständlich bleiben, damit du fundiert entscheiden kannst.' },
+        { icon: 'handshake', title: 'Ein Blick über den Launch hinaus', text: 'Eine Website oder Anwendung wird später gepflegt und genutzt. Deshalb denke ich Änderungen, Betrieb und Weiterentwicklung mit. Wie viel Betreuung du brauchst, stimmen wir passend zum Projekt ab.' },
+      ],
+    },
+    location: {
+      heading: {
+        eyebrow: 'Standort & Zusammenarbeit',
+        title: 'Im Rheinland zu Hause. Digital überall nah dran.',
+        text: 'Mein Ausgangspunkt ist Mönchengladbach. Das Rheinland mit Düsseldorf, Köln und Bonn liegt nah – die Zusammenarbeit ist aber nicht an eine Region gebunden. Websites, Anwendungen und Designprojekte begleite ich auch deutschlandweit im digitalen Austausch.',
+      },
+      regions: [{ code: 'MG', name: 'Mönchengladbach' }, { code: 'D', name: 'Düsseldorf' }, { code: 'K', name: 'Köln' }, { code: 'BN', name: 'Bonn' }],
+      note: 'Nähe ist für mich vor allem eine Frage der Zusammenarbeit. Ein Beispiel außerhalb des Rheinlands ist die Praxiswebsite in Weinheim: Entscheidend sind klare Absprachen und ein gemeinsames Verständnis für das Projekt.',
+      cta: 'Kundenprojekte entdecken',
+    },
     seo: {
       title: 'Studio | Design. Code. Repeat.',
       description: 'Design. Code. Repeat. verbindet Full-Stack-Webentwicklung, UI/UX, Design und technische Betreuung in einer persönlichen Studio-Struktur.',
@@ -171,7 +204,7 @@ const de: StudioContent = {
     },
     heading: {
       eyebrow: 'about.studio',
-      title: 'Kleines Studio. Kurze Wege. Volle technische Verantwortung.',
+      title: 'Design & Code. Persönlich.',
       text: 'Design. Code. Repeat. verbindet Webentwicklung, individuelle Software, Design und technische Betreuung in einer direkten Studio-Struktur. B² ist die Developer-Signatur dahinter.',
     },
     intro: [
@@ -733,6 +766,39 @@ const en: StudioContent = {
     deliveredAriaLabel: 'Delivered client projects',
   },
   studioPage: {
+    identity: {
+      name: 'Benjamin Bennewitz',
+      role: 'Development, design & operations',
+      location: 'Mönchengladbach · Germany',
+      portraitAlt: 'Ben holding a coffee cup',
+      facets: [
+        { icon: 'data_object', title: 'Full stack', text: 'Interfaces, data and applications' },
+        { icon: 'design_services', title: 'Design', text: 'Visual systems and clear interaction' },
+        { icon: 'dns', title: 'Operations', text: 'From deployment to ongoing development' },
+      ],
+    },
+    collaboration: {
+      heading: {
+        eyebrow: 'Working together',
+        title: 'Talk to the person who builds it.',
+        text: 'Behind Design. Code. Repeat. is me: Ben. Design, technical decisions and implementation connect directly in my work. For you, that means short paths and one point of contact who sees the whole project.',
+      },
+      items: [
+        { icon: 'forum', title: 'Direct communication', text: 'We start with your goal, the people behind the project and the workflows it should support. Even without a finished concept, that gives us a direction to explore together.' },
+        { icon: 'account_tree', title: 'Decisions you can understand', text: 'I explain the solution I suggest and why. Scope, technical dependencies and trade-offs should stay understandable so you can make informed decisions.' },
+        { icon: 'handshake', title: 'Looking beyond launch', text: 'A website or application will be maintained and used over time. That is why I consider future changes, operations and development from the start. We agree on the level of support that fits your project.' },
+      ],
+    },
+    location: {
+      heading: {
+        eyebrow: 'Location & collaboration',
+        title: 'At home in the Rhineland. Connected wherever you are.',
+        text: 'My base is Mönchengladbach. Düsseldorf, Cologne and Bonn are close by, but collaboration is not tied to one region. I also work on websites, applications and design projects across Germany through digital communication.',
+      },
+      regions: [{ code: 'MG', name: 'Mönchengladbach' }, { code: 'D', name: 'Düsseldorf' }, { code: 'K', name: 'Cologne' }, { code: 'BN', name: 'Bonn' }],
+      note: 'For me, closeness is mostly about how we work together. The practice website in Weinheim is one example outside the Rhineland: clear agreements and a shared understanding of the project matter most.',
+      cta: 'Explore client projects',
+    },
     seo: {
       title: 'Studio | Design. Code. Repeat.',
       description: 'Design. Code. Repeat. combines full-stack web development, UI/UX, design and technical operations in a personal studio structure.',
@@ -740,7 +806,7 @@ const en: StudioContent = {
     },
     heading: {
       eyebrow: 'about.studio',
-      title: 'Small studio. Short paths. Full technical ownership.',
+      title: 'Design & code. With Ben.',
       text: 'Design. Code. Repeat. combines web development, custom software, design and technical support in a direct studio structure. B² is the developer signature behind it.',
     },
     intro: [
