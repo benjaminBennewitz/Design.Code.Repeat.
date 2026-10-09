@@ -5,13 +5,14 @@
 
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LanguageService } from './core/services/language.service';
 import { TabTitleService } from './core/services/tab-title.service';
 import { AccessibilityPanelComponent } from './layout/accessibility-panel/accessibility-panel.component';
 import { CookieBannerComponent } from './layout/cookie-banner/cookie-banner.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { FragmentScrollService } from './core/services/fragment-scroll.service';
 import { HeaderComponent } from './layout/header/header.component';
 import { ScrollToTopComponent } from './layout/scroll-to-top/scroll-to-top.component';
 
@@ -21,6 +22,7 @@ import { ScrollToTopComponent } from './layout/scroll-to-top/scroll-to-top.compo
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
     HeaderComponent,
     FooterComponent,
     AccessibilityPanelComponent,
@@ -57,6 +59,7 @@ export class AppComponent {
   private currentRoutePath = this.routePath(this.router.url);
 
   constructor() {
+    inject(FragmentScrollService);
     this.viewportScroller.setOffset(() => [0, this.document.querySelector<HTMLElement>('.site-header')?.offsetHeight ?? 0]);
 
     effect(() => this.tabTitleService.setHiddenTitle(this.languageService.content().meta.hiddenTitle));

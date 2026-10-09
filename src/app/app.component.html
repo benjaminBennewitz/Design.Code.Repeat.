@@ -1,5 +1,5 @@
 <div class="app-shell">
-  <a class="skip-link" href="#main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
+  <a class="skip-link" [routerLink]="[]" fragment="main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
   <dcr-header />
 
   @defer (on timer(3500ms)) {

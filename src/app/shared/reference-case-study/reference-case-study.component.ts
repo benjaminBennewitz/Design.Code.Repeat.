@@ -15,6 +15,7 @@ import { SystemDialogComponent } from '../reference-system-dialog/reference-syst
 import { ProjectTelemetryComponent } from '../reference-project-telemetry/reference-project-telemetry.component';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { TextRevealDirective } from '../text-reveal.directive';
 
 /** Stabile Reader-Seite mit fertig berechnetem Bild-Asset für Angular-Bindings. */
 interface CatalogReaderPage extends ProjectCatalogPage {
@@ -67,7 +68,7 @@ interface CatalogLoupeState {
 @Component({
   selector: 'dcr-reference-case-study',
   standalone: true,
-  imports: [RouterLink, RevealOnScrollDirective, SystemDialogComponent, ProjectTelemetryComponent],
+  imports: [TextRevealDirective, RouterLink, RevealOnScrollDirective, SystemDialogComponent, ProjectTelemetryComponent],
   templateUrl: './reference-case-study.component.html',
   styleUrls: [
     './reference-case-study.component.scss',

@@ -4,11 +4,13 @@
  */
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TextRevealDirective } from '../text-reveal.directive';
 
 /** Semantische Überschrift für Hauptbereiche. */
 @Component({
   selector: 'dcr-section-heading',
   standalone: true,
+  imports: [TextRevealDirective],
   templateUrl: './section-heading.component.html',
   styleUrl: './section-heading.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

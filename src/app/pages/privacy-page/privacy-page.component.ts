@@ -3,8 +3,9 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { CookieConsentService } from '../../core/services/cookie-consent.service';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
-@Component({ selector: 'dcr-privacy-page', standalone: true, templateUrl: './privacy-page.component.html', styleUrl: './privacy-page.component.scss', changeDetection: ChangeDetectionStrategy.OnPush })
+@Component({ selector: 'dcr-privacy-page', standalone: true, imports: [TextRevealDirective], templateUrl: './privacy-page.component.html', styleUrl: './privacy-page.component.scss', changeDetection: ChangeDetectionStrategy.OnPush })
 export class PrivacyPageComponent {
   private readonly languageService = inject(LanguageService);
   private readonly seoService = inject(SeoService);

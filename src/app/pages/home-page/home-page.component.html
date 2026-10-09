@@ -8,32 +8,32 @@
 
       <h1 id="home-hero-title" class="home-hero__claim" [attr.aria-label]="heroClaimLabel()">
         <span class="home-hero__line">
-          <span>{{ heroClaimLines()[0].before }}</span>
+          <span [dcrTextReveal]="heroClaimLines()[0].before"></span>
           <span class="home-hero__slot home-hero__slot--one" aria-hidden="true">
             <span class="home-hero__symbol home-hero__symbol--grid is-phase-0" [attr.data-animation]="heroSymbolAnimations[0][0]"></span>
             <span class="home-hero__symbol home-hero__symbol--code is-phase-2" [attr.data-animation]="heroSymbolAnimations[0][1]">&lt;/&gt;</span>
             <span class="home-hero__symbol home-hero__symbol--cluster is-phase-1" [attr.data-animation]="heroSymbolAnimations[0][2]"><i></i><i></i><i></i><i></i></span>
           </span>
-          <span>{{ heroClaimLines()[0].after }}</span>
+          <span [dcrTextReveal]="heroClaimLines()[0].after"></span>
         </span>
         <span class="home-hero__line">
-          <span>{{ heroClaimLines()[1].before }}</span>
+          <span [dcrTextReveal]="heroClaimLines()[1].before"></span>
           <span class="home-hero__slot home-hero__slot--two" aria-hidden="true">
             <span class="home-hero__symbol home-hero__symbol--cluster is-phase-0" [attr.data-animation]="heroSymbolAnimations[1][0]"><i></i><i></i><i></i><i></i></span>
             <span class="home-hero__symbol home-hero__symbol--grid is-phase-2" [attr.data-animation]="heroSymbolAnimations[1][1]"></span>
             <span class="home-hero__symbol home-hero__symbol--code is-phase-1" [attr.data-animation]="heroSymbolAnimations[1][2]">&lt;/&gt;</span>
           </span>
-          <span>{{ heroClaimLines()[1].after }}</span>
+          <span [dcrTextReveal]="heroClaimLines()[1].after"></span>
         </span>
         <span class="home-hero__line home-hero__line--accent" [class.home-hero__line--symbol-end]="!heroClaimLines()[2].after">
-          <span>{{ heroClaimLines()[2].before }}</span>
+          <span [dcrTextReveal]="heroClaimLines()[2].before"></span>
           <span class="home-hero__slot home-hero__slot--three" aria-hidden="true">
             <span class="home-hero__symbol home-hero__symbol--code is-phase-0" [attr.data-animation]="heroSymbolAnimations[2][0]">&lt;/&gt;</span>
             <span class="home-hero__symbol home-hero__symbol--cluster is-phase-2" [attr.data-animation]="heroSymbolAnimations[2][1]"><i></i><i></i><i></i><i></i></span>
             <span class="home-hero__symbol home-hero__symbol--grid is-phase-1" [attr.data-animation]="heroSymbolAnimations[2][2]"></span>
           </span>
           @if (heroClaimLines()[2].after) {
-            <span>{{ heroClaimLines()[2].after }}</span>
+            <span [dcrTextReveal]="heroClaimLines()[2].after"></span>
           }
         </span>
       </h1>
@@ -49,13 +49,13 @@
     <div class="dcr-container home-capabilities__layout">
       <div class="home-capabilities__intro">
         <p class="dcr-eyebrow">{{ content().home.hero.eyebrow }}</p>
-        <h2 id="home-capabilities-title">{{ content().home.hero.title }}</h2>
-        <p class="home-capabilities__lead">{{ content().home.hero.lead }}</p>
+        <h2 id="home-capabilities-title" [dcrTextReveal]="content().home.hero.title"></h2>
+        <p class="home-capabilities__lead" [dcrTextReveal]="content().home.hero.lead"></p>
         <span class="home-capabilities__signature" aria-hidden="true">↗</span>
       </div>
       <div class="home-capabilities__grid">
         @for (service of content().services.slice(0, 4); track service.slug; let index = $index) {
-          <a class="home-capabilities__item" [class.home-capabilities__item--care]="service.slug === 'wartung'" [attr.aria-describedby]="'home-capability-detail-' + service.slug" routerLink="/leistungen" [queryParams]="{ service: service.slug }" fragment="service-index" [attr.aria-label]="service.title">
+          <a class="home-capabilities__item" [class.home-capabilities__item--care]="service.slug === 'wartung'" [attr.aria-describedby]="'home-capability-detail-' + service.slug" [routerLink]="'/leistungen/' + service.slug" [attr.aria-label]="service.title">
             <div class="home-capabilities__top">
               <span class="home-capabilities__index">0{{ index + 1 }}</span>
               <span class="material-symbols-outlined home-capabilities__arrow" aria-hidden="true">arrow_outward</span>
@@ -75,7 +75,7 @@
   </section>
 
 
-@defer (on viewport) {
+@defer (on viewport; when anchorTarget()) {
     <section class="home-services dcr-section dcr-viewport-section dcr-section-flow" id="leistungen">
       <div class="dcr-container">
         <dcr-section-heading [eyebrow]="content().home.services.eyebrow" [title]="content().home.services.title" [text]="content().home.services.text" />
@@ -94,7 +94,7 @@
               </div>
               <div class="service-card__bottom">
                 <strong>{{ service.price }}</strong>
-                <a routerLink="/leistungen" fragment="service-index" [attr.aria-label]="service.title">
+                <a [routerLink]="'/leistungen/' + service.slug" [attr.aria-label]="service.title">
                   <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
                 </a>
               </div>
@@ -107,7 +107,7 @@
   <section class="home-services dcr-section dcr-viewport-section home-deferred-placeholder" id="leistungen" aria-hidden="true"></section>
 }
 
-@defer (on viewport) {
+@defer (on viewport; when anchorTarget()) {
     <section class="hosting-strip dcr-section dcr-viewport-section dcr-section-flow" id="hosting">
       <div class="dcr-container hosting-strip__layout">
         <div>
@@ -117,15 +117,15 @@
               <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>{{ point }}</li>
             }
           </ul>
-          <dcr-action-button [label]="content().home.hosting.cta" route="/leistungen" fragment="managed-ops" variant="dark" />
+          <dcr-action-button [label]="content().home.hosting.cta" route="/leistungen/managed-hosting" variant="dark" />
         </div>
   
         <aside class="hosting-strip__mail">
           <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>
           <p class="dcr-eyebrow">mail.addon</p>
           <h3>{{ content().home.hosting.emailTitle }}</h3>
-          <p>{{ content().home.hosting.emailText }}</p>
-          <a routerLink="/leistungen" fragment="managed-ops">{{ content().services[5].ctaLabel }} →</a>
+          <p [dcrTextReveal]="content().home.hosting.emailText"></p>
+          <a routerLink="/leistungen/email">{{ content().services[5].title }} →</a>
         </aside>
       </div>
     </section>
@@ -133,7 +133,7 @@
   <section class="hosting-strip dcr-section dcr-viewport-section home-deferred-placeholder" id="hosting" aria-hidden="true"></section>
 }
 
-@defer (on viewport) {
+@defer (on viewport; when anchorTarget()) {
     <section class="home-references dcr-section dcr-viewport-section dcr-section-flow" id="referenzen" [dcrHorizontalWheel]="workTrack" [dcrHorizontalSticky]="workSticky">
       <div class="dcr-container home-references__head">
         <dcr-section-heading [eyebrow]="content().home.references.eyebrow" [title]="content().home.references.title" [text]="content().home.references.text" />
@@ -191,7 +191,7 @@
 
 
 
-@defer (on viewport) {
+@defer (on viewport; when anchorTarget()) {
     <section class="home-process dcr-section dcr-viewport-section dcr-section-flow" id="prozess">
       <div class="dcr-container">
         <dcr-section-heading align="right" [eyebrow]="content().home.process.eyebrow" [title]="processHeadingTitle()" [text]="content().home.process.text" />
@@ -211,13 +211,13 @@
   <section class="home-process dcr-section dcr-viewport-section home-deferred-placeholder" id="prozess" aria-hidden="true"></section>
 }
 
-  @defer (on viewport) {
+  @defer (on viewport; when anchorTarget()) {
     <dcr-infinite-marquee class="home-marquee" [items]="servicesMarqueeItems()" [ariaLabel]="marqueeLabel()" tone="primary" />
   } @placeholder {
     <div class="home-marquee-placeholder" aria-hidden="true"></div>
   }
 
-@defer (on viewport) {
+@defer (on viewport; when anchorTarget()) {
     <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
       <div class="dcr-container home-faq__layout">
         <dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" />
@@ -245,6 +245,9 @@
                 [attr.aria-hidden]="openFaqIndex() !== index">
                 <div class="faq-list__content-inner">
                   <p>{{ item.answer }}</p>
+                  @if (item.relatedLink; as link) {
+                    <p class="faq-list__related"><a [routerLink]="link.route" [fragment]="link.fragment" [attr.tabindex]="openFaqIndex() === index ? null : -1">{{ link.label }} →</a></p>
+                  }
                 </div>
               </div>
             </div>

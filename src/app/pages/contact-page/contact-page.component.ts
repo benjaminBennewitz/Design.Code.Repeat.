@@ -8,12 +8,13 @@ import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Kontaktseite. */
 @Component({
   selector: 'dcr-contact-page',
   standalone: true,
-  imports: [ContactFormComponent, SectionHeadingComponent],
+  imports: [TextRevealDirective, ContactFormComponent, SectionHeadingComponent],
   templateUrl: './contact-page.component.html',
   styleUrl: './contact-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

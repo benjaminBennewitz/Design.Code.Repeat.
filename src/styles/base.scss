@@ -273,3 +273,13 @@ html.dcr-language-is-switching .site-footer {
 :root[data-motion='off'].dcr-language-is-switching .site-footer {
   animation: none !important;
 }
+
+
+html.dcr-anchor-is-scrolling {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+  overflow-anchor: none;
+}
+html.dcr-anchor-is-scrolling #main-content .dcr-viewport-section {
+  content-visibility: visible;
+}

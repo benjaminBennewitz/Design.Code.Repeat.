@@ -3,8 +3,9 @@
  * @description Orchestriert Leistungen, Managed Hosting, Referenzen, Prozess, FAQ und Kontakt als kommerziellen Überblick.
  */
 
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
@@ -13,12 +14,13 @@ import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-sc
 import { HorizontalScrollHintComponent } from '../../shared/horizontal-scroll-hint/horizontal-scroll-hint.component';
 import { InfiniteMarqueeComponent } from '../../shared/infinite-marquee/infinite-marquee.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Studio-Landingpage mit klarer Conversion-Hierarchie. */
 @Component({
   selector: 'dcr-home-page',
   standalone: true,
-  imports: [RouterLink, ActionButtonComponent, ContactFormComponent, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, InfiniteMarqueeComponent, SectionHeadingComponent],
+  imports: [TextRevealDirective, RouterLink, ActionButtonComponent, ContactFormComponent, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, InfiniteMarqueeComponent, SectionHeadingComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +28,8 @@ import { SectionHeadingComponent } from '../../shared/section-heading/section-he
 export class HomePageComponent {
   private readonly languageService = inject(LanguageService);
   private readonly seoService = inject(SeoService);
+  /** Materialisiert bei Sprunglinks auch die vorausgehenden Abschnitte für stabile Geometrie. */
+  readonly anchorTarget = toSignal(inject(ActivatedRoute).fragment, { initialValue: null });
   readonly content = computed(() => this.languageService.content());
   readonly techStackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');
   readonly marqueeLabel = computed(() => this.languageService.language() === 'de' ? 'Leistungen' : 'Services');

@@ -126,10 +126,18 @@ export interface ProcessStep {
   readonly command: string;
 }
 
+/** Kontextbezogener Verweis auf eine interne Seite oder einen Abschnitt. */
+export interface InternalContentLink {
+  readonly label: string;
+  readonly route: string;
+  readonly fragment?: string;
+}
+
 /** FAQ-Eintrag. */
 export interface FaqItem {
   readonly question: string;
   readonly answer: string;
+  readonly relatedLink?: InternalContentLink;
 }
 
 /** Technischer Kontaktgrund. */

@@ -1,7 +1,7 @@
 <header class="section-heading" [class.section-heading--center]="align() === 'center'" [class.section-heading--right]="align() === 'right'">
   <p class="dcr-eyebrow">{{ eyebrow() }}</p>
-  <h2>{{ title() }}</h2>
+  <h2 [dcrTextReveal]="title()"></h2>
   @if (text()) {
-    <p class="section-heading__text">{{ text() }}</p>
+    <p class="section-heading__text" [dcrTextReveal]="text()"></p>
   }
 </header>

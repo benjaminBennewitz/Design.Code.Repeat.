@@ -6,7 +6,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
@@ -15,8 +15,9 @@ const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
       routes,
+      withRouterConfig({ onSameUrlNavigation: 'reload' }),
       withInMemoryScrolling({
-        anchorScrolling: 'enabled',
+        anchorScrolling: 'disabled',
         scrollPositionRestoration: 'enabled',
       }),
     ),

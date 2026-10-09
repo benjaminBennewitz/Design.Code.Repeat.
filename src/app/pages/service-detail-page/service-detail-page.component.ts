@@ -11,12 +11,13 @@ import { SeoPageContent, StudioService } from '../../core/models/studio.models';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { TerminalPanelComponent } from '../../shared/terminal-panel/terminal-panel.component';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Dynamische Detailseite für Web, Software, Design, Care, Hosting und E-Mail. */
 @Component({
   selector: 'dcr-service-detail-page',
   standalone: true,
-  imports: [RouterLink, TerminalPanelComponent],
+  imports: [TextRevealDirective, RouterLink, TerminalPanelComponent],
   templateUrl: './service-detail-page.component.html',
   styleUrl: './service-detail-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +45,36 @@ export class ServiceDetailPageComponent {
   readonly contactHint = computed(() => this.languageService.language() === 'de'
     ? 'Scope, vorhandener Stand und Betriebsanforderungen werden vor einem verbindlichen Angebot gemeinsam geklärt.'
     : 'Scope, current state and operational requirements are clarified together before a binding proposal.');
+
+  /** Ergänzende Leistungen aus dem vorhandenen Content, ohne doppelte Beschriftungen. */
+  readonly relatedServices = computed(() => {
+    const relatedSlugs: Record<string, readonly string[]> = {
+      webentwicklung: ['ui-ux-design', 'wartung'],
+      softwareentwicklung: ['managed-hosting', 'wartung'],
+      'ui-ux-design': ['webentwicklung'],
+      wartung: ['managed-hosting'],
+      'managed-hosting': ['wartung', 'email'],
+      email: ['managed-hosting'],
+    };
+    return this.languageService.content().services.filter((item) => (relatedSlugs[this.slug()] ?? []).includes(item.slug));
+  });
+
+  readonly relatedLabel = computed(() => this.languageService.language() === 'de' ? 'Passend zu dieser Leistung' : 'Related to this service');
+  readonly processLabel = computed(() => this.languageService.language() === 'de' ? 'So läuft ein Projekt ab' : 'See the project process');
+
+  /** Praktisches Beispiel passend zur angebotenen Leistung. */
+  readonly exampleLink = computed(() => {
+    const content = this.languageService.content();
+    const referenceSlug = this.slug() === 'softwareentwicklung' ? 'intranet'
+      : this.slug() === 'ui-ux-design' ? 'design-archive' : null;
+    const reference = content.references.find((item) => item.slug === referenceSlug);
+    if (reference?.internalRoute) {
+      return { route: reference.internalRoute, label: reference.name, fragment: undefined };
+    }
+    return this.slug() === 'webentwicklung'
+      ? { route: '/referenzen', label: content.referencesPage.deliveredHeading.title, fragment: 'kundenprojekte' }
+      : null;
+  });
 
   constructor() {
     effect(() => {

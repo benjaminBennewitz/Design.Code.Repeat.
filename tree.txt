@@ -29,6 +29,8 @@ dcr/
 │   │   │       ├── contact-api.service.spec.ts
 │   │   │       ├── contact-api.service.ts
 │   │   │       ├── cookie-consent.service.ts
+│   │   │       ├── fragment-scroll.service.spec.ts
+│   │   │       ├── fragment-scroll.service.ts
 │   │   │       ├── language.service.ts
 │   │   │       ├── seo.service.ts
 │   │   │       ├── tab-title.service.ts
@@ -163,7 +165,9 @@ dcr/
 │   │   │   │   └── terminal-panel.component.ts
 │   │   │   ├── horizontal-wheel-scroll.directive.ts
 │   │   │   ├── reference-reveal-on-scroll.directive.ts
-│   │   │   └── scroll-reveal.directive.ts
+│   │   │   ├── scroll-reveal.directive.ts
+│   │   │   ├── text-reveal.directive.spec.ts
+│   │   │   └── text-reveal.directive.ts
 │   │   ├── app.component.html
 │   │   ├── app.component.scss
 │   │   ├── app.component.ts
@@ -339,6 +343,7 @@ dcr/
 │   │   ├── reference-case-catalog.scss
 │   │   ├── reference-case-tokens.scss
 │   │   ├── reference-case-utilities.scss
+│   │   ├── text-reveal.scss
 │   │   ├── tokens.scss
 │   │   └── utilities.scss
 │   ├── .htaccess

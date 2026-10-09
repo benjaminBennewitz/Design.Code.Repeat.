@@ -5,9 +5,9 @@
       <div>
         <a class="service-detail__back" routerLink="/leistungen"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>{{ backLabel() }}</a>
         <p class="dcr-eyebrow">{{ item.command }}</p>
-        <h1>{{ item.title }}</h1>
+        <h1 [dcrTextReveal]="item.title"></h1>
         <p class="service-detail__kicker">{{ item.kicker }}</p>
-        <p class="service-detail__lead">{{ item.description }}</p>
+        <p class="service-detail__lead" [dcrTextReveal]="item.description"></p>
         <div class="service-detail__actions">
           <a class="dcr-button dcr-button--accent" routerLink="/kontakt">{{ item.ctaLabel }}</a>
           <strong>{{ item.price }}</strong>
@@ -21,7 +21,7 @@
     <div class="dcr-container service-detail__columns">
       <article>
         <p class="dcr-eyebrow">capabilities.list</p>
-        <h2>{{ capabilitiesLabel() }}</h2>
+        <h2 [dcrTextReveal]="capabilitiesLabel()"></h2>
         <ul>
           @for (feature of item.features; track feature) {
             <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ feature }}</li>
@@ -30,19 +30,30 @@
       </article>
       <article>
         <p class="dcr-eyebrow">scope.includes</p>
-        <h2>{{ includedLabel() }}</h2>
+        <h2 [dcrTextReveal]="includedLabel()"></h2>
         <ul>
           @for (included of item.includes; track included) {
             <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ included }}</li>
           }
         </ul>
       </article>
+      <nav class="service-detail__related" [attr.aria-label]="relatedLabel()">
+        <h3>{{ relatedLabel() }}</h3>
+        <ul>
+          @if (exampleLink(); as example) {
+            <li><a [routerLink]="example.route" [fragment]="example.fragment">{{ example.label }} →</a></li>
+          }
+          @for (related of relatedServices(); track related.slug) {
+            <li><a [routerLink]="'/leistungen/' + related.slug">{{ related.title }} →</a></li>
+          }
+        </ul>
+      </nav>
     </div>
   </section>
 
   <section class="service-detail__cta dcr-section dcr-viewport-section dcr-section-flow" [id]="item.slug + '-kontakt'">
     <div class="dcr-container service-detail__cta-layout">
-      <div><p class="dcr-eyebrow">next.step</p><h2>{{ item.ctaLabel }}</h2><p>{{ contactHint() }}</p></div>
+      <div><p class="dcr-eyebrow">next.step</p><h2 [dcrTextReveal]="item.ctaLabel"></h2><p [dcrTextReveal]="contactHint()"></p><p><a class="service-detail__process" routerLink="/" fragment="prozess">{{ processLabel() }} →</a></p></div>
       <a class="dcr-button dcr-button--dark" routerLink="/kontakt">{{ item.ctaLabel }} →</a>
     </div>
   </section>

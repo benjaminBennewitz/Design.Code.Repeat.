@@ -22,13 +22,13 @@
           <h1 class="bp-title project-detail__hero-title">
             @if (activeProject.titleLines; as titleLines) {
             @for (line of titleLines; track line) {
-            <span>{{ line }}</span>
+            <span [dcrTextReveal]="line"></span>
             }
             } @else {
-            {{ activeProject.name }}
+            <span [dcrTextReveal]="activeProject.name"></span>
             }
           </h1>
-          <p class="bp-subtitle project-detail__hero-summary">{{ activeProject.summary }}</p>
+          <p class="bp-subtitle project-detail__hero-summary" [dcrTextReveal]="activeProject.summary"></p>
 
           <ul class="project-detail__hero-tags" [attr.aria-label]="content().projectsIntro.techStackAriaLabel">
             @for (stack of activeProject.techStack; track stack) {
@@ -233,7 +233,7 @@
     <section class="project-detail__highlights bp-section" aria-labelledby="project-highlights-title" bpReveal>
       <div class="bp-container project-detail__signals">
         <p class="bp-eyebrow">{{ content().projectsIntro.highlightsEyebrow }}</p>
-        <h2 id="project-highlights-title">{{ content().projectsIntro.highlightsTitle }}</h2>
+        <h2 id="project-highlights-title" [dcrTextReveal]="content().projectsIntro.highlightsTitle"></h2>
 
         @if ((activeProject.technicalHighlights?.length ?? 0) > 0) {
         <div class="project-detail__highlight-grid">
@@ -295,12 +295,12 @@
 
         <div class="project-detail__copy" bpReveal>
           <section>
-            <h2>{{ content().projectsIntro.descriptionLabel }}</h2>
-            <p>{{ activeProject.description }}</p>
+            <h2 [dcrTextReveal]="content().projectsIntro.descriptionLabel"></h2>
+            <p [dcrTextReveal]="activeProject.description"></p>
           </section>
           <section>
-            <h2>{{ content().projectsIntro.goalLabel }}</h2>
-            <p>{{ activeProject.goal }}</p>
+            <h2 [dcrTextReveal]="content().projectsIntro.goalLabel"></h2>
+            <p [dcrTextReveal]="activeProject.goal"></p>
             <ul>
               @for (requirement of activeProject.requirements; track requirement) {
               <li>{{ requirement }}</li>
@@ -308,8 +308,8 @@
             </ul>
           </section>
           <section>
-            <h2>{{ content().projectsIntro.roleLabel }}</h2>
-            <p>{{ activeProject.role }}</p>
+            <h2 [dcrTextReveal]="content().projectsIntro.roleLabel"></h2>
+            <p [dcrTextReveal]="activeProject.role"></p>
           </section>
         </div>
       </div>
@@ -320,7 +320,7 @@
       <div class="bp-container">
         <div class="project-detail__section-head">
           <p class="bp-eyebrow">{{ content().projectsIntro.caseStudyLabel }}</p>
-          <h2>{{ content().projectsIntro.insightsLabel }}</h2>
+          <h2 [dcrTextReveal]="content().projectsIntro.insightsLabel"></h2>
         </div>
 
         @if ((activeProject.architecture ?? []).length > 0) {
@@ -328,7 +328,7 @@
           <div class="project-detail__architecture-head">
             <h3>{{ content().projectsIntro.architectureLabel }}</h3>
             @if (content().projectsIntro.architectureHint) {
-            <p>{{ content().projectsIntro.architectureHint }}</p>
+            <p [dcrTextReveal]="content().projectsIntro.architectureHint"></p>
             }
           </div>
 
@@ -479,9 +479,9 @@
         <header class="project-detail__capabilities-head">
           <div>
             <p class="bp-eyebrow">{{ capabilities.eyebrow }}</p>
-            <h2>{{ capabilities.title }}</h2>
+            <h2 [dcrTextReveal]="capabilities.title"></h2>
           </div>
-          <p>{{ capabilities.text }}</p>
+          <p [dcrTextReveal]="capabilities.text"></p>
         </header>
 
         <ol class="project-detail__capability-index">
@@ -505,7 +505,7 @@
       <div class="bp-container">
         <div class="project-detail__section-head" bpReveal>
           <p class="bp-eyebrow">{{ boardShowcase.workflowEyebrow }}</p>
-          <h2>{{ boardShowcase.workflowTitle }}</h2>
+          <h2 [dcrTextReveal]="boardShowcase.workflowTitle"></h2>
         </div>
 
         <ol class="project-detail__board-flow" [attr.aria-label]="boardShowcase.workflowTitle">
@@ -550,9 +550,9 @@
 
           <div class="project-detail__character-copy">
             <p class="bp-eyebrow">{{ boardShowcase.mascot.eyebrow }}</p>
-            <h2>{{ boardShowcase.mascot.title }}</h2>
+            <h2 [dcrTextReveal]="boardShowcase.mascot.title"></h2>
             <strong>{{ boardShowcase.mascot.name }} · {{ boardShowcase.mascot.role }}</strong>
-            <p class="project-detail__character-intro">{{ boardShowcase.mascot.text }}</p>
+            <p class="project-detail__character-intro" [dcrTextReveal]="boardShowcase.mascot.text"></p>
 
             @if (activeProject.liveDemo; as demo) {
             @if (demo.status === 'available' && demo.url) {
@@ -603,7 +603,7 @@
       <div class="bp-container">
         <div class="project-detail__section-head" bpReveal>
           <p class="bp-eyebrow">{{ bloodShowcase.pipelineEyebrow }}</p>
-          <h2>{{ bloodShowcase.pipelineTitle }}</h2>
+          <h2 [dcrTextReveal]="bloodShowcase.pipelineTitle"></h2>
         </div>
 
         <div class="project-detail__blood-pipeline-grid">
@@ -627,7 +627,7 @@
       <div class="bp-container project-detail__blood-guide bp-card" [class.project-detail__blood-guide--scale]="isBloodGuideMode('scale')" [class.project-detail__blood-guide--bar]="isBloodGuideMode('bar')" [class.project-detail__blood-guide--chart]="isBloodGuideMode('chart')" [style.--blood-guide-mode-index]="bloodGuideModeIndex()">
         <div class="project-detail__blood-guide-copy">
           <p class="bp-eyebrow">{{ bloodShowcase.guideEyebrow }}</p>
-          <h2>{{ bloodShowcase.guideTitle }}</h2>
+          <h2 [dcrTextReveal]="bloodShowcase.guideTitle"></h2>
 
           <div class="project-detail__blood-guide-controls" [attr.aria-label]="bloodShowcase.guideModeLabel">
             @for (mode of bloodShowcase.guideModes; track mode.key) {
@@ -679,7 +679,7 @@
     <section class="project-detail__catalog-reader-intro" bpReveal>
       <div class="bp-container project-detail__catalog-reader-head">
         <p class="bp-eyebrow">{{ catalogShowcase.readerEyebrow }}</p>
-        <h2>{{ catalogShowcase.readerTitle }}</h2>
+        <h2 [dcrTextReveal]="catalogShowcase.readerTitle"></h2>
         @if (catalogShowcase.readerHint) {
         <span>{{ catalogShowcase.readerHint }}</span>
         }
@@ -779,7 +779,7 @@
       <div class="bp-container">
         <div class="project-detail__section-head" bpReveal>
           <p class="bp-eyebrow">{{ content().projectsIntro.caseStudyLabel }}</p>
-          <h2>{{ content().projectsIntro.detailLayerLabel }}</h2>
+          <h2 [dcrTextReveal]="content().projectsIntro.detailLayerLabel"></h2>
         </div>
 
         <div class="project-detail__chapter-grid">
@@ -813,7 +813,7 @@
             </span>
             <div>
               <p class="bp-eyebrow">{{ content().projectsIntro.liveDemoLabel }} · {{ activeProject.name }}</p>
-              <h2>{{ content().projectsIntro.openDemoLabel }}</h2>
+              <h2 [dcrTextReveal]="content().projectsIntro.openDemoLabel"></h2>
               <p>{{ demo.text }}</p>
             </div>
           </div>
@@ -894,7 +894,7 @@
       <div class="bp-container">
         <div class="project-detail__section-head">
           <p class="bp-eyebrow">{{ activeProject.boardShowcase?.galleryEyebrow ?? activeProject.bloodShowcase?.galleryEyebrow ?? content().projectsIntro.galleryLabel }}</p>
-          <h2>{{ activeProject.boardShowcase?.galleryTitle ?? activeProject.bloodShowcase?.galleryTitle ?? activeProject.name }}</h2>
+          <h2 [dcrTextReveal]="activeProject.boardShowcase?.galleryTitle ?? activeProject.bloodShowcase?.galleryTitle ?? activeProject.name"></h2>
         </div>
 
         <div class="project-detail__evidence-grid">
@@ -985,7 +985,7 @@
   <section class="project-detail__missing bp-section">
     <div class="bp-container">
       <p class="bp-eyebrow">404</p>
-      <h1 class="bp-title">{{ content().notFoundTitle }}</h1>
+      <h1 class="bp-title" [dcrTextReveal]="content().notFoundTitle"></h1>
       <p class="bp-subtitle">{{ content().notFoundText }}</p>
       <a class="bp-button bp-button--accent" routerLink="/referenzen">
         <span>{{ content().projectsIntro.overviewLabel }}</span>

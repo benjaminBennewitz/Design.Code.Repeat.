@@ -12,12 +12,13 @@ import { SectionHeadingComponent } from '../../shared/section-heading/section-he
 import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Studio-Seite. */
 @Component({
   selector: 'dcr-studio-page',
   standalone: true,
-  imports: [ScrollRevealDirective, RouterLink, ActionButtonComponent, InfiniteMarqueeComponent, SectionHeadingComponent, SystemGridComponent],
+  imports: [TextRevealDirective, ScrollRevealDirective, RouterLink, ActionButtonComponent, InfiniteMarqueeComponent, SectionHeadingComponent, SystemGridComponent],
   templateUrl: './studio-page.component.html',
   styleUrl: './studio-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

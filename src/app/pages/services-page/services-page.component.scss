@@ -386,7 +386,7 @@
   overflow-wrap: normal;
 }
 
-.service-index__head h2 span {
+.service-index__head h2 > span {
   display: block;
 }
 
@@ -873,3 +873,23 @@
 }
 
 
+
+
+.service-console__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1rem;
+}
+.service-console__details {
+  color: var(--dcr-color-text);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.service-console__details:hover { color: var(--dcr-color-primary-text); }
+.service-console__details:focus-visible {
+  outline: 2px solid var(--dcr-color-primary);
+  outline-offset: 0.25rem;
+}

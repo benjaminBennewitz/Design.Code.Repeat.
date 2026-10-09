@@ -603,12 +603,12 @@ const de: StudioContent = {
     { index: '05', title: 'Betreiben', text: 'Deployment, Monitoring, Updates und Weiterentwicklung werden auf Wunsch dauerhaft betreut.', command: 'ops --keep-running' },
   ],
   faq: [
-    { question: 'Muss ich schon ein fertiges Konzept haben?', answer: 'Nein. Für den Start reichen Ziel, Problem und grober Kontext. Aus diesen Informationen lässt sich ein sinnvoller Scope entwickeln.' },
-    { question: 'Arbeitest du nur mit Angular und Django?', answer: 'Nein. Angular und Django sind mein Hauptstack für größere Anwendungen. Für eine kompakte Website kann ein schlankerer Stack sinnvoller sein. Die Technologie folgt dem Problem.' },
-    { question: 'Sind SEO und Accessibility extra Leistungen?', answer: 'Grundlegendes technisches SEO, semantische Struktur, responsive Umsetzung und WCAG-orientierte Accessibility gehören zur Qualitätsbasis. Spezialisierte SEO-Kampagnen oder umfangreiche Audits sind davon zu unterscheiden.' },
-    { question: 'Was bedeutet Managed Hosting?', answer: 'Nicht nur Speicherplatz: Einrichtung, SSL, Deployment, Monitoring, Backups, Restore und technische Administration werden passend zum Projekt betreut.' },
-    { question: 'Kann E-Mail mit übernommen werden?', answer: 'Ja, als optionale Ergänzung zu Domain, Website oder Managed Hosting. Dazu gehören je nach Bedarf Postfächer, Aliase und technische Einrichtung.' },
-    { question: 'Kannst du bestehende Projekte weiterentwickeln?', answer: 'Ja, sofern Codebasis, Zugänge und technischer Zustand eine seriöse Übernahme zulassen. Vorher wird geprüft, ob gezielte Weiterentwicklung oder ein sauberer Neuaufbau wirtschaftlicher ist.' },
+    { question: 'Muss ich schon ein fertiges Konzept haben?', answer: 'Nein. Für den Start reichen Ziel, Problem und grober Kontext. Aus diesen Informationen lässt sich ein sinnvoller Scope entwickeln.', relatedLink: { label: 'So läuft ein Projekt ab', route: '/', fragment: 'prozess' } },
+    { question: 'Arbeitest du nur mit Angular und Django?', answer: 'Nein. Angular und Django sind mein Hauptstack für größere Anwendungen. Für eine kompakte Website kann ein schlankerer Stack sinnvoller sein. Die Technologie folgt dem Problem.', relatedLink: { label: 'Technik im praktischen Einsatz', route: '/referenzen' } },
+    { question: 'Sind SEO und Accessibility extra Leistungen?', answer: 'Grundlegendes technisches SEO, semantische Struktur, responsive Umsetzung und WCAG-orientierte Accessibility gehören zur Qualitätsbasis. Spezialisierte SEO-Kampagnen oder umfangreiche Audits sind davon zu unterscheiden.', relatedLink: { label: 'Leistungsumfang der Webentwicklung', route: '/leistungen/webentwicklung' } },
+    { question: 'Was bedeutet Managed Hosting?', answer: 'Nicht nur Speicherplatz: Einrichtung, SSL, Deployment, Monitoring, Backups, Restore und technische Administration werden passend zum Projekt betreut.', relatedLink: { label: 'Managed Hosting im Detail', route: '/leistungen/managed-hosting' } },
+    { question: 'Kann E-Mail mit übernommen werden?', answer: 'Ja, als optionale Ergänzung zu Domain, Website oder Managed Hosting. Dazu gehören je nach Bedarf Postfächer, Aliase und technische Einrichtung.', relatedLink: { label: 'E-Mail-Einrichtung und Betreuung', route: '/leistungen/email' } },
+    { question: 'Kannst du bestehende Projekte weiterentwickeln?', answer: 'Ja, sofern Codebasis, Zugänge und technischer Zustand eine seriöse Übernahme zulassen. Vorher wird geprüft, ob gezielte Weiterentwicklung oder ein sauberer Neuaufbau wirtschaftlicher ist.', relatedLink: { label: 'Wartung und Weiterentwicklung', route: '/leistungen/wartung' } },
   ],
 };
 
@@ -1008,12 +1008,12 @@ const en: StudioContent = {
     { index: '05', title: 'Operate', text: 'Deployment, monitoring, updates and improvements can remain managed after launch.', command: 'ops --keep-running' },
   ],
   faq: [
-    { question: 'Do I need a finished concept?', answer: 'No. A goal, a problem and some context are enough to start. A sensible scope can be developed from there.' },
-    { question: 'Do you only work with Angular and Django?', answer: 'No. Angular and Django are my main stack for larger applications. A compact website may be better served by a leaner stack. Technology follows the problem.' },
-    { question: 'Are SEO and accessibility extra services?', answer: 'Technical SEO basics, semantic structure, responsive implementation and WCAG-oriented accessibility are part of the quality baseline. Specialized SEO campaigns or extensive audits are separate topics.' },
-    { question: 'What does managed hosting mean?', answer: 'More than storage: setup, SSL, deployment, monitoring, backups, restore and technical administration are managed around the project.' },
-    { question: 'Can email be included?', answer: 'Yes, as an optional extension to domain, website or managed hosting. Depending on the setup this includes mailboxes, aliases and technical configuration.' },
-    { question: 'Can you improve an existing project?', answer: 'Yes, if the codebase, access and technical state allow a responsible takeover. First we evaluate whether targeted improvement or a clean rebuild makes more economic sense.' },
+    { question: 'Do I need a finished concept?', answer: 'No. A goal, a problem and some context are enough to start. A sensible scope can be developed from there.', relatedLink: { label: 'See the project process', route: '/', fragment: 'prozess' } },
+    { question: 'Do you only work with Angular and Django?', answer: 'No. Angular and Django are my main stack for larger applications. A compact website may be better served by a leaner stack. Technology follows the problem.', relatedLink: { label: 'Technology in real projects', route: '/referenzen' } },
+    { question: 'Are SEO and accessibility extra services?', answer: 'Technical SEO basics, semantic structure, responsive implementation and WCAG-oriented accessibility are part of the quality baseline. Specialized SEO campaigns or extensive audits are separate topics.', relatedLink: { label: 'Web development capabilities', route: '/leistungen/webentwicklung' } },
+    { question: 'What does managed hosting mean?', answer: 'More than storage: setup, SSL, deployment, monitoring, backups, restore and technical administration are managed around the project.', relatedLink: { label: 'Managed hosting in detail', route: '/leistungen/managed-hosting' } },
+    { question: 'Can email be included?', answer: 'Yes, as an optional extension to domain, website or managed hosting. Depending on the setup this includes mailboxes, aliases and technical configuration.', relatedLink: { label: 'Email setup and support', route: '/leistungen/email' } },
+    { question: 'Can you improve an existing project?', answer: 'Yes, if the codebase, access and technical state allow a responsible takeover. First we evaluate whether targeted improvement or a clean rebuild makes more economic sense.', relatedLink: { label: 'Maintenance and ongoing development', route: '/leistungen/wartung' } },
   ],
 };
 

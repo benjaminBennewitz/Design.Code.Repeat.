@@ -3,8 +3,9 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
-@Component({ selector: 'dcr-not-found-page', standalone: true, imports: [RouterLink], templateUrl: './not-found-page.component.html', styleUrl: './not-found-page.component.scss', changeDetection: ChangeDetectionStrategy.OnPush })
+@Component({ selector: 'dcr-not-found-page', standalone: true, imports: [TextRevealDirective, RouterLink], templateUrl: './not-found-page.component.html', styleUrl: './not-found-page.component.scss', changeDetection: ChangeDetectionStrategy.OnPush })
 export class NotFoundPageComponent {
   private readonly languageService = inject(LanguageService);
   private readonly seoService = inject(SeoService);

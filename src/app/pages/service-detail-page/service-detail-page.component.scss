@@ -51,3 +51,31 @@
   display: grid;
   align-items: center;
 }
+
+
+.service-detail__related {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--dcr-color-border-strong);
+  padding-top: 1.25rem;
+}
+.service-detail__related h3 { margin: 0 0 1rem; font-size: 1rem; }
+.service-detail__related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.service-detail__related a { color: var(--dcr-color-text); }
+.service-detail__process { color: inherit; }
+.service-detail__related a, .service-detail__process {
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.service-detail__related a:hover, .service-detail__process:hover { text-decoration-thickness: 2px; }
+.service-detail__related a:focus-visible, .service-detail__process:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 0.3rem;
+}

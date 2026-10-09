@@ -4,8 +4,8 @@
     <div class="dcr-container studio-hero__layout">
       <div class="studio-hero__copy">
         <p class="dcr-eyebrow">{{ content().studioPage.heading.eyebrow }}</p>
-        <h1>{{ content().studioPage.heading.title }}</h1>
-        <p class="studio-hero__lead">{{ content().studioPage.heading.text }}</p>
+        <h1 [dcrTextReveal]="content().studioPage.heading.title"></h1>
+        <p class="studio-hero__lead" [dcrTextReveal]="content().studioPage.heading.text"></p>
         <div class="studio-deployment">
           <div class="studio-deployment__head">
             <span aria-hidden="true">CODE → BUILD → LIVE</span>
@@ -47,14 +47,14 @@
         @for (paragraph of content().studioPage.intro; track paragraph; let index = $index) {
           <article class="studio-intro__statement">
             <span class="studio-intro__statement-index" aria-hidden="true">0{{ index + 1 }}</span>
-            <p>{{ paragraph }}</p>
+            <p [dcrTextReveal]="paragraph"></p>
           </article>
         }
 
         <aside class="studio-intro__vita" aria-labelledby="studio-vita-title">
           <p class="studio-intro__vita-eyebrow">{{ content().studioPage.vita.eyebrow }}</p>
-          <h2 id="studio-vita-title">{{ content().studioPage.vita.title }}</h2>
-          <p>{{ content().studioPage.vita.text }}</p>
+          <h2 id="studio-vita-title" [dcrTextReveal]="content().studioPage.vita.title"></h2>
+          <p [dcrTextReveal]="content().studioPage.vita.text"></p>
           <ul>
             @for (fact of content().studioPage.vita.facts; track fact) {
               <li>{{ fact }}</li>
@@ -73,8 +73,8 @@
     <div class="dcr-container studio-collaboration__layout">
       <div class="studio-collaboration__intro">
         <p class="dcr-eyebrow">{{ content().studioPage.collaboration.heading.eyebrow }}</p>
-        <h2 id="studio-collaboration-title">{{ content().studioPage.collaboration.heading.title }}</h2>
-        <p>{{ content().studioPage.collaboration.heading.text }}</p>
+        <h2 id="studio-collaboration-title" [dcrTextReveal]="content().studioPage.collaboration.heading.title"></h2>
+        <p [dcrTextReveal]="content().studioPage.collaboration.heading.text"></p>
       </div>
       <ul class="studio-collaboration__list">
         @for (item of content().studioPage.collaboration.items; track item.icon) {
@@ -100,8 +100,8 @@
     <div class="dcr-container studio-region__layout">
       <div class="studio-region__copy">
         <p class="dcr-eyebrow">{{ content().studioPage.location.heading.eyebrow }}</p>
-        <h2 id="studio-region-title">{{ content().studioPage.location.heading.title }}</h2>
-        <p>{{ content().studioPage.location.heading.text }}</p>
+        <h2 id="studio-region-title" [dcrTextReveal]="content().studioPage.location.heading.title"></h2>
+        <p [dcrTextReveal]="content().studioPage.location.heading.text"></p>
       </div>
       <div class="studio-region__area">
         <ul class="studio-region__cities">
@@ -109,7 +109,7 @@
             <li><strong dcrScrollReveal aria-hidden="true">{{ region.code }}</strong><span>{{ region.name }}</span></li>
           }
         </ul>
-        <p class="studio-region__note">{{ content().studioPage.location.note }}</p>
+        <p class="studio-region__note" [dcrTextReveal]="content().studioPage.location.note"></p>
         <a class="studio-region__link" routerLink="/referenzen" fragment="kundenprojekte">{{ content().studioPage.location.cta }}<span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
       </div>
     </div>

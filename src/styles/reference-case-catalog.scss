@@ -84,7 +84,7 @@ body.bp-lightbox-open {
   text-shadow: 0 0 34px color-mix(in srgb, var(--bp-color-accent), transparent 72%);
 }
 
-.project-detail[data-project='grafikdesign-katalog'] .project-detail__hero .bp-title span {
+.project-detail[data-project='grafikdesign-katalog'] .project-detail__hero .bp-title > span {
   display: block;
 }
 .project-detail[data-project='grafikdesign-katalog'] .project-detail__hero-grid {
@@ -461,7 +461,7 @@ body.bp-lightbox-open {
   text-transform: uppercase;
 }
 
-.project-detail__catalog-reader-head span {
+.project-detail__catalog-reader-head > span {
   display: block;
   max-width: 720px;
   color: var(--bp-color-text-muted);

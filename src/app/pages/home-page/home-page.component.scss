@@ -901,3 +901,15 @@
 }
 
 .home-hero__line--symbol-end { grid-template-columns: max-content var(--hero-symbol-size); }
+
+
+.faq-list__related a {
+  color: var(--dcr-color-primary-text);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.faq-list__related a:hover { color: var(--dcr-color-text); }
+.faq-list__related a:focus-visible {
+  outline: 2px solid var(--dcr-color-primary);
+  outline-offset: 0.25rem;
+}

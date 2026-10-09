@@ -4,18 +4,18 @@
       <div class="references-hero__intro">
         <div>
           <p class="dcr-eyebrow">{{ content().referencesPage.heading.eyebrow }}</p>
-          <h1 id="references-title">{{ content().referencesPage.heading.title }}</h1>
+          <h1 id="references-title" [dcrTextReveal]="content().referencesPage.heading.title"></h1>
         </div>
-        <p class="references-hero__lead">{{ content().referencesPage.heading.text }}</p>
+        <p class="references-hero__lead" [dcrTextReveal]="content().referencesPage.heading.text"></p>
       </div>
       <div class="reference-categories">
         <article class="reference-category" aria-labelledby="reference-techs-title">
           <div class="reference-category__head">
             <span class="material-symbols-outlined" aria-hidden="true">data_object</span>
-            <h2 id="reference-techs-title">{{ content().referencesPage.techs.title }}</h2>
+            <h2 id="reference-techs-title" [dcrTextReveal]="content().referencesPage.techs.title"></h2>
             <span class="reference-category__count">{{ content().references.length.toString().padStart(2, '0') }}</span>
           </div>
-          <p class="reference-category__text">{{ content().referencesPage.techs.text }}</p>
+          <p class="reference-category__text" [dcrTextReveal]="content().referencesPage.techs.text"></p>
           <ul class="reference-category__features">
             @for (feature of content().referencesPage.techs.features; track feature) {
               <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ feature }}</li>
@@ -31,10 +31,10 @@
         <article class="reference-category reference-category--clients" aria-labelledby="reference-clients-title">
           <div class="reference-category__head">
             <span class="material-symbols-outlined" aria-hidden="true">language</span>
-            <h2 id="reference-clients-title">{{ content().referencesPage.clients.title }}</h2>
+            <h2 id="reference-clients-title" [dcrTextReveal]="content().referencesPage.clients.title"></h2>
             <span class="reference-category__count">{{ content().deliveredProjects.length.toString().padStart(2, '0') }}</span>
           </div>
-          <p class="reference-category__text">{{ content().referencesPage.clients.text }}</p>
+          <p class="reference-category__text" [dcrTextReveal]="content().referencesPage.clients.text"></p>
           <ul class="reference-category__features">
             @for (feature of content().referencesPage.clients.features; track feature) {
               <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ feature }}</li>
@@ -81,7 +81,7 @@
 
           <div class="reference-row__content">
             <div class="reference-row__meta"><span>{{ reference.type }}</span><span>{{ reference.year }}</span></div>
-            <h2>{{ reference.name }}</h2>
+            <h2 [dcrTextReveal]="reference.name"></h2>
             <p>{{ reference.summary }}</p>
 
             @if (reference.details?.length) {
@@ -152,7 +152,7 @@
 
             <div class="delivered-card__body">
               <p>{{ project.label }}</p>
-              <h2>{{ project.name }}</h2>
+              <h2 [dcrTextReveal]="project.name"></h2>
               @if (project.summary) {
                 <p class="delivered-card__summary">{{ project.summary }}</p>
               }
@@ -166,10 +166,14 @@
               <ul class="delivered-card__stack" [attr.aria-label]="techStackLabel()">
                 @for (tech of project.stack; track tech) { <li>{{ tech }}</li> }
               </ul>
+              @if (project.url !== '#') {
               <a [href]="project.url" target="_blank" rel="noopener noreferrer">
                 {{ content().referencesPage.deliveredCta }}
                 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
               </a>
+              } @else {
+                <span class="delivered-card__link-pending">{{ unpublishedLinkLabel() }}</span>
+              }
             </div>
           </article>
         }
@@ -185,12 +189,17 @@
     <div class="dcr-container references-closing__layout">
       <div>
         <p class="dcr-eyebrow">{{ content().referencesPage.closing.eyebrow }}</p>
-        <h2 id="references-closing-title">{{ content().referencesPage.closing.title }}</h2>
+        <h2 id="references-closing-title" [dcrTextReveal]="content().referencesPage.closing.title"></h2>
       </div>
       <div class="references-closing__copy">
         @for (paragraph of content().referencesPage.closing.paragraphs; track paragraph) {
-          <p>{{ paragraph }}</p>
+          <p [dcrTextReveal]="paragraph"></p>
         }
+        <nav class="references-closing__services" [attr.aria-label]="content().footer.servicesTitle">
+          @for (service of content().services.slice(0, 3); track service.slug) {
+            <a [routerLink]="'/leistungen/' + service.slug">{{ service.title }} →</a>
+          }
+        </nav>
         <a class="references-closing__link" routerLink="/kontakt">
           {{ content().referencesPage.closing.cta }}
           <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>

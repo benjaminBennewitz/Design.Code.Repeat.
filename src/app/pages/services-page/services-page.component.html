@@ -4,15 +4,15 @@
     <div class="dcr-container services-hero__layout">
       <div class="services-hero__copy">
         <p class="dcr-eyebrow">{{ content().servicesPage.hero.eyebrow }}</p>
-        <h1>{{ content().servicesPage.hero.title }}</h1>
-        <p class="services-hero__lead">{{ content().servicesPage.hero.text }}</p>
+        <h1 [dcrTextReveal]="content().servicesPage.hero.title"></h1>
+        <p class="services-hero__lead" [dcrTextReveal]="content().servicesPage.hero.text"></p>
         <div class="services-hero__actions">
           <dcr-action-button
             [label]="content().servicesPage.hero.primaryCta"
             route="/kontakt"
             variant="primary"
             icon="arrow_outward" />
-          <a class="services-hero__jump" href="#service-index">
+          <a class="services-hero__jump" routerLink="/leistungen" fragment="service-index">
             <span>service.index</span>
             <span class="material-symbols-outlined" aria-hidden="true">south</span>
           </a>
@@ -44,9 +44,9 @@
     <div class="services-offers__layout dcr-container">
       <div class="services-offers__head">
         <p class="dcr-eyebrow">{{ content().servicesPage.offersHeading.eyebrow }}</p>
-        <h2 id="services-offers-title">{{ content().servicesPage.offersHeading.title }}</h2>
+        <h2 id="services-offers-title" [dcrTextReveal]="content().servicesPage.offersHeading.title"></h2>
         @if (content().servicesPage.offersHeading.text) {
-          <p>{{ content().servicesPage.offersHeading.text }}</p>
+          <p [dcrTextReveal]="content().servicesPage.offersHeading.text"></p>
         }
       </div>
 
@@ -62,7 +62,7 @@
               <h3>{{ offer.title }}</h3>
               <strong class="service-offer__price">{{ offer.price }}</strong>
               <p class="service-offer__claim">{{ offer.claim }}</p>
-              <p class="service-offer__description">{{ offer.description }}</p>
+              <p class="service-offer__description" [dcrTextReveal]="offer.description"></p>
               <code class="service-offer__command">{{ offer.command }}</code>
             </div>
 
@@ -89,7 +89,7 @@
     <div class="dcr-container service-index__layout">
       <div class="service-index__head">
         <p class="dcr-eyebrow">{{ indexLabels().eyebrow }}</p>
-        <h2><span>{{ indexLabels().title }}</span><span>{{ indexLabels().titleContinuation }}</span></h2>
+        <h2><span [dcrTextReveal]="indexLabels().title"></span><span [dcrTextReveal]="indexLabels().titleContinuation"></span></h2>
       </div>
 
       <div class="service-console">
@@ -128,7 +128,7 @@
             <div>
               <p class="service-console__kicker">{{ service.kicker }}</p>
               <h3>{{ serviceTitles()[selectedServiceIndex()] }}</h3>
-              <p class="service-console__summary">{{ service.summary }}</p>
+              <p class="service-console__summary" [dcrTextReveal]="service.summary"></p>
             </div>
             <div class="service-console__quick">
               <div>
@@ -144,7 +144,10 @@
                 </ul>
               </div>
             </div>
-            <dcr-action-button [label]="indexLabels().contact" route="/kontakt" variant="primary" icon="arrow_outward" />
+            <div class="service-console__actions">
+              <dcr-action-button [label]="indexLabels().contact" route="/kontakt" variant="primary" icon="arrow_outward" />
+              <a class="service-console__details" [routerLink]="'/leistungen/' + service.slug">{{ service.shortTitle }}: {{ indexLabels().details }} →</a>
+            </div>
           </article>
         }
       </div>
@@ -155,8 +158,8 @@
     <div class="dcr-container care-section__layout">
       <div class="care-section__head">
         <p class="dcr-eyebrow">{{ content().servicesPage.careHeading.eyebrow }}</p>
-        <h2 id="care-system-title">{{ content().servicesPage.careHeading.title }}</h2>
-        <p>{{ content().servicesPage.careHeading.text }}</p>
+        <h2 id="care-system-title" [dcrTextReveal]="content().servicesPage.careHeading.title"></h2>
+        <p [dcrTextReveal]="content().servicesPage.careHeading.text"></p>
       </div>
       <div class="care-plans">
         @for (plan of content().carePlans; track plan.name; let index = $index) {
@@ -176,7 +179,7 @@
         }
       </div>
       <div class="care-section__footer">
-        <p>{{ content().services[3].summary }}</p>
+        <p [dcrTextReveal]="content().services[3].summary"></p>
         <dcr-action-button [label]="indexLabels().careContact" route="/kontakt" variant="primary" icon="arrow_outward" />
       </div>
     </div>
@@ -190,8 +193,8 @@
           [title]="content().servicesPage.hostingHeading.title"
           [text]="content().servicesPage.hostingHeading.text" />
         <div class="ops-section__actions">
-          <dcr-action-button [label]="content().services[4].title" route="/kontakt" variant="dark" icon="arrow_outward" />
-          <dcr-action-button [label]="content().services[5].title" route="/kontakt" variant="dark" icon="arrow_outward" />
+          <dcr-action-button [label]="content().services[4].title" route="/leistungen/managed-hosting" variant="dark" icon="arrow_outward" />
+          <dcr-action-button [label]="content().services[5].title" route="/leistungen/email" variant="dark" icon="arrow_outward" />
         </div>
       </div>
 

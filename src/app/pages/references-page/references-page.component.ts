@@ -19,12 +19,13 @@ import { RouterLink } from '@angular/router';
 import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-scroll.directive';
 import { HorizontalScrollHintComponent } from '../../shared/horizontal-scroll-hint/horizontal-scroll-hint.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Referenzseite mit getrennten Case Studies und Kundenprojekten. */
 @Component({
   selector: 'dcr-references-page',
   standalone: true,
-  imports: [RouterLink, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent],
+  imports: [TextRevealDirective, RouterLink, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent],
   templateUrl: './references-page.component.html',
   styleUrl: './references-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +47,7 @@ export class ReferencesPageComponent implements AfterViewInit {
   private revealObserver?: IntersectionObserver;
 
   /** Sprachabhängiger Content. */
+  readonly unpublishedLinkLabel = computed(() => this.languageService.language() === 'de' ? 'Noch kein öffentlicher Link' : 'No public link yet');
   readonly content = computed(() => this.languageService.content());
 
   /** ARIA-Label der Technologie-Tags. */

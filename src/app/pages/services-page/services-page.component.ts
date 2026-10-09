@@ -5,7 +5,7 @@
 
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
@@ -13,13 +13,16 @@ import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
 import { SignalDividerComponent } from '../../shared/signal-divider/signal-divider.component';
 import { DitheringShaderComponent } from '../../shared/dithering-shader/dithering-shader.component';
+import { TextRevealDirective } from '../../shared/text-reveal.directive';
 
 /** Leistungsseite mit kompakten In-Page-Details statt unnötiger Unterseiten-Navigation. */
 @Component({
   selector: 'dcr-services-page',
   standalone: true,
   imports: [
+    TextRevealDirective,
     ActionButtonComponent,
+    RouterLink,
     AmbientFieldComponent,
     SectionHeadingComponent,
     SignalDividerComponent,
@@ -65,6 +68,7 @@ export class ServicesPageComponent {
         price: 'Einstieg',
         contact: 'Projekt dazu besprechen',
         selector: 'Leistungsmodul auswählen',
+        details: 'Leistungsumfang',
       }
     : {
         eyebrow: 'service.index // 06 modules',
@@ -75,6 +79,7 @@ export class ServicesPageComponent {
         price: 'Starting at',
         contact: 'Discuss this project',
         selector: 'Choose service module',
+        details: 'Capabilities',
       });
 
   /** Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“. */

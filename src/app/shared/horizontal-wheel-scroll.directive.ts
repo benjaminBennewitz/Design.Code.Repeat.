@@ -131,7 +131,14 @@ export class HorizontalWheelScrollDirective implements AfterViewInit, OnDestroy 
       return;
     }
 
-    const stickyOffset = sticky.offsetTop;
+    const introduction = sticky.previousElementSibling;
+    const introductionMargin = introduction instanceof HTMLElement
+      ? Number.parseFloat(getComputedStyle(introduction).marginBottom) || 0 : 0;
+    const stickyMargin = Number.parseFloat(getComputedStyle(sticky).marginTop) || 0;
+    /** Die normale Flussposition bleibt unabhängig vom bereits zurückgelegten Sticky-Scrollweg. */
+    const stickyOffset = introduction instanceof HTMLElement
+      ? introduction.offsetTop + introduction.offsetHeight + introductionMargin + stickyMargin
+      : 0;
     this.host.style.height = `${stickyOffset + stickyHeight + this.scrollDistance}px`;
     this.host.classList.add('is-scroll-pinned');
     this.scrollStart = window.scrollY + this.host.getBoundingClientRect().top + stickyOffset - headerHeight;
