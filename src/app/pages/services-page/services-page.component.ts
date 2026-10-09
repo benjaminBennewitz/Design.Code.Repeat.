@@ -13,7 +13,6 @@ import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
 import { SignalDividerComponent } from '../../shared/signal-divider/signal-divider.component';
 import { DitheringShaderComponent } from '../../shared/dithering-shader/dithering-shader.component';
-import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 
 /** Leistungsseite mit kompakten In-Page-Details statt unnötiger Unterseiten-Navigation. */
 @Component({
@@ -25,7 +24,6 @@ import { SystemGridComponent } from '../../shared/system-grid/system-grid.compon
     SectionHeadingComponent,
     SignalDividerComponent,
     DitheringShaderComponent,
-    SystemGridComponent,
   ],
   templateUrl: './services-page.component.html',
   styleUrl: './services-page.component.scss',
@@ -60,7 +58,9 @@ export class ServicesPageComponent {
   readonly indexLabels = computed(() => this.languageService.language() === 'de'
     ? {
         eyebrow: 'service.index // 06 module',
-        title: 'Leistung auswählen. Quickinfo statt Unterseite.',
+        title: 'Entwicklung & Design.',
+        titleContinuation: 'Betrieb & Betreuung.',
+        careContact: 'Betreuung besprechen',
         highlights: 'Highlights',
         price: 'Einstieg',
         contact: 'Projekt dazu besprechen',
@@ -68,38 +68,37 @@ export class ServicesPageComponent {
       }
     : {
         eyebrow: 'service.index // 06 modules',
-        title: 'Choose a service. Quick info instead of another page.',
+        title: 'Development & design.',
+        titleContinuation: 'Operations & support.',
+        careContact: 'Discuss ongoing support',
         highlights: 'Highlights',
         price: 'Starting at',
         contact: 'Discuss this project',
         selector: 'Choose service module',
       });
 
-  /** Kontextblock der großen Maintenance-Systemfläche. */
-  readonly careSystemAside = computed(() => {
-    const careService = this.content().services.find((service) => service.slug === 'wartung') ?? this.content().services[3];
+  /** Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“. */
+  readonly serviceTitles = computed(() => this.content().services.map((service) =>
+    service.title.replace('entwicklung', '\u00adentwicklung')));
 
-    return {
-      eyebrow: careService.kicker,
-      title: careService.title,
-      text: careService.summary,
-      meta: careService.price,
-    };
-  });
-
-  /** Drei Care-Modelle für die wiederkehrende Systemflächen-Section. */
-  readonly careSystemPanels = computed(() => this.content().carePlans.map((plan, index) => ({
-    eyebrow: `CARE::0${index + 1}`,
-    title: plan.name,
-    text: plan.text,
-    meta: plan.price,
-    details: plan.features,
-  })));
-
-  /** Übersetzte Pipeline-Texte der Managed-Ops-Visualisierung. */
-  readonly opsLabels = computed(() => this.languageService.language() === 'de'
-    ? ['Deploy', 'SSL', 'Monitor', 'Backup', 'Restore', 'Mail']
-    : ['Deploy', 'SSL', 'Monitor', 'Backup', 'Restore', 'Mail']);
+  /** Inhaltliche Bausteine der Betriebsvisualisierung, ohne simulierte Live-Messwerte. */
+  readonly opsModules = computed(() => this.languageService.language() === 'de'
+    ? [
+        { icon: 'rocket_launch', title: 'Deployment', text: 'Änderungen veröffentlichen' },
+        { icon: 'lock', title: 'SSL', text: 'Verbindungen absichern' },
+        { icon: 'monitor_heart', title: 'Monitoring', text: 'Probleme früh erkennen' },
+        { icon: 'backup', title: 'Backups', text: 'Daten regelmäßig sichern' },
+        { icon: 'restore', title: 'Wieder\u00adherstellung', text: 'Im Fehlerfall zurücksetzen' },
+        { icon: 'alternate_email', title: 'E-Mail', text: 'Optional ergänzen' },
+      ]
+    : [
+        { icon: 'rocket_launch', title: 'Deployment', text: 'Publish changes' },
+        { icon: 'lock', title: 'SSL', text: 'Secure connections' },
+        { icon: 'monitor_heart', title: 'Monitoring', text: 'Detect problems early' },
+        { icon: 'backup', title: 'Backups', text: 'Save data regularly' },
+        { icon: 'restore', title: 'Recovery', text: 'Restore when needed' },
+        { icon: 'alternate_email', title: 'Email', text: 'Add optionally' },
+      ]);
 
   constructor() {
     effect(() => this.seoService.setPage(this.content().servicesPage.seo, '/leistungen'));

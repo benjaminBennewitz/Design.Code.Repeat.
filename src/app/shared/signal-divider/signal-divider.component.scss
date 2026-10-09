@@ -21,6 +21,11 @@
   isolation: isolate;
 }
 
+.signal-divider[data-variant='ink'] {
+  --signal-bg: var(--dcr-color-contrast-dark);
+  --signal-fg: var(--dcr-color-contrast-light);
+}
+
 .signal-divider[data-variant='accent'] {
   --signal-bg: var(--dcr-color-lime);
   --signal-fg: var(--dcr-color-on-lime);

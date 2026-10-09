@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 
 /** Verfügbare visuelle Varianten des Signal-Trenners. */
-export type SignalDividerVariant = 'paper' | 'accent';
+export type SignalDividerVariant = 'paper' | 'accent' | 'ink';
 
 /** Position und Darstellung eines animierten Markenzeichens. */
 interface SignalGlyph {

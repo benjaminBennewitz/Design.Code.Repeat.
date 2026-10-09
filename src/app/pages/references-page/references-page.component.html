@@ -1,13 +1,54 @@
 <main class="references-page">
-  <section id="referenzen-hero" class="references-hero dcr-viewport-section" aria-labelledby="references-title">
-    <dcr-system-grid
-      [eyebrow]="content().referencesPage.heading.eyebrow"
-      [title]="content().referencesPage.heading.title"
-      [text]="content().referencesPage.heading.text"
-      titleId="references-title"
-      [titleLevel]="1"
-      [leadAside]="heroSystemAside()"
-      [panels]="heroSystemPanels()" />
+  <section id="referenzen-hero" class="references-hero dcr-section" aria-labelledby="references-title">
+    <div class="dcr-container">
+      <div class="references-hero__intro">
+        <div>
+          <p class="dcr-eyebrow">{{ content().referencesPage.heading.eyebrow }}</p>
+          <h1 id="references-title">{{ content().referencesPage.heading.title }}</h1>
+        </div>
+        <p class="references-hero__lead">{{ content().referencesPage.heading.text }}</p>
+      </div>
+      <div class="reference-categories">
+        <article class="reference-category" aria-labelledby="reference-techs-title">
+          <div class="reference-category__head">
+            <span class="material-symbols-outlined" aria-hidden="true">data_object</span>
+            <h2 id="reference-techs-title">{{ content().referencesPage.techs.title }}</h2>
+            <span class="reference-category__count">{{ content().references.length.toString().padStart(2, '0') }}</span>
+          </div>
+          <p class="reference-category__text">{{ content().referencesPage.techs.text }}</p>
+          <ul class="reference-category__features">
+            @for (feature of content().referencesPage.techs.features; track feature) {
+              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ feature }}</li>
+            }
+          </ul>
+          <ul class="reference-category__index">
+            @for (reference of content().references; track reference.slug; let index = $index) {
+              <li><a routerLink="/referenzen" [fragment]="'case-' + reference.slug"><span>0{{ index + 1 }}</span>{{ reference.name }}<span class="material-symbols-outlined" aria-hidden="true">south_east</span></a></li>
+            }
+          </ul>
+          <a class="reference-category__jump" routerLink="/referenzen" [fragment]="'case-' + content().references[0].slug">{{ content().referencesPage.techs.cta }}<span class="material-symbols-outlined" aria-hidden="true">south</span></a>
+        </article>
+        <article class="reference-category reference-category--clients" aria-labelledby="reference-clients-title">
+          <div class="reference-category__head">
+            <span class="material-symbols-outlined" aria-hidden="true">language</span>
+            <h2 id="reference-clients-title">{{ content().referencesPage.clients.title }}</h2>
+            <span class="reference-category__count">{{ content().deliveredProjects.length.toString().padStart(2, '0') }}</span>
+          </div>
+          <p class="reference-category__text">{{ content().referencesPage.clients.text }}</p>
+          <ul class="reference-category__features">
+            @for (feature of content().referencesPage.clients.features; track feature) {
+              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right</span>{{ feature }}</li>
+            }
+          </ul>
+          <ul class="reference-category__index">
+            @for (project of content().deliveredProjects; track project.name; let index = $index) {
+              <li class="reference-category__client"><span>0{{ index + 1 }}</span>{{ project.name }}</li>
+            }
+          </ul>
+          <a class="reference-category__jump" routerLink="/referenzen" fragment="kundenprojekte">{{ content().referencesPage.clients.cta }}<span class="material-symbols-outlined" aria-hidden="true">south</span></a>
+        </article>
+      </div>
+    </div>
   </section>
 
   @for (reference of content().references; track reference.slug; let index = $index) {
@@ -46,7 +87,7 @@
             @if (reference.details?.length) {
               <ul class="reference-row__details">
                 @for (detail of reference.details; track detail) {
-                  <li>{{ detail }}</li>
+                  <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ detail }}</li>
                 }
               </ul>
             }
@@ -76,8 +117,6 @@
       </div>
     </section>
   }
-
-  <dcr-signal-divider variant="accent" marker="CASE::CLIENT_SPLIT" />
 
   <section id="kundenprojekte" class="delivered-projects dcr-section dcr-viewport-section dcr-section-flow" [attr.aria-label]="content().referencesPage.deliveredAriaLabel" [dcrHorizontalWheel]="clientTrack" [dcrHorizontalSticky]="clientSticky">
     <div class="dcr-container delivered-projects__head">
@@ -114,7 +153,17 @@
             <div class="delivered-card__body">
               <p>{{ project.label }}</p>
               <h2>{{ project.name }}</h2>
-              <ul [attr.aria-label]="techStackLabel()">
+              @if (project.summary) {
+                <p class="delivered-card__summary">{{ project.summary }}</p>
+              }
+              @if (project.details?.length) {
+                <ul class="delivered-card__details">
+                  @for (detail of project.details; track detail) {
+                    <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ detail }}</li>
+                  }
+                </ul>
+              }
+              <ul class="delivered-card__stack" [attr.aria-label]="techStackLabel()">
                 @for (tech of project.stack; track tech) { <li>{{ tech }}</li> }
               </ul>
               <a [href]="project.url" target="_blank" rel="noopener noreferrer">
@@ -130,6 +179,23 @@
         </div>
       </div>
       <dcr-horizontal-scroll-hint [target]="clientTrack" />
+    </div>
+  </section>
+  <section id="referenzen-ausblick" class="references-closing dcr-section" aria-labelledby="references-closing-title">
+    <div class="dcr-container references-closing__layout">
+      <div>
+        <p class="dcr-eyebrow">{{ content().referencesPage.closing.eyebrow }}</p>
+        <h2 id="references-closing-title">{{ content().referencesPage.closing.title }}</h2>
+      </div>
+      <div class="references-closing__copy">
+        @for (paragraph of content().referencesPage.closing.paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+        <a class="references-closing__link" routerLink="/kontakt">
+          {{ content().referencesPage.closing.cta }}
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+        </a>
+      </div>
     </div>
   </section>
 </main>

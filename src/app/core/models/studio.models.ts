@@ -73,6 +73,8 @@ export interface CarePlan {
 
 /** Veröffentlichtes Kundenprojekt ohne Case-Study-Tiefe. */
 export interface DeliveredProject {
+  readonly summary?: string;
+  readonly details?: readonly string[];
   readonly name: string;
   readonly url: string;
   readonly label: string;
@@ -81,6 +83,14 @@ export interface DeliveredProject {
   readonly image?: string;
   /** Alternativtext des Screenshots; fällt bei rein dekorativem Placeholder leer aus. */
   readonly imageAlt?: string;
+}
+
+/** Inhaltlicher Einstieg in eine Referenzkategorie. */
+export interface ReferenceCategory {
+  readonly title: string;
+  readonly text: string;
+  readonly features: readonly string[];
+  readonly cta: string;
 }
 
 /** Technische Case Study der Studio-Website. */
@@ -188,6 +198,14 @@ export interface StudioContent {
     readonly hostingHeading: SectionHeadingContent;
   };
   readonly referencesPage: {
+    readonly closing: {
+      readonly eyebrow: string;
+      readonly title: string;
+      readonly paragraphs: readonly string[];
+      readonly cta: string;
+    };
+    readonly techs: ReferenceCategory;
+    readonly clients: ReferenceCategory;
     readonly seo: SeoPageContent;
     readonly heading: SectionHeadingContent;
     readonly portfolioHint: string;

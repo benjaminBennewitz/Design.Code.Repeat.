@@ -19,14 +19,12 @@ import { RouterLink } from '@angular/router';
 import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-scroll.directive';
 import { HorizontalScrollHintComponent } from '../../shared/horizontal-scroll-hint/horizontal-scroll-hint.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
-import { SignalDividerComponent } from '../../shared/signal-divider/signal-divider.component';
-import { SystemGridComponent } from '../../shared/system-grid/system-grid.component';
 
 /** Referenzseite mit getrennten Case Studies und Kundenprojekten. */
 @Component({
   selector: 'dcr-references-page',
   standalone: true,
-  imports: [RouterLink, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent, SignalDividerComponent, SystemGridComponent],
+  imports: [RouterLink, HorizontalWheelScrollDirective, HorizontalScrollHintComponent, SectionHeadingComponent],
   templateUrl: './references-page.component.html',
   styleUrl: './references-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,26 +50,6 @@ export class ReferencesPageComponent implements AfterViewInit {
 
   /** ARIA-Label der Technologie-Tags. */
   readonly techStackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');
-
-  /** Kontextblock der Referenz-Hero-Systemfläche. */
-  readonly heroSystemAside = computed(() => ({
-    eyebrow: 'CASE STUDIES',
-    title: String(this.content().references.length).padStart(2, '0'),
-    text: this.content().referencesPage.portfolioHint,
-  }));
-
-  /** Direkte Sprungziele zu den ersten drei technischen Case Studies. */
-  readonly heroSystemPanels = computed(() => this.content().references.slice(0, 3).map((reference, index) => ({
-    eyebrow: `0${index + 1} // ${reference.type}`,
-    title: reference.name,
-    text: reference.summary,
-    meta: reference.year,
-    details: reference.stack.slice(0, 3),
-    href: `#case-${reference.slug}`,
-    actionLabel: this.languageService.language() === 'de'
-      ? `Zu ${reference.name} springen`
-      : `Jump to ${reference.name}`,
-  })));
 
   /** Tastaturhinweis des horizontalen Kundenprojekt-Tracks. */
   readonly horizontalHint = computed(() => this.languageService.language() === 'de'

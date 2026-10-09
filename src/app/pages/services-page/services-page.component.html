@@ -83,13 +83,13 @@
     </div>
   </section>
 
-  <dcr-signal-divider variant="paper" marker="SVC::MATRIX_06" />
+  <dcr-signal-divider variant="ink" marker="SVC::MATRIX_06" />
 
   <section id="service-index" class="service-index dcr-section dcr-viewport-section dcr-section-flow">
     <div class="dcr-container service-index__layout">
       <div class="service-index__head">
         <p class="dcr-eyebrow">{{ indexLabels().eyebrow }}</p>
-        <h2>{{ indexLabels().title }}</h2>
+        <h2><span>{{ indexLabels().title }}</span><span>{{ indexLabels().titleContinuation }}</span></h2>
       </div>
 
       <div class="service-console">
@@ -106,7 +106,7 @@
               <span class="service-console__index">0{{ index + 1 }}</span>
               <span class="material-symbols-outlined" aria-hidden="true">{{ service.icon }}</span>
               <span class="service-console__label">
-                <strong>{{ service.title }}</strong>
+                <strong>{{ serviceTitles()[index] }}</strong>
                 <small>{{ service.kicker }}</small>
               </span>
               <span class="material-symbols-outlined service-console__arrow" aria-hidden="true">east</span>
@@ -127,7 +127,7 @@
             </div>
             <div>
               <p class="service-console__kicker">{{ service.kicker }}</p>
-              <h3>{{ service.title }}</h3>
+              <h3>{{ serviceTitles()[selectedServiceIndex()] }}</h3>
               <p class="service-console__summary">{{ service.summary }}</p>
             </div>
             <div class="service-console__quick">
@@ -151,15 +151,35 @@
     </div>
   </section>
 
-  <section id="betreuung" class="care-section dcr-viewport-section" aria-labelledby="care-system-title">
-    <dcr-system-grid
-      [eyebrow]="content().servicesPage.careHeading.eyebrow"
-      [title]="content().servicesPage.careHeading.title"
-      [text]="content().servicesPage.careHeading.text"
-      titleId="care-system-title"
-      [leadAside]="careSystemAside()"
-      [panels]="careSystemPanels()"
-      [revealMetaOnInteraction]="true" />
+  <section id="betreuung" class="care-section dcr-section" aria-labelledby="care-system-title">
+    <div class="dcr-container care-section__layout">
+      <div class="care-section__head">
+        <p class="dcr-eyebrow">{{ content().servicesPage.careHeading.eyebrow }}</p>
+        <h2 id="care-system-title">{{ content().servicesPage.careHeading.title }}</h2>
+        <p>{{ content().servicesPage.careHeading.text }}</p>
+      </div>
+      <div class="care-plans">
+        @for (plan of content().carePlans; track plan.name; let index = $index) {
+          <article class="care-plan">
+            <span class="care-plan__index" aria-hidden="true">0{{ index + 1 }}</span>
+            <div class="care-plan__copy">
+              <h3>{{ plan.name }}</h3>
+              <p>{{ plan.text }}</p>
+            </div>
+            <ul>
+              @for (feature of plan.features; track feature) {
+                <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ feature }}</li>
+              }
+            </ul>
+            <strong class="care-plan__price">{{ plan.price }}</strong>
+          </article>
+        }
+      </div>
+      <div class="care-section__footer">
+        <p>{{ content().services[3].summary }}</p>
+        <dcr-action-button [label]="indexLabels().careContact" route="/kontakt" variant="primary" icon="arrow_outward" />
+      </div>
+    </div>
   </section>
 
   <section id="managed-ops" class="ops-section dcr-section dcr-viewport-section dcr-section-flow">
@@ -175,15 +195,36 @@
         </div>
       </div>
 
-      <div class="ops-pipeline" aria-hidden="true">
-        <div class="ops-pipeline__line"></div>
-        @for (label of opsLabels(); track label; let index = $index) {
-          <div class="ops-pipeline__node" [style.--node-index]="index">
-            <span>{{ index + 1 }}</span>
-            <strong>{{ label }}</strong>
+      <div class="ops-map">
+        <div class="ops-map__core">
+          <span class="material-symbols-outlined ops-map__server" aria-hidden="true">dns</span>
+          <div>
+            <p class="ops-map__eyebrow">{{ content().servicesPage.hostingHeading.eyebrow }}</p>
+            <h3>{{ content().services[4].title }}</h3>
           </div>
-        }
-        <code>request → deploy → observe → recover</code>
+          <span class="ops-map__activity" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <svg class="ops-map__routes" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+          <g class="ops-map__tracks">
+            <path d="M300 0 V35 Q300 55 280 55 H120 Q100 55 100 75 V120" />
+            <path d="M300 0 V120" />
+            <path d="M300 0 V35 Q300 55 320 55 H480 Q500 55 500 75 V120" />
+          </g>
+          <g class="ops-map__packets">
+            <path d="M300 0 V35 Q300 55 280 55 H120 Q100 55 100 75 V120" />
+            <path d="M300 0 V120" />
+            <path d="M300 0 V35 Q300 55 320 55 H480 Q500 55 500 75 V120" />
+          </g>
+        </svg>
+        <div class="ops-map__modules">
+          @for (module of opsModules(); track module.icon) {
+            <div class="ops-map__module">
+              <span class="material-symbols-outlined" aria-hidden="true">{{ module.icon }}</span>
+              <h4>{{ module.title }}</h4>
+              <p>{{ module.text }}</p>
+            </div>
+          }
+        </div>
       </div>
     </div>
   </section>
