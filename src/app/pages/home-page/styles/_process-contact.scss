@@ -1,0 +1,163 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _process-contact.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Process Contact
+   02 Responsive Layout
+   03 Process Contact (2)
+   04 Responsive Layout (2)
+   05 Process Contact (3)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Process Contact
+   ========================================================================== */
+  .home-process > .dcr-container {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .home-process dcr-section-heading {
+    --dcr-heading-overflow-wrap: normal;
+    --dcr-heading-hyphens: manual;
+    --dcr-heading-size: clamp(2.4rem, min(3.6vw, 5.5vh), 4.6rem);
+    align-self: center;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-process .process-list {
+    margin-top: 0;
+  }
+
+  .home-process .process-list,
+  .home-process .process-list li,
+  .home-process .process-list li > div {
+    min-width: 0;
+  }
+
+  .process-list li {
+    position: relative;
+    overflow: hidden;
+    transition:
+      padding 260ms var(--dcr-ease-out),
+      color 180ms ease;
+  }
+
+  .process-list li::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    background: var(--dcr-color-primary);
+    transform: translateX(-101%);
+    transition: transform 360ms var(--dcr-ease-out);
+  }
+
+  .process-list li:hover,
+  .process-list li:focus-visible {
+    padding-inline: 1rem;
+    color: var(--dcr-color-on-primary);
+    outline: 0;
+  }
+
+  .process-list li:hover::before,
+  .process-list li:focus-visible::before {
+    transform: none;
+  }
+
+  .process-list li:hover :is(p, code, .process-list__index),
+  .process-list li:focus-visible :is(p, code, .process-list__index) {
+    color: inherit;
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (max-width: 1150px) {
+    .home-process > .dcr-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .home-process dcr-section-heading {
+      max-width: 52rem;
+      margin-left: auto;
+    }
+  }
+
+  /* ==========================================================================
+   Process Contact (2)
+   ========================================================================== */
+
+  .home-contact__layout {
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 7vw, 7rem);
+    align-items: center;
+  }
+
+  .home-contact__copy {
+    position: static;
+    max-width: 42rem;
+  }
+
+  .home-contact__copy dcr-section-heading {
+    --dcr-heading-size: clamp(2.8rem, min(5.4vw, 6.6vh), 5.8rem);
+  }
+
+  .home-contact dcr-contact-form {
+    --contact-form-bg: var(--dcr-color-contrast-dark);
+    --contact-form-text: var(--dcr-color-contrast-light);
+    --contact-form-muted: color-mix(in srgb, var(--dcr-color-contrast-light) 68%, transparent);
+    --contact-form-border: color-mix(in srgb, var(--dcr-color-contrast-light) 30%, transparent);
+    --contact-form-accent: var(--dcr-color-lime);
+    --contact-form-danger: color-mix(in srgb, var(--dcr-color-danger) 62%, var(--dcr-color-contrast-light));
+    --dcr-color-primary: var(--dcr-color-lime);
+    --dcr-color-on-primary: var(--dcr-color-on-lime);
+    width: min(100%, 40rem);
+    justify-self: end;
+  }
+
+  /* ==========================================================================
+   Responsive Layout (2)
+   ========================================================================== */
+
+  @media (max-width: 820px) {
+    .home-contact__layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==========================================================================
+   Process Contact (3)
+   ========================================================================== */
+
+  .home-contact.dcr-section-flow::after {
+    height: clamp(22rem, 52vh, 40rem);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 6%, transparent) 12%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 24%, transparent) 34%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 55%, transparent) 58%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 82%, transparent) 80%,
+      var(--dcr-color-contrast-dark) 100%
+    );
+  }
+}

@@ -1,0 +1,53 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _chapters.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Chapters
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Chapters
+   ========================================================================== */
+  .dcr-case .project-detail__chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--bp-space-3);
+  }
+
+  .dcr-case .project-detail__chapter {
+    display: grid;
+    min-width: 0;
+    align-content: start;
+    gap: var(--bp-space-3);
+    border-radius: 0;
+    padding: var(--bp-space-4);
+    background:
+      radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bp-color-accent), transparent 92%), transparent 42%),
+      color-mix(in srgb, var(--bp-color-surface), transparent 6%);
+  }
+
+  .dcr-case .project-detail__chapter .bp-eyebrow {
+    margin: 0;
+  }
+
+  .dcr-case .project-detail__chapter p {
+    margin: 0;
+    color: var(--bp-color-text-muted);
+    line-height: 1.68;
+  }
+}

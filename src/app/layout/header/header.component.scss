@@ -1,232 +1,39 @@
-:host { display: block; height: var(--dcr-header-height); }
+/*###############################
+###
+###     Design. Code. Repeat.
+###     header.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
 
-.site-header {
-  position: fixed;
-  z-index: 70;
-  top: 0;
-  right: 0;
-  left: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 1.5rem;
-  align-items: center;
-  min-height: var(--dcr-header-height);
-  border-bottom: 1px solid var(--dcr-color-border);
-  padding-inline: var(--dcr-page-gutter);
-  background: color-mix(in srgb, var(--dcr-color-bg) 88%, transparent);
-  backdrop-filter: blur(18px);
-}
+/*
+   INHALTSVERZEICHNIS
+   01 Module Imports
+   02 Style Output
+*/
 
-.site-header__brand { display: inline-flex; gap: 0.65rem; align-items: center; width: fit-content; color: var(--dcr-color-text); text-decoration: none; }
-.site-header__wordmark { font-family: var(--dcr-font-display); font-size: 0.88rem; letter-spacing: -0.03em; white-space: nowrap; }
-.site-header__brand small { color: var(--dcr-color-text-muted); font: 700 0.62rem/1 var(--dcr-font-mono); }
+/* ==========================================================================
+   Module Imports
+   ========================================================================== */
+@use './styles/header.component/structure';
+@use './styles/header.component/controls';
+@use './styles/header.component/navigation';
+@use './styles/header.component/responsive';
+@use './styles/header.component/tool-glyphs';
 
-.site-header__status { justify-self: center; font: 800 0.58rem/1 var(--dcr-font-mono); letter-spacing: 0.1em; }
-.site-header__status i { display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.5rem; border-radius: 50%; background: var(--dcr-color-lime); box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--dcr-color-lime) 15%, transparent); }
-
-:host-context(:root[data-theme='light']) .site-header__status i {
-  border: 1px solid color-mix(in srgb, var(--dcr-color-contrast-dark) 78%, transparent);
-  background: color-mix(in srgb, var(--dcr-color-lime) 82%, var(--dcr-color-contrast-dark));
-  box-shadow:
-    0 0 0 0.2rem color-mix(in srgb, var(--dcr-color-lime) 24%, transparent),
-    0 1px 3px color-mix(in srgb, var(--dcr-color-contrast-dark) 44%, transparent);
-}
-
-.site-header__controls { display: flex; gap: 0.4rem; align-items: center; justify-self: end; }
-.site-header__menu-button { display: inline-flex; gap: 0.75rem; align-items: center; min-height: 2.65rem; border: 1px solid var(--dcr-color-border-strong); padding: 0.65rem 0.85rem; background: var(--dcr-color-surface-solid); color: var(--dcr-color-text); font: 900 0.64rem/1 var(--dcr-font-mono); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 180ms ease, border-color 180ms ease; }
-.site-header__menu-button b { font-size: 1.15rem; line-height: 0.7; }
-
-.site-header__contact {
-  display: inline-flex;
-  gap: 0.6rem;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.65rem;
-  border: 1px solid var(--dcr-color-primary);
-  padding: 0.65rem 0.85rem;
-  background: var(--dcr-color-primary);
-  color: var(--dcr-color-on-primary);
-  font: 900 0.64rem/1 var(--dcr-font-mono);
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.site-header__navigation { position: fixed; z-index: -1; top: var(--dcr-header-height); right: 0; left: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.22fr); grid-template-rows: minmax(0, 1fr) auto; gap: 1.5rem 3rem; height: calc(100dvh - var(--dcr-header-height)); min-height: 0; padding: clamp(1.5rem, 4vw, 4rem) var(--dcr-page-gutter) 1.25rem; overflow: hidden; visibility: hidden; background: var(--dcr-color-contrast-dark); color: var(--dcr-color-contrast-light); opacity: 0; clip-path: inset(0 0 100% 0); pointer-events: none; transition: clip-path 480ms var(--dcr-ease-out), opacity 220ms ease, visibility 480ms; }
-.site-header__navigation::before { position: absolute; inset: 0; content: ''; background-image: linear-gradient(color-mix(in srgb, currentColor 9%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, currentColor 9%, transparent) 1px, transparent 1px); background-size: 25% 25%; opacity: 0.35; pointer-events: none; }
-.site-header__navigation.is-open { visibility: visible; opacity: 1; clip-path: inset(0); pointer-events: auto; }
-.site-header__close { position: absolute; z-index: 3; top: clamp(1rem, 2vw, 1.5rem); right: var(--dcr-page-gutter); display: grid; width: 2.8rem; aspect-ratio: 1; place-items: center; border: 1px solid color-mix(in srgb, currentColor 48%, transparent); padding: 0; background: transparent; color: inherit; cursor: pointer; }
-.site-header__close b { font-size: 1.6rem; line-height: 1; transition: transform 420ms var(--dcr-ease-out); }
-.site-header__close:hover b, .site-header__close:focus-visible b { transform: rotate(180deg); }
-.site-header__navigation.is-open .site-header__close { animation: dcr-menu-close-reveal 520ms var(--dcr-ease-out) both; }
-
-
-.site-header nav { position: relative; z-index: 1; display: grid; align-content: center; min-width: min(70vw, 72rem); }
-.site-header nav a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; gap: 1rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent); padding: 0.14em 0; color: inherit; font-family: var(--dcr-font-display); font-size: clamp(2.5rem, min(6vw, 9vh), 6.5rem); line-height: 0.9; letter-spacing: -0.065em; text-decoration: none; }
-.site-header nav a small { align-self: start; margin-top: 0.5em; color: var(--dcr-color-lime-text-on-dark); font: 800 0.58rem/1 var(--dcr-font-mono); letter-spacing: 0; }
-.site-header nav a > span { transform: translateX(0); transition: transform 280ms var(--dcr-ease-out); }
-.site-header nav a b { font-family: var(--dcr-font-body); font-size: 0.35em; font-weight: 400; opacity: 0; transform: translate(-0.8rem, 0.8rem); transition: opacity 180ms ease, transform 280ms var(--dcr-ease-out); }
-.site-header nav a:hover, .site-header nav a:focus-visible, .site-header nav a.is-active { color: var(--dcr-color-lime-text-on-dark); }
-.site-header nav a:hover > span, .site-header nav a:focus-visible > span, .site-header nav a.is-active > span { transform: translateX(0.2em); }
-.site-header nav a:hover b, .site-header nav a:focus-visible b, .site-header nav a.is-active b { opacity: 1; transform: none; }
-
-.site-header__menu-aside { position: relative; z-index: 1; display: grid; gap: 0.65rem; align-content: end; padding-bottom: clamp(1rem, 4vh, 3rem); color: color-mix(in srgb, currentColor 58%, transparent); font: 800 0.56rem/1.45 var(--dcr-font-mono); letter-spacing: 0.1em; }
-.site-header__menu-aside strong { color: var(--dcr-color-lime-text-on-dark); font-size: clamp(0.8rem, 1vw, 1rem); line-height: 1.4; }
-
-.site-header__menu-tools {
-  position: relative;
-  z-index: 2;
-  display: none;
-  gap: 0.6rem;
-  min-width: 0;
-}
-
-.site-header__menu-tools button {
-  display: inline-flex;
-  gap: 0.55rem;
-  align-items: center;
-  min-width: 0;
-  min-height: 2.8rem;
-  border: 1px solid color-mix(in srgb, currentColor 38%, transparent);
-  padding: 0.65rem 0.75rem;
-  background: transparent;
-  color: inherit;
-  font: 900 0.64rem/1.2 var(--dcr-font-mono);
-  text-align: left;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.site-header__menu-tools button > span:last-child {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.site-header__icon-button, .site-header__language { display: grid; place-items: center; width: 2.65rem; height: 2.65rem; border: 1px solid color-mix(in srgb, currentColor 45%, transparent); background: transparent; color: inherit; cursor: pointer; }
-.site-header__language { font: 900 0.7rem/1 var(--dcr-font-mono); }
-.site-header__theme-glyph { font: 900 1.15rem/1 var(--dcr-font-body); }
-.site-header__menu-wordmark {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  gap: 0.16em;
-  grid-column: 1 / -1;
-  min-width: 0;
-  padding: 0.08em 0.1em;
-  color: color-mix(in srgb, currentColor 8%, transparent);
-  font-family: var(--dcr-font-display);
-  font-size: clamp(1rem, 8.2vw, 9rem);
-  line-height: 1.05;
-  letter-spacing: -0.08em;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-:host-context(html.dcr-menu-open) { position: relative; z-index: 70; }
-:host-context(.dcr-theme-is-switching) .site-header__icon-button .material-symbols-outlined { transform: rotate(180deg) scale(0.72); }
-:host-context(.dcr-language-is-switching) .site-header__language { opacity: 0.25; transform: translateY(-0.35rem) skewX(-8deg); }
-
-@media (max-width: 760px) {
-  .site-header { grid-template-columns: minmax(0, 1fr) auto; gap: 0.75rem; padding-inline: 1rem; }
-  .site-header__status { display: none; }
-  .site-header__brand { min-width: 0; }
-  .site-header__brand small { display: none; }
-  .site-header__wordmark { min-width: 0; overflow: hidden; font-size: 0.72rem; text-overflow: ellipsis; }
-  .site-header__navigation { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 1rem; padding: 3.5rem 1rem 1rem; overflow-y: auto; }
-  .site-header__menu-aside, .site-header__menu-wordmark { display: none; }
-  .site-header__menu-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .site-header nav { min-width: 0; }
-  .site-header nav a { grid-template-columns: 1.8rem minmax(0, 1fr) auto; font-size: clamp(2.15rem, 11vw, 4.5rem); }
-  .site-header nav a span { min-width: 0; overflow-wrap: anywhere; }
-  .site-header__controls { gap: 0.55rem; }
-  .site-header__desktop-tool { display: none; }
-  .site-header__menu-button span { display: none; }
-  .site-header__menu-button { width: 2.65rem; flex: 0 0 2.65rem; justify-content: center; padding-inline: 0; }
-  .site-header__close { right: 1rem; }
-}
-
-@media (max-width: 560px) {
-  .site-header__menu-tools { grid-template-columns: 1fr; }
-  .site-header__menu-tools button { width: 100%; }
-}
-
-@media (max-width: 420px) { .site-header__wordmark { font-size: 0.65rem; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .site-header__navigation, .site-header nav a > span, .site-header nav a b, .site-header__close b { transition: none; }
-}
-
-.site-header__tool-glyph {
-  display: inline-grid;
-  min-width: 1.5rem;
-  place-items: center;
-  font-family: var(--dcr-font-mono);
-  font-size: 1rem;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.site-header__tool-glyph--text {
-  font-size: 0.58rem;
-  letter-spacing: -0.04em;
-}
-
-
-.site-header__controls > :is(button, a),
-.site-header__menu-tools button,
-.site-header__close {
-  position: absolute;
-  --header-fill: var(--dcr-color-lime);
-  --header-fill-text: var(--dcr-color-on-lime);
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  transition: color 240ms ease, border-color 240ms ease;
-}
-
-.site-header__close {
-  position: absolute;
-  --header-fill: var(--dcr-color-pink);
-  --header-fill-text: var(--dcr-color-on-pink);
-}
-
-.site-header__controls > :is(button, a)::before,
-.site-header__menu-tools button::before,
-.site-header__close::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: '';
-  background: var(--header-fill);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 320ms var(--dcr-ease-out);
-  pointer-events: none;
-}
-
-.site-header__controls > :is(button, a):is(:hover, :focus-visible),
-.site-header__menu-tools button:is(:hover, :focus-visible),
-.site-header__close:is(:hover, :focus-visible) {
-  border-color: var(--header-fill);
-  color: var(--header-fill-text);
-}
-
-.site-header__controls > :is(button, a):is(:hover, :focus-visible)::before,
-.site-header__menu-tools button:is(:hover, :focus-visible)::before,
-.site-header__close:is(:hover, :focus-visible)::before {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-
-.site-header__menu-button b {
-  transition: transform 320ms var(--dcr-ease-out);
-}
-
-.site-header__menu-button[aria-expanded='true'] b {
-  transform: rotate(45deg);
-}
-
-@keyframes dcr-menu-close-reveal {
-  from { opacity: 0; transform: rotate(-90deg) scale(0.6); }
-  to { opacity: 1; transform: none; }
-}
+/* ==========================================================================
+   Style Output
+   ========================================================================== */
+@include structure.render;
+@include controls.render;
+@include navigation.render;
+@include responsive.render;
+@include tool-glyphs.render;

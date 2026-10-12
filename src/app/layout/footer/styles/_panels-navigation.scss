@@ -1,0 +1,119 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _panels-navigation.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Panels Navigation
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Panels Navigation
+   ========================================================================== */
+  .site-footer__panel-copy {
+    position: relative;
+    z-index: 2;
+    min-height: 0;
+  }
+
+  .site-footer__panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(230px, 0.4fr) minmax(0, 0.6fr);
+    gap: clamp(1.4rem, 4vw, 4rem);
+    align-items: center;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(3rem);
+    transition:
+      opacity 320ms var(--dcr-ease-out),
+      transform 420ms var(--dcr-ease-out),
+      visibility 0s 420ms;
+  }
+
+  .site-footer__panel.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition-delay: 0s;
+  }
+
+  .site-footer__panel-head {
+    min-width: 0;
+  }
+
+  .site-footer__panel-head p {
+    margin: 0 0 0.4rem;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .site-footer__panel-head h2 {
+    max-width: 14ch;
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.8rem, min(3.7vw, 4.7vh), 3.8rem);
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+  .site-footer__sitemap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .site-footer__sitemap nav {
+    display: grid;
+    gap: 0.3rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .site-footer__sitemap a,
+  .site-footer__legal-grid a,
+  .site-footer__legal-grid button {
+    color: inherit;
+    font-family: var(--dcr-font-mono);
+    font-size: clamp(0.66rem, 0.8vw, 0.78rem);
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .site-footer__sitemap a {
+    width: fit-content;
+    max-width: 100%;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+    padding: 0.27rem 0;
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer__sitemap a:hover,
+  .site-footer__sitemap a:focus-visible {
+    border-bottom-color: currentColor;
+    transform: translateX(0.3rem);
+  }
+}

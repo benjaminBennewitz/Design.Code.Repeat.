@@ -1,3 +1,6 @@
+/* src/app/pages/services-page/services-page.component.ts */
+import { OPS_MODULES } from './ops-modules.data';
+import { SERVICE_INDEX_LABELS } from './service-index-labels.data';
 /**
  * @file Leistungsübersicht der Studio-Website.
  * @description Bündelt Preisrahmen, interaktive Leistungs-Quickinfos, Betreuung und Managed Operations auf einer Route.
@@ -33,92 +36,65 @@ import { TextRevealDirective } from '../../shared/text-reveal.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServicesPageComponent {
-  /** Aktuelle Sprache und Inhalte. */
-  private readonly languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService); // Aktuelle Sprache und Inhalte.
+  private readonly seoService = inject(SeoService);           // SEO-Metadaten der Route.
+  private readonly route = inject(ActivatedRoute);            // Aktuelle Route für die Leistungsauswahl per Query-Parameter und ältere Fragmentlinks.
+  private readonly router = inject(Router);                   // Erkennt auch erneute Navigationen zur unveränderten Quicklink-URL.
+  private readonly destroyRef = inject(DestroyRef);           // Lifecycle-Handle für die Routen-Subscription.
+  readonly content = computed(
+    /** Vollständiger sprachabhängiger Content. */
+    () => this.languageService.content(),
+  ); // Vollständiger sprachabhängiger Content.
+  readonly selectedServiceIndex = signal<number>(0); // Aktuell ausgewähltes Modul im Service-Console-Index.
+  readonly selectedService = computed(
+    /** Aktuell ausgewählter Service. */
+    () => this.content().services[this.selectedServiceIndex()] ?? this.content().services[0],
+  ); // Aktuell ausgewählter Service.
+  readonly indexLabels = computed(
+    /** Übersetzte UI-Texte für das interaktive Quickinfo-Modul. */
+    () => SERVICE_INDEX_LABELS[this.languageService.language()],
+  ); // Übersetzte UI-Texte für das interaktive Quickinfo-Modul.
+  readonly serviceTitles = computed(
+    /** Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“. */
+    () =>
+      this.content().services.map(
+        /**
+         * Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“.
+         * @param service Leistung aus dem zentralen Content.
+         */
+        (service) => service.title.replace('entwicklung', '\u00adentwicklung'),
+      ),
+  ); // Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“.
+  readonly opsModules = computed(
+    /** Inhaltliche Bausteine der Betriebsvisualisierung, ohne simulierte Live-Messwerte. */
+    () => OPS_MODULES[this.languageService.language()],
+  ); // Inhaltliche Bausteine der Betriebsvisualisierung, ohne simulierte Live-Messwerte.
 
-  /** SEO-Metadaten der Route. */
-  private readonly seoService = inject(SeoService);
-
-  /** Aktuelle Route für die Leistungsauswahl per Query-Parameter und ältere Fragmentlinks. */
-  private readonly route = inject(ActivatedRoute);
-
-  /** Erkennt auch erneute Navigationen zur unveränderten Quicklink-URL. */
-  private readonly router = inject(Router);
-
-  /** Lifecycle-Handle für die Routen-Subscription. */
-  private readonly destroyRef = inject(DestroyRef);
-
-  /** Vollständiger sprachabhängiger Content. */
-  readonly content = computed(() => this.languageService.content());
-
-  /** Aktuell ausgewähltes Modul im Service-Console-Index. */
-  readonly selectedServiceIndex = signal<number>(0);
-
-  /** Aktuell ausgewählter Service. */
-  readonly selectedService = computed(() => this.content().services[this.selectedServiceIndex()] ?? this.content().services[0]);
-
-  /** Übersetzte UI-Texte für das interaktive Quickinfo-Modul. */
-  readonly indexLabels = computed(() => this.languageService.language() === 'de'
-    ? {
-        eyebrow: 'service.index // 06 module',
-        title: 'Entwicklung & Design.',
-        titleContinuation: 'Betrieb & Betreuung.',
-        careContact: 'Betreuung besprechen',
-        highlights: 'Highlights',
-        price: 'Einstieg',
-        contact: 'Projekt dazu besprechen',
-        selector: 'Leistungsmodul auswählen',
-        details: 'Leistungsumfang',
-      }
-    : {
-        eyebrow: 'service.index // 06 modules',
-        title: 'Development & design.',
-        titleContinuation: 'Operations & support.',
-        careContact: 'Discuss ongoing support',
-        highlights: 'Highlights',
-        price: 'Starting at',
-        contact: 'Discuss this project',
-        selector: 'Choose service module',
-        details: 'Capabilities',
-      });
-
-  /** Erlaubt deutsche Umbrüche nur an der Wortgrenze vor „Entwicklung“. */
-  readonly serviceTitles = computed(() => this.content().services.map((service) =>
-    service.title.replace('entwicklung', '\u00adentwicklung')));
-
-  /** Inhaltliche Bausteine der Betriebsvisualisierung, ohne simulierte Live-Messwerte. */
-  readonly opsModules = computed(() => this.languageService.language() === 'de'
-    ? [
-        { icon: 'rocket_launch', title: 'Deployment', text: 'Änderungen veröffentlichen' },
-        { icon: 'lock', title: 'SSL', text: 'Verbindungen absichern' },
-        { icon: 'monitor_heart', title: 'Monitoring', text: 'Probleme früh erkennen' },
-        { icon: 'backup', title: 'Backups', text: 'Daten regelmäßig sichern' },
-        { icon: 'restore', title: 'Wieder\u00adherstellung', text: 'Im Fehlerfall zurücksetzen' },
-        { icon: 'alternate_email', title: 'E-Mail', text: 'Optional ergänzen' },
-      ]
-    : [
-        { icon: 'rocket_launch', title: 'Deployment', text: 'Publish changes' },
-        { icon: 'lock', title: 'SSL', text: 'Secure connections' },
-        { icon: 'monitor_heart', title: 'Monitoring', text: 'Detect problems early' },
-        { icon: 'backup', title: 'Backups', text: 'Save data regularly' },
-        { icon: 'restore', title: 'Recovery', text: 'Restore when needed' },
-        { icon: 'alternate_email', title: 'Email', text: 'Add optionally' },
-      ]);
-
+  /** Verbindet die Seite mit ihrer lokalisierten SEO-Ausgabe. */
   constructor() {
-    effect(() => this.seoService.setPage(this.content().servicesPage.seo, '/leistungen'));
+    effect(
+      /** Aktualisiert die SEO-Ausgabe beim Wechsel der Sprache. */
+      () => this.seoService.setPage(this.content().servicesPage.seo, '/leistungen'),
+    );
 
     this.selectServiceFromRoute();
-    this.router.events
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((event) => {
+    this.router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
+      /**
+       * Übernimmt nach Navigation die angeforderte Leistungsauswahl.
+       * @param event Aktuelles Router-Ereignis.
+       */
+      (event) => {
         if (event instanceof NavigationEnd) {
           this.selectServiceFromRoute();
         }
-      });
+      },
+    );
   }
 
-  /** Aktiviert ein Service-Modul ohne Route oder Seitenwechsel. */
+  /**
+   * Aktiviert ein Service-Modul ohne Route oder Seitenwechsel.
+   * @param index Position des ausgewählten Eintrags.
+   */
   selectService(index: number): void {
     if (index < 0 || index >= this.content().services.length) {
       return;
@@ -127,15 +103,38 @@ export class ServicesPageComponent {
     this.selectedServiceIndex.set(index);
   }
 
-  /** Trennt die Leistungsauswahl vom Scrollziel und unterstützt ältere Fragmentlinks. */
+  /** Übernimmt eine vorhandene Leistungsauswahl ohne Veränderung des Scrollziels. */
   private selectServiceFromRoute(): void {
-    const fragment = this.route.snapshot.fragment;
-    const slug = this.route.snapshot.queryParamMap.get('service')
-      ?? (fragment?.startsWith('service-') ? fragment.slice('service-'.length) : null);
-    const index = this.content().services.findIndex((service) => service.slug === slug);
+    /**
+     * Index der über Query-Parameter oder älteres Fragment angeforderten Leistung.
+     */
+    const index = this.serviceIndexFor(this.requestedServiceSlug());
+    if (index >= 0) this.selectService(index);
+  }
 
-    if (index >= 0) {
-      this.selectService(index);
-    }
+  /** Liefert den Leistungs-Slug mit der bisherigen Priorität des Query-Parameters. */
+  private requestedServiceSlug(): string | null {
+    /**
+     * Aktuelles Fragment für ältere Leistungs-Quicklinks.
+     */
+    const fragment = this.route.snapshot.fragment;
+    return (
+      this.route.snapshot.queryParamMap.get('service') ??
+      (fragment?.startsWith('service-') ? fragment.slice('service-'.length) : null)
+    );
+  }
+
+  /**
+   * Sucht die angeforderte Leistung in den Inhalten der aktiven Sprache.
+   * @param slug Über Query-Parameter oder älteres Fragment angeforderter Slug.
+   */
+  private serviceIndexFor(slug: string | null): number {
+    return this.content().services.findIndex(
+      /**
+       * Vergleicht den Leistungseintrag mit dem angeforderten Slug.
+       * @param service Leistung aus dem zentralen Content.
+       */
+      (service) => service.slug === slug,
+    );
   }
 }

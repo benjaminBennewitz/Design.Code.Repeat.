@@ -18,22 +18,93 @@ dcr/
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── data/
+│   │   │   │   ├── design-catalog/
+│   │   │   │   │   ├── gallery/
+│   │   │   │   │   │   ├── archive.data.ts
+│   │   │   │   │   │   ├── compositing.data.ts
+│   │   │   │   │   │   ├── editorial.data.ts
+│   │   │   │   │   │   ├── generative.data.ts
+│   │   │   │   │   │   ├── layout.data.ts
+│   │   │   │   │   │   ├── photography.data.ts
+│   │   │   │   │   │   └── vector.data.ts
+│   │   │   │   │   ├── catalog-chapters.data.ts
+│   │   │   │   │   ├── catalog-gallery.ts
+│   │   │   │   │   ├── catalog-pages.ts
+│   │   │   │   │   ├── catalog-reader.spec.ts
+│   │   │   │   │   ├── catalog-reader.ts
+│   │   │   │   │   ├── catalog-seed.models.ts
+│   │   │   │   │   ├── gallery-backgrounds.data.ts
+│   │   │   │   │   └── gallery-items.data.ts
+│   │   │   │   ├── reference-projects/
+│   │   │   │   │   ├── intranet/
+│   │   │   │   │   │   ├── gallery.de.ts
+│   │   │   │   │   │   ├── gallery.en.ts
+│   │   │   │   │   │   ├── overview.de.ts
+│   │   │   │   │   │   ├── overview.en.ts
+│   │   │   │   │   │   ├── presentation.de.ts
+│   │   │   │   │   │   ├── presentation.en.ts
+│   │   │   │   │   │   ├── system.de.ts
+│   │   │   │   │   │   ├── system.en.ts
+│   │   │   │   │   │   ├── telemetry.de.ts
+│   │   │   │   │   │   └── telemetry.en.ts
+│   │   │   │   │   ├── design-archive.de.ts
+│   │   │   │   │   ├── design-archive.en.ts
+│   │   │   │   │   ├── intranet.de.ts
+│   │   │   │   │   └── intranet.en.ts
+│   │   │   │   ├── studio-content/
+│   │   │   │   │   ├── contact.de.ts
+│   │   │   │   │   ├── contact.en.ts
+│   │   │   │   │   ├── delivered-projects.de.ts
+│   │   │   │   │   ├── delivered-projects.en.ts
+│   │   │   │   │   ├── demo-links.ts
+│   │   │   │   │   ├── home.de.ts
+│   │   │   │   │   ├── home.en.ts
+│   │   │   │   │   ├── layout.de.ts
+│   │   │   │   │   ├── layout.en.ts
+│   │   │   │   │   ├── legal.de.ts
+│   │   │   │   │   ├── legal.en.ts
+│   │   │   │   │   ├── offers.de.ts
+│   │   │   │   │   ├── offers.en.ts
+│   │   │   │   │   ├── process.de.ts
+│   │   │   │   │   ├── process.en.ts
+│   │   │   │   │   ├── references.de.ts
+│   │   │   │   │   ├── references.en.ts
+│   │   │   │   │   ├── references-page.de.ts
+│   │   │   │   │   ├── references-page.en.ts
+│   │   │   │   │   ├── services.de.ts
+│   │   │   │   │   ├── services.en.ts
+│   │   │   │   │   ├── services-page.de.ts
+│   │   │   │   │   ├── services-page.en.ts
+│   │   │   │   │   ├── studio.de.ts
+│   │   │   │   │   └── studio.en.ts
 │   │   │   │   ├── reference-case-projects.ts
 │   │   │   │   ├── reference-case-ui.ts
 │   │   │   │   ├── studio-content.spec.ts
 │   │   │   │   └── studio-content.ts
 │   │   │   ├── models/
 │   │   │   │   ├── reference-case.models.ts
+│   │   │   │   ├── reference-catalog.models.ts
+│   │   │   │   ├── reference-common.models.ts
+│   │   │   │   ├── reference-profile.models.ts
+│   │   │   │   ├── reference-project.models.ts
+│   │   │   │   ├── reference-showcase.models.ts
+│   │   │   │   ├── reference-site.models.ts
 │   │   │   │   └── studio.models.ts
 │   │   │   └── services/
 │   │   │       ├── accessibility-panel.service.ts
 │   │   │       ├── accessibility-preference.service.ts
+│   │   │       ├── appearance-services.spec.ts
 │   │   │       ├── contact-api.service.spec.ts
 │   │   │       ├── contact-api.service.ts
 │   │   │       ├── cookie-consent.service.ts
+│   │   │       ├── document-transition.ts
 │   │   │       ├── fragment-scroll.service.spec.ts
 │   │   │       ├── fragment-scroll.service.ts
+│   │   │       ├── fragment-scroll-task.ts
 │   │   │       ├── language.service.ts
+│   │   │       ├── scroll-reveal.service.spec.ts
+│   │   │       ├── scroll-reveal.service.ts
+│   │   │       ├── seo.service.spec.ts
 │   │   │       ├── seo.service.ts
 │   │   │       ├── tab-title.service.ts
 │   │   │       └── theme.service.ts
@@ -47,10 +118,25 @@ dcr/
 │   │   │   │   ├── cookie-banner.component.scss
 │   │   │   │   └── cookie-banner.component.ts
 │   │   │   ├── footer/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _legal-socials.scss
+│   │   │   │   │   ├── _panels-navigation.scss
+│   │   │   │   │   ├── _responsive-motion.scss
+│   │   │   │   │   ├── _stage.scss
+│   │   │   │   │   ├── _toolbar.scss
+│   │   │   │   │   └── _wordmark-meta.scss
 │   │   │   │   ├── footer.component.html
 │   │   │   │   ├── footer.component.scss
-│   │   │   │   └── footer.component.ts
+│   │   │   │   ├── footer.component.ts
+│   │   │   │   └── footer-ui.data.ts
 │   │   │   ├── header/
+│   │   │   │   ├── styles/
+│   │   │   │   │   └── header.component/
+│   │   │   │   │       ├── _controls.scss
+│   │   │   │   │       ├── _navigation.scss
+│   │   │   │   │       ├── _responsive.scss
+│   │   │   │   │       ├── _structure.scss
+│   │   │   │   │       └── _tool-glyphs.scss
 │   │   │   │   ├── header.component.html
 │   │   │   │   ├── header.component.scss
 │   │   │   │   └── header.component.ts
@@ -68,6 +154,18 @@ dcr/
 │   │   │   │   ├── design-archive-case-page.component.scss
 │   │   │   │   └── design-archive-case-page.component.ts
 │   │   │   ├── home-page/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _contact-responsive.scss
+│   │   │   │   │   ├── _hosting.scss
+│   │   │   │   │   ├── _placeholders-availability.scss
+│   │   │   │   │   ├── _process-contact.scss
+│   │   │   │   │   ├── _process-faq.scss
+│   │   │   │   │   ├── _reference-cards.scss
+│   │   │   │   │   ├── _reference-track.scss
+│   │   │   │   │   ├── _section-surfaces.scss
+│   │   │   │   │   ├── _services.scss
+│   │   │   │   │   └── _viewport-composition.scss
+│   │   │   │   ├── hero-claim-lines.data.ts
 │   │   │   │   ├── home-page.component.html
 │   │   │   │   ├── home-page.component.scss
 │   │   │   │   └── home-page.component.ts
@@ -88,6 +186,13 @@ dcr/
 │   │   │   │   ├── privacy-page.component.scss
 │   │   │   │   └── privacy-page.component.ts
 │   │   │   ├── references-page/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _availability.scss
+│   │   │   │   │   ├── _case-rows.scss
+│   │   │   │   │   ├── _closing.scss
+│   │   │   │   │   ├── _delivered-projects.scss
+│   │   │   │   │   ├── _hero-categories.scss
+│   │   │   │   │   └── _responsive-motion.scss
 │   │   │   │   ├── references-page.component.html
 │   │   │   │   ├── references-page.component.scss
 │   │   │   │   └── references-page.component.ts
@@ -96,10 +201,28 @@ dcr/
 │   │   │   │   ├── service-detail-page.component.scss
 │   │   │   │   └── service-detail-page.component.ts
 │   │   │   ├── services-page/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _care.scss
+│   │   │   │   │   ├── _console-actions.scss
+│   │   │   │   │   ├── _hero.scss
+│   │   │   │   │   ├── _index-console.scss
+│   │   │   │   │   ├── _offers.scss
+│   │   │   │   │   ├── _operations.scss
+│   │   │   │   │   └── _responsive-motion.scss
+│   │   │   │   ├── ops-modules.data.ts
+│   │   │   │   ├── service-index-labels.data.ts
 │   │   │   │   ├── services-page.component.html
 │   │   │   │   ├── services-page.component.scss
 │   │   │   │   └── services-page.component.ts
 │   │   │   ├── studio-page/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _collaboration-region.scss
+│   │   │   │   │   ├── _hero.scss
+│   │   │   │   │   ├── _hero-deployment.scss
+│   │   │   │   │   ├── _hero-region-reveals.scss
+│   │   │   │   │   ├── _intro.scss
+│   │   │   │   │   ├── _responsive.scss
+│   │   │   │   │   └── _stack.scss
 │   │   │   │   ├── studio-page.component.html
 │   │   │   │   ├── studio-page.component.scss
 │   │   │   │   └── studio-page.component.ts
@@ -119,11 +242,26 @@ dcr/
 │   │   │   ├── contact-form/
 │   │   │   │   ├── contact-form.component.html
 │   │   │   │   ├── contact-form.component.scss
-│   │   │   │   └── contact-form.component.ts
+│   │   │   │   ├── contact-form.component.spec.ts
+│   │   │   │   ├── contact-form.component.ts
+│   │   │   │   ├── contact-form.errors.ts
+│   │   │   │   ├── contact-form.factory.ts
+│   │   │   │   ├── contact-form.ids.ts
+│   │   │   │   ├── contact-form.logic.spec.ts
+│   │   │   │   ├── contact-form.payload.ts
+│   │   │   │   └── contact-form.validators.ts
 │   │   │   ├── dithering-shader/
+│   │   │   │   ├── dithering.models.ts
+│   │   │   │   ├── dithering-colors.ts
+│   │   │   │   ├── dithering-fallback.ts
+│   │   │   │   ├── dithering-patterns.ts
+│   │   │   │   ├── dithering-program.ts
+│   │   │   │   ├── dithering-renderer.spec.ts
+│   │   │   │   ├── dithering-renderer.ts
 │   │   │   │   ├── dithering-shader.component.html
 │   │   │   │   ├── dithering-shader.component.scss
-│   │   │   │   └── dithering-shader.component.ts
+│   │   │   │   ├── dithering-shader.component.ts
+│   │   │   │   └── shader-sources.ts
 │   │   │   ├── horizontal-scroll-hint/
 │   │   │   │   ├── horizontal-scroll-hint.component.html
 │   │   │   │   ├── horizontal-scroll-hint.component.scss
@@ -133,8 +271,62 @@ dcr/
 │   │   │   │   ├── infinite-marquee.component.scss
 │   │   │   │   └── infinite-marquee.component.ts
 │   │   │   ├── reference-case-study/
+│   │   │   │   ├── controllers/
+│   │   │   │   │   ├── case-asset-loader.spec.ts
+│   │   │   │   │   ├── case-asset-loader.ts
+│   │   │   │   │   ├── case-study-selection.ts
+│   │   │   │   │   ├── catalog-flow.ts
+│   │   │   │   │   ├── catalog-flow-renderer.ts
+│   │   │   │   │   ├── catalog-loupe.ts
+│   │   │   │   │   ├── catalog-menu.ts
+│   │   │   │   │   ├── catalog-reader.models.ts
+│   │   │   │   │   ├── catalog-reader.spec.ts
+│   │   │   │   │   ├── catalog-reader.ts
+│   │   │   │   │   ├── gallery-lightbox.spec.ts
+│   │   │   │   │   ├── gallery-lightbox.ts
+│   │   │   │   │   └── overlay-focus.ts
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _accent.scss
+│   │   │   │   │   ├── _accessibility.scss
+│   │   │   │   │   ├── _app-landscape.scss
+│   │   │   │   │   ├── _app-stack.scss
+│   │   │   │   │   ├── _architecture.scss
+│   │   │   │   │   ├── _chapters.scss
+│   │   │   │   │   ├── _copy.scss
+│   │   │   │   │   ├── _detail.scss
+│   │   │   │   │   ├── _evidence.scss
+│   │   │   │   │   ├── _hero.scss
+│   │   │   │   │   ├── _highlights.scss
+│   │   │   │   │   ├── _info.scss
+│   │   │   │   │   ├── _metrics.scss
+│   │   │   │   │   ├── _missing.scss
+│   │   │   │   │   ├── _notes.scss
+│   │   │   │   │   ├── _presentation.scss
+│   │   │   │   │   ├── _responsive.scss
+│   │   │   │   │   ├── _showcase.scss
+│   │   │   │   │   ├── _showcase-2.scss
+│   │   │   │   │   ├── _showcase-3.scss
+│   │   │   │   │   ├── _showcase-4.scss
+│   │   │   │   │   ├── _terminal.scss
+│   │   │   │   │   └── _wide-screen.scss
+│   │   │   │   ├── views/
+│   │   │   │   │   ├── case-architecture.view.html
+│   │   │   │   │   ├── case-architecture.view.ts
+│   │   │   │   │   ├── case-gallery.view.html
+│   │   │   │   │   ├── case-gallery.view.ts
+│   │   │   │   │   ├── case-hero.view.html
+│   │   │   │   │   ├── case-hero.view.ts
+│   │   │   │   │   ├── case-info.view.html
+│   │   │   │   │   ├── case-info.view.ts
+│   │   │   │   │   ├── case-lightbox.view.html
+│   │   │   │   │   ├── case-lightbox.view.ts
+│   │   │   │   │   ├── case-reader.view.html
+│   │   │   │   │   ├── case-reader.view.ts
+│   │   │   │   │   ├── case-study-view.models.ts
+│   │   │   │   │   └── protected-asset.directive.ts
 │   │   │   │   ├── reference-case-study.component.html
 │   │   │   │   ├── reference-case-study.component.scss
+│   │   │   │   ├── reference-case-study.component.spec.ts
 │   │   │   │   ├── reference-case-study.component.ts
 │   │   │   │   └── reference-case-styles.component.ts
 │   │   │   ├── reference-project-telemetry/
@@ -146,6 +338,11 @@ dcr/
 │   │   │   │   ├── reference-system-dialog.component.scss
 │   │   │   │   └── reference-system-dialog.component.ts
 │   │   │   ├── reference-telemetry-chart/
+│   │   │   │   ├── styles/
+│   │   │   │   │   └── reference-telemetry-chart.component/
+│   │   │   │   │       ├── _animation-overrides.scss
+│   │   │   │   │       ├── _chart-layout.scss
+│   │   │   │   │       └── _legend-reveal.scss
 │   │   │   │   ├── reference-telemetry-chart.component.html
 │   │   │   │   ├── reference-telemetry-chart.component.scss
 │   │   │   │   └── reference-telemetry-chart.component.ts
@@ -158,6 +355,13 @@ dcr/
 │   │   │   │   ├── signal-divider.component.scss
 │   │   │   │   └── signal-divider.component.ts
 │   │   │   ├── system-grid/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _boxed-layout.scss
+│   │   │   │   │   ├── _lead.scss
+│   │   │   │   │   ├── _marks-navigation.scss
+│   │   │   │   │   ├── _panels.scss
+│   │   │   │   │   ├── _responsive.scss
+│   │   │   │   │   └── _reveals.scss
 │   │   │   │   ├── system-grid.component.html
 │   │   │   │   ├── system-grid.component.scss
 │   │   │   │   └── system-grid.component.ts
@@ -172,6 +376,7 @@ dcr/
 │   │   │   └── text-reveal.directive.ts
 │   │   ├── app.component.html
 │   │   ├── app.component.scss
+│   │   ├── app.component.spec.ts
 │   │   ├── app.component.ts
 │   │   └── app.routes.ts
 │   ├── assets/
@@ -332,6 +537,32 @@ dcr/
 │   │   ├── environment.production.ts
 │   │   └── environment.ts
 │   ├── styles/
+│   │   ├── reference-case-catalog/
+│   │   │   ├── _accent.scss
+│   │   │   ├── _animations.scss
+│   │   │   ├── _gallery.scss
+│   │   │   ├── _hero.scss
+│   │   │   ├── _lightbox.scss
+│   │   │   ├── _pages.scss
+│   │   │   ├── _reader.scss
+│   │   │   ├── _reader-2.scss
+│   │   │   └── _responsive.scss
+│   │   ├── reference-case-utilities/
+│   │   │   ├── _buttons.scss
+│   │   │   ├── _cards-windows.scss
+│   │   │   ├── _layout.scss
+│   │   │   ├── _light-theme.scss
+│   │   │   ├── _responsive.scss
+│   │   │   ├── _reveals.scss
+│   │   │   ├── _tags.scss
+│   │   │   ├── _theme-transitions.scss
+│   │   │   └── _typography.scss
+│   │   ├── styles/
+│   │   │   └── home-hero/
+│   │   │       ├── _animations.scss
+│   │   │       ├── _layout.scss
+│   │   │       ├── _motion.scss
+│   │   │       └── _responsive.scss
 │   │   ├── base.scss
 │   │   ├── home-capabilities.scss
 │   │   ├── home-hero.scss

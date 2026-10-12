@@ -1,0 +1,115 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero-region-reveals.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero Region Reveals
+   02 Accessibility Overrides
+   03 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Hero Region Reveals
+   ========================================================================== */
+  .studio-hero::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 85% 25%, color-mix(in srgb, var(--dcr-color-pink) 12%, transparent), transparent 55%),
+      radial-gradient(ellipse at 55% 90%, color-mix(in srgb, var(--dcr-color-lime) 7%, transparent), transparent 50%);
+  }
+
+  .studio-hero__signature {
+    color: var(--dcr-color-primary-text);
+    background: linear-gradient(
+      120deg,
+      var(--dcr-color-primary-text) 15%,
+      var(--dcr-color-violet-text) 55%,
+      var(--dcr-color-pink-text)
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .studio-hero__facets li:nth-child(2) .material-symbols-outlined {
+    color: var(--dcr-color-pink-text);
+  }
+
+  .studio-hero__facets li:nth-child(3) .material-symbols-outlined {
+    color: var(--dcr-color-lime-text);
+  }
+
+  .studio-region__cities strong.is-reveal-ready {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0) scale(0.92);
+    transform-origin: left bottom;
+    transition:
+      opacity 600ms ease,
+      transform 750ms var(--dcr-ease-out);
+    transition-delay: var(--city-reveal-delay, 0ms);
+  }
+
+  .studio-region__cities li:nth-child(2) {
+    --city-reveal-delay: 90ms;
+  }
+
+  .studio-region__cities li:nth-child(3) {
+    --city-reveal-delay: 180ms;
+  }
+
+  .studio-region__cities li:nth-child(4) {
+    --city-reveal-delay: 270ms;
+  }
+
+  .studio-region__cities strong.is-in-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :host-context(:root[data-motion='off']) .studio-region__cities strong.is-reveal-ready,
+  :host-context(:root[data-motion='reduced']) .studio-region__cities strong.is-reveal-ready,
+  :host-context(:root[data-comfort='simple']) .studio-region__cities strong.is-reveal-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .studio-region__cities strong.is-reveal-ready {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (forced-colors: active) {
+    .studio-hero__signature {
+      background: none;
+      -webkit-text-fill-color: currentColor;
+    }
+  }
+}

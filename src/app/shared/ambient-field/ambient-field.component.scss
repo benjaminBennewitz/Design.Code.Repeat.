@@ -1,3 +1,31 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     ambient-field.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Ambient Field
+   02 Theme Overrides
+   03 Animation Keyframes
+   04 Accessibility Overrides
+   05 Ambient Field (2)
+*/
+
+/* ==========================================================================
+   Ambient Field
+   ========================================================================== */
 :host {
   position: absolute;
   inset: 0;
@@ -75,7 +103,12 @@
   bottom: -20%;
   left: 12%;
   width: clamp(7rem, 14vw, 15rem);
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--dcr-color-primary) 8%, transparent), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--dcr-color-primary) 8%, transparent),
+    transparent
+  );
   transform: skewX(-12deg) translateX(-40vw);
   animation: ambient-scan 8.5s var(--dcr-ease-out) infinite;
 }
@@ -91,13 +124,41 @@
   animation: ambient-node 3.8s steps(2, jump-none) infinite;
 }
 
-.ambient-field__nodes span:nth-child(2) { top: 30%; left: 19%; animation-delay: -0.31s; }
-.ambient-field__nodes span:nth-child(3) { top: 48%; left: 30%; animation-delay: -0.62s; }
-.ambient-field__nodes span:nth-child(4) { top: 66%; left: 41%; animation-delay: -0.93s; }
-.ambient-field__nodes span:nth-child(5) { top: 12%; left: 52%; animation-delay: -1.24s; }
-.ambient-field__nodes span:nth-child(6) { top: 30%; left: 63%; animation-delay: -1.55s; }
-.ambient-field__nodes span:nth-child(7) { top: 48%; left: 74%; animation-delay: -1.86s; }
-.ambient-field__nodes span:nth-child(8) { top: 66%; left: 85%; animation-delay: -2.17s; }
+.ambient-field__nodes span:nth-child(2) {
+  top: 30%;
+  left: 19%;
+  animation-delay: -0.31s;
+}
+.ambient-field__nodes span:nth-child(3) {
+  top: 48%;
+  left: 30%;
+  animation-delay: -0.62s;
+}
+.ambient-field__nodes span:nth-child(4) {
+  top: 66%;
+  left: 41%;
+  animation-delay: -0.93s;
+}
+.ambient-field__nodes span:nth-child(5) {
+  top: 12%;
+  left: 52%;
+  animation-delay: -1.24s;
+}
+.ambient-field__nodes span:nth-child(6) {
+  top: 30%;
+  left: 63%;
+  animation-delay: -1.55s;
+}
+.ambient-field__nodes span:nth-child(7) {
+  top: 48%;
+  left: 74%;
+  animation-delay: -1.86s;
+}
+.ambient-field__nodes span:nth-child(8) {
+  top: 66%;
+  left: 85%;
+  animation-delay: -2.17s;
+}
 
 .ambient-field__nodes span:nth-child(3n) {
   background: var(--dcr-color-lime);
@@ -143,34 +204,76 @@
   display: none;
 }
 
+/* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+
 :host-context(:root[data-theme='light']) .ambient-field[data-variant='studio'] .ambient-field__grid {
   background-image:
     linear-gradient(to right, color-mix(in srgb, var(--dcr-color-contrast-dark) 10%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--dcr-color-contrast-dark) 9%, transparent) 1px, transparent 1px);
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes ambient-grid-drift {
-  from { background-position: 0 0, 0 0; }
-  to { background-position: 7rem 0, 0 7rem; }
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+  to {
+    background-position:
+      7rem 0,
+      0 7rem;
+  }
 }
 
 @keyframes ambient-orbit {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes ambient-scan {
-  0%, 12% { transform: skewX(-12deg) translateX(-45vw); opacity: 0; }
-  30%, 65% { opacity: 1; }
-  88%, 100% { transform: skewX(-12deg) translateX(110vw); opacity: 0; }
+  0%,
+  12% {
+    transform: skewX(-12deg) translateX(-45vw);
+    opacity: 0;
+  }
+  30%,
+  65% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    transform: skewX(-12deg) translateX(110vw);
+    opacity: 0;
+  }
 }
 
 @keyframes ambient-node {
-  0%, 100% { opacity: 0.28; transform: translateY(0) scale(0.8); }
-  50% { opacity: 1; transform: translateY(-0.5rem) scale(1.2); }
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-0.5rem) scale(1.2);
+  }
 }
 
-:host-context(:root[data-motion='reduced']) :is(.ambient-field__grid, .ambient-field__orbit, .ambient-field__scan, .ambient-field__nodes span),
-:host-context(:root[data-motion='off']) :is(.ambient-field__grid, .ambient-field__orbit, .ambient-field__scan, .ambient-field__nodes span) {
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+:host-context(:root[data-motion='reduced'])
+  :is(.ambient-field__grid, .ambient-field__orbit, .ambient-field__scan, .ambient-field__nodes span),
+:host-context(:root[data-motion='off'])
+  :is(.ambient-field__grid, .ambient-field__orbit, .ambient-field__scan, .ambient-field__nodes span) {
   animation: none;
 }
 
@@ -180,6 +283,10 @@
 }
 
 /* Der Services-Hero nutzt die neue Maschinenanimation statt Scanner und Orbit-Halbkreisen. */
+
+/* ==========================================================================
+   Ambient Field (2)
+   ========================================================================== */
 .ambient-field[data-variant='services'] :is(.ambient-field__scan, .ambient-field__orbit) {
   display: none;
 }

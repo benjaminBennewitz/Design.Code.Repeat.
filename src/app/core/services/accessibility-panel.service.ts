@@ -10,11 +10,16 @@ import { Injectable, signal } from '@angular/core';
 /** Zentraler Trigger zum Öffnen des globalen Accessibility-Dialogs. */
 @Injectable({ providedIn: 'root' })
 export class AccessibilityPanelService {
-  /** Fortlaufende Anfrage-ID, damit auch wiederholte Öffnungen zuverlässig erkannt werden. */
-  readonly openRequest = signal(0);
+  readonly openRequest = signal(0); // Fortlaufende Anfrage-ID, damit auch wiederholte Öffnungen zuverlässig erkannt werden.
 
   /** Fordert das Öffnen des globalen Accessibility-Panels an. */
   requestOpen(): void {
-    this.openRequest.update((request) => request + 1);
+    this.openRequest.update(
+      /**
+       * Erzeugt eine neue Anfrage-ID auch bei wiederholtem Öffnen.
+       * @param request Zuletzt vergebene Anfrage-ID.
+       */
+      (request) => request + 1,
+    );
   }
 }

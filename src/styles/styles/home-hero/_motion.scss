@@ -1,0 +1,46 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _motion.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Home Hero Motion Overrides
+*/
+
+/* ==========================================================================
+   Home Hero Motion Overrides
+   ========================================================================== */
+
+@mixin render {
+
+  :root[data-motion='reduced'] :is(.home-hero__line, .home-hero__slot, .home-hero__service, .home-hero__cta),
+  :root[data-motion='off'] :is(.home-hero__line, .home-hero__slot, .home-hero__service, .home-hero__cta) {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+
+  :root[data-motion='reduced'] .home-hero__symbol,
+  :root[data-motion='off'] .home-hero__symbol {
+    opacity: 0;
+    animation: none;
+  }
+
+  :root[data-motion='reduced'] .home-hero__symbol.is-phase-0,
+  :root[data-motion='off'] .home-hero__symbol.is-phase-0 {
+    opacity: 1;
+  }
+}

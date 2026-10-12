@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     terminal-panel.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Terminal Panel
+   02 Animation Keyframes
+   03 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Terminal Panel
+   ========================================================================== */
 .terminal {
   border: 2px solid var(--dcr-color-border-strong);
   background: var(--dcr-color-surface-solid);
@@ -54,10 +80,22 @@
   animation: terminal-blink 1s steps(2, end) infinite;
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes terminal-blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .terminal__cursor { animation: none; }
+  .terminal__cursor {
+    animation: none;
+  }
 }

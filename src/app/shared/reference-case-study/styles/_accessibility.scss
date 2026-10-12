@@ -1,0 +1,42 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _accessibility.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__highlight-card .material-symbols-outlined,
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__highlight-card .material-symbols-outlined,
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__map-node .material-symbols-outlined,
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__map-node .material-symbols-outlined,
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__app-card > .material-symbols-outlined,
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail__app-card > .material-symbols-outlined {
+    background: #111111;
+    color: #f6f0e8;
+  }
+
+  :root[data-motion='off'] .dcr-case .project-detail__stack-card,
+  :root[data-motion='reduced'] .dcr-case .project-detail__stack-card,
+  :root[data-motion='off'] .dcr-case .project-detail__stack-card,
+  :root[data-motion='reduced'] .dcr-case .project-detail__stack-card {
+    transition: none;
+  }
+}

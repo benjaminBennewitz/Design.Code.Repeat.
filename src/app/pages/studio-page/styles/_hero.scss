@@ -1,0 +1,130 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Hero
+   ========================================================================== */
+  .studio-page {
+    overflow: hidden;
+  }
+
+  .studio-hero {
+    --dcr-section-bg: var(--dcr-color-bg);
+    --dcr-section-next-bg: var(--dcr-color-bg-soft);
+    display: grid;
+    align-items: center;
+  }
+
+  .studio-hero__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .studio-hero__copy {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .studio-hero h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(3rem, min(6.5vw, 9vh), 7rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .studio-hero__lead {
+    max-width: 40rem;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    line-height: 1.7;
+  }
+
+  .studio-hero__identity {
+    border-left: 1px solid var(--dcr-color-border-strong);
+    padding-left: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .studio-hero__signature {
+    color: var(--dcr-color-primary);
+    font-family: var(--dcr-font-display);
+    font-size: clamp(6rem, min(11vw, 17vh), 11rem);
+    line-height: 1;
+    letter-spacing: -0.08em;
+  }
+
+  .studio-hero__name {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .studio-hero__location {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  .studio-hero__location .material-symbols-outlined {
+    font-size: 1.1rem;
+  }
+
+  .studio-hero__facets {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .studio-hero__facets li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: 0.8rem;
+    border-top: 1px solid var(--dcr-color-border-strong);
+    padding: 0.9rem 0;
+  }
+
+  .studio-hero__facets .material-symbols-outlined {
+    color: var(--dcr-color-primary);
+    font-size: 1.4rem;
+  }
+
+  .studio-hero__facets strong {
+    font-size: 0.9rem;
+  }
+
+  .studio-hero__facets p {
+    margin: 0.2rem 0 0;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}

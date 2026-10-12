@@ -1,0 +1,77 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _copy.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Copy
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Copy
+   ========================================================================== */
+  .dcr-case .project-detail__copy {
+    display: grid;
+    gap: var(--bp-space-5);
+    min-width: 0;
+  }
+
+  .dcr-case .project-detail__copy section {
+    border-bottom: 1px solid var(--bp-color-border);
+    padding-bottom: var(--bp-space-5);
+  }
+
+  .dcr-case .project-detail__copy p {
+    max-width: 860px;
+    margin: var(--bp-space-3) 0 0;
+    color: var(--bp-color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.72;
+  }
+
+  .dcr-case .project-detail__copy ul,
+  .dcr-case .project-detail__chapter ul,
+  .dcr-case .project-detail__map-detail ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: var(--bp-space-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dcr-case .project-detail__copy li,
+  .dcr-case .project-detail__chapter li,
+  .dcr-case .project-detail__map-detail li {
+    display: flex;
+    gap: 0.7rem;
+    color: var(--bp-color-text-muted);
+    line-height: 1.55;
+  }
+
+  .dcr-case .project-detail__copy li::before,
+  .dcr-case .project-detail__chapter li::before,
+  .dcr-case .project-detail__map-detail li::before {
+    content: '✦';
+    color: var(--bp-color-accent);
+  }
+
+  .dcr-case .project-detail__section-head {
+    display: grid;
+    gap: var(--bp-space-2);
+    max-width: 940px;
+    margin-bottom: var(--bp-space-5);
+  }
+}

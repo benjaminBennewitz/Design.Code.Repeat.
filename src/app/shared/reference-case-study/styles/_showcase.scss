@@ -1,0 +1,369 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _showcase.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Showcase
+   02 Theme Overrides
+   03 Showcase (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Showcase
+   ========================================================================== */
+  .dcr-case .project-detail {
+    --project-detail-blue: var(--bp-color-accent);
+    --project-detail-blue-soft: color-mix(in srgb, var(--project-detail-blue), transparent 86%);
+    --project-detail-purple-soft: color-mix(in srgb, var(--bp-color-accent), transparent 90%);
+    --project-detail-red-soft: color-mix(in srgb, var(--project-detail-blue), transparent 90%);
+    --project-detail-focus-bg: color-mix(in srgb, var(--bp-color-surface-solid) 90%, black 10%);
+    --project-detail-grid-soft: color-mix(in srgb, var(--bp-color-text), transparent 93%);
+    --project-detail-halftone: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--bp-color-accent), transparent 70%) 1px,
+      transparent 1.9px
+    );
+    --project-detail-hero-bg: var(--bp-color-bg);
+    --project-detail-ink: var(--bp-color-text);
+    --project-detail-muted: var(--bp-color-text-muted);
+  }
+
+  /* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+
+  :root[data-theme='light'] .dcr-case .project-detail,
+  :root[data-theme='light'] .dcr-case .project-detail,
+  [data-theme='light'] .dcr-case .project-detail {
+    --project-detail-blue: var(--bp-color-accent);
+    --project-detail-blue-soft: color-mix(in srgb, var(--project-detail-blue), transparent 88%);
+    --project-detail-focus-bg: color-mix(in srgb, #151923 88%, var(--project-detail-blue) 12%);
+    --project-detail-grid-soft: color-mix(in srgb, var(--bp-color-accent), transparent 78%);
+    --project-detail-halftone: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--bp-color-accent), transparent 66%) 1px,
+      transparent 1.9px
+    );
+  }
+
+  /* ==========================================================================
+   Showcase (2)
+   ========================================================================== */
+
+  .dcr-case .project-detail__hero {
+    height: auto;
+    min-height: 100svh;
+    padding-top: calc(var(--bp-header-height) + clamp(0.35rem, 0.9vw, 0.85rem));
+    padding-bottom: clamp(0.65rem, 1.2vw, 1rem);
+    background:
+      radial-gradient(circle at 82% 24%, var(--project-detail-blue-soft), transparent 30%),
+      radial-gradient(circle at 16% 18%, color-mix(in srgb, var(--bp-color-accent), transparent 90%), transparent 26%),
+      var(--project-detail-halftone),
+      linear-gradient(
+        135deg,
+        var(--project-detail-hero-bg),
+        color-mix(in srgb, var(--project-detail-hero-bg) 92%, var(--project-detail-blue) 8%)
+      );
+    background-size:
+      auto,
+      auto,
+      11px 11px,
+      auto;
+  }
+
+  .dcr-case .project-detail__hero::before {
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--project-detail-blue), transparent 72%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--project-detail-blue), transparent 82%) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.28;
+  }
+
+  .dcr-case .project-detail__hero::after {
+    background: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--project-detail-blue), transparent 54%) 1px,
+      transparent 2px
+    );
+    background-size: 9px 9px;
+    opacity: 0.18;
+    transform: translateX(18%);
+  }
+
+  .dcr-case .project-detail__hero-grid {
+    grid-template-columns: minmax(470px, 0.82fr) minmax(520px, 1.18fr);
+    gap: clamp(1.35rem, 3.4vw, 4.1rem);
+    min-height: calc(100svh - var(--bp-header-height) - clamp(1.25rem, 2vw, 1.85rem));
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .dcr-case .project-detail__hero-copy {
+    position: relative;
+    z-index: 4;
+  }
+
+  .dcr-case .project-detail__hero-copy::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -1rem -1.25rem -1rem -1rem;
+    border-radius: 0;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--project-detail-hero-bg) 92%, transparent), transparent);
+    opacity: 0.82;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: fit-content;
+    margin-bottom: clamp(0.55rem, 1vw, 1rem);
+    border: 1px solid var(--bp-color-border-strong);
+    padding: 0.64rem 0.85rem;
+    background: color-mix(in srgb, var(--bp-color-bg) 84%, transparent);
+    color: var(--bp-color-text);
+    font-family: var(--bp-font-mono);
+    font-size: 0.74rem;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms var(--bp-ease-out);
+  }
+
+  .dcr-case .project-detail__back:hover,
+  .dcr-case .project-detail__back:focus-visible {
+    border-color: var(--bp-color-accent);
+    background: color-mix(in srgb, var(--bp-color-surface-solid) 78%, var(--bp-color-accent) 10%);
+    box-shadow: 5px 5px 0 color-mix(in srgb, var(--bp-color-accent) 32%, transparent);
+    transform: translate3d(-2px, -2px, 0);
+  }
+
+  .dcr-case .project-detail__back .material-symbols-outlined {
+    color: var(--bp-color-accent);
+    font-size: 1.2rem;
+  }
+
+  .dcr-case .project-detail__hero .bp-eyebrow {
+    margin-bottom: clamp(0.58rem, 1vw, 0.9rem);
+  }
+
+  .dcr-case .project-detail__hero .bp-title {
+    max-width: none;
+    padding-right: 0;
+    font-size: clamp(3rem, 6.2vw, 6.9rem);
+    letter-spacing: -0.083em;
+    overflow-wrap: normal;
+    white-space: nowrap;
+    word-break: keep-all;
+    animation: project-detail-title-in 860ms var(--bp-ease-out) both;
+  }
+
+  .dcr-case .project-detail__hero .bp-subtitle {
+    max-width: 590px;
+    margin-top: clamp(0.8rem, 1.35vw, 1.15rem);
+    color: color-mix(in srgb, var(--project-detail-ink), transparent 16%);
+    font-size: clamp(0.95rem, 1.12vw, 1.08rem);
+    line-height: 1.58;
+    animation: project-detail-copy-in 720ms var(--bp-ease-out) 120ms both;
+  }
+
+  .dcr-case .project-detail__hero-tags {
+    gap: 0.45rem;
+    margin-top: clamp(0.85rem, 1.5vw, 1.25rem);
+    animation: project-detail-copy-in 720ms var(--bp-ease-out) 220ms both;
+  }
+
+  .dcr-case .project-detail__hero-tags li {
+    position: relative;
+    overflow: hidden;
+    border-color: transparent;
+    padding: 0.42rem 0.66rem;
+    background: color-mix(in srgb, var(--bp-color-accent) 86%, white 14%);
+    color: var(--project-detail-hero-tag-fg);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 20%, transparent);
+    transition:
+      border-color 170ms ease,
+      background-color 170ms ease,
+      color 170ms ease,
+      transform 170ms var(--bp-ease-out),
+      box-shadow 170ms ease;
+  }
+
+  .dcr-case .project-detail__hero-tags li::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      color-mix(in srgb, var(--bp-color-accent) 92%, white 8%),
+      var(--bp-color-accent)
+    );
+    opacity: 0;
+    transition: opacity 170ms ease;
+  }
+
+  .dcr-case .project-detail__hero-tags li span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dcr-case .project-detail__hero-tags li:hover,
+  .dcr-case .project-detail__hero-tags li:focus-within {
+    border-color: transparent;
+    color: var(--project-detail-hero-tag-fg);
+    box-shadow: 0 14px 34px color-mix(in srgb, var(--bp-color-accent), transparent 76%);
+    transform: translateY(-2px);
+  }
+
+  .dcr-case .project-detail__hero-tags li:hover::before,
+  .dcr-case .project-detail__hero-tags li:focus-within::before {
+    opacity: 1;
+  }
+
+  .dcr-case .project-detail__hero-actions {
+    gap: 0.85rem;
+    margin-top: clamp(1rem, 1.8vw, 1.6rem);
+    animation: project-detail-copy-in 720ms var(--bp-ease-out) 320ms both;
+  }
+
+  .dcr-case .project-detail__hero-stage {
+    min-height: clamp(380px, 45vw, 500px);
+    animation: project-detail-stage-in 920ms var(--bp-ease-out) 180ms both;
+  }
+
+  .dcr-case .project-detail__app-stack {
+    width: min(100%, 700px);
+    height: min(48vw, 490px);
+  }
+
+  .dcr-case .project-detail__stack-card {
+    width: clamp(124px, 12.4vw, 178px);
+    min-height: clamp(175px, 18vw, 238px);
+    border-radius: 0;
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.54;
+    transform: translate(-50%, -50%) translateX(calc(var(--stack-offset) * 2.42rem))
+      rotateY(calc(var(--stack-offset) * -7deg)) rotateZ(calc(var(--stack-offset) * 1.25deg)) scale(0.81);
+  }
+
+  .dcr-case .project-detail__stack-card:hover,
+  .dcr-case .project-detail__stack-card:focus-visible {
+    border-color: rgba(246, 240, 232, 0.16);
+    box-shadow: 0 34px 70px rgba(0, 0, 0, 0.42);
+    opacity: 0.54;
+    transform: translate(-50%, -50%) translateX(calc(var(--stack-offset) * 2.42rem))
+      rotateY(calc(var(--stack-offset) * -7deg)) rotateZ(calc(var(--stack-offset) * 1.25deg)) scale(0.81);
+  }
+
+  .dcr-case .project-detail__stack-card strong {
+    font-size: clamp(0.74rem, 1vw, 0.94rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .dcr-case .project-detail__stack-card small {
+    font-size: 0.56rem;
+  }
+
+  .dcr-case .project-detail__stack-card.is-active,
+  .dcr-case .project-detail__stack-card.is-active:hover {
+    z-index: 24;
+    border-color: color-mix(in srgb, var(--project-detail-blue), transparent 18%);
+    box-shadow: 0 32px 86px color-mix(in srgb, var(--project-detail-blue), transparent 82%);
+    opacity: 1;
+    transform: translate(-50%, -55%) translateX(calc(var(--stack-offset) * 2.58rem))
+      rotateY(calc(var(--stack-offset) * -3deg)) rotateZ(calc(var(--stack-offset) * 0.7deg)) scale(0.89);
+  }
+
+  .dcr-case .project-detail__app-focus {
+    display: grid;
+    width: min(68vw, 330px);
+    min-height: clamp(330px, 34vw, 365px);
+    align-content: space-between;
+    gap: var(--bp-space-3);
+    border: 1px solid color-mix(in srgb, var(--project-detail-blue), transparent 24%);
+    border-radius: 0;
+    padding: clamp(1rem, 2vw, 1.35rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.08), transparent 26%),
+      linear-gradient(145deg, rgba(42, 43, 48, 0.94), rgba(12, 13, 17, 0.98));
+    color: #f6f0e8;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 34px 100px rgba(0, 0, 0, 0.58),
+      0 0 34px color-mix(in srgb, var(--project-detail-blue), transparent 84%);
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__app-focus-bar {
+    display: none;
+  }
+
+  .dcr-case .project-detail__app-focus-body {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 100%;
+    align-content: space-between;
+    gap: var(--bp-space-3);
+    padding: 0;
+  }
+
+  .dcr-case .project-detail__app-focus .project-detail__app-star {
+    inset: 0.82rem 0.82rem auto auto;
+    z-index: 2;
+  }
+
+  .dcr-case .project-detail__app-focus-icon {
+    justify-self: center;
+    margin-top: 0;
+    color: rgba(246, 240, 232, 0.8);
+    font-size: clamp(3.2rem, 7vw, 5rem);
+    text-shadow: 0 0 34px rgba(255, 255, 255, 0.2);
+  }
+
+  .dcr-case .project-detail__app-focus h2 {
+    color: #f6f0e8;
+    font-size: clamp(1.08rem, 1.85vw, 1.48rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .dcr-case .project-detail__app-focus p {
+    color: var(--project-detail-blue);
+    font-size: clamp(0.58rem, 0.72vw, 0.66rem);
+    overflow-wrap: break-word;
+  }
+
+  .dcr-case .project-detail__app-focus span:not(.material-symbols-outlined) {
+    color: rgba(246, 240, 232, 0.72);
+    overflow-wrap: break-word;
+  }
+}

@@ -1,0 +1,155 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _collaboration-region.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Collaboration Region
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Collaboration Region
+   ========================================================================== */
+  .studio-collaboration,
+  .studio-region {
+    padding-block: clamp(4rem, 8vw, 8rem);
+  }
+
+  .studio-collaboration__layout,
+  .studio-region__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: start;
+  }
+
+  :is(.studio-collaboration__intro, .studio-region__copy) h2 {
+    max-width: 18ch;
+    margin: 1rem 0 1.5rem;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  :is(.studio-collaboration__intro, .studio-region__copy) > p:not(.dcr-eyebrow) {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    line-height: 1.75;
+  }
+
+  .studio-collaboration__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .studio-collaboration__list li {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    gap: 1rem;
+    border-top: 1px solid var(--dcr-color-border-strong);
+    padding: 1.5rem 0;
+  }
+
+  .studio-collaboration__list .material-symbols-outlined {
+    color: var(--dcr-color-primary);
+    font-size: 1.6rem;
+  }
+
+  .studio-collaboration__list h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .studio-collaboration__list p {
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .studio-principles__layout {
+    height: 100%;
+  }
+
+  .studio-region {
+    --dcr-section-bg: var(--dcr-color-bg-soft);
+  }
+
+  .studio-region__cities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--dcr-color-border-strong);
+    border-left: 1px solid var(--dcr-color-border-strong);
+  }
+
+  .studio-region__cities li {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1rem, 2vw, 2rem);
+    border-right: 1px solid var(--dcr-color-border-strong);
+    border-bottom: 1px solid var(--dcr-color-border-strong);
+  }
+
+  .studio-region__cities strong {
+    color: var(--dcr-color-primary);
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .studio-region__cities span {
+    font-size: 0.85rem;
+  }
+
+  .studio-region__note {
+    margin: 1.5rem 0;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .studio-region__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--dcr-color-text);
+    text-decoration: underline;
+    text-underline-offset: 0.35em;
+    line-height: 1.5;
+  }
+
+  .studio-region__link:hover {
+    color: var(--dcr-color-primary);
+  }
+
+  .studio-region__link:focus-visible {
+    outline: 2px solid var(--dcr-color-primary);
+    outline-offset: 0.4rem;
+  }
+
+  .studio-region__link .material-symbols-outlined {
+    font-size: 1.3rem;
+  }
+}

@@ -1,7 +1,7 @@
 /*###############################
 ###
-###     Design. Code. Repeat. Studio
-###     DESIGN TOKENS
+###     Design. Code. Repeat.
+###     tokens.scss
 ###     BASED ON: Angular 22, SCSS
 ###     AUTHOR: Benjamin Bennewitz
 ###
@@ -14,6 +14,17 @@
 ###
 #################################*/
 
+/*
+   INHALTSVERZEICHNIS
+   01 Local Fonts
+   02 Design Tokens
+   03 Theme Overrides
+   04 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Local Fonts
+   ========================================================================== */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -37,6 +48,10 @@
   font-display: swap;
   src: url('/assets/fonts/material-symbols-outlined-latin-fill-normal.woff2') format('woff2');
 }
+
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
 
 :root {
   color-scheme: dark;
@@ -67,6 +82,10 @@
   --dcr-focus-ring-offset: 4px;
   --dcr-disabled-opacity: 0.52;
 }
+
+/* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
 
 :root,
 :root[data-theme='dark'] {
@@ -141,7 +160,6 @@
   --dcr-color-neutral-panel: #d8dadd;
   --dcr-color-on-neutral-panel: #101112;
 }
-
 
 /* ==========================================================================
    Accessibility Overrides
@@ -273,11 +291,6 @@
   --dcr-color-danger-text: #222222;
   --dcr-color-lime-text-on-dark: #d4d4d4;
 }
-
-
-/* ==========================================================================
-   Static semantic foregrounds
-   ========================================================================== */
 
 /*
  * Die `on-*`-Tokens sind bewusst statisch definiert. Ihre Werte entsprechen

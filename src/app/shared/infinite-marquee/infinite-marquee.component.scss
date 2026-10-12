@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     infinite-marquee.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Infinite Marquee
+   02 Animation Keyframes
+   03 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Infinite Marquee
+   ========================================================================== */
 :host {
   display: block;
   overflow: hidden;
@@ -7,7 +33,13 @@
   overflow: hidden;
   border-block: 1px solid var(--dcr-color-border-strong);
   background: color-mix(in srgb, var(--dcr-color-surface-solid) 86%, transparent);
-  mask-image: linear-gradient(to right, transparent, var(--dcr-color-contrast-dark) 6%, var(--dcr-color-contrast-dark) 94%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--dcr-color-contrast-dark) 6%,
+    var(--dcr-color-contrast-dark) 94%,
+    transparent
+  );
 }
 
 .marquee__track,
@@ -40,9 +72,15 @@
   white-space: nowrap;
 }
 
-.marquee span:nth-child(3n + 1) { color: var(--dcr-color-primary-text); }
-.marquee span:nth-child(3n + 2) { color: var(--dcr-color-lime-text); }
-.marquee span:nth-child(3n) { color: var(--dcr-color-pink-text); }
+.marquee span:nth-child(3n + 1) {
+  color: var(--dcr-color-primary-text);
+}
+.marquee span:nth-child(3n + 2) {
+  color: var(--dcr-color-lime-text);
+}
+.marquee span:nth-child(3n) {
+  color: var(--dcr-color-pink-text);
+}
 
 .marquee[data-tone='primary'],
 .marquee[data-tone='pink'] {
@@ -68,10 +106,22 @@
   color: var(--dcr-color-on-pink);
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes marquee-run {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
+
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
 
 :host-context(:root[data-motion='reduced']) .marquee__track,
 :host-context(:root[data-motion='off']) .marquee__track {

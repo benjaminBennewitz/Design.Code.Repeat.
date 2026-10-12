@@ -1,0 +1,159 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _gallery.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Gallery
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Gallery
+   ========================================================================== */
+  .dcr-case .project-detail__catalog-gallery-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__masonry-gallery {
+    column-count: 3;
+    column-gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .dcr-case .project-detail__masonry-card {
+    display: block;
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    break-inside: avoid;
+    animation: projectCatalogCardIn 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--reveal-index, 0) * 70ms);
+  }
+
+  .dcr-case .project-detail__masonry-card button {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 68%);
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--bp-color-text);
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 22px 64px rgba(0, 0, 0, 0.16);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .dcr-case .project-detail__masonry-card button:hover,
+  .dcr-case .project-detail__masonry-card button:focus-visible {
+    border-color: color-mix(in srgb, var(--bp-color-accent), transparent 14%);
+    box-shadow: 0 28px 84px color-mix(in srgb, var(--bp-color-accent), transparent 86%);
+    transform: translateY(-4px);
+  }
+
+  .dcr-case .project-detail__masonry-caption {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.85rem 0.95rem 0.95rem;
+    background: color-mix(in srgb, var(--bp-color-surface-solid), transparent 4%);
+  }
+
+  .dcr-case .project-detail__masonry-caption strong {
+    color: var(--bp-color-text);
+    font-family: var(--bp-font-display);
+    font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__masonry-caption small {
+    color: var(--bp-color-text-muted);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .dcr-case .project-detail__masonry-image {
+    position: relative;
+    display: grid;
+    min-height: 280px;
+    place-items: center;
+    overflow: hidden;
+    background: var(--gallery-bg, color-mix(in srgb, var(--bp-color-surface-solid), #050407 18%));
+  }
+
+  .dcr-case .project-detail__masonry-shield {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.016));
+  }
+
+  .dcr-case .project-detail__masonry-card--sm .project-detail__masonry-image {
+    min-height: 220px;
+  }
+
+  .dcr-case .project-detail__masonry-card--lg .project-detail__masonry-image {
+    min-height: 390px;
+  }
+
+  .dcr-case .project-detail__masonry-image img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .dcr-case .project-detail__masonry-placeholder {
+    display: grid;
+    min-height: inherit;
+    place-items: center;
+    gap: 0.8rem;
+    padding: 1.4rem;
+    background:
+      radial-gradient(circle at 24% 16%, color-mix(in srgb, var(--bp-color-accent), transparent 58%), transparent 28%),
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 10px),
+      linear-gradient(145deg, #1c101d, #08070a);
+    color: #fff8ec;
+    text-align: center;
+  }
+
+  .dcr-case .project-detail__masonry-placeholder .material-symbols-outlined {
+    color: var(--bp-color-accent-text);
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+  }
+
+  .dcr-case .project-detail__masonry-placeholder strong {
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__masonry-placeholder small {
+    max-width: 24ch;
+    overflow-wrap: anywhere;
+    color: rgba(255, 248, 236, 0.64);
+    font-size: 0.68rem;
+  }
+}

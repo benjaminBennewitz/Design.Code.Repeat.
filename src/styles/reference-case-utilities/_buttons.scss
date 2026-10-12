@@ -1,0 +1,167 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _buttons.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Buttons
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Buttons
+   ========================================================================== */
+  .bp-button {
+    --bp-action-bg: color-mix(in srgb, var(--bp-color-surface) 84%, transparent);
+    --bp-action-fg: var(--bp-color-text);
+    --bp-action-border: var(--bp-color-border-strong);
+    --bp-action-hover-bg: var(--bp-color-control-hover);
+    --bp-action-hover-fg: var(--bp-color-on-control-hover);
+    --bp-action-hover-border: var(--bp-color-accent);
+    --bp-action-focus-bg: var(--bp-color-control-hover);
+    --bp-action-focus-fg: var(--bp-color-on-control-hover);
+    --bp-action-focus-border: var(--bp-color-accent);
+    --bp-action-active-bg: var(--bp-color-control-hover);
+    --bp-action-active-fg: var(--bp-color-on-control-hover);
+    --bp-action-primary-bg: var(--bp-color-accent);
+    --bp-action-primary-fg: var(--bp-color-on-accent);
+    --bp-action-primary-hover-bg: var(--bp-color-accent-hover);
+    --bp-action-primary-hover-fg: var(--bp-color-on-accent-state, var(--bp-color-on-accent));
+    --bp-action-primary-focus-bg: var(--bp-color-accent-hover);
+    --bp-action-primary-focus-fg: var(--bp-color-on-accent-state, var(--bp-color-on-accent));
+    --bp-action-primary-active-bg: var(--bp-color-accent-hover);
+    --bp-action-primary-active-fg: var(--bp-color-on-accent-state, var(--bp-color-on-accent));
+    --bp-action-disabled-bg: var(--bp-action-bg);
+    --bp-action-disabled-fg: var(--bp-color-text-muted);
+    --bp-action-disabled-border: var(--bp-color-border);
+    --bp-action-primary-disabled-bg: color-mix(in srgb, var(--bp-color-accent) 58%, var(--bp-color-surface-solid));
+    --bp-action-primary-disabled-fg: var(--bp-color-on-accent);
+    position: relative;
+    display: inline-flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 0;
+    border: 1px solid var(--bp-action-border);
+    padding: 0.72rem 1rem;
+    overflow: hidden;
+    background: var(--bp-action-bg);
+    color: var(--bp-action-fg);
+    font-family: var(--bp-font-mono);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 62%, transparent);
+    cursor: pointer;
+    overflow-wrap: anywhere;
+    transition:
+      transform 180ms var(--bp-ease-out),
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .bp-button>* {
+    min-width: 0;
+  }
+
+  .bp-button:hover {
+    border-color: var(--bp-action-hover-border);
+    background: var(--bp-action-hover-bg);
+    color: var(--bp-action-hover-fg);
+  }
+
+  .bp-button:focus-visible {
+    border-color: var(--bp-action-focus-border);
+    background: var(--bp-action-focus-bg);
+    color: var(--bp-action-focus-fg);
+  }
+
+  .bp-button:active:not(:disabled) {
+    background: var(--bp-action-active-bg);
+    color: var(--bp-action-active-fg);
+  }
+
+  .bp-button:hover,
+  .bp-button:focus-visible {
+    box-shadow: 8px 8px 0 color-mix(in srgb, var(--bp-color-accent) 72%, transparent);
+    transform: translate(-2px, -2px) rotate(-1.2deg);
+  }
+
+  .bp-button:disabled,
+  .bp-button[aria-disabled='true'] {
+    border-color: var(--bp-action-disabled-border);
+    background: var(--bp-action-disabled-bg);
+    color: var(--bp-action-disabled-fg);
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: var(--bp-disabled-opacity);
+    transform: none;
+  }
+
+  .bp-button--ghost {
+    background: var(--bp-action-bg);
+  }
+
+  .bp-button--accent {
+    border-color: color-mix(in srgb, var(--bp-color-text) 78%, var(--bp-color-accent) 22%);
+    background: var(--bp-action-primary-bg);
+    color: var(--bp-action-primary-fg);
+    box-shadow:
+      4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 64%, #000000 20%),
+      0 14px 34px var(--bp-color-shadow);
+  }
+
+  .bp-button--accent:hover {
+    background: var(--bp-action-primary-hover-bg);
+    color: var(--bp-action-primary-hover-fg);
+  }
+
+  .bp-button--accent:focus-visible {
+    background: var(--bp-action-primary-focus-bg);
+    color: var(--bp-action-primary-focus-fg);
+  }
+
+  .bp-button--accent:active:not(:disabled) {
+    background: var(--bp-action-primary-active-bg);
+    color: var(--bp-action-primary-active-fg);
+  }
+
+  .bp-button--accent:hover,
+  .bp-button--accent:focus-visible {
+    border-color: color-mix(in srgb, var(--bp-color-text) 84%, var(--bp-color-accent) 16%);
+    box-shadow:
+      10px 10px 0 color-mix(in srgb, var(--bp-color-accent) 56%, #000000 36%),
+      0 0 0 3px color-mix(in srgb, var(--bp-color-accent) 28%, transparent),
+      0 24px 64px var(--bp-color-shadow);
+    transform: translate(-3px, -3px) rotate(-1.2deg);
+  }
+
+  .bp-button--accent:disabled,
+  .bp-button--accent[aria-disabled='true'] {
+    background: var(--bp-action-primary-disabled-bg);
+    color: var(--bp-action-primary-disabled-fg);
+  }
+
+  .bp-button--accent:hover>*,
+  .bp-button--accent:focus-visible>* {
+    color: var(--bp-action-primary-hover-fg);
+  }
+}

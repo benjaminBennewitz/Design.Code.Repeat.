@@ -1,0 +1,61 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _boxed-layout.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Accessibility Overrides
+   02 Boxed Layout
+   03 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+  :host-context(:root[data-motion='reduced']) :is(.system-grid__panel, .system-grid__mark, .system-grid__jump),
+  :host-context(:root[data-motion='off']) :is(.system-grid__panel, .system-grid__mark, .system-grid__jump) {
+    transition: none;
+  }
+
+  /* ==========================================================================
+   Boxed Layout
+   ========================================================================== */
+
+  .system-grid--boxed {
+    gap: 1rem;
+    background: transparent;
+  }
+
+  .system-grid--boxed .system-grid__split {
+    gap: 1rem;
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (max-width: 760px), (max-height: 799px) {
+    .system-grid--boxed .system-grid__panel--lead {
+      min-height: 0;
+    }
+    .system-grid--boxed :is(.system-grid__panel--light, .system-grid__panel--neutral) {
+      min-height: 18rem;
+    }
+    .system-grid--boxed .system-grid__panel--dark {
+      min-height: 14rem;
+    }
+  }
+}

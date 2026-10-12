@@ -1,0 +1,209 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _closing.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Closing
+   02 Responsive Layout
+   03 Accessibility Overrides
+   04 Closing (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Closing
+   ========================================================================== */
+  .references-closing {
+    padding-block: clamp(4rem, 8vw, 8rem);
+    background: var(--dcr-color-bg);
+  }
+
+  .references-closing__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    border-top: 1px solid var(--dcr-color-border-strong);
+    padding-top: clamp(2rem, 4vw, 4rem);
+  }
+
+  .references-closing h2 {
+    max-width: 17ch;
+    margin: 1.25rem 0 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+    overflow-wrap: normal;
+    hyphens: auto;
+    text-wrap: balance;
+  }
+
+  .references-closing__copy {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+
+  .references-closing__copy p {
+    max-width: 56ch;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1.75;
+  }
+
+  .references-closing__link {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    justify-self: start;
+    margin-top: 0.75rem;
+    border-bottom: 2px solid var(--dcr-color-primary-text);
+    padding-block: 0.5rem;
+    color: var(--dcr-color-text);
+    font: 600 0.8rem/1.5 var(--dcr-font-mono);
+    text-decoration: none;
+  }
+
+  .references-closing__link .material-symbols-outlined {
+    font-size: 1.2rem;
+    transition: transform 250ms var(--dcr-ease-out);
+  }
+
+  .references-closing__link:is(:hover, :focus-visible) {
+    color: var(--dcr-color-primary-text);
+  }
+
+  .references-closing__link:is(:hover, :focus-visible) .material-symbols-outlined {
+    transform: rotate(45deg);
+  }
+
+  .references-closing__link:focus-visible {
+    outline: 2px solid var(--dcr-color-primary-text);
+    outline-offset: 4px;
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (min-width: 901px) and (min-height: 800px) {
+    .references-hero {
+      display: grid;
+      box-sizing: border-box;
+      height: calc(100svh - var(--dcr-header-height));
+      padding-block: 1rem;
+    }
+    .references-hero > .dcr-container {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vh, 3rem);
+      min-height: 0;
+      height: 100%;
+    }
+    .references-hero__intro {
+      gap: 2rem 4vw;
+      margin-bottom: 0;
+    }
+    .references-hero h1 {
+      margin-top: 0.8rem;
+      font-size: clamp(3rem, min(6vw, 8vh), 6.5rem);
+    }
+    .references-hero__lead {
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      line-height: 1.7;
+    }
+    .reference-category {
+      padding-block: clamp(1rem, 2.5vh, 2rem);
+    }
+    .reference-category__head {
+      margin-bottom: clamp(0.85rem, 1.8vh, 1.5rem);
+    }
+    .reference-category h2 {
+      font-size: clamp(2rem, min(3.2vw, 5vh), 3.5rem);
+    }
+    .reference-category__text {
+      font-size: clamp(0.875rem, 1.7vh, 0.95rem);
+      line-height: 1.65;
+    }
+    .reference-category__features {
+      gap: clamp(0.4rem, 0.9vh, 0.75rem);
+      margin-block: clamp(1rem, 2.2vh, 1.5rem);
+    }
+    .reference-category__features li {
+      font-size: clamp(0.8rem, 1.5vh, 0.9rem);
+    }
+    .reference-category__index {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 1rem;
+    }
+    .reference-category__index a,
+    .reference-category__client {
+      padding-block: clamp(0.5rem, 1.2vh, 0.85rem);
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .references-closing__layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .references-closing__link .material-symbols-outlined {
+      transition: none;
+    }
+  }
+
+  /* ==========================================================================
+   Closing (2)
+   ========================================================================== */
+
+  .delivered-card__link-pending {
+    color: var(--dcr-color-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .references-closing__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.5rem;
+    margin-block: 1.5rem;
+  }
+
+  .references-closing__services a {
+    color: var(--dcr-color-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .references-closing__services a:hover {
+    color: var(--dcr-color-primary-text);
+  }
+
+  .references-closing__services a:focus-visible {
+    outline: 2px solid var(--dcr-color-primary);
+    outline-offset: 0.3rem;
+  }
+}

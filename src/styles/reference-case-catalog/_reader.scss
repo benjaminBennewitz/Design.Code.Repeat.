@@ -1,0 +1,346 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _reader.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Reader
+   02 Theme Overrides
+   03 Reader (2)
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Reader
+   ========================================================================== */
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__highlight-card.bp-reveal--visible {
+    transition-delay: 0ms;
+  }
+
+  .dcr-case .project-detail__catalog-reader-intro {
+    position: relative;
+    width: 100%;
+    padding: clamp(4.2rem, 8vw, 7rem) var(--bp-stage-gutter) clamp(1.4rem, 3vw, 2.4rem);
+    overflow-x: clip;
+    background:
+      radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--bp-color-accent), transparent 88%), transparent 26%),
+      linear-gradient(180deg, var(--bp-color-bg), color-mix(in srgb, var(--bp-color-bg), #120b15 10%));
+  }
+
+  .dcr-case .project-detail__catalog-reader-head {
+    display: grid;
+    gap: clamp(0.55rem, 1.4vw, 0.95rem);
+    justify-items: start;
+  }
+
+  .dcr-case .project-detail__catalog-reader-head .bp-eyebrow {
+    margin: 0;
+  }
+
+  .dcr-case .project-detail__catalog-reader-head h2 {
+    max-width: 16ch;
+    margin: 0;
+    overflow: visible;
+    padding-top: 0.08em;
+    font-size: clamp(2.35rem, 6.2vw, 6.2rem);
+    line-height: 0.96;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-reader-head>span {
+    display: block;
+    max-width: 720px;
+    color: var(--bp-color-text-muted);
+    font-size: clamp(0.98rem, 1.35vw, 1.18rem);
+    line-height: 1.58;
+  }
+
+  .dcr-case .project-detail__catalog-reader-section {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    padding: calc(var(--bp-header-height) + clamp(0.5rem, 1.4vh, 1rem)) clamp(0.75rem, 2vw, 2rem) clamp(0.75rem, 2.4vh, 1.5rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 84% 16%, color-mix(in srgb, var(--bp-color-accent), transparent 84%), transparent 28%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bp-color-bg), #120b15 12%), var(--bp-color-bg));
+    scroll-snap-stop: always;
+  }
+
+  .dcr-case .project-detail__catalog-reader {
+    display: grid;
+    width: min(1760px, 100%);
+    height: 100%;
+    min-height: 0;
+    margin: 0 auto;
+  }
+
+  .dcr-case .project-detail__catalog-reader-frame {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 0;
+    place-items: center;
+    height: calc(100svh - var(--bp-header-height) - clamp(0.8rem, 2.4vh, 1.6rem));
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 58%);
+    padding: clamp(0.55rem, 1.25vw, 1rem);
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bp-color-accent), transparent 91%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--bp-color-accent), transparent 93%) 1px, transparent 1px),
+      rgba(0, 0, 0, 0.28);
+    background-size: 36px 36px;
+    box-shadow: 0 34px 110px var(--project-detail-catalog-shadow);
+    isolation: isolate;
+  }
+
+  .dcr-case .project-detail__catalog-reader-frame::before {
+    content: '';
+    position: absolute;
+    inset: -18% auto auto -10%;
+    z-index: -1;
+    width: min(34vw, 480px);
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 68%);
+    filter: blur(58px);
+    opacity: 0.72;
+  }
+
+  .dcr-case .project-detail__catalog-loader {
+    position: absolute;
+    z-index: 8;
+    inset: 0;
+    display: grid;
+    gap: 0.9rem;
+    place-content: center;
+    place-items: center;
+    background: color-mix(in srgb, var(--bp-color-bg), transparent 8%);
+    color: var(--bp-color-text);
+    font-family: var(--bp-font-mono);
+    font-size: clamp(0.68rem, 1vw, 0.8rem);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+
+  .dcr-case .project-detail__catalog-loader-mark {
+    display: grid;
+    width: 2.9rem;
+    aspect-ratio: 1;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.24rem;
+    transform: rotate(45deg);
+  }
+
+  .dcr-case .project-detail__catalog-loader-mark i {
+    display: block;
+    border-radius: 50% 14% 50% 16%;
+    background: var(--bp-color-accent);
+    animation: projectCatalogLoaderPulse 900ms ease-in-out infinite alternate;
+  }
+
+  .dcr-case .project-detail__catalog-loader-mark i:nth-child(2),
+  .dcr-case .project-detail__catalog-loader-mark i:nth-child(3) {
+    animation-delay: 180ms;
+  }
+
+  .dcr-case .project-detail__catalog-loader-mark i:nth-child(4) {
+    animation-delay: 360ms;
+  }
+
+  .dcr-case .project-detail__catalog-menu-button {
+    position: absolute;
+    z-index: 5;
+    top: clamp(0.8rem, 1.8vw, 1.25rem);
+    right: clamp(0.8rem, 1.8vw, 1.25rem);
+    grid-template-columns: auto 1fr;
+    gap: 0.48rem;
+    min-width: max-content;
+    padding: 0.54rem 0.68rem;
+    background: color-mix(in srgb, var(--bp-color-surface-solid), transparent 14%);
+    color: var(--bp-color-text);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    backdrop-filter: blur(18px);
+  }
+
+  .dcr-case .project-detail__catalog-menu-button .material-symbols-outlined {
+    font-size: 1.05rem;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls {
+    position: absolute;
+    z-index: 5;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 62%);
+    background: color-mix(in srgb, var(--bp-color-surface-solid), transparent 12%);
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+    right: clamp(0.8rem, 1.8vw, 1.25rem);
+    bottom: clamp(0.8rem, 1.8vw, 1.25rem);
+    display: flex;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.55rem;
+    padding: 0.45rem;
+    color: var(--bp-color-text-muted);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls button {
+    width: 2.45rem;
+  }
+
+  /* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+
+  :root[data-theme='light'] .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__catalog-reader-controls button,
+  :root[data-theme='light'] .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__catalog-reader-controls button,
+  [data-theme='light'] .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__catalog-reader-controls button {
+    color: var(--project-detail-catalog-ink);
+  }
+
+  /* ==========================================================================
+   Reader (2)
+   ========================================================================== */
+
+  .dcr-case .project-detail__catalog-toc-backdrop {
+    position: fixed;
+    z-index: 118;
+    inset: 0;
+    background: rgba(4, 3, 6, 0.58);
+    backdrop-filter: blur(12px);
+  }
+
+  .dcr-case .project-detail__catalog-reader-meta {
+    position: fixed;
+    z-index: 119;
+    top: max(1rem, calc(var(--bp-header-height) + 1rem));
+    right: clamp(1rem, 3vw, 2rem);
+    display: grid;
+    gap: 0.85rem;
+    width: min(323px, calc(100vw - 2rem));
+    max-height: calc(100svh - var(--bp-header-height) - 2rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: clamp(0.95rem, 1.7vw, 1.25rem);
+    animation: projectCatalogTocIn 220ms ease both;
+  }
+
+  .dcr-case .project-detail__catalog-reader-meta h3 {
+    margin: 0;
+    padding-right: 2.8rem;
+    font-size: clamp(1.18rem, 2vw, 1.85rem);
+    line-height: 1;
+  }
+
+  .dcr-case .project-detail__catalog-reader-meta p:not(.bp-eyebrow) {
+    margin: 0;
+    color: var(--bp-color-text-muted);
+    line-height: 1.7;
+  }
+
+  .dcr-case .project-detail__catalog-toc-close {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    width: 2.4rem;
+    aspect-ratio: 1;
+    color: var(--bp-color-text);
+  }
+
+  .dcr-case .project-detail__catalog-spread-tabs {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .dcr-case .project-detail__catalog-spread-tabs button {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--bp-color-border), var(--bp-color-accent) 22%);
+    border-radius: 0;
+    padding: 0.85rem;
+    background: color-mix(in srgb, var(--bp-color-surface), transparent 18%);
+    color: var(--bp-color-text);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .dcr-case .project-detail__catalog-spread-tabs button span {
+    display: grid;
+    width: 2rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 82%);
+    color: var(--bp-color-accent-text);
+    font-weight: 900;
+  }
+
+  .dcr-case .project-detail__catalog-spread-tabs button strong {
+    font-size: 0.88rem;
+  }
+
+  .dcr-case .project-detail__catalog-spread-tabs button.is-active {
+    border-color: color-mix(in srgb, var(--bp-color-accent), transparent 16%);
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 86%);
+  }
+
+  .dcr-case .project-detail__catalog-toc-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .dcr-case .project-detail__catalog-toc-list button {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.12rem 0.65rem;
+    align-items: start;
+    border: 1px solid color-mix(in srgb, var(--bp-color-border), var(--bp-color-accent) 22%);
+    border-radius: 0;
+    padding: 0.72rem;
+    background: color-mix(in srgb, var(--bp-color-surface), transparent 18%);
+    color: var(--bp-color-text);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .dcr-case .project-detail__catalog-toc-list button:hover,
+  .dcr-case .project-detail__catalog-toc-list button:focus-visible {
+    border-color: color-mix(in srgb, var(--bp-color-accent), transparent 16%);
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 88%);
+    transform: translateX(-3px);
+  }
+
+  .dcr-case .project-detail__catalog-toc-list button.is-active {
+    border-color: color-mix(in srgb, var(--bp-color-accent), transparent 12%);
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 84%);
+  }
+}

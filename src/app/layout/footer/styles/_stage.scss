@@ -1,0 +1,78 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _stage.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Stage
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Stage
+   ========================================================================== */
+  .site-footer__stage {
+    position: relative;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) clamp(7.5rem, 18vh, 10rem) auto;
+    gap: clamp(0.55rem, 1.2vh, 0.85rem);
+    min-height: 0;
+    height: 100%;
+    border: 2px solid var(--dcr-color-lime);
+    border-radius: clamp(1rem, 2vw, 1.7rem);
+    padding: clamp(1rem, 2vh, 1.5rem);
+    overflow: hidden;
+    background: var(--dcr-color-lime);
+    color: var(--dcr-color-on-lime);
+  }
+
+  .site-footer__stage::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.035;
+    pointer-events: none;
+  }
+
+  .site-footer__characters {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .site-footer__character {
+    position: absolute;
+    bottom: clamp(2.5rem, 5vh, 4rem);
+    display: block;
+    height: auto;
+    opacity: 0.42;
+    filter: drop-shadow(7px 8px 0 color-mix(in srgb, var(--dcr-color-on-lime) 16%, transparent));
+    transition: opacity 260ms ease;
+  }
+
+  .site-footer__character--fuelli {
+    right: clamp(0.5rem, 2vw, 2rem);
+    width: clamp(3.2rem, 6.5vw, 6.5rem);
+    transform: rotate(2deg) translateY(2%);
+  }
+
+  .site-footer__stage:hover .site-footer__character {
+    opacity: 1;
+  }
+}

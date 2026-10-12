@@ -1,0 +1,127 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _lead.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Lead
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Lead
+   ========================================================================== */
+  :host {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .system-grid {
+    display: grid;
+    grid-template-rows: minmax(0, 1.6fr) minmax(0, 1.9fr) minmax(0, 1fr);
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--dcr-color-contrast-dark);
+  }
+
+  .system-grid__panel {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    transition:
+      background-color 240ms ease,
+      color 240ms ease;
+  }
+
+  .system-grid__panel--lead {
+    grid-template-columns: 3.5rem minmax(0, 1.25fr) minmax(14rem, 0.75fr);
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: center;
+    padding: clamp(1rem, 2.4vw, 1.8rem);
+    background: var(--dcr-color-lime);
+    color: var(--dcr-color-on-lime);
+  }
+
+  .system-grid__lead-copy {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .system-grid__lead-copy :is(h1, h2) {
+    max-width: 31ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.3rem, 2vw, 2.25rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+  }
+
+  .system-grid__lead-text {
+    max-width: 67ch;
+    margin: 0;
+    font-size: clamp(0.84rem, 0.95vw, 1.05rem);
+    line-height: 1.42;
+  }
+
+  .system-grid__eyebrow,
+  .system-grid__label,
+  .system-grid__footer strong {
+    font-family: var(--dcr-font-mono);
+    font-size: 0.58rem;
+    font-weight: 900;
+    line-height: 1.45;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .system-grid__eyebrow {
+    margin: 0;
+  }
+
+  .system-grid__lead-aside {
+    display: grid;
+    gap: 0.55rem;
+    justify-items: end;
+    align-content: center;
+    text-align: right;
+  }
+
+  .system-grid__lead-aside h3 {
+    max-width: 20ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.45rem, 2.2vw, 2.6rem);
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+
+  .system-grid__lead-aside strong {
+    font-family: var(--dcr-font-mono);
+    font-size: 0.76rem;
+  }
+
+  .system-grid__lead-aside p {
+    max-width: 35ch;
+    margin: 0;
+    font-size: clamp(0.74rem, 0.85vw, 0.9rem);
+    line-height: 1.45;
+  }
+}

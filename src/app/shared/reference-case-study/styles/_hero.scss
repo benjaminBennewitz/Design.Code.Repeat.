@@ -1,0 +1,171 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Hero
+   ========================================================================== */
+  .dcr-case .project-detail__hero {
+    position: relative;
+    min-height: calc(100svh - var(--bp-header-height));
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 76% 28%, color-mix(in srgb, var(--bp-color-accent), transparent 78%), transparent 28%),
+      radial-gradient(
+        circle at 16% 18%,
+        color-mix(in srgb, var(--bp-color-accent-2), transparent 84%),
+        transparent 32%
+      ),
+      linear-gradient(90deg, var(--project-detail-grid-soft) 1px, transparent 1px),
+      linear-gradient(0deg, var(--project-detail-grid-soft) 1px, transparent 1px),
+      linear-gradient(
+        135deg,
+        var(--project-detail-hero-bg),
+        color-mix(in srgb, var(--project-detail-hero-bg) 82%, var(--bp-color-accent) 18%)
+      );
+    background-size:
+      auto,
+      auto,
+      54px 54px,
+      54px 54px,
+      auto;
+  }
+
+  .dcr-case .project-detail__hero::before,
+  .dcr-case .project-detail__hero::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__hero::before {
+    inset: auto -9% -22% auto;
+    width: min(62vw, 900px);
+    aspect-ratio: 1.35;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bp-color-accent), transparent 72%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--bp-color-accent), transparent 82%) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.46;
+    transform: perspective(520px) rotateX(64deg) rotateZ(-6deg);
+  }
+
+  .dcr-case .project-detail__hero::after {
+    inset: 18% 0 auto auto;
+    width: min(22vw, 360px);
+    aspect-ratio: 1;
+    background: var(--project-detail-halftone);
+    background-size: 9px 9px;
+    opacity: 0.38;
+    mask-image: radial-gradient(circle, black, transparent 72%);
+  }
+
+  .dcr-case .project-detail__hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(min(520px, 100%), 1.18fr);
+    gap: clamp(2.4rem, 5vw, 6rem);
+    min-height: calc(100svh - var(--bp-header-height));
+    align-items: center;
+    padding-top: clamp(2rem, 4vw, 4rem);
+    padding-bottom: clamp(2rem, 4vw, 4rem);
+  }
+
+  .dcr-case .project-detail__hero-copy {
+    min-width: 0;
+    color: var(--project-detail-ink);
+  }
+
+  .dcr-case .project-detail__hero .bp-eyebrow {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: var(--bp-space-3);
+  }
+
+  .dcr-case .project-detail__hero .bp-title {
+    max-width: 12ch;
+    color: var(--project-detail-ink);
+    font-size: clamp(3.2rem, 8.6vw, 8.8rem);
+    line-height: 0.82;
+    letter-spacing: -0.09em;
+    overflow-wrap: anywhere;
+    text-shadow: 0 18px 60px rgba(0, 0, 0, 0.62);
+  }
+
+  .dcr-case .project-detail__hero .bp-subtitle {
+    max-width: 680px;
+    color: var(--project-detail-muted);
+    font-size: clamp(1rem, 1.35vw, 1.26rem);
+    line-height: 1.72;
+  }
+
+  .dcr-case .project-detail__hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    max-width: 680px;
+    margin: var(--bp-space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dcr-case .project-detail__hero-tags li {
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 48%);
+    border-radius: 999px;
+    padding: 0.46rem 0.7rem;
+    background: rgba(0, 0, 0, 0.34);
+    color: var(--project-detail-ink);
+    font-family: var(--bp-font-mono);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bp-space-2);
+    margin-top: var(--bp-space-5);
+  }
+
+  .dcr-case .project-detail__hero-actions .bp-button--ghost {
+    border-color: rgba(246, 240, 232, 0.3);
+    color: var(--project-detail-ink);
+  }
+
+  .dcr-case .project-detail__external-link-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    fill: currentColor;
+  }
+
+  .dcr-case .project-detail__hero-stage {
+    position: relative;
+    min-height: clamp(520px, 56vw, 760px);
+  }
+
+  .dcr-case .project-detail__back {
+    margin-bottom: var(--bp-space-5);
+  }
+}

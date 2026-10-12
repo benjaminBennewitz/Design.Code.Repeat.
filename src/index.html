@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="de" data-theme="dark" class="dcr-initial-load dcr-app-hidden">
+
 <head>
   <meta charset="utf-8">
   <title>Design. Code. Repeat. | Webentwicklung, Software & Design</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Design. Code. Repeat. entwickelt Websites, Webanwendungen, individuelle Software und digitale Interfaces – inklusive Wartung und Managed Hosting.">
+  <meta name="description"
+    content="Design. Code. Repeat. entwickelt Websites, Webanwendungen, individuelle Software und digitale Interfaces – inklusive Wartung und Managed Hosting.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0b0d0f">
   <meta name="color-scheme" content="dark light">
@@ -13,19 +15,33 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Design. Code. Repeat.">
   <meta property="og:title" content="Design. Code. Repeat. | Webentwicklung, Software &amp; Design">
-  <meta property="og:description" content="Webentwicklung, individuelle Software, UI/UX, Wartung und Managed Hosting aus Mönchengladbach.">
+  <meta property="og:description"
+    content="Webentwicklung, individuelle Software, UI/UX, Wartung und Managed Hosting aus Mönchengladbach.">
   <meta property="og:url" content="https://design-code-repeat.de/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Design. Code. Repeat. | Webentwicklung, Software &amp; Design">
-  <meta name="twitter:description" content="Webentwicklung, individuelle Software, UI/UX, Wartung und Managed Hosting aus Mönchengladbach.">
+  <meta name="twitter:description"
+    content="Webentwicklung, individuelle Software, UI/UX, Wartung und Managed Hosting aus Mönchengladbach.">
   <link rel="canonical" href="https://design-code-repeat.de/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
-    html { scrollbar-gutter: stable; }
+    html {
+      scrollbar-gutter: stable;
+    }
+
     html.dcr-initial-load,
-    html.dcr-initial-load body { overflow: hidden; }
-    dcr-root { display: block; min-height: 100svh; }
-    html.dcr-app-hidden dcr-root { visibility: hidden; }
+    html.dcr-initial-load body {
+      overflow: hidden;
+    }
+
+    dcr-root {
+      display: block;
+      min-height: 100svh;
+    }
+
+    html.dcr-app-hidden dcr-root {
+      visibility: hidden;
+    }
 
     .site-loader {
       position: fixed;
@@ -42,11 +58,12 @@
       opacity: 1;
       visibility: visible;
     }
+
     .site-loader::before {
       position: absolute;
       inset: 0;
       content: '';
-      background: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background: linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
       background-size: 12.5% 12.5%;
       opacity: .45;
       transform: scale(1.08);
@@ -58,38 +75,63 @@
     .site-loader__footer {
       position: relative;
       z-index: 2;
-      font: 800 clamp(.62rem,.72vw,.72rem)/1.15 Consolas, ui-monospace, monospace;
+      font: 800 clamp(.62rem, .72vw, .72rem)/1.15 Consolas, ui-monospace, monospace;
       letter-spacing: .1em;
       text-transform: uppercase;
     }
 
     .site-loader__meta,
-    .site-loader__footer > div:last-child { display: flex; gap: 1rem; justify-content: space-between; }
+    .site-loader__footer>div:last-child {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+
     .site-loader__core {
       position: relative;
       z-index: 2;
       display: grid;
       width: 100%;
-      grid-template-columns: max-content clamp(4rem,8.5vw,8.5rem) max-content;
+      grid-template-columns: max-content clamp(4rem, 8.5vw, 8.5rem) max-content;
       grid-template-rows: auto auto;
       gap: .06em .12em;
       align-content: center;
       align-items: center;
       justify-content: center;
       font-family: Impact, 'Arial Black', sans-serif;
-      font-size: clamp(3.6rem,10.5vw,10.5rem);
+      font-size: clamp(3.6rem, 10.5vw, 10.5rem);
       line-height: .78;
       letter-spacing: -.075em;
     }
 
-    .site-loader__word { display: block; opacity: 0; transform: translateY(65%) skewY(7deg); animation: dcr-loader-word 720ms cubic-bezier(.22,1,.36,1) forwards; }
-    .site-loader__word--lcp { opacity: 1; transform: none; animation: none; }
-    .site-loader__word:nth-child(3) { animation-delay: 500ms; }
-    .site-loader__word--accent { grid-column: 1 / -1; justify-self: center; color: #67a2ff; animation-delay: 760ms; }
+    .site-loader__word {
+      display: block;
+      opacity: 0;
+      transform: translateY(65%) skewY(7deg);
+      animation: dcr-loader-word 720ms cubic-bezier(.22, 1, .36, 1) forwards;
+    }
+
+    .site-loader__word--lcp {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .site-loader__word:nth-child(3) {
+      animation-delay: 500ms;
+    }
+
+    .site-loader__word--accent {
+      grid-column: 1 / -1;
+      justify-self: center;
+      color: #67a2ff;
+      animation-delay: 760ms;
+    }
+
     .site-loader__mark {
       position: relative;
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8%;
       width: 100%;
       aspect-ratio: 1;
@@ -97,41 +139,113 @@
       padding: 11%;
       background: #67a2ff;
       color: #080808;
-      animation: dcr-loader-mark 1.4s cubic-bezier(.22,1,.36,1) 150ms infinite alternate;
+      animation: dcr-loader-mark 1.4s cubic-bezier(.22, 1, .36, 1) 150ms infinite alternate;
     }
-    .site-loader__mark i { aspect-ratio: 1; border-radius: 50% 12% 50% 16%; background: currentColor; transform: rotate(45deg); }
-    .site-loader__footer { display: grid; gap: .75rem; }
-    .site-loader__progress { height: .45rem; overflow: hidden; background: rgba(255,255,255,.2); }
-    .site-loader__progress span { display: block; width: 100%; height: 100%; background: #67a2ff; transform: scaleX(0); transform-origin: left; animation: dcr-loader-progress 3s linear forwards; }
 
-    @keyframes dcr-loader-word { to { opacity: 1; transform: none; } }
-    @keyframes dcr-loader-progress { to { transform: scaleX(1); } }
-    @keyframes dcr-loader-grid { to { opacity: .16; transform: scale(1); } }
+    .site-loader__mark i {
+      aspect-ratio: 1;
+      border-radius: 50% 12% 50% 16%;
+      background: currentColor;
+      transform: rotate(45deg);
+    }
+
+    .site-loader__footer {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .site-loader__progress {
+      height: .45rem;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .site-loader__progress span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #67a2ff;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: dcr-loader-progress 3s linear forwards;
+    }
+
+    @keyframes dcr-loader-word {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes dcr-loader-progress {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes dcr-loader-grid {
+      to {
+        opacity: .16;
+        transform: scale(1);
+      }
+    }
+
     @keyframes dcr-loader-mark {
-      0% { transform: rotateY(0) scale(1); }
-      48% { transform: rotateY(180deg) scale(.82); }
-      100% { transform: rotateY(360deg) scale(1); }
+      0% {
+        transform: rotateY(0) scale(1);
+      }
+
+      48% {
+        transform: rotateY(180deg) scale(.82);
+      }
+
+      100% {
+        transform: rotateY(360deg) scale(1);
+      }
     }
 
     @media (max-width: 680px) {
-      .site-loader { padding: 1rem; }
-      .site-loader__core { grid-template-columns: max-content clamp(2.35rem,12vw,4rem) max-content; gap: .06em; font-size: clamp(2.15rem,10.8vw,4.2rem); }
-      .site-loader__word { white-space: nowrap; }
+      .site-loader {
+        padding: 1rem;
+      }
+
+      .site-loader__core {
+        grid-template-columns: max-content clamp(2.35rem, 12vw, 4rem) max-content;
+        gap: .06em;
+        font-size: clamp(2.15rem, 10.8vw, 4.2rem);
+      }
+
+      .site-loader__word {
+        white-space: nowrap;
+      }
+
       .site-loader__meta span:last-child,
-      .site-loader__footer > div:last-child span:last-child { display: none; }
+      .site-loader__footer>div:last-child span:last-child {
+        display: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       .site-loader::before,
-      .site-loader__mark { animation: none; }
-      .site-loader__word { opacity: 1; transform: none; animation: none; }
+      .site-loader__mark {
+        animation: none;
+      }
+
+      .site-loader__word {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <dcr-root></dcr-root>
 
-  <div id="dcr-site-loader" class="site-loader" role="status" aria-live="polite" aria-busy="true" aria-label="Website wird geladen">
+  <div id="dcr-site-loader" class="site-loader" role="status" aria-live="polite" aria-busy="true"
+    aria-label="Website wird geladen">
     <div class="site-loader__meta" aria-hidden="true">
       <span>B² // DESIGN. CODE. REPEAT.</span>
       <span>SYSTEMSTART</span>
@@ -152,4 +266,5 @@
 
   <script src="/loader-init.js"></script>
 </body>
+
 </html>

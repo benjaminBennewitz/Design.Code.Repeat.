@@ -1,0 +1,79 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _stack.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Stack
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Stack
+   ========================================================================== */
+  .studio-stack {
+    --dcr-section-bg: var(--dcr-color-surface-solid);
+    --dcr-section-next-bg: var(--dcr-color-contrast-dark);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(1rem, 3vh, 2rem);
+    align-content: center;
+    overflow: hidden;
+  }
+
+  .studio-stack__head,
+  .studio-stack__action {
+    width: min(calc(100% - (var(--dcr-page-gutter) * 2)), var(--dcr-content-width));
+  }
+
+  .studio-stack__marquees {
+    display: grid;
+    gap: clamp(0.7rem, 1.5vh, 1.1rem);
+    align-content: center;
+    min-height: 0;
+    transform: rotate(-1.3deg) scale(1.03);
+  }
+
+  .studio-stack__action {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: clamp(1rem, 2.5vh, 2rem);
+    padding-bottom: clamp(2.5rem, 6vh, 5rem);
+  }
+
+  .studio-stack.dcr-section-flow::after {
+    height: clamp(20rem, 48vh, 36rem);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 5%, transparent) 12%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 18%, transparent) 30%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 42%, transparent) 52%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 70%, transparent) 72%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 90%, transparent) 88%,
+      var(--dcr-color-contrast-dark) 100%
+    );
+  }
+
+  .studio-stack {
+    padding-bottom: clamp(7rem, 15vh, 12rem);
+  }
+
+  .studio-stack__marquees {
+    margin-bottom: clamp(1.5rem, 4vh, 3.5rem);
+  }
+}

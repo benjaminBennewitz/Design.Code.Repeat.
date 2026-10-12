@@ -1,0 +1,184 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _app-stack.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 App Stack
+*/
+
+@mixin render {
+  /* ==========================================================================
+   App Stack
+   ========================================================================== */
+  .dcr-case .project-detail__app-stack {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: min(100%, 760px);
+    height: min(62vw, 560px);
+    transform: translate(-50%, -50%);
+  }
+
+  .dcr-case .project-detail__app-stack::before {
+    content: '';
+    position: absolute;
+    inset: 13% -6% -4%;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--bp-color-accent), transparent 82%),
+      transparent 68%
+    );
+    filter: blur(10px);
+    opacity: 0.9;
+  }
+
+  .dcr-case .project-detail__stack-card {
+    position: absolute;
+    z-index: calc(8 + var(--stack-index));
+    inset: 54% auto auto 50%;
+    display: grid;
+    width: clamp(142px, 15vw, 210px);
+    min-height: clamp(210px, 23vw, 300px);
+    align-content: end;
+    gap: 0.62rem;
+    border: 1px solid rgba(246, 240, 232, 0.16);
+    border-radius: 0;
+    padding: 1rem;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.08), transparent 26%),
+      linear-gradient(145deg, rgba(42, 43, 48, 0.88), rgba(12, 13, 17, 0.94));
+    color: var(--project-detail-ink);
+    text-align: left;
+    box-shadow: 0 34px 70px rgba(0, 0, 0, 0.42);
+    cursor: pointer;
+    opacity: 0.7;
+    transform: translate(-50%, -50%) translateX(calc((var(--stack-index) - 4) * 2.35rem))
+      rotateY(calc((var(--stack-index) - 4) * -7deg)) rotateZ(calc((var(--stack-index) - 4) * 1.7deg)) scale(0.86);
+    transition:
+      opacity 220ms ease,
+      transform 260ms var(--bp-ease-out),
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .dcr-case .project-detail__stack-card:hover,
+  .dcr-case .project-detail__stack-card:focus-visible,
+  .dcr-case .project-detail__stack-card.is-active {
+    z-index: 24;
+    border-color: color-mix(in srgb, var(--bp-color-accent), transparent 20%);
+    box-shadow: 0 32px 90px color-mix(in srgb, var(--bp-color-accent), transparent 86%);
+    opacity: 1;
+    transform: translate(-50%, -55%) translateX(calc((var(--stack-index) - 4) * 2.9rem))
+      rotateY(calc((var(--stack-index) - 4) * -4deg)) rotateZ(calc((var(--stack-index) - 4) * 1.1deg)) scale(0.92);
+  }
+
+  .dcr-case .project-detail__stack-card .material-symbols-outlined {
+    position: absolute;
+    inset: 1.1rem auto auto 50%;
+    color: rgba(246, 240, 232, 0.74);
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    transform: translateX(-50%);
+  }
+
+  .dcr-case .project-detail__stack-card strong {
+    color: var(--project-detail-ink);
+    font-family: var(--bp-font-display);
+    font-size: clamp(0.94rem, 1.45vw, 1.22rem);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .dcr-case .project-detail__stack-card small {
+    color: var(--project-detail-muted);
+    font-family: var(--bp-font-mono);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__app-focus {
+    position: absolute;
+    z-index: 40;
+    inset: 50% auto auto 50%;
+    display: grid;
+    width: min(68vw, 330px);
+    min-height: 390px;
+    align-content: space-between;
+    gap: var(--bp-space-3);
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 14%);
+    border-radius: 0;
+    padding: clamp(1rem, 2vw, 1.35rem);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 34%),
+      linear-gradient(150deg, rgba(45, 45, 52, 0.96), rgba(14, 15, 18, 0.96));
+    color: var(--project-detail-ink);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 34px 100px rgba(0, 0, 0, 0.58),
+      0 0 34px color-mix(in srgb, var(--bp-color-accent), transparent 80%);
+    transform: translate(-50%, -50%);
+  }
+
+  .dcr-case .project-detail__app-focus-icon {
+    justify-self: center;
+    color: rgba(246, 240, 232, 0.8);
+    font-size: clamp(3.2rem, 7vw, 5rem);
+    text-shadow: 0 0 34px rgba(255, 255, 255, 0.2);
+  }
+
+  .dcr-case .project-detail__app-focus p {
+    margin: 0 0 0.45rem;
+    color: var(--bp-color-accent-text);
+    font-family: var(--bp-font-mono);
+    font-size: 0.68rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__app-focus h2 {
+    margin: 0;
+    color: var(--project-detail-ink);
+    font-family: var(--bp-font-display);
+    font-size: clamp(1.38rem, 2.8vw, 2.1rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .dcr-case .project-detail__app-focus span:not(.material-symbols-outlined) {
+    margin-top: 0.78rem;
+    color: var(--project-detail-muted);
+    line-height: 1.55;
+  }
+
+  .dcr-case .project-detail__app-star {
+    position: absolute;
+    inset: 0.82rem 0.82rem auto auto;
+    display: grid;
+    width: 2rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bp-color-warning), transparent 38%);
+    color: #ffe600;
+    font-size: 1.05rem;
+  }
+}

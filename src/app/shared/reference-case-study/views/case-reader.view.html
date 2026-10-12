@@ -1,0 +1,85 @@
+<!-- src/app/shared/reference-case-study/views/case-reader.view.html -->
+<div class="project-detail__catalog-reader">
+  @if (reader().activeSpread(); as spread) {
+  <div class="project-detail__catalog-reader-frame" [attr.aria-label]="showcase().readerLabel" [attr.aria-busy]="reader().isBusy()">
+    @if (reader().isBusy()) {
+    <div class="project-detail__catalog-loader" role="status" aria-live="polite">
+      <span class="project-detail__catalog-loader-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>{{ loadingLabel() }}</span>
+    </div>
+    }
+
+    <button #catalogMenuTrigger type="button" class="project-detail__catalog-menu-button" [attr.aria-label]="showcase().tocOpenLabel" [attr.aria-expanded]="menu().isOpen()" (pointerenter)="loupe().hide()" (focusin)="loupe().hide()" (click)="toggleCatalogMenu()">
+      <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+      <strong>{{ showcase().tocTitle }}</strong>
+    </button>
+
+    <div class="project-detail__catalog-book project-detail__catalog-book--reader" [class.project-detail__catalog-book--next]="reader().direction() === 1" [class.project-detail__catalog-book--previous]="reader().direction() === -1" [class.project-detail__catalog-book--loading]="reader().isBusy()">
+      @for (page of spread.pages; track page.number) {
+      <article [class]="'project-detail__catalog-page project-detail__catalog-page--' + page.mood + (page.side ? ' project-detail__catalog-page--' + page.side : '')" (pointerenter)="updateCatalogLoupe($event, page)" (pointermove)="updateCatalogLoupe($event, page)" (pointerleave)="loupe().hide()">
+        @if (page.asset) {
+        <img class="project-detail__catalog-page-image" [src]="page.asset" [alt]="page.alt" loading="eager" decoding="async" fetchpriority="high" draggable="false" dcrProtectedAsset />
+        <span class="project-detail__catalog-page-shield" aria-hidden="true"></span>
+        @if (loupe().state().isVisible && loupe().state().pageNumber === page.number) {
+        <span class="project-detail__catalog-page-loupe" aria-hidden="true" [style.--catalog-loupe-x]="loupe().state().x + 'px'" [style.--catalog-loupe-y]="loupe().state().y + 'px'" [style.--catalog-loupe-width]="loupe().state().width + 'px'" [style.--catalog-loupe-height]="loupe().state().height + 'px'" [style.background-image]="'url(' + loupe().state().asset + ')'" [style.background-size]="loupe().state().backgroundSize" [style.background-position]="loupe().state().backgroundPosition"></span>
+        }
+        } @else {
+        <div class="project-detail__catalog-page-placeholder">
+          <span>{{ page.number }}</span>
+          <em>{{ page.eyebrow }}</em>
+          <strong>{{ page.title }}</strong>
+          <p>{{ page.text }}</p>
+          <small>{{ page.imageHint }}</small>
+          <i aria-hidden="true"></i>
+        </div>
+        }
+      </article>
+      }
+    </div>
+
+    <div class="project-detail__catalog-reader-controls" (pointerenter)="loupe().hide()" (focusin)="loupe().hide()">
+      <button type="button" [attr.aria-label]="showcase().previousLabel" [disabled]="reader().isBusy()" (click)="reader().selectAdjacent(-1)">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+      </button>
+      <span>{{ spread.pageLabel }}</span>
+      <button type="button" [attr.aria-label]="showcase().nextLabel" [disabled]="reader().isBusy()" (click)="reader().selectAdjacent(1)">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </button>
+    </div>
+  </div>
+
+  @if (menu().isOpen()) {
+  <div class="project-detail__catalog-toc-backdrop" aria-hidden="true" (click)="menu().close()"></div>
+  <aside #catalogMenuDialog class="project-detail__catalog-reader-meta bp-card" role="dialog" aria-modal="true" tabindex="-1" [attr.aria-label]="showcase().tocTitle" (pointerenter)="loupe().hide()" (focusin)="loupe().hide()">
+    <button type="button" class="project-detail__catalog-toc-close" [attr.aria-label]="showcase().tocCloseLabel" (click)="menu().close()">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <p class="bp-eyebrow">{{ showcase().eyebrow }}</p>
+    <h3>{{ showcase().tocTitle }}</h3>
+    @if (showcase().tocItems?.length) {
+    <div class="project-detail__catalog-toc-list" [attr.aria-label]="showcase().tocTitle">
+      @for (tocItem of showcase().tocItems; track tocItem.number) {
+      <button type="button" [class.is-active]="reader().index() === tocItem.targetSpreadIndex" (click)="reader().select(tocItem.targetSpreadIndex); menu().close()">
+        <span>{{ tocItem.number }}</span>
+        <strong>{{ tocItem.title }}</strong>
+        <em>{{ tocItem.subtitle }}</em>
+        @if (tocItem.tool) {
+        <small>{{ tocItem.tool }}</small>
+        }
+      </button>
+      }
+    </div>
+    } @else {
+    <div class="project-detail__catalog-spread-tabs" [attr.aria-label]="showcase().readerLabel">
+      @for (catalogSpread of showcase().spreads; track catalogSpread.id; let index = $index) {
+      <button type="button" [class.is-active]="reader().index() === index" (click)="reader().select(index); menu().close()">
+        <span>{{ index + 1 }}</span>
+        <strong>{{ catalogSpread.title }}</strong>
+      </button>
+      }
+    </div>
+    }
+  </aside>
+  }
+  }
+</div>

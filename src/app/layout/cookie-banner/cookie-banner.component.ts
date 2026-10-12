@@ -1,3 +1,4 @@
+/* src/app/layout/cookie-banner/cookie-banner.component.ts */
 /**
  * @file Eigenes Privacy-Control-Panel der Studio-Website.
  * @description Informiert transparent über notwendige lokale Einstellungen ohne externe Consent- oder Tracking-Dienste.
@@ -40,14 +41,11 @@ interface CookieBannerTexts {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CookieBannerComponent {
-  /** Gemeinsamer Panel-Zustand für Banner, Footer und Rechtliches. */
-  readonly consentService = inject(CookieConsentService);
-
-  /** Aktive Sprache. */
-  private readonly languageService = inject(LanguageService);
-
-  /** Sprachabhängige Inhalte. */
-  readonly texts = computed<CookieBannerTexts>(() => COOKIE_BANNER_TEXTS[this.languageService.language()]);
+  readonly consentService = inject(CookieConsentService);     // Gemeinsamer Panel-Zustand für Banner, Footer und Rechtliches.
+  private readonly languageService = inject(LanguageService); // Aktive Sprache.
+  readonly texts = computed<CookieBannerTexts>(
+    /** Sprachabhängige Inhalte. */ () => COOKIE_BANNER_TEXTS[this.languageService.language()],
+  ); // Sprachabhängige Inhalte.
 }
 
 /** Statische, bewusst trackingfreie Privacy-Informationen. */
@@ -64,10 +62,34 @@ const COOKIE_BANNER_TEXTS: Record<'de' | 'en', CookieBannerTexts> = {
     overviewLabel: 'Zur Übersicht',
     acceptLabel: 'Alles klar',
     controls: [
-      { icon: 'lock', title: 'Notwendige Einstellungen', status: 'aktiv · lokal', text: 'Theme, Sprache, Accessibility-Modi und der Hinweisstatus werden ausschließlich im Browser gespeichert.', state: 'locked' },
-      { icon: 'tune', title: 'Komfortfunktionen', status: 'lokal · ohne Profiling', text: 'Darstellungsoptionen personalisieren die Oberfläche, ohne daraus Nutzerprofile zu erstellen.', state: 'local' },
-      { icon: 'query_stats', title: 'Analytics / Marketing', status: 'nicht aktiv', text: 'Aktuell werden keine Analytics-, Marketing- oder Profiling-Cookies gesetzt.', state: 'off' },
-      { icon: 'hub', title: 'Externe Consent-Dienste', status: 'nicht aktiv', text: 'Das Privacy-Panel ist Bestandteil der Website und lädt dafür keinen Drittanbieter.', state: 'off' },
+      {
+        icon: 'lock',
+        title: 'Notwendige Einstellungen',
+        status: 'aktiv · lokal',
+        text: 'Theme, Sprache, Accessibility-Modi und der Hinweisstatus werden ausschließlich im Browser gespeichert.',
+        state: 'locked',
+      },
+      {
+        icon: 'tune',
+        title: 'Komfortfunktionen',
+        status: 'lokal · ohne Profiling',
+        text: 'Darstellungsoptionen personalisieren die Oberfläche, ohne daraus Nutzerprofile zu erstellen.',
+        state: 'local',
+      },
+      {
+        icon: 'query_stats',
+        title: 'Analytics / Marketing',
+        status: 'nicht aktiv',
+        text: 'Aktuell werden keine Analytics-, Marketing- oder Profiling-Cookies gesetzt.',
+        state: 'off',
+      },
+      {
+        icon: 'hub',
+        title: 'Externe Consent-Dienste',
+        status: 'nicht aktiv',
+        text: 'Das Privacy-Panel ist Bestandteil der Website und lädt dafür keinen Drittanbieter.',
+        state: 'off',
+      },
     ],
   },
   en: {
@@ -82,10 +104,34 @@ const COOKIE_BANNER_TEXTS: Record<'de' | 'en', CookieBannerTexts> = {
     overviewLabel: 'Back to overview',
     acceptLabel: 'Got it',
     controls: [
-      { icon: 'lock', title: 'Necessary settings', status: 'active · local', text: 'Theme, language, accessibility modes and the notice status are stored only in this browser.', state: 'locked' },
-      { icon: 'tune', title: 'Comfort features', status: 'local · no profiling', text: 'Display preferences personalize the interface without creating user profiles.', state: 'local' },
-      { icon: 'query_stats', title: 'Analytics / marketing', status: 'not active', text: 'No analytics, marketing or profiling cookies are currently used.', state: 'off' },
-      { icon: 'hub', title: 'External consent services', status: 'not active', text: 'The privacy panel is part of the website and does not load a third-party consent provider.', state: 'off' },
+      {
+        icon: 'lock',
+        title: 'Necessary settings',
+        status: 'active · local',
+        text: 'Theme, language, accessibility modes and the notice status are stored only in this browser.',
+        state: 'locked',
+      },
+      {
+        icon: 'tune',
+        title: 'Comfort features',
+        status: 'local · no profiling',
+        text: 'Display preferences personalize the interface without creating user profiles.',
+        state: 'local',
+      },
+      {
+        icon: 'query_stats',
+        title: 'Analytics / marketing',
+        status: 'not active',
+        text: 'No analytics, marketing or profiling cookies are currently used.',
+        state: 'off',
+      },
+      {
+        icon: 'hub',
+        title: 'External consent services',
+        status: 'not active',
+        text: 'The privacy panel is part of the website and does not load a third-party consent provider.',
+        state: 'off',
+      },
     ],
   },
 };

@@ -1,0 +1,94 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _animation-overrides.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Animation Keyframes
+   02 Responsive Layout
+   03 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+  @keyframes telemetry-radial-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes telemetry-line-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes telemetry-fill-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes telemetry-point-in {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 720px) {
+    .telemetry-chart__head {
+      grid-template-columns: 1fr;
+    }
+
+    .telemetry-chart__head p {
+      max-width: 52ch;
+    }
+
+    .telemetry-chart__x-label {
+      font-size: 8px;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .telemetry-chart__point,
+    .telemetry-chart__radial-value,
+    .telemetry-chart__line,
+    .telemetry-chart__fill,
+    .telemetry-chart__head p {
+      animation: none;
+      transition: none;
+    }
+
+    .telemetry-chart__radial-value,
+    .telemetry-chart__line {
+      stroke-dashoffset: 0;
+    }
+
+    .telemetry-chart__point,
+    .telemetry-chart__fill {
+      opacity: 1;
+    }
+  }
+}

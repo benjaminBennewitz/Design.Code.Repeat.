@@ -1,6 +1,8 @@
-/** Aktiviert einmalige Scroll-Reveals und lässt Inhalte ohne erlaubte Bewegung sichtbar. */
+/* src/app/shared/scroll-reveal.directive.ts */
 import { afterNextRender, booleanAttribute, DestroyRef, Directive, ElementRef, inject, input } from '@angular/core';
+import { ScrollRevealService } from '../core/services/scroll-reveal.service';
 
+/** Aktiviert einmalige Scroll-Reveals und lässt Inhalte ohne erlaubte Bewegung sichtbar. */
 @Directive({
   selector: '[dcrScrollReveal]',
   standalone: true,
@@ -11,27 +13,19 @@ export class ScrollRevealDirective {
 
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly destroyRef = inject(DestroyRef);
+  private readonly scrollReveal = inject(ScrollRevealService);
 
   constructor() {
     afterNextRender(() => {
-      const windowRef = this.element.ownerDocument.defaultView;
-      const root = this.element.ownerDocument.documentElement;
-      if (!this.enabled() || !windowRef || !('IntersectionObserver' in windowRef)
-        || windowRef.matchMedia('(prefers-reduced-motion: reduce)').matches
-        || root.dataset['motion'] === 'off' || root.dataset['motion'] === 'reduced'
-        || root.dataset['comfort'] === 'simple') {
+      if (!this.enabled()) {
         return;
       }
 
       this.element.classList.add('is-reveal-ready');
-      const observer = new windowRef.IntersectionObserver(([entry]) => {
-        if (entry?.isIntersecting) {
-          this.element.classList.add('is-in-view');
-          observer.disconnect();
-        }
-      }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
-      observer.observe(this.element);
-      this.destroyRef.onDestroy(() => observer.disconnect());
+      const cleanup = this.scrollReveal.register(this.element, () => {
+        this.element.classList.add('is-in-view');
+      });
+      this.destroyRef.onDestroy(cleanup);
     });
   }
 }

@@ -1,0 +1,169 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _showcase-4.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Showcase
+   03 Responsive Layout (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 760px) {
+    .dcr-case .project-detail__blueprint-frame::after {
+      content: 'horizontal scroll';
+      display: block;
+      margin-top: 0.45rem;
+      color: color-mix(in srgb, var(--bp-color-text), transparent 36%);
+      font-family: var(--bp-font-mono);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .dcr-case .project-detail__blueprint {
+      min-width: 940px;
+    }
+  }
+
+  /* ==========================================================================
+   Showcase
+   ========================================================================== */
+
+  .dcr-case .project-detail__blueprint {
+    border: 0;
+    padding: 0;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--project-detail-blue), transparent 95%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--project-detail-blue), transparent 95%) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--project-detail-blue), transparent 97%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--project-detail-blue), transparent 97%) 1px, transparent 1px),
+      color-mix(in srgb, var(--bp-color-surface), transparent 4%);
+    background-size:
+      4rem 4rem,
+      4rem 4rem,
+      1.25rem 1.25rem,
+      1.25rem 1.25rem,
+      auto;
+  }
+
+  .dcr-case .project-detail__blueprint::before,
+  .dcr-case .project-detail__blueprint::after {
+    content: none;
+  }
+
+  .dcr-case .project-detail__map-svg--normalized {
+    inset: 0;
+  }
+
+  .dcr-case .project-detail__svg-title {
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .dcr-case .project-detail__svg-title--compact {
+    font-size: 21px;
+    letter-spacing: -0.035em;
+  }
+
+  .dcr-case .project-detail__svg-label {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    paint-order: stroke fill;
+    stroke: color-mix(in srgb, var(--bp-color-surface), transparent 8%);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+
+  .dcr-case .project-detail__svg-label--monitor {
+    stroke-width: 5px;
+  }
+
+  .dcr-case .project-detail__svg-line--monitor {
+    stroke: color-mix(in srgb, var(--project-detail-blue), transparent 22%);
+    stroke-width: 1.8;
+    stroke-dasharray: 2 9;
+  }
+
+  .dcr-case .project-detail__svg-grid rect {
+    stroke: color-mix(in srgb, var(--project-detail-blue), transparent 42%);
+    stroke-width: 1.2;
+  }
+
+  .dcr-case .project-detail__blueprint-frame {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .dcr-case .project-detail__blueprint-scroll {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .dcr-case .project-detail__blueprint {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 1120 / 640;
+  }
+
+  .dcr-case .project-detail__map-svg--normalized {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ==========================================================================
+   Responsive Layout (2)
+   ========================================================================== */
+
+  @media (max-width: 920px) {
+    .dcr-case .project-detail__blueprint {
+      width: 1120px;
+      min-width: 1120px;
+      height: 640px;
+      min-height: 640px;
+      aspect-ratio: auto;
+    }
+
+    .dcr-case .project-detail__map-svg--normalized {
+      width: 1120px;
+      min-width: 1120px;
+      height: 640px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .dcr-case .project-detail__blueprint-frame::after {
+      content: 'horizontal scroll';
+      display: block;
+      margin-top: 0.55rem;
+      color: color-mix(in srgb, var(--bp-color-text), transparent 34%);
+      font-family: var(--bp-font-mono);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  }
+}

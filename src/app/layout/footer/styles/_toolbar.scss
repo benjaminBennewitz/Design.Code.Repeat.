@@ -1,0 +1,114 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _toolbar.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Toolbar
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Toolbar
+   ========================================================================== */
+  .site-footer {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(0.65rem, 1.4vh, 1rem);
+    height: calc(100svh - var(--dcr-header-height));
+    box-sizing: border-box;
+    padding: clamp(0.9rem, 1.8vh, 1.3rem) 0 clamp(0.75rem, 1.4vh, 1rem);
+    overflow: hidden;
+    border-bottom-color: currentColor;
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+  }
+
+  .site-footer__toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    min-height: 2.8rem;
+    font-family: var(--dcr-font-mono);
+  }
+
+  .site-footer__toolbar > div:first-child {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .site-footer__toolbar span {
+    font-size: 0.7rem;
+    font-weight: 900;
+  }
+
+  .site-footer__toolbar small,
+  .site-footer__status {
+    color: color-mix(in srgb, var(--dcr-color-contrast-light) 62%, transparent);
+    font-size: 0.56rem;
+  }
+
+  .site-footer__status {
+    justify-self: end;
+  }
+
+  .site-footer__arrows {
+    display: flex;
+    gap: 0.85rem;
+    align-items: end;
+  }
+
+  .site-footer__arrows > div {
+    display: grid;
+    gap: 0.3rem;
+    justify-items: center;
+  }
+
+  .site-footer__arrows small {
+    max-width: 6rem;
+    overflow: hidden;
+    color: color-mix(in srgb, var(--dcr-color-contrast-light) 68%, transparent);
+    font: 800 0.46rem/1 var(--dcr-font-mono);
+    letter-spacing: 0.07em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .site-footer__arrows button {
+    display: grid;
+    width: 2.8rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 2px solid var(--dcr-color-lime-text-on-dark);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--dcr-color-lime-text-on-dark);
+    cursor: pointer;
+    transition:
+      transform 160ms var(--dcr-ease-out),
+      background 160ms ease,
+      color 160ms ease;
+  }
+
+  .site-footer__arrows button:hover,
+  .site-footer__arrows button:focus-visible {
+    background: var(--dcr-color-lime);
+    color: var(--dcr-color-on-lime);
+    transform: scale(1.08);
+  }
+}

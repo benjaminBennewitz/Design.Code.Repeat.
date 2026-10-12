@@ -1,0 +1,124 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _terminal.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Terminal
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Terminal
+   ========================================================================== */
+  .dcr-case .project-detail__terminal {
+    justify-self: end;
+    width: min(100%, 520px);
+    transform: rotate(1deg);
+  }
+
+  .dcr-case .project-detail__terminal-body,
+  .dcr-case .project-detail__floating-window-body,
+  .dcr-case .project-detail__case-note-body {
+    display: grid;
+    gap: 0.48rem;
+  }
+
+  .dcr-case .project-detail__terminal-body {
+    min-height: 330px;
+  }
+
+  .dcr-case .project-detail__terminal-body p,
+  .dcr-case .project-detail__floating-window-body p,
+  .dcr-case .project-detail__case-note-body p {
+    margin: 0;
+    color: #172012;
+    font-family: var(--bp-font-mono);
+    font-size: clamp(0.66rem, 0.76vw, 0.74rem);
+    line-height: 1.48;
+    overflow-wrap: anywhere;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__terminal-body p::before,
+  .dcr-case .project-detail__floating-window-body p::before,
+  .dcr-case .project-detail__case-note-body p::before {
+    content: '> ';
+    color: #009b4e;
+    font-weight: 950;
+  }
+
+  .dcr-case .project-detail__floating-windows {
+    position: absolute;
+    inset: 0;
+    z-index: 55;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__floating-window {
+    position: absolute;
+    width: clamp(210px, 22vw, 310px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.64);
+    pointer-events: auto;
+  }
+
+  .dcr-case .project-detail__floating-window--status {
+    inset: 0 auto auto 8%;
+    transform: rotate(-1.2deg);
+  }
+
+  .dcr-case .project-detail__floating-window--events {
+    inset: 2% 2% auto auto;
+    transform: rotate(1.2deg);
+  }
+
+  .dcr-case .project-detail__floating-window--auth {
+    inset: auto auto 6% 3%;
+    transform: rotate(1.5deg);
+  }
+
+  .dcr-case .project-detail__floating-window--queue {
+    inset: auto 6% 8% auto;
+    transform: rotate(-1deg);
+  }
+
+  .dcr-case .project-detail__window-close {
+    display: inline-grid;
+    width: 1.25rem;
+    height: 1.25rem;
+    place-items: center;
+    border: 1px solid #f2f2f2;
+    border-radius: 0;
+    background: transparent;
+    color: #f2f2f2;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      transform 160ms var(--bp-ease-out),
+      box-shadow 160ms ease;
+  }
+
+  .dcr-case .project-detail__window-close:hover,
+  .dcr-case .project-detail__window-close:focus-visible {
+    background: #ff2b2b;
+    color: #ffffff;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.42);
+    transform: translate(-1px, -1px);
+  }
+}

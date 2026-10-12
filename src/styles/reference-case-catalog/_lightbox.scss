@@ -1,0 +1,233 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _lightbox.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Lightbox
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Lightbox
+   ========================================================================== */
+  .dcr-case .project-detail__lightbox {
+    position: fixed;
+    z-index: 10000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+    background: rgba(4, 3, 6, 0.88);
+    backdrop-filter: blur(18px);
+  }
+
+  .dcr-case .project-detail__lightbox-panel {
+    --lightbox-reveal-offset: 10px;
+
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
+    gap: clamp(0.8rem, 1.6vw, 1.2rem);
+    width: min(90vw, 1500px);
+    max-width: 90vw;
+    height: min(80vh, 880px);
+    max-height: 80vh;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 48%);
+    border-radius: 0;
+    padding: clamp(0.75rem, 1.4vw, 1rem);
+    background: color-mix(in srgb, var(--bp-color-bg), #120b15 18%);
+    color: var(--bp-color-text);
+    box-shadow: 0 40px 130px rgba(0, 0, 0, 0.56);
+  }
+
+  .dcr-case .project-detail__lightbox-close {
+    position: absolute;
+    z-index: 4;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.55rem;
+    aspect-ratio: 1;
+    background: var(--bp-color-surface-solid);
+    color: var(--bp-color-text);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
+  }
+
+  .dcr-case .project-detail__lightbox-visual {
+    position: relative;
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 0;
+    background-color: var(--gallery-bg, #0a070d);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+    will-change: opacity, transform;
+  }
+
+  .dcr-case .project-detail__lightbox-visual img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition:
+      transform 180ms ease,
+      filter 180ms ease;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-out .project-detail__lightbox-visual {
+    opacity: 0;
+    transform: translateX(calc(var(--lightbox-reveal-offset, 10px) * -0.55)) scale(0.996);
+  }
+
+  .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-out .project-detail__lightbox-copy {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-in .project-detail__lightbox-visual {
+    animation: projectCatalogLightboxVisualFadeIn 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-in .project-detail__lightbox-copy {
+    animation: projectCatalogLightboxCopyFadeIn 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .dcr-case .project-detail__lightbox-shield {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.012));
+  }
+
+  .dcr-case .project-detail__lightbox-placeholder {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background:
+      radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--bp-color-accent), transparent 62%), transparent 30%),
+      linear-gradient(135deg, #1b101c, #060507);
+    color: #fff8ec;
+    text-align: center;
+  }
+
+  .dcr-case .project-detail__lightbox-placeholder .material-symbols-outlined {
+    color: var(--bp-color-accent-text);
+    font-size: clamp(3rem, 8vw, 6rem);
+  }
+
+  .dcr-case .project-detail__lightbox-placeholder strong {
+    font-size: clamp(1.6rem, 4vw, 3.4rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__lightbox-placeholder small {
+    overflow-wrap: anywhere;
+    color: rgba(255, 248, 236, 0.7);
+  }
+
+  .dcr-case .project-detail__lightbox-copy {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: clamp(0.65rem, 1.25vh, 0.95rem);
+    overflow-y: auto;
+    padding: clamp(3rem, 4vw, 3.45rem) clamp(0.75rem, 1.5vw, 1rem) clamp(0.75rem, 1.5vw, 1rem);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+    will-change: opacity, transform;
+  }
+
+  .dcr-case .project-detail__lightbox-copy .bp-eyebrow {
+    margin: 0;
+  }
+
+  .dcr-case .project-detail__lightbox-copy h3 {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(1.55rem, 2.6vw, 3rem);
+    line-height: 0.94;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .dcr-case .project-detail__lightbox-copy p:not(.bp-eyebrow) {
+    display: block;
+    margin: 0;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    color: var(--bp-color-text-muted);
+    line-height: 1.62;
+  }
+
+  .dcr-case .project-detail__lightbox-copy ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dcr-case .project-detail__lightbox-copy li {
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 58%);
+    border-radius: 999px;
+    padding: 0.28rem 0.5rem;
+    color: var(--bp-color-text-muted);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__lightbox-actions {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 3;
+    display: flex;
+    gap: 0.7rem;
+  }
+
+  .dcr-case .project-detail__lightbox-panel--switch-prev {
+    --lightbox-reveal-offset: -10px;
+  }
+}

@@ -1,3 +1,32 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     base.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Base Layout
+   02 Accessibility Overrides
+   03 Base Layout (2)
+   04 Animation Keyframes
+   05 Accessibility Overrides (2)
+   06 Base Layout (3)
+*/
+
+/* ==========================================================================
+   Base Layout
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -153,19 +182,24 @@ svg {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
-
-/* ========================================================================== 
-   Accessibility Modes
-   ========================================================================== */
 
 :root[data-comfort='simple'] {
   --dcr-shadow-hard: 0 12px 32px var(--dcr-color-shadow);
@@ -206,8 +240,8 @@ svg {
   filter: grayscale(1) contrast(1.08) !important;
 }
 
-/* ========================================================================== 
-   Theme- und Sprachwechsel
+/* ==========================================================================
+   Base Layout (2)
    ========================================================================== */
 
 html.dcr-theme-is-switching::before {
@@ -241,25 +275,74 @@ html.dcr-language-is-switching .site-footer {
   animation: dcr-language-shift 400ms var(--dcr-ease-out) both;
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes dcr-theme-swipe {
-  0% { clip-path: inset(0 100% 0 0); }
-  48% { clip-path: inset(0 0 0 0); }
-  52% { clip-path: inset(0 0 0 0); }
-  100% { clip-path: inset(0 0 0 100%); }
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  48% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  52% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
 }
 
 @keyframes dcr-theme-scan {
-  0% { transform: translateX(-2px); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(100vw); opacity: 1; }
-  100% { transform: translateX(100vw); opacity: 0; }
+  0% {
+    transform: translateX(-2px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(100vw);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
 }
 
 @keyframes dcr-language-shift {
-  0%, 100% { opacity: 1; transform: translateX(0); filter: none; }
-  42% { opacity: 0.35; transform: translateX(-0.55rem); filter: blur(1px); }
-  58% { opacity: 0.35; transform: translateX(0.55rem); filter: blur(1px); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: none;
+  }
+
+  42% {
+    opacity: 0.35;
+    transform: translateX(-0.55rem);
+    filter: blur(1px);
+  }
+
+  58% {
+    opacity: 0.35;
+    transform: translateX(0.55rem);
+    filter: blur(1px);
+  }
 }
+
+/* ==========================================================================
+   Accessibility Overrides (2)
+   ========================================================================== */
 
 :root[data-motion='reduced'].dcr-theme-is-switching::before,
 :root[data-motion='off'].dcr-theme-is-switching::before,
@@ -274,12 +357,16 @@ html.dcr-language-is-switching .site-footer {
   animation: none !important;
 }
 
+/* ==========================================================================
+   Base Layout (3)
+   ========================================================================== */
 
 html.dcr-anchor-is-scrolling {
   scroll-behavior: auto !important;
   scroll-snap-type: none !important;
   overflow-anchor: none;
 }
+
 html.dcr-anchor-is-scrolling #main-content .dcr-viewport-section {
   content-visibility: visible;
 }

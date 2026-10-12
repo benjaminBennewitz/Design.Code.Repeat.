@@ -1,0 +1,155 @@
+/* src/app/core/data/reference-projects/design-archive.en.ts */
+import type { PortfolioProject } from '../../models/reference-project.models';
+import { createDesignCatalogTocItems, createDesignCatalogSpreads } from '../design-catalog/catalog-reader';
+import { createDesignCatalogGalleryItems } from '../design-catalog/catalog-gallery';
+
+/**
+ * Englische Case-Study-Inhalte des Designarchivs.
+ */
+export const DESIGN_ARCHIVE_EN_PROJECT: PortfolioProject = {
+  slug: 'grafikdesign-katalog',
+  name: 'Design Archive',
+  titleLines: ['Design', 'Archive'],
+  kicker: 'Editorial',
+  summary:
+    'A visual archive of selected work from 2017–2023: editorial layouts, motifs, retouching and design experiments are presented as a curated WebP catalogue and masonry gallery.',
+  description:
+    'The design archive brings together free and applied work from 2017–2023. The focus is image editing, composition, color, typography, layout rhythm and self-built assets. The collection is presented as a performance-friendly WebP catalogue and as a visual masonry gallery with extended archive context.',
+  goal: 'The goal is a portfolio-like archive stage that makes development, range and visual handwriting visible: large, calm, image-led and with enough context to understand tools, motifs and design decisions.',
+  role: 'Image selection, retouching, color look, compositing, vector work, typography, layout structure, page rhythm and digital staging of the catalogue.',
+  year: '2017–2023',
+  type: 'Graphic Design / Editorial',
+  accent: 'pink',
+  techStack: ['Photoshop', 'Lightroom', 'Illustrator', 'Compositing', 'Editorial Design'],
+  highlights: ['WebP catalogue pages', 'Catalogue magnifier', 'Masonry gallery', 'Lightbox with image details'],
+  requirements: [
+    'Show complete catalogue pages as WebP',
+    'Display the custom format proportionally',
+    'Make image details visible',
+    'Name the tools',
+    'No technical case study',
+    'Responsive gallery',
+    'Keyboard-friendly lightbox',
+    'Keep assets performance-friendly and easy to swap',
+  ],
+  detailMode: 'editorial',
+  metrics: [
+    { value: '2017–23', label: 'Archive works', text: 'Selected archive works from the years 2017 to 2023.' },
+    {
+      value: '21×25 cm',
+      label: 'Print origin',
+      text: 'Originally created as a printed booklet in a compact custom format.',
+    },
+    { value: 'PS', label: 'Photoshop', text: 'Compositings, retouches, cut-outs and image montages.' },
+    { value: 'LR', label: 'Lightroom', text: 'Image look, color series, contrast and consistent moods.' },
+    { value: 'AI', label: 'Illustrator', text: 'Vectors, signs, layout graphics and precise shapes.' },
+    {
+      value: 'Masonry+',
+      label: 'Gallery',
+      text: 'The masonry gallery expands the catalogue with additional works and detail context.',
+    },
+  ],
+  telemetry: {
+    eyebrow: 'archive_telemetry.exe',
+    title: 'Design as a system, not an image folder.',
+    subtitle:
+      'The values describe the relative scope of the documented editorial, archive and interaction areas of the digital catalog.',
+    statusLabel: 'Archive',
+    statusValue: 'EDITORIAL / INTERACTIVE',
+    source: 'Source: catalog structure',
+    kpiAriaLabel: 'Graphic design catalog project metrics',
+    charts: [
+      {
+        id: 'scope',
+        eyebrow: 'design_scope.radial',
+        title: 'Design Surface',
+        description: 'Relative weighting of the central design areas.',
+        variant: 'radial',
+        maxValue: 5,
+        data: [
+          { label: 'Editorial', value: 5 },
+          { label: 'Visual', value: 5 },
+          { label: 'Archive', value: 4 },
+          { label: 'Interaction', value: 4 },
+          { label: 'Type', value: 4 },
+        ],
+      },
+      {
+        id: 'flow',
+        eyebrow: 'reader_flow.area',
+        title: 'Reader Interaction Flow',
+        description: 'Relative interaction depth from entry to detail view.',
+        variant: 'area',
+        maxValue: 5,
+        data: [
+          { label: 'Cover', value: 1 },
+          { label: 'TOC', value: 2 },
+          { label: 'Spread', value: 4 },
+          { label: 'Loupe', value: 5 },
+          { label: 'Gallery', value: 4 },
+        ],
+      },
+      {
+        id: 'layers',
+        eyebrow: 'editorial.step',
+        title: 'Editorial Layers',
+        description: 'Digital reader layers from content to interaction.',
+        variant: 'step',
+        maxValue: 5,
+        data: [
+          { label: 'Content', value: 2 },
+          { label: 'Layout', value: 3 },
+          { label: 'Assets', value: 4 },
+          { label: 'Reader', value: 5 },
+          { label: 'Lightbox', value: 4 },
+        ],
+      },
+    ],
+  },
+  catalogShowcase: {
+    eyebrow: 'digital_catalog.indd',
+    title: 'Digital editorial',
+    status: 'Static WebP Editorial',
+    lead: 'The archive is not presented as a technical demo, but as a curated image sequence: prepared WebP pages, calm viewing and a gallery that brings work from 2017 to 2023 into a portfolio-ready format.',
+    ctaLabel: 'View works',
+    chips: ['Photoshop', 'Lightroom', 'Illustrator', 'WebP Reader'],
+    readerLabel: 'Design archive with prepared WebP catalogue pages',
+    readerEyebrow: 'Catalogue Reader',
+    readerTitle: 'Selected works',
+    readerHint: '',
+    tocOpenLabel: 'Open table of contents',
+    tocCloseLabel: 'Close table of contents',
+    tocTitle: 'Catalogue contents',
+    previousLabel: 'Previous spread',
+    nextLabel: 'Next spread',
+    galleryEyebrow: 'Masonry Gallery',
+    galleryTitle: 'Selected works as an image wall',
+    lightboxOpenLabel: 'Open image details',
+    lightboxCloseLabel: 'Close lightbox',
+    lightboxPreviousLabel: 'Previous image',
+    lightboxNextLabel: 'Next image',
+    tocItems: createDesignCatalogTocItems(),
+    spreads: createDesignCatalogSpreads(),
+  },
+  chapters: [
+    {
+      eyebrow: 'Concept',
+      title: 'Individual print catalogue as archive format',
+      text: 'The original catalogue concept was meant to feel creative, informative and deliberately individual. The compact 21×25 cm format, strong black-and-white contrasts, light and dark page rhythms and a broad range of work were chosen to make different design skills visible.',
+      points: ['21×25 cm booklet', 'Black-and-white contrasts', 'Broad skill range'],
+    },
+    {
+      eyebrow: 'Tools',
+      title: 'Photoshop, Lightroom and Illustrator at the core',
+      text: 'The works were created through retouching, compositing, color looks, vector shapes, typography and layout decisions. Each tool had a clear role in the visual result and was combined deliberately depending on the motif.',
+      points: ['Photoshop for compositing', 'Lightroom for the look', 'Illustrator for vector work'],
+    },
+    {
+      eyebrow: 'Staging',
+      title: 'Browse, zoom, look closer',
+      text: 'The reader shows complete archive pages as WebP files so layout, motif and visual impact remain intact. The masonry images are lazy-loaded, while active reader pages remain directly available. Navigation, hover magnifier and the lightbox keep the collection easy to inspect.',
+      points: ['Proportional WebP reader', 'Lazy-loaded masonry gallery', 'Image details via magnifier'],
+    },
+  ],
+  gallery: createDesignCatalogGalleryItems('en'),
+};

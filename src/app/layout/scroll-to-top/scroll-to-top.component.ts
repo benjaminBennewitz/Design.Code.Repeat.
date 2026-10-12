@@ -1,3 +1,4 @@
+/* src/app/layout/scroll-to-top/scroll-to-top.component.ts */
 /**
  * @file Globaler Scroll-to-top Button.
  * @description Blendet nach ausreichender Scrolltiefe einen zugänglichen Rücksprung zur Seitenoberkante ein.
@@ -15,14 +16,12 @@ import { LanguageService } from '../../core/services/language.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollToTopComponent {
-  /** Sprachservice für ARIA-Text. */
-  private readonly languageService = inject(LanguageService);
-
-  /** Sichtbarkeit ab ungefähr einem Viewport Scrolltiefe. */
-  readonly visible = signal<boolean>(false);
-
-  /** Sprachabhängige Beschriftung. */
-  readonly label = computed(() => this.languageService.language() === 'de' ? 'Zum Seitenanfang' : 'Back to top');
+  private readonly languageService = inject(LanguageService); // Sprachservice für ARIA-Text.
+  readonly visible = signal<boolean>(false);                  // Sichtbarkeit ab ungefähr einem Viewport Scrolltiefe.
+  readonly label = computed(
+    /** Sprachabhängige Beschriftung. */ () =>
+      this.languageService.language() === 'de' ? 'Zum Seitenanfang' : 'Back to top',
+  ); // Sprachabhängige Beschriftung.
 
   /** Aktualisiert den Button ohne zusätzlichen Scroll-Service. */
   @HostListener('window:scroll')
@@ -32,6 +31,9 @@ export class ScrollToTopComponent {
 
   /** Scrollt respektvoll zur aktuellen Motion-Präferenz nach oben. */
   scrollToTop(): void {
+    /**
+     * Reduzierte oder ausgeschaltete Bewegung im globalen Dokument.
+     */
     const reducedMotion = document.documentElement.dataset['motion'] !== 'full';
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   }

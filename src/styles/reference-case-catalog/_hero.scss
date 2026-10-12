@@ -1,0 +1,254 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Hero
+   ========================================================================== */
+  .dcr-case .project-detail__catalog-showcase {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 720px);
+    transform: rotate(-2.5deg);
+    transform-origin: center;
+  }
+
+  .dcr-case .project-detail__catalog-window {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 42%);
+    border-radius: 34px;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.065) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(145deg, rgba(12, 8, 14, 0.94), rgba(35, 18, 32, 0.88));
+    background-size:
+      26px 26px,
+      26px 26px,
+      auto;
+    box-shadow:
+      0 36px 110px var(--project-detail-catalog-shadow),
+      0 0 42px color-mix(in srgb, var(--bp-color-accent), transparent 74%);
+  }
+
+  .dcr-case .project-detail__catalog-window::before {
+    content: '';
+    position: absolute;
+    inset: -12% auto auto -10%;
+    width: 36%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 60%);
+    filter: blur(44px);
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__catalog-bar,
+  .dcr-case .project-detail__catalog-head,
+  .dcr-case .project-detail__catalog-hero-preview {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dcr-case .project-detail__catalog-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.95rem 1.15rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 64%);
+    color: var(--project-detail-ink);
+  }
+
+  .dcr-case .project-detail__catalog-bar>span {
+    width: 0.72rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--bp-color-accent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--bp-color-accent), transparent 32%);
+  }
+
+  .dcr-case .project-detail__catalog-bar strong {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-bar small {
+    margin-left: auto;
+    color: var(--project-detail-muted);
+  }
+
+  .dcr-case .project-detail__catalog-head {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.2rem, 2vw, 1.8rem);
+  }
+
+  .dcr-case .project-detail__catalog-head p {
+    max-width: 10ch;
+    margin: 0 0 0.35rem;
+    color: var(--project-detail-ink);
+    font-size: clamp(1.7rem, 3vw, 3.3rem);
+    font-weight: 900;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-head span {
+    display: block;
+    max-width: 58ch;
+    color: var(--project-detail-muted);
+    line-height: 1.6;
+  }
+
+  .dcr-case .project-detail__catalog-head ul,
+  .dcr-case .project-detail__lightbox-copy ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dcr-case .project-detail__catalog-head li,
+  .dcr-case .project-detail__lightbox-copy li {
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 44%);
+    border-radius: 999px;
+    padding: 0.38rem 0.68rem;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 88%);
+    color: var(--project-detail-ink);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-hero-preview {
+    display: grid;
+    grid-template-columns: 0.8fr 1.1fr;
+    gap: 0.75rem;
+    min-height: 260px;
+    margin: 0 clamp(1rem, 2vw, 1.4rem) clamp(1rem, 2vw, 1.4rem);
+    padding: clamp(0.9rem, 2vw, 1.2rem);
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 66%);
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .dcr-case .project-detail__catalog-hero-preview span {
+    display: block;
+    min-height: 74px;
+    background:
+      radial-gradient(circle at 28% 18%, color-mix(in srgb, var(--bp-color-accent), transparent 58%), transparent 28%),
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.13) 0 1px, transparent 1px 11px),
+      linear-gradient(145deg, rgba(255, 248, 236, 0.88), rgba(255, 248, 236, 0.18));
+  }
+
+  .dcr-case .project-detail__catalog-hero-preview span:nth-child(1) {
+    grid-row: span 2;
+  }
+
+  .dcr-case .project-detail__catalog-hero-preview span:nth-child(4) {
+    grid-column: span 2;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls button,
+  .dcr-case .project-detail__catalog-menu-button,
+  .dcr-case .project-detail__catalog-toc-close,
+  .dcr-case .project-detail__lightbox-actions button,
+  .dcr-case .project-detail__lightbox-close {
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 52%);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 86%);
+    color: var(--project-detail-ink);
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls button,
+  .dcr-case .project-detail__lightbox-actions button {
+    width: 2.8rem;
+    aspect-ratio: 1;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls button:disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__catalog-reader-controls button:hover,
+  .dcr-case .project-detail__catalog-menu-button:hover,
+  .dcr-case .project-detail__catalog-toc-close:hover,
+  .dcr-case .project-detail__lightbox-actions button:hover,
+  .dcr-case .project-detail__lightbox-close:hover {
+    border-color: var(--bp-color-accent);
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 76%);
+    transform: translateY(-2px);
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__highlights {
+    min-height: 100svh;
+    padding-top: calc(var(--bp-header-height) + clamp(0.9rem, 2.4vh, 1.65rem));
+    padding-bottom: clamp(0.9rem, 2.4vh, 1.65rem);
+    scroll-snap-stop: always;
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__signals {
+    align-content: center;
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__highlights h2 {
+    max-width: 13ch;
+    font-size: clamp(2rem, 4vw, 4.1rem);
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__highlight-grid {
+    gap: clamp(0.65rem, 1.4vw, 1rem);
+    margin-top: clamp(1rem, 2vh, 1.5rem);
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__highlight-card {
+    min-height: clamp(138px, 18vh, 174px);
+    gap: clamp(0.55rem, 1.3vh, 0.9rem);
+    padding: clamp(0.8rem, 1.65vw, 1.15rem);
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__metric-strip {
+    margin-top: clamp(0.75rem, 1.8vh, 1.15rem);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__metric strong {
+    font-size: clamp(1.12rem, 1.55vw, 1.7rem);
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .dcr-case .project-detail[data-project='grafikdesign-katalog'] .project-detail__metric h3 {
+    overflow-wrap: normal;
+  }
+}

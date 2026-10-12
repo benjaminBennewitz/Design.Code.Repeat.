@@ -1,0 +1,110 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _marks-navigation.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Marks Navigation
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Marks Navigation
+   ========================================================================== */
+  .system-grid__mark {
+    display: grid;
+    width: 3.5rem;
+    aspect-ratio: 1;
+    place-items: center;
+    font-family: var(--dcr-font-display);
+    transition: transform 300ms var(--dcr-ease-out);
+  }
+
+  .system-grid__mark--arrow {
+    border-radius: 34% 48% 38% 44%;
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+    font-size: 2.2rem;
+    transform: rotate(-6deg);
+  }
+
+  .system-grid__mark--asterisk {
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .system-grid__mark--cluster {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.18rem;
+  }
+
+  .system-grid__mark--cluster i {
+    aspect-ratio: 1;
+    border-radius: 36% 52% 42% 48%;
+    background: currentColor;
+    transform: rotate(12deg);
+  }
+
+  .system-grid__mark--diamond {
+    background: var(--dcr-color-contrast-light);
+    color: var(--dcr-color-contrast-dark);
+    font-size: 2.5rem;
+  }
+
+  .system-grid__jump {
+    display: grid;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-family: var(--dcr-font-mono);
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-decoration: none;
+    transition:
+      transform 180ms var(--dcr-ease-out),
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .system-grid__jump:hover,
+  .system-grid__jump:focus-visible {
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+    transform: translate(-2px, -2px);
+  }
+
+  .system-grid__panel--dark .system-grid__jump:hover,
+  .system-grid__panel--dark .system-grid__jump:focus-visible {
+    background: var(--dcr-color-contrast-light);
+    color: var(--dcr-color-contrast-dark);
+  }
+
+  .system-grid--meta-reveal .system-grid__lead-aside strong {
+    font-size: 1.14rem;
+  }
+
+  .system-grid--meta-reveal .system-grid__footer > strong {
+    font-size: 0.87rem;
+  }
+
+  .system-grid--meta-reveal .system-grid__panel:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: -5px;
+  }
+}

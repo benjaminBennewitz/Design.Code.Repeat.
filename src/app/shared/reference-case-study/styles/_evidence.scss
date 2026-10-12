@@ -1,0 +1,187 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _evidence.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Evidence
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Evidence
+   ========================================================================== */
+  .dcr-case .project-detail__gallery {
+    background:
+      radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--bp-color-accent), transparent 86%), transparent 28%),
+      linear-gradient(180deg, transparent, color-mix(in srgb, var(--bp-color-bg) 88%, black 12%));
+  }
+
+  .dcr-case .project-detail__evidence-grid {
+    column-count: 3;
+    column-gap: var(--bp-space-3);
+  }
+
+  .dcr-case .project-detail__evidence-card {
+    display: grid;
+    min-width: 0;
+    gap: var(--bp-space-3);
+    width: 100%;
+    margin: 0 0 var(--bp-space-3);
+    break-inside: avoid;
+    border: 1px solid var(--bp-color-border);
+    border-radius: 0;
+    padding: var(--bp-space-3);
+    background: color-mix(in srgb, var(--bp-color-surface), transparent 8%);
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__browser-frame {
+    position: relative;
+    display: grid;
+    min-height: var(--project-detail-screen-height, 340px);
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 58%);
+    border-radius: 0;
+    background: color-mix(in srgb, var(--bp-color-bg), transparent 10%);
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__evidence-card--lg {
+    --project-detail-screen-height: 430px;
+  }
+
+  .dcr-case .project-detail__evidence-card--md {
+    --project-detail-screen-height: 340px;
+  }
+
+  .dcr-case .project-detail__evidence-card--sm {
+    --project-detail-screen-height: 275px;
+  }
+
+  .dcr-case .project-detail__browser-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .dcr-case .project-detail__evidence-image-trigger {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: zoom-in;
+  }
+
+  .dcr-case .project-detail__evidence-image-trigger:focus-visible {
+    outline: 2px solid var(--bp-color-accent);
+    outline-offset: -4px;
+  }
+
+  .dcr-case .project-detail__evidence-screen {
+    position: relative;
+    display: grid;
+    min-height: 100%;
+    align-content: center;
+    justify-items: center;
+    gap: var(--bp-space-3);
+    padding: var(--bp-space-4);
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bp-color-accent), transparent 94%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--bp-color-accent), transparent 96%) 1px, transparent 1px),
+      linear-gradient(135deg, color-mix(in srgb, var(--bp-color-accent), transparent 88%), transparent 55%);
+    background-size:
+      26px 26px,
+      26px 26px,
+      auto;
+    text-align: center;
+  }
+
+  .dcr-case .project-detail__evidence-screen .material-symbols-outlined {
+    color: color-mix(in srgb, var(--bp-color-accent), var(--bp-color-text) 18%);
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    opacity: 0.74;
+  }
+
+  .dcr-case .project-detail__evidence-screen strong {
+    max-width: 12ch;
+    color: var(--bp-color-text);
+    font-family: var(--bp-font-display);
+    font-size: clamp(1.7rem, 3.4vw, 3.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .dcr-case .project-detail__evidence-screen div {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__evidence-screen em {
+    position: absolute;
+    display: inline-flex;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), #111111 18%);
+    border-radius: 0;
+    padding: 0.38rem 0.5rem;
+    background: var(--bp-color-accent);
+    color: var(--bp-color-on-accent);
+    font-family: var(--bp-font-mono);
+    font-size: 0.64rem;
+    font-style: normal;
+    font-weight: 950;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+  }
+
+  .dcr-case .project-detail__evidence-screen em:nth-child(1) {
+    inset: 14% auto auto 9%;
+  }
+
+  .dcr-case .project-detail__evidence-screen em:nth-child(2) {
+    inset: auto 8% 19% auto;
+  }
+
+  .dcr-case .project-detail__evidence-screen em:nth-child(3) {
+    inset: 10% 12% auto auto;
+  }
+
+  .dcr-case .project-detail__zoom {
+    position: absolute;
+    inset: auto 0.9rem 0.9rem auto;
+    display: grid;
+    width: 2.45rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid var(--bp-color-border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bp-color-bg), transparent 20%);
+    color: var(--bp-color-text);
+    cursor: pointer;
+  }
+
+  .dcr-case .project-detail__evidence-card p {
+    margin: var(--bp-space-2) 0 0;
+    color: var(--bp-color-text-muted);
+    line-height: 1.58;
+  }
+}

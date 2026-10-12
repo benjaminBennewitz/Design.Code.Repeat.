@@ -1,0 +1,139 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _services.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Services
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Services
+   ========================================================================== */
+  .home-services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: clamp(1.25rem, 2.2vh, 2rem);
+  }
+
+  .service-card {
+    --card-accent: var(--dcr-color-primary);
+    --card-on-accent: var(--dcr-color-on-primary);
+    display: grid;
+    gap: 1.5rem;
+    min-height: 250px;
+    border: 2px solid var(--dcr-color-border-strong);
+    padding: 1.4rem;
+    background: var(--dcr-color-surface-solid);
+    transition:
+      transform 180ms var(--dcr-ease-out),
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .service-card[data-accent='lime'] {
+    --card-accent: var(--dcr-color-lime);
+    --card-on-accent: var(--dcr-color-on-lime);
+  }
+
+  .service-card[data-accent='pink'] {
+    --card-accent: var(--dcr-color-pink);
+    --card-on-accent: var(--dcr-color-on-pink);
+  }
+
+  .service-card[data-accent='violet'] {
+    --card-accent: var(--dcr-color-violet);
+    --card-on-accent: var(--dcr-color-on-violet);
+  }
+
+  .service-card[data-accent='orange'] {
+    --card-accent: var(--dcr-color-orange);
+    --card-on-accent: var(--dcr-color-on-orange);
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    border-color: var(--card-accent);
+    box-shadow: 9px 9px 0 var(--card-accent);
+    transform: translate(-4px, -4px);
+  }
+
+  .service-card__top,
+  .service-card__bottom {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .service-card__index,
+  .service-card__kicker,
+  .service-card strong {
+    font-family: var(--dcr-font-mono);
+    font-size: 0.7rem;
+  }
+
+  .service-card__top .material-symbols-outlined {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--card-accent);
+    color: var(--card-on-accent);
+  }
+
+  .service-card__kicker {
+    margin: 0 0 0.7rem;
+    border-left: 4px solid var(--card-accent);
+    padding-left: 0.55rem;
+    color: var(--dcr-color-text-muted);
+    font-weight: 800;
+  }
+
+  .service-card h3 {
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.8rem, 2.8vw, 2.7rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+  .service-card p:not(.service-card__kicker) {
+    color: var(--dcr-color-text-muted);
+    line-height: 1.65;
+  }
+
+  .service-card__bottom {
+    align-self: end;
+  }
+
+  .service-card__bottom a {
+    display: grid;
+    place-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 2px solid var(--dcr-color-border-strong);
+    color: var(--dcr-color-text);
+  }
+
+  .service-card__bottom a:hover,
+  .service-card__bottom a:focus-visible {
+    border-color: var(--card-accent);
+    background: var(--card-accent);
+    color: var(--card-on-accent);
+  }
+}

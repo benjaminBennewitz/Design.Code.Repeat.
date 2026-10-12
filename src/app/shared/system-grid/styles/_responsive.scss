@@ -1,0 +1,148 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (hover: hover) and (pointer: fine) {
+    .system-grid--meta-reveal :is(.system-grid__lead-aside strong, .system-grid__footer > strong) {
+      opacity: 0;
+      transform: translate3d(0, 0.7rem, 0) scale(0.88);
+      transform-origin: left bottom;
+      transition:
+        opacity 180ms ease,
+        transform 260ms var(--dcr-ease-out);
+    }
+
+    .system-grid--meta-reveal .system-grid__lead-aside strong {
+      transform-origin: right bottom;
+    }
+
+    .system-grid--meta-reveal
+      .system-grid__panel:is(:hover, :focus, :focus-within)
+      :is(.system-grid__lead-aside strong, .system-grid__footer > strong) {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @media (hover: hover) {
+    .system-grid__panel:hover .system-grid__mark {
+      transform: rotate(4deg) scale(1.08);
+    }
+
+    .system-grid__panel--lead:hover .system-grid__mark--arrow {
+      transform: rotate(-1deg) scale(1.08);
+    }
+
+    .system-grid__panel--light:hover {
+      background: var(--dcr-color-primary);
+      color: var(--dcr-color-on-primary);
+    }
+
+    .system-grid__panel--neutral:hover {
+      background: var(--dcr-color-pink);
+      color: var(--dcr-color-on-pink);
+    }
+
+    .system-grid__panel--dark:hover {
+      background: var(--dcr-color-violet);
+      color: var(--dcr-color-on-violet);
+    }
+  }
+
+  @media (max-width: 760px), (max-height: 799px) {
+    :host {
+      height: auto;
+    }
+
+    .system-grid {
+      grid-template-rows: auto;
+      height: auto;
+      min-height: calc(100svh - var(--dcr-header-height));
+      overflow: visible;
+    }
+
+    .system-grid__panel--lead {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      min-height: 25rem;
+    }
+
+    .system-grid__lead-aside {
+      grid-column: 2;
+      justify-items: start;
+      text-align: left;
+    }
+
+    .system-grid__split {
+      grid-template-columns: 1fr;
+    }
+
+    .system-grid__panel--light,
+    .system-grid__panel--neutral {
+      min-height: 22rem;
+    }
+
+    .system-grid__panel--dark {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      min-height: 18rem;
+    }
+
+    .system-grid__footer--side {
+      grid-column: 2;
+      justify-items: start;
+      text-align: left;
+    }
+
+    .system-grid__footer--side ul {
+      justify-content: flex-start;
+    }
+
+    .system-grid__mark {
+      width: 3rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .system-grid__footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .system-grid__footer ul {
+      justify-content: flex-start;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .system-grid__panel,
+    .system-grid__mark,
+    .system-grid__jump {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,157 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero
+   02 Theme Overrides
+   03 Hero (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Hero
+   ========================================================================== */
+  .services-page {
+    --services-transition-color: var(--dcr-color-lime);
+    --services-transition-on-color: var(--dcr-color-on-lime);
+  }
+
+  .services-hero {
+    --dcr-section-bg: var(--dcr-color-bg);
+    --dcr-section-next-bg: var(--dcr-color-bg-soft);
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .services-hero__layout {
+    position: relative;
+    z-index: 2;
+    display: block;
+  }
+
+  .services-hero__copy {
+    display: grid;
+    gap: clamp(0.75rem, 1.7vh, 1.25rem);
+    align-content: center;
+    width: min(46rem, calc(50vw - (var(--dcr-page-gutter) * 1.5)));
+    min-height: calc(100svh - var(--dcr-header-height) - (var(--dcr-section-y) * 2));
+  }
+
+  .services-hero h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(3rem, min(7vw, 8.4vh), 7.4rem);
+    line-height: 0.83;
+    letter-spacing: -0.07em;
+    text-wrap: balance;
+  }
+
+  .services-hero__lead {
+    max-width: 50rem;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(0.95rem, 1.25vw, 1.14rem);
+    line-height: 1.58;
+  }
+
+  .services-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .services-hero__jump {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.66rem;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .services-hero__jump:hover,
+  .services-hero__jump:focus-visible {
+    color: var(--dcr-color-primary-text);
+  }
+
+  .services-hero__note {
+    max-width: 46rem;
+    margin: 0;
+    border-left: 2px solid var(--dcr-color-primary);
+    padding-left: 0.75rem;
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: clamp(0.62rem, 0.72vw, 0.72rem);
+    line-height: 1.55;
+  }
+
+  .services-hero__visual {
+    --services-shader-back: var(--dcr-color-contrast-dark);
+    --services-shader-front: var(--dcr-color-pink-text);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50vw;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--services-shader-back);
+    isolation: isolate;
+  }
+
+  /* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+
+  :host-context(:root[data-theme='light']) .services-hero__visual {
+    --services-shader-back: var(--dcr-color-bg-soft);
+    --services-shader-front: var(--dcr-color-primary-text);
+  }
+
+  /* ==========================================================================
+   Hero (2)
+   ========================================================================== */
+
+  .services-hero__shader {
+    position: absolute;
+    inset: 0;
+  }
+
+  .services-hero__shader-meta {
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--services-shader-front);
+    font-family: var(--dcr-font-mono);
+    font-size: clamp(0.52rem, 0.62vw, 0.64rem);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+}

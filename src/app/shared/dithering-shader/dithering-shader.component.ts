@@ -1,35 +1,21 @@
 /* src/app/shared/dithering-shader/dithering-shader.component.ts */
-
-/**
- * @file Animierter Dithering-Shader als wiederverwendbare WebGL2-Komponente.
- * @description Rendert pixelige Swirl- und Wave-Muster GPU-beschleunigt, übernimmt CSS-Design-Tokens und pausiert außerhalb des Viewports.
- */
-
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, NgZone, OnDestroy, ViewChild, inject } from '@angular/core';
-
-/** Unterstützte Dithering-Matrizen. */
-type DitheringMatrixType = '2x2' | '4x4' | '8x8';
-
-/** Unterstützte prozedurale Shader-Muster. */
-type DitheringShape = 'swirl' | 'wave' | 'liquid' | 'cat';
-
-/** RGBA-Farbwert mit normalisierten Kanälen von 0 bis 1. */
-type RgbaColor = readonly [number, number, number, number];
-
-/** Uniform-Locations des Fragment-Shaders. */
-interface ShaderUniforms {
-  readonly resolution: WebGLUniformLocation;
-  readonly time: WebGLUniformLocation;
-  readonly speed: WebGLUniformLocation;
-  readonly intensity: WebGLUniformLocation;
-  readonly zoom: WebGLUniformLocation;
-  readonly frontColor: WebGLUniformLocation;
-  readonly backColor: WebGLUniformLocation;
-  readonly ditherSize: WebGLUniformLocation;
-  readonly shape: WebGLUniformLocation;
-}
-
-/** Dekorativer GPU-Shader für animierte Dithering-Hintergründe. */
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import type { DitheringMatrixType, DitheringShape, DitheringOptions, RgbaColor } from './dithering.models';
+import { DitheringRenderer } from './dithering-renderer';
+import { DitheringFallback } from './dithering-fallback';
+import { resolveCssColor } from './dithering-colors';
+/** Verbindet Dithering-Einstellungen mit GPU-Rendering, Fallback und Browser-Lifecycle. */
 @Component({
   selector: 'dcr-dithering-shader',
   standalone: true,
@@ -37,704 +23,201 @@ interface ShaderUniforms {
   styleUrl: './dithering-shader.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DitheringShaderComponent implements AfterViewInit, OnDestroy {
-  /** Canvas-Element für das WebGL-Rendering. */
-  @ViewChild('canvasRef')
-  private readonly canvasRef?: ElementRef<HTMLCanvasElement>;
+export class DitheringShaderComponent implements AfterViewInit, OnDestroy, DitheringOptions {
+  @ViewChild('canvasRef') private readonly canvasRef?: ElementRef<HTMLCanvasElement>; // Canvas des GPU- oder Fallback-Renderers.
+  private readonly hostRef = inject(ElementRef<HTMLElement>);                         // Größe und CSS-Farbkontext des Hosts.
+  private readonly ngZone = inject(NgZone);                                           // Animationen außerhalb der Angular-Zone.
+  private renderer?: DitheringRenderer;                                               // Vollständig initialisiertes GPU-Programm.
+  private resizeObserver?: ResizeObserver;                                            // Größenänderungen des Shader-Hosts.
+  private rootObserver?: MutationObserver;                                            // Theme-, Kontrast- und Motion-Änderungen.
+  private visibilityObserver?: IntersectionObserver;                                  // Sichtbarkeit des Shader-Hosts.
+  private animationFrameId = 0;                                                       // Aktuell ausstehender Animations-Frame.
+  private animationStart = 0;                                                         // Startzeit der aktuellen Animationssequenz.
+  private isVisible = true;                                                           // Sichtbarkeit bis zur ersten Observer-Meldung.
+  private frontColor: RgbaColor = [167 / 255, 1, 25 / 255, 1];                        // Normalisierte GPU-Vordergrundfarbe.
+  private backColor: RgbaColor = [0, 0, 0, 0];                                        // Normalisierte GPU-Hintergrundfarbe.
+  private readonly animationCallback = this.animate.bind(this);                       // Stabiler Callback für alle Animations-Frames.
+  @Input() colorBack = 'transparent';                                                 // CSS-Farbe der transparenten oder dunklen Musterflächen.
+  @Input() colorFront = 'var(--dcr-color-primary)';                                   // CSS-Farbe der sichtbaren Dither-Pixel.
+  @Input() shape: DitheringShape = 'swirl';                                           // Prozedurales Muster des Shader-Feldes.
+  @Input() type: DitheringMatrixType = '4x4';                                         // Bayer-Matrix des GPU-Ditherings.
+  @Input() pxSize = 4;                                                                // Größe eines Shader-Pixels in CSS-Pixeln.
+  @Input() speed = 0.9;                                                               // Bewegungsgeschwindigkeit des GPU-Musters.
+  @Input() intensity = 1;                                                             // Dichte und Stärke des GPU-Musters.
+  @Input() zoom = 1;                                                                  // Mathematischer Ausschnitt ohne größere Renderfläche.
+  @HostBinding('attr.aria-hidden') protected readonly ariaHidden = 'true';            // Dekorative Darstellung ohne Screenreader-Ausgabe.
 
-  /** Host-Element für Größe und CSS-Farbauflösung. */
-  private readonly hostRef = inject(ElementRef<HTMLElement>);
-
-  /** Führt den Animationsloop außerhalb der Angular-Zone aus. */
-  private readonly ngZone = inject(NgZone);
-
-  /** WebGL2-Kontext des Canvas. */
-  private gl?: WebGL2RenderingContext;
-
-  /** Kompiliertes GPU-Programm für den Swirl. */
-  private program?: WebGLProgram;
-
-  /** Uniform-Locations für alle pro Frame benötigten Werte. */
-  private uniforms?: ShaderUniforms;
-
-  /** Beobachtet Größenänderungen des Hosts. */
-  private resizeObserver?: ResizeObserver;
-
-  /** Beobachtet Theme-, Kontrast- und Motion-Änderungen. */
-  private rootObserver?: MutationObserver;
-
-  /** Pausiert Rendering außerhalb des sichtbaren Viewports. */
-  private visibilityObserver?: IntersectionObserver;
-
-  /** ID des laufenden Animationsframes. */
-  private animationFrameId = 0;
-
-  /** Startzeit der aktuellen Animationssequenz. */
-  private animationStart = 0;
-
-  /** Sichtbarkeitsstatus des Hosts. */
-  private isVisible = true;
-
-  /** Verhindert wiederholte Starts nach einem fehlgeschlagenen WebGL-Setup. */
-  private isWebGlAvailable = false;
-
-  /** Vordergrundfarbe als normalisierte RGBA-Kanäle. */
-  private frontColor: RgbaColor = [167 / 255, 1, 25 / 255, 1];
-
-  /** Hintergrundfarbe als normalisierte RGBA-Kanäle. */
-  private backColor: RgbaColor = [0, 0, 0, 0];
-
-  /** CSS-Farbe für die transparenten bzw. dunklen Shader-Flächen. */
-  @Input() colorBack = 'transparent';
-
-  /** CSS-Farbe für die sichtbaren Dither-Pixel. */
-  @Input() colorFront = 'var(--dcr-color-primary)';
-
-  /** Prozedurale Form des Dithering-Musters. */
-  @Input() shape: DitheringShape = 'swirl';
-
-  /** Bayer-Matrix für das Dithering. */
-  @Input() type: DitheringMatrixType = '4x4';
-
-  /** Größe eines Shader-Pixels in CSS-Pixeln. */
-  @Input() pxSize = 4;
-
-  /** Geschwindigkeit des Swirls. */
-  @Input() speed = 0.9;
-
-  /** Dichte und Stärke des Musters. */
-  @Input() intensity = 1;
-
-  /**
-   * Sichtbarer Ausschnitt des mathematischen Swirls.
-   * 0.4 entspricht dem bisherigen 250-vw-Zoom, ohne eine 2.5-fach größere Renderfläche zu erzeugen.
-   */
-  @Input() zoom = 1;
-
-  /** Dekorativer Hintergrund wird von Screenreadern ignoriert. */
-  @HostBinding('attr.aria-hidden')
-  protected readonly ariaHidden = 'true';
-
-  /** Initialisiert WebGL, Observer und Animation. */
+  /** Initialisiert Farben, Renderauflösung, Renderer und Browser-Observer. */
   ngAfterViewInit(): void {
+    /**
+     * Nach dem Rendern verfügbares Canvas des Shader-Hosts.
+     */
     const canvas = this.canvasRef?.nativeElement;
-
-    if (!canvas) {
-      return;
-    }
-
+    if (!canvas) return;
     this.refreshColors();
     this.resizeCanvas();
-    this.isWebGlAvailable = this.initializeWebGl(canvas);
+    this.renderer = DitheringRenderer.create(canvas);
+    this.renderer?.resize(canvas);
     this.bindObservers();
-
-    if (!this.isWebGlAvailable) {
-      this.renderStaticFallback(canvas);
-      return;
-    }
-
-    this.updateAnimationState();
+    if (this.renderer) this.updateAnimationState();
+    else this.renderFallback(canvas);
   }
-
-  /** Räumt Browser-Observer, GPU-Ressourcen und Animationsframes auf. */
+  /** Gibt Browser-Observer, Animations-Frames und GPU-Ressourcen frei. */
   ngOnDestroy(): void {
-    window.cancelAnimationFrame(this.animationFrameId);
-    this.animationFrameId = 0;
+    this.stopAnimation();
     this.resizeObserver?.disconnect();
     this.rootObserver?.disconnect();
     this.visibilityObserver?.disconnect();
-
-    if (this.gl && this.program) {
-      this.gl.deleteProgram(this.program);
-    }
+    this.renderer?.destroy();
+    this.renderer = undefined;
   }
-
-  /** Registriert Resize-, Sichtbarkeits- und Theme-Beobachter. */
+  /** Registriert Größen-, Sichtbarkeits- und Theme-Beobachter. */
   private bindObservers(): void {
-    const host = this.hostRef.nativeElement;
-
-    this.resizeObserver = new ResizeObserver(() => {
-      this.resizeCanvas();
-
-      if (this.isWebGlAvailable) {
-        this.renderCurrentFrame();
-        return;
-      }
-
-      const canvas = this.canvasRef?.nativeElement;
-      canvas && this.renderStaticFallback(canvas);
-    });
-    this.resizeObserver.observe(host);
-
-    this.visibilityObserver = new IntersectionObserver(([entry]) => {
-      this.isVisible = entry?.isIntersecting ?? false;
-      this.updateAnimationState();
-    }, { threshold: 0.05 });
-    this.visibilityObserver.observe(host);
-
-    this.rootObserver = new MutationObserver(() => {
-      this.refreshColors();
-
-      if (this.isWebGlAvailable) {
-        this.updateAnimationState();
-        return;
-      }
-
-      const canvas = this.canvasRef?.nativeElement;
-      canvas && this.renderStaticFallback(canvas);
-    });
+    this.bindHostObservers();
+    this.bindThemeObserver();
+  }
+  /** Registriert Beobachter für die Größe und Sichtbarkeit des Hosts. */
+  private bindHostObservers(): void {
+    this.resizeObserver = new ResizeObserver(this.handleResize.bind(this));
+    this.resizeObserver.observe(this.hostRef.nativeElement);
+    this.visibilityObserver = new IntersectionObserver(this.handleVisibility.bind(this), { threshold: 0.05 });
+    this.visibilityObserver.observe(this.hostRef.nativeElement);
+  }
+  /** Registriert die bisherigen globalen Theme- und Motion-Attribute. */
+  private bindThemeObserver(): void {
+    this.rootObserver = new MutationObserver(this.handleThemeChange.bind(this));
     this.rootObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['data-theme', 'data-contrast', 'data-color-vision', 'data-motion'],
     });
   }
-
-  /** Initialisiert WebGL2 und kompiliert das GPU-Programm. */
-  private initializeWebGl(canvas: HTMLCanvasElement): boolean {
-    const gl = canvas.getContext('webgl2', {
-      alpha: true,
-      antialias: false,
-      depth: false,
-      desynchronized: true,
-      failIfMajorPerformanceCaveat: true,
-      powerPreference: 'high-performance',
-      premultipliedAlpha: true,
-      preserveDrawingBuffer: false,
-      stencil: false,
-    });
-
-    if (!gl) {
-      return false;
-    }
-
-    const vertexShader = this.compileShader(gl, gl.VERTEX_SHADER, this.vertexShaderSource);
-    const fragmentShader = this.compileShader(gl, gl.FRAGMENT_SHADER, this.fragmentShaderSource);
-
-    if (!vertexShader || !fragmentShader) {
-      vertexShader && gl.deleteShader(vertexShader);
-      fragmentShader && gl.deleteShader(fragmentShader);
-      return false;
-    }
-
-    const program = gl.createProgram();
-
-    if (!program) {
-      gl.deleteShader(vertexShader);
-      gl.deleteShader(fragmentShader);
-      return false;
-    }
-
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    gl.deleteShader(vertexShader);
-    gl.deleteShader(fragmentShader);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.warn('Dithering-Shader konnte nicht verlinkt werden.', gl.getProgramInfoLog(program));
-      gl.deleteProgram(program);
-      return false;
-    }
-
-    const uniforms = this.resolveUniforms(gl, program);
-
-    if (!uniforms) {
-      gl.deleteProgram(program);
-      return false;
-    }
-
-    this.gl = gl;
-    this.program = program;
-    this.uniforms = uniforms;
-
-    gl.disable(gl.BLEND);
-    gl.disable(gl.DEPTH_TEST);
-    gl.disable(gl.CULL_FACE);
-    gl.useProgram(program);
-    this.resizeViewport();
-
-    return true;
+  /** Zeichnet nach einer Größenänderung den aktuellen GPU- oder Fallback-Zustand. */
+  private handleResize(): void {
+    this.resizeCanvas();
+    this.renderCurrentFrame();
   }
-
-  /** Kompiliert einen einzelnen GLSL-Shader und liefert bei Fehlern keinen Shader zurück. */
-  private compileShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader | undefined {
-    const shader = gl.createShader(type);
-
-    if (!shader) {
-      return undefined;
-    }
-
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.warn('Dithering-Shader konnte nicht kompiliert werden.', gl.getShaderInfoLog(shader));
-      gl.deleteShader(shader);
-      return undefined;
-    }
-
-    return shader;
+  /**
+   * Aktualisiert den sichtbarkeitsabhängigen Animationszustand.
+   * @param entries Sichtbarkeitsmeldungen für den Shader-Host.
+   */
+  private handleVisibility(entries: IntersectionObserverEntry[]): void {
+    this.isVisible = entries[0]?.isIntersecting ?? false;
+    this.updateAnimationState();
   }
-
-  /** Löst alle benötigten Uniform-Locations einmalig auf. */
-  private resolveUniforms(gl: WebGL2RenderingContext, program: WebGLProgram): ShaderUniforms | undefined {
-    const resolution = gl.getUniformLocation(program, 'u_resolution');
-    const time = gl.getUniformLocation(program, 'u_time');
-    const speed = gl.getUniformLocation(program, 'u_speed');
-    const intensity = gl.getUniformLocation(program, 'u_intensity');
-    const zoom = gl.getUniformLocation(program, 'u_zoom');
-    const frontColor = gl.getUniformLocation(program, 'u_front_color');
-    const backColor = gl.getUniformLocation(program, 'u_back_color');
-    const ditherSize = gl.getUniformLocation(program, 'u_dither_size');
-    const shape = gl.getUniformLocation(program, 'u_shape');
-
-    if (!resolution || !time || !speed || !intensity || !zoom || !frontColor || !backColor || !ditherSize || !shape) {
-      return undefined;
-    }
-
-    return { resolution, time, speed, intensity, zoom, frontColor, backColor, ditherSize, shape };
+  /** Übernimmt Theme-Farben und aktualisiert Rendering sowie Bewegungszustand. */
+  private handleThemeChange(): void {
+    this.refreshColors();
+    if (this.renderer) this.updateAnimationState();
+    else this.renderCurrentFrame();
   }
-
-  /** Skaliert die interne Renderauflösung passend zur gewünschten Pixelgröße. */
+  /** Synchronisiert Canvas-Größe und GPU-Viewport mit der gewünschten Pixelgröße. */
   private resizeCanvas(): void {
+    /**
+     * Canvas mit der zuletzt verwendeten Renderauflösung.
+     */
     const canvas = this.canvasRef?.nativeElement;
-
-    if (!canvas) {
-      return;
-    }
-
-    const pixelSize = Math.max(1, Math.round(this.pxSize));
-    const width = Math.max(1, Math.ceil(this.hostRef.nativeElement.clientWidth / pixelSize));
-    const height = Math.max(1, Math.ceil(this.hostRef.nativeElement.clientHeight / pixelSize));
-
-    if (canvas.width === width && canvas.height === height) {
-      return;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-    this.resizeViewport();
+    if (!canvas) return;
+    resizeRenderCanvas(canvas, this.hostRef.nativeElement, this.pxSize);
+    this.renderer?.resize(canvas);
   }
-
-  /** Synchronisiert den WebGL-Viewport mit der internen Canvas-Auflösung. */
-  private resizeViewport(): void {
-    const canvas = this.canvasRef?.nativeElement;
-
-    if (!canvas || !this.gl) {
-      return;
-    }
-
-    this.gl.viewport(0, 0, canvas.width, canvas.height);
-  }
-
-  /** Startet, pausiert oder statisiert die Animation abhängig von Sichtbarkeit und Motion-Präferenz. */
+  /** Startet oder statisiert das GPU-Rendering gemäß Sichtbarkeit und Motion-Modus. */
   private updateAnimationState(): void {
-    window.cancelAnimationFrame(this.animationFrameId);
-    this.animationFrameId = 0;
-
-    if (!this.isWebGlAvailable) {
-      return;
-    }
-
+    this.stopAnimation();
+    if (!this.renderer) return;
     if (!this.shouldAnimate()) {
       this.animationStart = 0;
       this.renderFrame(0);
-      return;
-    }
-
-    this.ngZone.runOutsideAngular(() => {
-      this.animationFrameId = window.requestAnimationFrame(this.animate);
-    });
+    } else this.ngZone.runOutsideAngular(this.startAnimation.bind(this));
   }
-
-  /** requestAnimationFrame-Loop; die eigentliche Pixelarbeit findet vollständig auf der GPU statt. */
-  private readonly animate = (timestamp: number): void => {
+  /** Plant den ersten Animations-Frame außerhalb der Angular-Zone. */
+  private startAnimation(): void {
+    this.animationFrameId = window.requestAnimationFrame(this.animationCallback);
+  }
+  /** Beendet einen noch ausstehenden Animations-Frame. */
+  private stopAnimation(): void {
+    if (typeof window !== 'undefined') window.cancelAnimationFrame(this.animationFrameId);
+    this.animationFrameId = 0;
+  }
+  /**
+   * Zeichnet eine GPU-Animationsstufe und plant den nächsten sichtbaren Frame.
+   * @param timestamp Vom Browser gelieferter Frame-Zeitpunkt.
+   */
+  private animate(timestamp: number): void {
     this.renderFrame(this.getElapsedSeconds(timestamp));
-
-    if (this.shouldAnimate()) {
-      this.animationFrameId = window.requestAnimationFrame(this.animate);
-    } else {
-      this.animationFrameId = 0;
-    }
-  };
-
-  /** Zeichnet nach Resize oder Theme-Wechsel unmittelbar den aktuellen Zustand. */
-  private renderCurrentFrame(): void {
-    if (!this.isWebGlAvailable) {
-      return;
-    }
-
-    const elapsedSeconds = this.shouldAnimate() ? this.getElapsedSeconds(performance.now()) : 0;
-    this.renderFrame(elapsedSeconds);
+    if (this.shouldAnimate()) this.startAnimation();
+    else this.animationFrameId = 0;
   }
-
-  /** Liefert die seit Animationsstart verstrichene Zeit in Sekunden. */
+  /** Zeichnet den aktuellen Zustand nach Resize oder Theme-Wechsel. */
+  private renderCurrentFrame(): void {
+    /**
+     * Für den aktuellen Zeichenauftrag verfügbares Canvas.
+     */
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    if (this.renderer) this.renderFrame(this.shouldAnimate() ? this.getElapsedSeconds(performance.now()) : 0);
+    else this.renderFallback(canvas);
+  }
+  /**
+   * Liefert die seit dem Animationsstart verstrichenen Sekunden.
+   * @param timestamp Vom Browser gelieferter Zeitwert.
+   */
   private getElapsedSeconds(timestamp: number): number {
     this.animationStart ||= timestamp;
     return (timestamp - this.animationStart) / 1000;
   }
-
-  /** Übergibt nur Uniforms an die GPU und zeichnet ein bildschirmfüllendes Dreieck. */
+  /**
+   * Übergibt die aktuellen Einstellungen an den GPU-Renderer.
+   * @param elapsedSeconds Seit dem Animationsstart verstrichene Sekunden.
+   */
   private renderFrame(elapsedSeconds: number): void {
+    /**
+     * Für den aktuellen GPU-Auftrag verfügbares Canvas.
+     */
     const canvas = this.canvasRef?.nativeElement;
-    const gl = this.gl;
-    const program = this.program;
-    const uniforms = this.uniforms;
-
-    if (!canvas || !gl || !program || !uniforms) {
-      return;
-    }
-
-    gl.useProgram(program);
-    gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
-    gl.uniform1f(uniforms.time, elapsedSeconds);
-    gl.uniform1f(uniforms.speed, Math.max(0.05, this.speed));
-    gl.uniform1f(uniforms.intensity, Math.min(1.6, Math.max(0.2, this.intensity)));
-    gl.uniform1f(uniforms.zoom, Math.min(2, Math.max(0.05, this.zoom)));
-    gl.uniform4f(uniforms.frontColor, ...this.frontColor);
-    gl.uniform4f(uniforms.backColor, ...this.backColor);
-    gl.uniform1i(uniforms.ditherSize, this.getDitherSize());
-    gl.uniform1i(uniforms.shape, this.shape === 'cat' ? 3 : this.shape === 'liquid' ? 2 : this.shape === 'wave' ? 1 : 0);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (canvas) this.renderer?.draw(canvas, this, elapsedSeconds, this.frontColor, this.backColor);
   }
-
-  /** Liefert die numerische Größe der konfigurierten Bayer-Matrix. */
-  private getDitherSize(): number {
-    switch (this.type) {
-      case '2x2':
-        return 2;
-      case '8x8':
-        return 8;
-      case '4x4':
-      default:
-        return 4;
-    }
-  }
-
-  /** Aktualisiert die GPU-Farben aus CSS-Variablen und Theme-Tokens. */
+  /** Übernimmt Vorder- und Hintergrundfarbe aus dem aktuellen CSS-Kontext. */
   private refreshColors(): void {
-    this.frontColor = this.resolveCssColor(this.colorFront);
-    this.backColor = this.resolveCssColor(this.colorBack);
+    this.frontColor = resolveCssColor(this.hostRef.nativeElement, this.colorFront);
+    this.backColor = resolveCssColor(this.hostRef.nativeElement, this.colorBack);
   }
-
-  /** Löst einen CSS-Farbwert über den Browser in normalisierte RGBA-Kanäle auf. */
-  private resolveCssColor(value: string): RgbaColor {
-    const probe = document.createElement('span');
-    probe.style.color = value;
-    this.hostRef.nativeElement.appendChild(probe);
-    const resolved = getComputedStyle(probe).color;
-    probe.remove();
-
-    if (resolved === 'transparent') {
-      return [0, 0, 0, 0];
-    }
-
-    const match = resolved.match(/rgba?\(([^)]+)\)/i);
-
-    if (!match) {
-      return [0, 0, 0, 0];
-    }
-
-    const channels = match[1].split(/[ ,/]+/).filter(Boolean).map(Number);
-    const alpha = channels.length > 3 ? channels[3] : 1;
-
-    return [
-      Math.min(1, Math.max(0, (channels[0] ?? 0) / 255)),
-      Math.min(1, Math.max(0, (channels[1] ?? 0) / 255)),
-      Math.min(1, Math.max(0, (channels[2] ?? 0) / 255)),
-      Math.min(1, Math.max(0, alpha ?? 1)),
-    ];
-  }
-
-  /** Prüft Sichtbarkeit und globale Motion-Präferenz. */
+  /** Prüft die bisherige Kombination aus Sichtbarkeit und globalem Motion-Modus. */
   private shouldAnimate(): boolean {
-    const motion = document.documentElement.dataset['motion'];
-    return this.isVisible && motion !== 'reduced' && motion !== 'off';
+    return this.isVisible && !['reduced', 'off'].includes(document.documentElement.dataset['motion'] ?? '');
   }
-
-  /** Zeichnet bei fehlendem WebGL2 einen einzigen statischen Frame mit Canvas2D. */
-  private renderStaticFallback(canvas: HTMLCanvasElement): void {
+  /**
+   * Zeichnet bei fehlendem GPU-Programm genau einen statischen Canvas2D-Frame.
+   * @param canvas Canvas des Shader-Hosts.
+   */
+  private renderFallback(canvas: HTMLCanvasElement): void {
+    /**
+     * Verfügbarer zweidimensionaler Fallback-Zeichenkontext.
+     */
     const context = canvas.getContext('2d', { alpha: true });
-
-    if (!context) {
-      return;
-    }
-
-    const width = canvas.width;
-    const height = canvas.height;
-    const imageData = context.createImageData(width, height);
-    const pixels = imageData.data;
-    const radiusBase = Math.max(1, Math.min(width, height) * 0.5);
-    const front = this.frontColor.map((channel, index) => Math.round(channel * (index === 3 ? 255 : 255)));
-    const back = this.backColor.map((channel) => Math.round(channel * 255));
-    const zoom = Math.min(2, Math.max(0.05, this.zoom));
-
-    for (let y = 0; y < height; y += 1) {
-      for (let x = 0; x < width; x += 1) {
-        const nx = ((x + 0.5 - width / 2) / radiusBase) * zoom;
-        const ny = ((y + 0.5 - height / 2) / radiusBase) * zoom;
-        let energy = 0;
-
-        if (this.shape === 'cat') {
-          const head = this.ellipseMask(nx, ny, 0, -0.34, 0.38, 0.34);
-          const body = this.ellipseMask(nx, ny, 0, 0.3, 0.47, 0.62);
-          const leftEar = this.diamondMask(nx, ny, -0.27, -0.62, 0.18, 0.28);
-          const rightEar = this.diamondMask(nx, ny, 0.27, -0.62, 0.18, 0.28);
-          const leftPaw = this.ellipseMask(nx, ny, -0.2, 0.82, 0.2, 0.16);
-          const rightPaw = this.ellipseMask(nx, ny, 0.2, 0.82, 0.2, 0.16);
-          const tailBase = this.rotatedEllipseMask(nx, ny, 0.47, 0.34, 0.17, 0.5, -0.58);
-          const tailTip = this.rotatedEllipseMask(nx, ny, 0.62, 0.02, 0.14, 0.34, -0.82);
-          const silhouette = Math.max(head, body, leftEar, rightEar, leftPaw, rightPaw, tailBase, tailTip);
-          const bands = 0.58 + 0.22 * Math.sin((nx * 8.5) + (ny * 5.8)) + 0.12 * Math.cos(ny * 13.0);
-          energy = Math.min(1, Math.max(0, silhouette * bands));
-        } else if (this.shape === 'liquid') {
-          const firstDistance = Math.hypot(nx + 0.45, ny + 0.08);
-          const secondDistance = Math.hypot(nx - 0.32, ny - 0.12);
-          const thirdDistance = Math.hypot(nx - 0.05, ny + 0.48);
-          const density = 0.3 / (firstDistance ** 2 + 0.08)
-            + 0.26 / (secondDistance ** 2 + 0.08)
-            + 0.2 / (thirdDistance ** 2 + 0.07);
-          energy = this.smoothStep(0.9, 1.3, density);
-        } else if (this.shape === 'wave') {
-          const uvX = x / Math.max(1, width);
-          const uvY = 1 - y / Math.max(1, height);
-          const waveX = uvX * 8 - 4;
-          const wave = Math.cos(0.5 * waveX) * Math.sin(1.5 * waveX) * 0.88;
-          energy = 1 - this.smoothStep(-0.95, 0.95, (uvY - 0.48) * 4.2 + wave);
-        } else {
-          const distance = Math.hypot(nx, ny);
-          const angle = Math.atan2(ny, nx);
-          const spiral = Math.sin(distance * 17.5 - angle * 5.8);
-          const ring = Math.sin(distance * 23.5);
-          const arm = Math.cos(angle * 2.6 + distance * 8.2);
-          energy = (spiral * 0.58 + ring * 0.24 + arm * 0.18) * 0.5 + 0.5;
-        }
-
-        const threshold = ((y & 3) * 4 + (x & 3)) / 16;
-        const color = energy > threshold ? front : back;
-        const offset = (y * width + x) * 4;
-
-        pixels[offset] = color[0] ?? 0;
-        pixels[offset + 1] = color[1] ?? 0;
-        pixels[offset + 2] = color[2] ?? 0;
-        pixels[offset + 3] = color[3] ?? 0;
-      }
-    }
-
-    context.putImageData(imageData, 0, 0);
+    if (context)
+      new DitheringFallback(canvas.width, canvas.height, this, this.frontColor, this.backColor).draw(context);
   }
-
-  /** Liefert eine weich begrenzte Ellipsenmaske für den statischen Cat-Fallback. */
-  private ellipseMask(x: number, y: number, centerX: number, centerY: number, radiusX: number, radiusY: number): number {
-    const normalizedX = (x - centerX) / radiusX;
-    const normalizedY = (y - centerY) / radiusY;
-    return 1 - this.smoothStep(0.84, 1, (normalizedX * normalizedX) + (normalizedY * normalizedY));
+}
+/**
+ * Berechnet die interne Canvas-Größe aus Hostgröße und gewünschter Pixelgröße.
+ * @param canvas Canvas mit der bisherigen Renderauflösung.
+ * @param host Hostelement mit den aktuellen Darstellungsabmessungen.
+ * @param pxSize Gewünschte Größe eines Shader-Pixels in CSS-Pixeln.
+ */
+function resizeRenderCanvas(canvas: HTMLCanvasElement, host: HTMLElement, pxSize: number): void {
+  /**
+   * Ganzzahlige Pixelgröße mit der bisherigen Untergrenze.
+   */
+  const pixelSize = Math.max(1, Math.round(pxSize));
+  /**
+   * Neue interne Auflösung des Shader-Feldes.
+   */
+  const size = {
+    width: Math.max(1, Math.ceil(host.clientWidth / pixelSize)),
+    height: Math.max(1, Math.ceil(host.clientHeight / pixelSize)),
+  };
+  if (canvas.width !== size.width || canvas.height !== size.height) {
+    canvas.width = size.width;
+    canvas.height = size.height;
   }
-
-  /** Liefert eine rautenförmige Maske, die im Cat-Fallback als Ohrspitze dient. */
-  private diamondMask(x: number, y: number, centerX: number, centerY: number, radiusX: number, radiusY: number): number {
-    const distance = Math.abs((x - centerX) / radiusX) + Math.abs((y - centerY) / radiusY);
-    return 1 - this.smoothStep(0.82, 1, distance);
-  }
-
-  /** Liefert eine rotierte Ellipsenmaske für Schwanzsegmente im statischen Cat-Fallback. */
-  private rotatedEllipseMask(
-    x: number,
-    y: number,
-    centerX: number,
-    centerY: number,
-    radiusX: number,
-    radiusY: number,
-    rotation: number,
-  ): number {
-    const offsetX = x - centerX;
-    const offsetY = y - centerY;
-    const cosine = Math.cos(rotation);
-    const sine = Math.sin(rotation);
-    const rotatedX = (offsetX * cosine) - (offsetY * sine);
-    const rotatedY = (offsetX * sine) + (offsetY * cosine);
-    return this.ellipseMask(rotatedX, rotatedY, 0, 0, radiusX, radiusY);
-  }
-
-  /** Interpoliert weich zwischen zwei Grenzwerten für den statischen Canvas-Fallback. */
-  private smoothStep(edge0: number, edge1: number, value: number): number {
-    const t = Math.min(1, Math.max(0, (value - edge0) / Math.max(0.0001, edge1 - edge0)));
-    return t * t * (3 - 2 * t);
-  }
-
-  /** Vertex-Shader für ein einzelnes bildschirmfüllendes Dreieck ohne Vertex-Buffer. */
-  private readonly vertexShaderSource = `#version 300 es
-    precision highp float;
-
-    const vec2 POSITIONS[3] = vec2[3](
-      vec2(-1.0, -1.0),
-      vec2(3.0, -1.0),
-      vec2(-1.0, 3.0)
-    );
-
-    void main() {
-      gl_Position = vec4(POSITIONS[gl_VertexID], 0.0, 1.0);
-    }
-  `;
-
-  /** Fragment-Shader mit Swirl-Feld und Bayer-Dithering. */
-  private readonly fragmentShaderSource = `#version 300 es
-    precision highp float;
-    precision highp int;
-
-    uniform vec2 u_resolution;
-    uniform float u_time;
-    uniform float u_speed;
-    uniform float u_intensity;
-    uniform float u_zoom;
-    uniform vec4 u_front_color;
-    uniform vec4 u_back_color;
-    uniform int u_dither_size;
-    uniform int u_shape;
-
-    out vec4 out_color;
-
-    float smooth_step(float edge0, float edge1, float value) {
-      float t = clamp((value - edge0) / (edge1 - edge0), 0.0, 1.0);
-      return t * t * (3.0 - 2.0 * t);
-    }
-
-    float ellipse_mask(vec2 point, vec2 center, vec2 radius) {
-      vec2 normalized_point = (point - center) / radius;
-      return 1.0 - smooth_step(0.84, 1.0, dot(normalized_point, normalized_point));
-    }
-
-    float diamond_mask(vec2 point, vec2 center, vec2 radius) {
-      vec2 normalized_point = abs((point - center) / radius);
-      return 1.0 - smooth_step(0.82, 1.0, normalized_point.x + normalized_point.y);
-    }
-
-    float rotated_ellipse_mask(vec2 point, vec2 center, vec2 radius, float rotation) {
-      float cosine = cos(rotation);
-      float sine = sin(rotation);
-      vec2 offset = point - center;
-      vec2 rotated = vec2(
-        offset.x * cosine - offset.y * sine,
-        offset.x * sine + offset.y * cosine
-      );
-      vec2 normalized_point = rotated / radius;
-      return 1.0 - smooth_step(0.84, 1.0, dot(normalized_point, normalized_point));
-    }
-
-    float bayer2(ivec2 point) {
-      const float matrix[4] = float[4](0.0, 2.0, 3.0, 1.0);
-      int index = (point.y & 1) * 2 + (point.x & 1);
-      return (matrix[index] + 0.5) / 4.0;
-    }
-
-    float bayer4(ivec2 point) {
-      const float matrix[16] = float[16](
-        0.0, 8.0, 2.0, 10.0,
-        12.0, 4.0, 14.0, 6.0,
-        3.0, 11.0, 1.0, 9.0,
-        15.0, 7.0, 13.0, 5.0
-      );
-      int index = (point.y & 3) * 4 + (point.x & 3);
-      return (matrix[index] + 0.5) / 16.0;
-    }
-
-    float bayer8(ivec2 point) {
-      const float matrix[64] = float[64](
-        0.0, 48.0, 12.0, 60.0, 3.0, 51.0, 15.0, 63.0,
-        32.0, 16.0, 44.0, 28.0, 35.0, 19.0, 47.0, 31.0,
-        8.0, 56.0, 4.0, 52.0, 11.0, 59.0, 7.0, 55.0,
-        40.0, 24.0, 36.0, 20.0, 43.0, 27.0, 39.0, 23.0,
-        2.0, 50.0, 14.0, 62.0, 1.0, 49.0, 13.0, 61.0,
-        34.0, 18.0, 46.0, 30.0, 33.0, 17.0, 45.0, 29.0,
-        10.0, 58.0, 6.0, 54.0, 9.0, 57.0, 5.0, 53.0,
-        42.0, 26.0, 38.0, 22.0, 41.0, 25.0, 37.0, 21.0
-      );
-      int index = (point.y & 7) * 8 + (point.x & 7);
-      return (matrix[index] + 0.5) / 64.0;
-    }
-
-    float dither_threshold(ivec2 point) {
-      if (u_dither_size == 2) {
-        return bayer2(point);
-      }
-
-      if (u_dither_size == 8) {
-        return bayer8(point);
-      }
-
-      return bayer4(point);
-    }
-
-    void main() {
-      float radius_base = max(1.0, min(u_resolution.x, u_resolution.y) * 0.5);
-      vec2 top_left_space = vec2(gl_FragCoord.x, u_resolution.y - gl_FragCoord.y);
-      vec2 normalized = ((top_left_space - u_resolution * 0.5) / radius_base) * u_zoom;
-      float time = u_time * u_speed;
-      float field = 0.0;
-
-      if (u_shape == 3) {
-        float breathe = sin(time * 0.82) * 0.018;
-        float sway = sin(time * 0.54) * 0.035;
-        vec2 cat_point = normalized;
-        cat_point.x -= sway * smooth_step(-0.9, 0.75, cat_point.y);
-
-        float head = ellipse_mask(cat_point, vec2(0.0, -0.34), vec2(0.38, 0.34));
-        float body = ellipse_mask(cat_point, vec2(0.0, 0.30 + breathe), vec2(0.47, 0.62 + breathe));
-        float left_ear = diamond_mask(cat_point, vec2(-0.27, -0.62), vec2(0.18, 0.28));
-        float right_ear = diamond_mask(cat_point, vec2(0.27, -0.62), vec2(0.18, 0.28));
-        float left_paw = ellipse_mask(cat_point, vec2(-0.20, 0.82), vec2(0.20, 0.16));
-        float right_paw = ellipse_mask(cat_point, vec2(0.20, 0.82), vec2(0.20, 0.16));
-        float tail_base = rotated_ellipse_mask(cat_point, vec2(0.47, 0.34), vec2(0.17, 0.50), -0.58);
-        float tail_tip = rotated_ellipse_mask(cat_point, vec2(0.62, 0.02), vec2(0.14, 0.34), -0.82);
-        float silhouette = max(max(max(head, body), max(left_ear, right_ear)), max(max(left_paw, right_paw), max(tail_base, tail_tip)));
-        float bands = 0.58
-          + 0.22 * sin(cat_point.x * 8.5 + cat_point.y * 5.8 - time * 0.72)
-          + 0.12 * cos(cat_point.y * 13.0 + time * 0.46);
-        float pulse = 0.06 * sin((cat_point.x - cat_point.y) * 17.0 + time * 0.9);
-        field = clamp(silhouette * (bands + pulse) * (0.88 + u_intensity * 0.18), 0.0, 1.0);
-      } else if (u_shape == 2) {
-        vec2 first_center = vec2(-0.52 + sin(time * 0.34) * 0.22, -0.08 + cos(time * 0.27) * 0.18);
-        vec2 second_center = vec2(0.38 + cos(time * 0.31) * 0.2, 0.12 + sin(time * 0.39) * 0.2);
-        vec2 third_center = vec2(sin(time * 0.23) * 0.2, -0.52 + cos(time * 0.35) * 0.16);
-        float first_distance = dot(normalized - first_center, normalized - first_center) + 0.075;
-        float second_distance = dot(normalized - second_center, normalized - second_center) + 0.075;
-        float third_distance = dot(normalized - third_center, normalized - third_center) + 0.065;
-        float density = 0.30 / first_distance + 0.27 / second_distance + 0.21 / third_distance;
-        float body = smooth_step(0.9, 1.28, density);
-        float edge = smooth_step(0.84, 1.02, density) - smooth_step(1.02, 1.28, density);
-        float bands = 0.5 + 0.5 * sin((normalized.y * 7.5 + normalized.x * 2.2) - time * 0.55 + density * 0.42);
-        float shine = pow(clamp(1.0 - abs(bands * 2.0 - 1.0), 0.0, 1.0), 5.0);
-        vec3 shadow_color = mix(vec3(0.015, 0.02, 0.03), u_front_color.rgb, 0.2);
-        vec3 metal_color = mix(shadow_color, u_front_color.rgb, 0.26 + bands * 0.48);
-        metal_color = mix(metal_color, vec3(1.0), shine * 0.78 + edge * 0.3);
-        out_color = vec4(metal_color, body * min(0.82, u_front_color.a));
-        return;
-      } else if (u_shape == 1) {
-        // Sine-Wave nach dem Dithering-Prinzip der Referenzkomponente.
-        vec2 uv = gl_FragCoord.xy / max(u_resolution, vec2(1.0));
-        float aspect = u_resolution.x / max(1.0, u_resolution.y);
-        float wave_x = (uv.x - 0.5) * 8.0 * max(1.0, aspect * 0.62);
-        float wave = cos(0.5 * wave_x - 2.0 * time)
-          * sin(1.5 * wave_x + time)
-          * (0.75 + 0.25 * cos(3.0 * time));
-        float wave_y = (uv.y - 0.48) * 4.2;
-        field = 1.0 - smooth_step(-0.95, 0.95, wave_y + wave);
-        field = clamp((field - 0.08) * (0.94 + u_intensity * 0.28), 0.0, 1.0);
-      } else {
-        float distance_from_center = length(normalized);
-        float angle = atan(normalized.y, normalized.x);
-        float spiral = sin(distance_from_center * 17.5 - angle * 5.8 + time * 2.15);
-        float ring = sin(distance_from_center * 23.5 - time * 1.05);
-        float arm = cos(angle * 2.6 + distance_from_center * 8.2 - time * 1.55);
-        float outer_fade = 1.0 - smooth_step(0.82, 1.72, distance_from_center);
-        float center_hole = smooth_step(0.16, 0.34, distance_from_center);
-        float energy = (spiral * 0.58 + ring * 0.24 + arm * 0.18) * 0.5 + 0.5;
-        field = clamp((energy - 0.14) * (0.96 + u_intensity * 0.34) * outer_fade * center_hole, 0.0, 1.0);
-      }
-
-      ivec2 dither_point = ivec2(floor(top_left_space));
-      float threshold = dither_threshold(dither_point);
-      out_color = field > threshold ? u_front_color : u_back_color;
-    }
-  `;
 }

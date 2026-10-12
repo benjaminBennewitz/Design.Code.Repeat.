@@ -1,0 +1,47 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _typography.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Typography
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Typography
+   ========================================================================== */
+  .bp-title {
+    margin: 0;
+    padding-right: 0.18em;
+    font-family: var(--bp-font-display);
+    font-size: clamp(2.25rem, 8.5vw, 8rem);
+    line-height: 0.84;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .bp-subtitle {
+    min-width: 0;
+    max-width: 760px;
+    margin: var(--bp-space-4) 0 0;
+    color: var(--bp-color-text-muted);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.72;
+    overflow-wrap: anywhere;
+  }
+}

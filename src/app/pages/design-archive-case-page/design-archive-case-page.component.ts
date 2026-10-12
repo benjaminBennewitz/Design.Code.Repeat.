@@ -1,3 +1,4 @@
+/* src/app/pages/design-archive-case-page/design-archive-case-page.component.ts */
 /**
  * @file Lokale Design-Archiv-Case-Study.
  * @description Bindet den vollständigen Katalogreader aus B²Folio an den DCR-Domainspace.

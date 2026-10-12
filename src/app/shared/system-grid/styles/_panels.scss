@@ -1,0 +1,137 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _panels.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Panels
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Panels
+   ========================================================================== */
+  .system-grid__split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+  }
+
+  .system-grid__panel--light,
+  .system-grid__panel--neutral {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    padding: clamp(1.25rem, 2.4vw, 2rem);
+  }
+
+  .system-grid__panel--light {
+    background: var(--dcr-color-contrast-light);
+    color: var(--dcr-color-contrast-dark);
+  }
+
+  .system-grid__panel--neutral {
+    background: var(--dcr-color-neutral-panel);
+    color: var(--dcr-color-on-neutral-panel);
+  }
+
+  .system-grid__panel-top {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .system-grid__content {
+    display: grid;
+    gap: 0.45rem;
+    align-self: center;
+    min-width: 0;
+  }
+
+  .system-grid__content > .system-grid__label {
+    margin: 0;
+  }
+
+  .system-grid__content h3 {
+    max-width: 22ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.65rem, 3vw, 3.35rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+  }
+
+  .system-grid__content > p:not(.system-grid__label) {
+    max-width: 58ch;
+    margin: 0;
+    font-size: clamp(0.76rem, 0.9vw, 0.98rem);
+    line-height: 1.45;
+  }
+
+  .system-grid__footer {
+    display: flex;
+    gap: 0.7rem 1rem;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .system-grid__footer > strong {
+    flex: 0 0 auto;
+  }
+
+  .system-grid__footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .system-grid__footer li {
+    border: 1px solid currentColor;
+    padding: 0.2rem 0.35rem;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.54rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .system-grid__panel--dark {
+    grid-template-columns: 3.5rem minmax(0, 1fr) minmax(12rem, 0.62fr);
+    gap: clamp(1.25rem, 2vw, 2rem);
+    align-items: center;
+    padding: clamp(1.2rem, 2.4vw, 2rem);
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+  }
+
+  .system-grid__panel--dark .system-grid__content h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2.8rem);
+  }
+
+  .system-grid__footer--side {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: end;
+    text-align: right;
+  }
+
+  .system-grid__footer--side ul {
+    justify-content: flex-end;
+  }
+}

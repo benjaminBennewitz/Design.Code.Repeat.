@@ -1,0 +1,71 @@
+<!-- src/app/shared/reference-case-study/views/case-gallery.view.html -->
+@if (mode() === 'catalog') {
+<div class="bp-container">
+  <div class="project-detail__section-head">
+    <p class="bp-eyebrow">{{ project().catalogShowcase!.galleryEyebrow }}</p>
+  </div>
+
+  <div class="project-detail__masonry-gallery">
+    @for (item of project().gallery; track item.title; let index = $index) {
+    <article [class]="'project-detail__masonry-card project-detail__masonry-card--' + item.size" [style.--reveal-index]="index" [style.--gallery-bg]="item.backgroundColor" bpReveal>
+      <button type="button" [attr.aria-label]="project().catalogShowcase!.lightboxOpenLabel + ': ' + item.title" (click)="lightbox().open(index)" dcrProtectedAsset>
+        <span class="project-detail__masonry-image">
+          @if (item.image) {
+          <img [src]="item.image" [alt]="item.alt ?? item.title" loading="lazy" decoding="async" fetchpriority="low" draggable="false" dcrProtectedAsset />
+            <span class="project-detail__masonry-shield" aria-hidden="true"></span>
+          } @else {
+          <span class="project-detail__masonry-placeholder" aria-hidden="true">
+            <span class="material-symbols-outlined">{{ item.icon ?? 'image' }}</span>
+            <strong>{{ item.title }}</strong>
+            <small>{{ item.imageHint }}</small>
+          </span>
+          }
+        </span>
+        <span class="project-detail__masonry-caption">
+          <strong>{{ item.title }}</strong>
+          <small>{{ item.text }}</small>
+        </span>
+      </button>
+    </article>
+    }
+  </div>
+</div>
+} @else {
+<div class="bp-container">
+  <div class="project-detail__section-head">
+    <p class="bp-eyebrow">{{ project().boardShowcase?.galleryEyebrow ?? project().bloodShowcase?.galleryEyebrow ?? content().projectsIntro.galleryLabel }}</p>
+    <h2 [dcrTextReveal]="project().boardShowcase?.galleryTitle ?? project().bloodShowcase?.galleryTitle ?? project().name"></h2>
+  </div>
+
+  <div class="project-detail__evidence-grid">
+    @for (item of project().gallery; track item.title; let index = $index) {
+    <article [class]="'project-detail__evidence-card project-detail__animated-item project-detail__evidence-card--' + item.size" [style.--reveal-index]="index" bpReveal>
+      <div class="project-detail__browser-frame">
+        @if (item.image) {
+        <button type="button" class="project-detail__evidence-image-trigger" [attr.aria-label]="content().projectsIntro.zoomLabel + ': ' + item.title" (click)="lightbox().open(index)">
+          <img [src]="item.image" [alt]="item.alt ?? item.title" loading="lazy" decoding="async" />
+        </button>
+        } @else {
+        <div class="project-detail__evidence-screen" aria-hidden="true">
+          <span class="material-symbols-outlined">{{ item.icon ?? 'web_asset' }}</span>
+          <strong>{{ item.title }}</strong>
+          <div>
+            @for (annotation of item.annotations ?? []; track annotation) {
+            <em>{{ annotation }}</em>
+            }
+          </div>
+        </div>
+        }
+        <button type="button" class="project-detail__zoom" [attr.aria-label]="content().projectsIntro.zoomLabel + ': ' + item.title" (click)="lightbox().open(index)">
+          <span class="material-symbols-outlined" aria-hidden="true">zoom_in</span>
+        </button>
+      </div>
+      <div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.text }}</p>
+      </div>
+    </article>
+    }
+  </div>
+</div>
+}

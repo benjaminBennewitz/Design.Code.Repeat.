@@ -1,0 +1,177 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _hero-deployment.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Hero Deployment
+   02 Animation Keyframes
+   03 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Hero Deployment
+   ========================================================================== */
+  .studio-hero__grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--dcr-color-primary) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--dcr-color-primary) 9%, transparent) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    mask-image: linear-gradient(110deg, transparent 20%, #000 100%);
+  }
+
+  .studio-deployment {
+    max-width: 28rem;
+    margin-top: 0.5rem;
+  }
+
+  .studio-deployment__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .studio-deployment__track {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem minmax(0, 1fr) 3rem;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .studio-deployment__node {
+    --deployment-accent: var(--dcr-color-pink);
+    --deployment-text: var(--dcr-color-pink-text);
+    --deployment-ink: var(--dcr-color-on-pink);
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--deployment-text);
+    color: var(--deployment-text);
+    background: var(--dcr-color-bg);
+    animation: studio-deploy-node 8s ease-in-out infinite;
+  }
+
+  .studio-deployment__node--build {
+    --deployment-accent: var(--dcr-color-violet);
+    --deployment-text: var(--dcr-color-violet-text);
+    --deployment-ink: var(--dcr-color-on-violet);
+    animation-delay: -5.5s;
+  }
+
+  .studio-deployment__node--live {
+    --deployment-accent: var(--dcr-color-lime);
+    --deployment-text: var(--dcr-color-lime-text);
+    --deployment-ink: var(--dcr-color-on-lime);
+    animation-delay: -3s;
+  }
+
+  .studio-deployment__connection {
+    position: relative;
+    height: 1px;
+    background: var(--dcr-color-border-strong);
+  }
+
+  .studio-deployment__connection i {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--deployment-accent, var(--dcr-color-pink));
+    transform-origin: left;
+    animation: studio-deploy-packet 8s var(--dcr-ease-out) infinite;
+  }
+
+  .studio-deployment__connection--live i {
+    --deployment-accent: var(--dcr-color-lime);
+    animation-delay: -5.5s;
+  }
+
+  :host-context(.dcr-initial-load) .studio-deployment * {
+    animation-play-state: paused;
+  }
+
+  /* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
+  @keyframes studio-deploy-node {
+    0%,
+    9%,
+    100% {
+      background: var(--deployment-accent, var(--dcr-color-pink));
+      color: var(--deployment-ink);
+    }
+    20%,
+    90% {
+      background: var(--dcr-color-bg);
+      color: var(--deployment-text);
+    }
+  }
+
+  @keyframes studio-deploy-packet {
+    0%,
+    5% {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    7% {
+      opacity: 1;
+      transform: scaleX(0);
+    }
+    30% {
+      opacity: 1;
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    31% {
+      opacity: 1;
+      transform: scaleX(1);
+      transform-origin: right;
+    }
+    49%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :host-context(:root[data-motion='off']) .studio-deployment *,
+  :host-context(:root[data-motion='reduced']) .studio-deployment *,
+  :host-context(:root[data-comfort='simple']) .studio-deployment * {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .studio-deployment * {
+      animation: none;
+    }
+  }
+}

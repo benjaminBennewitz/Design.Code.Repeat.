@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     cookie-banner.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Cookie Banner
+   02 Animation Keyframes
+   03 Responsive Layout
+*/
+
+/* ==========================================================================
+   Cookie Banner
+   ========================================================================== */
 :host {
   display: contents;
 }
@@ -16,7 +42,9 @@
   overscroll-behavior: contain;
   background: color-mix(in srgb, var(--dcr-color-surface-solid) 90%, transparent);
   color: var(--dcr-color-text);
-  box-shadow: 8px 8px 0 color-mix(in srgb, var(--dcr-color-primary) 22%, transparent), 0 28px 72px var(--dcr-color-shadow);
+  box-shadow:
+    8px 8px 0 color-mix(in srgb, var(--dcr-color-primary) 22%, transparent),
+    0 28px 72px var(--dcr-color-shadow);
   backdrop-filter: blur(16px) saturate(1.12);
   animation: cookie-banner-in 420ms var(--dcr-ease-out) both;
 }
@@ -216,10 +244,24 @@
   box-shadow: 4px 4px 0 var(--dcr-color-border-strong);
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes cookie-banner-in {
-  from { opacity: 0; transform: translateY(1.5rem); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
 
 @media (max-width: 560px) {
   .cookie-banner {

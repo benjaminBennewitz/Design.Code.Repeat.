@@ -1,0 +1,107 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _section-surfaces.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Section Surfaces
+   02 Responsive Layout
+   03 Section Surfaces (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Section Surfaces
+   ========================================================================== */
+  .home-services {
+    --dcr-section-bg: color-mix(in srgb, var(--dcr-color-primary) 5%, var(--dcr-color-bg));
+    --dcr-section-next-bg: var(--dcr-color-lime);
+    background: var(--dcr-section-bg);
+  }
+
+  .hosting-strip {
+    --dcr-section-bg: var(--dcr-color-lime);
+    --dcr-section-next-bg: color-mix(in srgb, var(--dcr-color-violet) 5%, var(--dcr-color-bg));
+  }
+
+  .home-references {
+    --dcr-section-bg: color-mix(in srgb, var(--dcr-color-violet) 5%, var(--dcr-color-bg));
+    --dcr-section-next-bg: var(--dcr-color-surface-solid);
+    background: var(--dcr-section-bg);
+  }
+
+  .home-process {
+    --dcr-section-bg: var(--dcr-color-surface-solid);
+    --dcr-section-next-bg: color-mix(in srgb, var(--dcr-color-pink) 5%, var(--dcr-color-bg));
+  }
+
+  .home-faq {
+    --dcr-section-bg: color-mix(in srgb, var(--dcr-color-primary) 7%, var(--dcr-color-bg-soft));
+    --dcr-section-next-bg: var(--dcr-color-bg);
+    --dcr-section-text-color: var(--dcr-color-text-muted);
+    --dcr-heading-accent-text: var(--dcr-color-primary-text);
+    background: var(--dcr-section-bg);
+    color: var(--dcr-color-text);
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (min-width: 901px) and (min-height: 800px) {
+    .home-services__grid {
+      gap: 0.7rem;
+      margin-top: clamp(1rem, 2.5vh, 1.8rem);
+    }
+
+    .service-card {
+      gap: 0.8rem;
+      min-height: 0;
+      padding: clamp(0.85rem, 1.4vh, 1.2rem);
+    }
+
+    .service-card h3 {
+      font-size: clamp(1.55rem, 2.15vw, 2.25rem);
+    }
+
+    .process-list {
+      margin-top: clamp(1rem, 2.5vh, 1.8rem);
+    }
+
+    .process-list li {
+      padding-block: clamp(0.75rem, 1.7vh, 1.15rem);
+    }
+  }
+
+  /* ==========================================================================
+   Section Surfaces (2)
+   ========================================================================== */
+
+  .home-contact {
+    --dcr-section-bg: var(--dcr-color-lime);
+    --dcr-section-next-bg: var(--dcr-color-contrast-dark);
+    --dcr-section-text-color: var(--dcr-color-on-lime);
+    --dcr-heading-accent-text: var(--dcr-color-on-lime);
+    background:
+      radial-gradient(
+          circle at 12% 18%,
+          color-mix(in srgb, var(--dcr-color-on-lime) 12%, transparent) 1px,
+          transparent 1.2px
+        )
+        0 0 / 14px 14px,
+      var(--dcr-section-bg);
+    color: var(--dcr-color-on-lime);
+  }
+}

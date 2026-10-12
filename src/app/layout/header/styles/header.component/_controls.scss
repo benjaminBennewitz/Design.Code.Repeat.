@@ -1,0 +1,148 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _controls.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Header Controls
+*/
+
+/* ==========================================================================
+   Header Controls
+   ========================================================================== */
+
+@mixin render {
+  .site-header__controls {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-self: end;
+  }
+
+  .site-header__menu-button {
+    display: inline-flex;
+    gap: 0.75rem;
+    align-items: center;
+    min-height: 2.65rem;
+    border: 1px solid var(--dcr-color-border-strong);
+    padding: 0.65rem 0.85rem;
+    background: var(--dcr-color-surface-solid);
+    color: var(--dcr-color-text);
+    font: 900 0.64rem/1 var(--dcr-font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .site-header__menu-button b {
+    font-size: 1.15rem;
+    line-height: 0.7;
+  }
+
+  .site-header__contact {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.65rem;
+    border: 1px solid var(--dcr-color-primary);
+    padding: 0.65rem 0.85rem;
+    background: var(--dcr-color-primary);
+    color: var(--dcr-color-on-primary);
+    font: 900 0.64rem/1 var(--dcr-font-mono);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .site-header__navigation {
+    position: fixed;
+    z-index: -1;
+    top: var(--dcr-header-height);
+    right: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.22fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 1.5rem 3rem;
+    height: calc(100dvh - var(--dcr-header-height));
+    min-height: 0;
+    padding: clamp(1.5rem, 4vw, 4rem) var(--dcr-page-gutter) 1.25rem;
+    overflow: hidden;
+    visibility: hidden;
+    background: var(--dcr-color-contrast-dark);
+    color: var(--dcr-color-contrast-light);
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    pointer-events: none;
+    transition:
+      clip-path 480ms var(--dcr-ease-out),
+      opacity 220ms ease,
+      visibility 480ms;
+  }
+
+  .site-header__navigation::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image:
+      linear-gradient(color-mix(in srgb, currentColor 9%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, currentColor 9%, transparent) 1px, transparent 1px);
+    background-size: 25% 25%;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .site-header__navigation.is-open {
+    visibility: visible;
+    opacity: 1;
+    clip-path: inset(0);
+    pointer-events: auto;
+  }
+
+  .site-header__close {
+    position: absolute;
+    z-index: 3;
+    top: clamp(1rem, 2vw, 1.5rem);
+    right: var(--dcr-page-gutter);
+    display: grid;
+    width: 2.8rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, currentColor 48%, transparent);
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .site-header__close b {
+    font-size: 1.6rem;
+    line-height: 1;
+    transition: transform 420ms var(--dcr-ease-out);
+  }
+
+  .site-header__close:hover b,
+  .site-header__close:focus-visible b {
+    transform: rotate(180deg);
+  }
+
+  .site-header__navigation.is-open .site-header__close {
+    animation: dcr-menu-close-reveal 520ms var(--dcr-ease-out) both;
+  }
+}

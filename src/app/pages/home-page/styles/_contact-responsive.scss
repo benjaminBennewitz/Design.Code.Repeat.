@@ -1,0 +1,126 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _contact-responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Contact Responsive
+   02 Responsive Layout
+   03 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Contact Responsive
+   ========================================================================== */
+  .home-contact {
+    background:
+      linear-gradient(var(--dcr-color-bg), var(--dcr-color-bg)) padding-box,
+      radial-gradient(
+        circle at 15% 20%,
+        color-mix(in srgb, var(--dcr-color-primary) 12%, transparent),
+        transparent 32%
+      );
+  }
+
+  .home-contact__layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: start;
+  }
+
+  .home-contact__copy {
+    display: grid;
+    gap: 2rem;
+    position: sticky;
+    top: calc(var(--dcr-header-height) + 2rem);
+  }
+
+  .home-contact__form-placeholder {
+    min-height: clamp(32rem, 70svh, 42rem);
+    border: 1px solid var(--dcr-color-border);
+    background: var(--dcr-color-surface-solid);
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (max-width: 1150px) {
+    .home-services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .reference-card {
+      grid-template-columns: 1fr;
+    }
+    .reference-card img,
+    .reference-card__placeholder {
+      min-height: 260px;
+      max-height: 320px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .hosting-strip__layout,
+    .home-faq__layout,
+    .home-contact__layout {
+      grid-template-columns: 1fr;
+    }
+    .home-contact__copy {
+      position: static;
+    }
+    .process-list li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+    }
+    .process-list code {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .home-services__grid {
+      grid-template-columns: 1fr;
+    }
+    .hosting-strip__points {
+      grid-template-columns: 1fr;
+    }
+    .faq-list p {
+      margin-left: 0;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .faq-list__content,
+    .faq-list__trigger .material-symbols-outlined,
+    .faq-list p {
+      transition: none;
+    }
+  }
+
+  :host-context(:root[data-motion='reduced']) .faq-list__content,
+  :host-context(:root[data-motion='reduced']) .faq-list__trigger .material-symbols-outlined,
+  :host-context(:root[data-motion='reduced']) .faq-list p,
+  :host-context(:root[data-motion='off']) .faq-list__content,
+  :host-context(:root[data-motion='off']) .faq-list__trigger .material-symbols-outlined,
+  :host-context(:root[data-motion='off']) .faq-list p {
+    transition: none;
+  }
+}

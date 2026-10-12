@@ -1,5 +1,28 @@
-/* src/app/shared/project-telemetry/project-telemetry.component.scss */
+/*###############################
+###
+###     Design. Code. Repeat.
+###     reference-project-telemetry.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
 
+/*
+   INHALTSVERZEICHNIS
+   01 Reference Project Telemetry
+   02 Responsive Layout
+*/
+
+/* ==========================================================================
+   Reference Project Telemetry
+   ========================================================================== */
 :host {
   display: block;
 }
@@ -17,7 +40,11 @@
     linear-gradient(90deg, color-mix(in srgb, var(--bp-color-border) 28%, transparent) 1px, transparent 1px),
     linear-gradient(0deg, color-mix(in srgb, var(--bp-color-border) 22%, transparent) 1px, transparent 1px),
     var(--bp-color-bg);
-  background-size: auto, 32px 32px, 32px 32px, auto;
+  background-size:
+    auto,
+    32px 32px,
+    32px 32px,
+    auto;
 }
 
 .project-telemetry::before {
@@ -40,7 +67,8 @@
   width: min(100%, 1680px);
   height: 100%;
   margin: 0 auto;
-  padding: calc(var(--bp-header-height) + clamp(0.55rem, 1.2vh, 0.9rem)) clamp(1rem, 3vw, 3rem) clamp(0.65rem, 1.4vh, 1rem);
+  padding: calc(var(--bp-header-height) + clamp(0.55rem, 1.2vh, 0.9rem)) clamp(1rem, 3vw, 3rem)
+    clamp(0.65rem, 1.4vh, 1rem);
 }
 
 .project-telemetry__head {
@@ -237,6 +265,10 @@
   grid-template-rows: auto auto auto;
   justify-content: center;
 }
+
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
 
 @media (min-width: 1181px) and (max-height: 820px) {
   .project-telemetry__shell {

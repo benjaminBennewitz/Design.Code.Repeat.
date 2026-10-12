@@ -1,0 +1,301 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _pages.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Pages
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Pages
+   ========================================================================== */
+  .dcr-case .project-detail__catalog-book {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    aspect-ratio: var(--project-detail-catalog-spread-ratio);
+    margin: 0 auto;
+    perspective: 2200px;
+    transform-style: preserve-3d;
+  }
+
+  .dcr-case .project-detail__catalog-book::after {
+    content: none;
+  }
+
+  .dcr-case .project-detail__catalog-book--reader {
+    width: auto;
+    max-width: min(100%, calc((100svh - var(--bp-header-height) - clamp(1.4rem, 3.2vh, 2.4rem)) * 1.68));
+    height: min(calc(100% - clamp(0.8rem, 2.2vh, 1.6rem)), calc((100vw - clamp(1.5rem, 5vw, 4rem)) / 1.68));
+    aspect-ratio: var(--project-detail-catalog-spread-ratio);
+  }
+
+  .dcr-case .project-detail__catalog-book--loading {
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__catalog-page {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--project-detail-catalog-ink);
+    box-shadow: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .dcr-case .project-detail__catalog-page::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-38%);
+  }
+
+  .dcr-case .project-detail__catalog-page:first-child {
+    transform-origin: right center;
+  }
+
+  .dcr-case .project-detail__catalog-page:last-child {
+    transform-origin: left center;
+  }
+
+  .dcr-case .project-detail__catalog-book--next .project-detail__catalog-page--right {
+    animation: projectCatalogPageTurnNextPrimary 420ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-book--previous .project-detail__catalog-page--left {
+    animation: projectCatalogPageTurnPreviousPrimary 420ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-book--next .project-detail__catalog-page--left {
+    animation: projectCatalogPageTurnNextSecondary 360ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-book--previous .project-detail__catalog-page--right {
+    animation: projectCatalogPageTurnPreviousSecondary 360ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-book--next .project-detail__catalog-page--right::after {
+    animation: projectCatalogPageSweepNext 420ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-book--previous .project-detail__catalog-page--left::after {
+    animation: projectCatalogPageSweepPrevious 420ms cubic-bezier(0.2, 0.85, 0.22, 1) both;
+  }
+
+  .dcr-case .project-detail__catalog-page-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--project-detail-catalog-paper);
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .dcr-case .project-detail__catalog-page--left {
+    grid-column: 1;
+    transform-origin: right center;
+  }
+
+  .dcr-case .project-detail__catalog-page--right {
+    grid-column: 2;
+    transform-origin: left center;
+  }
+
+  .dcr-case .project-detail__catalog-page-shield {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.018));
+    cursor: zoom-in;
+  }
+
+  .dcr-case .project-detail__catalog-page-loupe {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: var(--catalog-loupe-width);
+    height: var(--catalog-loupe-height);
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 18%);
+    background-color: var(--project-detail-catalog-paper);
+    background-repeat: no-repeat;
+    box-shadow:
+      0 18px 48px rgba(0, 0, 0, 0.34),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    pointer-events: none;
+    transform: translate3d(calc(var(--catalog-loupe-x) - 50%), calc(var(--catalog-loupe-y) - 50%), 0);
+    will-change: transform, background-position;
+  }
+
+  .dcr-case .project-detail__catalog-page-loupe::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.26;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder {
+    position: relative;
+    display: grid;
+    min-height: 100%;
+    grid-template-rows: auto auto 1fr auto auto;
+    gap: clamp(0.8rem, 2vw, 1.4rem);
+    padding: clamp(1rem, 3vw, 3rem);
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 18%, color-mix(in srgb, var(--bp-color-accent), transparent 62%), transparent 28%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.055) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.042) 1px, transparent 1px);
+    background-size:
+      auto,
+      20px 20px,
+      20px 20px;
+    opacity: 0.78;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder>* {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder span {
+    align-self: flex-start;
+    border-bottom: 2px solid var(--project-detail-catalog-ink);
+    font-size: clamp(1.8rem, 5vw, 5.4rem);
+    font-weight: 900;
+    line-height: 0.95;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder em {
+    align-self: start;
+    font-style: normal;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder strong {
+    max-width: 11ch;
+    font-size: clamp(1.7rem, 4.2vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.86;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder p {
+    align-self: end;
+    max-width: 28ch;
+    margin: 0;
+    color: var(--project-detail-catalog-muted);
+    font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+    line-height: 1.5;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder small {
+    color: color-mix(in srgb, var(--project-detail-catalog-ink), transparent 42%);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-page-placeholder i {
+    position: absolute;
+    right: clamp(1rem, 3vw, 3rem);
+    bottom: clamp(1rem, 3vw, 3rem);
+    width: min(42%, 280px);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--project-detail-catalog-ink), transparent 78%);
+    background:
+      radial-gradient(circle at 34% 32%, color-mix(in srgb, var(--bp-color-accent), transparent 28%), transparent 24%),
+      repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 9px),
+      color-mix(in srgb, var(--project-detail-catalog-ink), transparent 92%);
+    transform: rotate(-5deg);
+  }
+
+  .dcr-case .project-detail__catalog-page--image .project-detail__catalog-page-placeholder::before {
+    background:
+      radial-gradient(circle at 72% 22%, color-mix(in srgb, var(--bp-color-accent), transparent 54%), transparent 26%),
+      linear-gradient(135deg, rgba(0, 0, 0, 0.1), transparent 52%);
+  }
+
+  .dcr-case .project-detail__catalog-page--image .project-detail__catalog-page-placeholder i {
+    width: min(58%, 360px);
+    aspect-ratio: 0.78;
+    border-radius: 0;
+  }
+
+  .dcr-case .project-detail__catalog-page--type .project-detail__catalog-page-placeholder strong {
+    max-width: 9ch;
+  }
+
+  .dcr-case .project-detail__catalog-page--detail .project-detail__catalog-page-placeholder::before {
+    background:
+      radial-gradient(circle at 18% 82%, color-mix(in srgb, var(--bp-color-accent), transparent 58%), transparent 30%),
+      repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.055) 0 1px, transparent 1px 8px);
+  }
+
+  .dcr-case .project-detail__catalog-page--detail .project-detail__catalog-page-placeholder i {
+    border-radius: 50%;
+  }
+
+  .dcr-case .project-detail__catalog-page--cover .project-detail__catalog-page-placeholder {
+    background: linear-gradient(145deg,
+        var(--project-detail-catalog-ink),
+        color-mix(in srgb, var(--bp-color-accent), #1a0b18 72%));
+    color: var(--project-detail-catalog-paper);
+  }
+
+  .dcr-case .project-detail__catalog-page--cover .project-detail__catalog-page-placeholder p,
+  .dcr-case .project-detail__catalog-page--cover .project-detail__catalog-page-placeholder small {
+    color: rgba(255, 248, 236, 0.74);
+  }
+
+  .dcr-case .project-detail__catalog-page--cover .project-detail__catalog-page-placeholder span {
+    border-color: var(--bp-color-accent);
+  }
+
+  .dcr-case .project-detail__catalog-page--cover .project-detail__catalog-page-placeholder i {
+    border-color: rgba(255, 248, 236, 0.2);
+    background:
+      radial-gradient(circle at 34% 32%, var(--bp-color-accent), transparent 24%),
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.13) 0 1px, transparent 1px 9px), rgba(255, 248, 236, 0.08);
+  }
+}

@@ -1,0 +1,154 @@
+<!-- src/app/shared/reference-case-study/views/case-architecture.view.html -->
+<div class="bp-container">
+  <div class="project-detail__section-head">
+    <p class="bp-eyebrow">{{ content().projectsIntro.caseStudyLabel }}</p>
+    <h2 [dcrTextReveal]="content().projectsIntro.insightsLabel"></h2>
+  </div>
+
+  @if ((project().architecture ?? []).length > 0) {
+  <section class="project-detail__architecture" [attr.aria-label]="content().projectsIntro.architectureLabel">
+    <div class="project-detail__architecture-head">
+      <h3>{{ content().projectsIntro.architectureLabel }}</h3>
+      @if (content().projectsIntro.architectureHint) {
+      <p [dcrTextReveal]="content().projectsIntro.architectureHint"></p>
+      }
+    </div>
+
+    <div class="project-detail__map">
+      <div class="project-detail__blueprint-frame">
+        <div class="project-detail__blueprint-scroll">
+          <div class="project-detail__blueprint" role="list">
+            <svg class="project-detail__map-svg project-detail__map-svg--normalized" viewBox="0 0 1120 640" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="architecture-map-title architecture-map-desc">
+              <title id="architecture-map-title">{{ content().projectsIntro.architectureLabel }}</title>
+              <desc id="architecture-map-desc">Systemkarte mit REST-, WebSocket-, Task-Queue- und Monitoring-Flows.</desc>
+
+              <g class="project-detail__svg-grid" aria-hidden="true">
+                <rect x="8" y="10" width="1104" height="620" rx="34"></rect>
+              </g>
+
+              <g class="project-detail__svg-lines" aria-hidden="true">
+                <path class="project-detail__svg-line project-detail__svg-line--rest" d="M 250 120 H 324"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--rest" d="M 324 120 l -12 -7 v 14 z"></path>
+                <text class="project-detail__svg-label" x="268" y="94">HTTPS</text>
+                <text class="project-detail__svg-label" x="268" y="108">REST</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--rest" d="M 520 120 H 594"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--rest" d="M 594 120 l -12 -7 v 14 z"></path>
+                <text class="project-detail__svg-label" x="544" y="108">RBAC</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--data" d="M 790 120 H 864"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--data" d="M 864 120 l -12 -7 v 14 z"></path>
+                <text class="project-detail__svg-label" x="806" y="108">ORM</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--ws" d="M 136 204 V 378 Q 136 400 158 400 H 324"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--ws" d="M 324 400 l -12 -7 v 14 z"></path>
+                <text class="project-detail__svg-label" x="54" y="298">WEBSOCKET</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--ws" d="M 520 400 H 662 Q 682 400 682 378 V 210"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--ws" d="M 682 210 l -7 12 h 14 z"></path>
+                <text class="project-detail__svg-label" x="528" y="380">EVENTS</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--task" d="M 682 210 V 316"></path>
+                <path class="project-detail__svg-arrow project-detail__svg-arrow--task" d="M 682 316 l -7 -12 h 14 z"></path>
+                <text class="project-detail__svg-label" x="694" y="264">TASK QUEUE</text>
+
+                <path class="project-detail__svg-line project-detail__svg-line--monitor" d="M 940 430 V 210"></path>
+                <path class="project-detail__svg-line project-detail__svg-line--monitor" d="M 864 520 H 692 V 484"></path>
+                <path class="project-detail__svg-line project-detail__svg-line--monitor" d="M 864 548 H 422 V 484"></path>
+                <text class="project-detail__svg-label project-detail__svg-label--monitor" x="698" y="512">OBSERVABILITY</text>
+              </g>
+
+              <g class="project-detail__svg-card project-detail__svg-card--frontends" [class.is-active]="selection().activeArchitectureNode().id === 'frontends'" role="button" tabindex="0" aria-label="Angular Frontends" (click)="selection().selectArchitectureNode('frontends')" (keydown.enter)="selection().selectArchitectureNode('frontends')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('frontends')">
+                <rect class="project-detail__svg-card-bg" x="42" y="36" width="208" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="64" y="82" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="90" y="116" text-anchor="middle">deployed_code</text>
+                <text class="project-detail__svg-role" x="64" y="66">PRESENTATION LAYER</text>
+                <text class="project-detail__svg-title" x="64" y="162">ANGULAR</text>
+                <text class="project-detail__svg-title" x="64" y="186">FRONTENDS</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'auth'" role="button" tabindex="0" aria-label="Auth und Rights" (click)="selection().selectArchitectureNode('auth')" (keydown.enter)="selection().selectArchitectureNode('auth')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('auth')">
+                <rect class="project-detail__svg-card-bg" x="324" y="42" width="196" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="346" y="88" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="372" y="122" text-anchor="middle">admin_panel_settings</text>
+                <text class="project-detail__svg-role" x="346" y="72">ACCESS CONTROL</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="346" y="168">AUTH &</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="346" y="192">RIGHTS</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'api'" role="button" tabindex="0" aria-label="Django API" (click)="selection().selectArchitectureNode('api')" (keydown.enter)="selection().selectArchitectureNode('api')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('api')">
+                <rect class="project-detail__svg-card-bg" x="594" y="42" width="196" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="616" y="88" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="642" y="122" text-anchor="middle">hub</text>
+                <text class="project-detail__svg-role" x="616" y="72">BUSINESS LAYER</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="616" y="176">DJANGO API</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'database'" role="button" tabindex="0" aria-label="PostgreSQL Models" (click)="selection().selectArchitectureNode('database')" (keydown.enter)="selection().selectArchitectureNode('database')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('database')">
+                <rect class="project-detail__svg-card-bg" x="864" y="42" width="214" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="886" y="88" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="912" y="122" text-anchor="middle">database</text>
+                <text class="project-detail__svg-role" x="886" y="72">PERSISTENCE LAYER</text>
+                <text class="project-detail__svg-title" x="886" y="166">POSTGRESQL</text>
+                <text class="project-detail__svg-title" x="886" y="190">MODELS</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'realtime'" role="button" tabindex="0" aria-label="Channels Redis" (click)="selection().selectArchitectureNode('realtime')" (keydown.enter)="selection().selectArchitectureNode('realtime')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('realtime')">
+                <rect class="project-detail__svg-card-bg" x="324" y="316" width="196" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="346" y="362" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="372" y="396" text-anchor="middle">stream</text>
+                <text class="project-detail__svg-role" x="346" y="346">REALTIME LAYER</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="346" y="442">CHANNELS /</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="346" y="466">REDIS</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'workers'" role="button" tabindex="0" aria-label="Celery Jobs" (click)="selection().selectArchitectureNode('workers')" (keydown.enter)="selection().selectArchitectureNode('workers')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('workers')">
+                <rect class="project-detail__svg-card-bg" x="594" y="316" width="196" height="168" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="616" y="362" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="642" y="396" text-anchor="middle">settings_suggest</text>
+                <text class="project-detail__svg-role" x="616" y="346">ASYNC LAYER</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="616" y="442">CELERY</text>
+                <text class="project-detail__svg-title project-detail__svg-title--compact" x="616" y="466">JOBS</text>
+              </g>
+
+              <g class="project-detail__svg-card" [class.is-active]="selection().activeArchitectureNode().id === 'ops'" role="button" tabindex="0" aria-label="System Health" (click)="selection().selectArchitectureNode('ops')" (keydown.enter)="selection().selectArchitectureNode('ops')" (keydown.space)="$event.preventDefault(); selection().selectArchitectureNode('ops')">
+                <rect class="project-detail__svg-card-bg" x="864" y="430" width="214" height="184" rx="18"></rect>
+                <rect class="project-detail__svg-icon-bg" x="886" y="476" width="52" height="52" rx="14"></rect>
+                <text class="project-detail__svg-icon" x="912" y="510" text-anchor="middle">monitor_heart</text>
+                <text class="project-detail__svg-role" x="886" y="460">OBSERVABILITY</text>
+                <text class="project-detail__svg-title" x="886" y="562">SYSTEM</text>
+                <text class="project-detail__svg-title" x="886" y="586">HEALTH</text>
+              </g>
+
+              <g class="project-detail__svg-legend" aria-hidden="true">
+                <rect x="42" y="316" width="208" height="116" rx="16"></rect>
+                <text x="64" y="346">HTTPS / REST</text>
+                <text x="64" y="370">WEBSOCKETS</text>
+                <text x="64" y="394">TASK QUEUE</text>
+                <text x="64" y="418">MONITORING</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <article class="project-detail__map-detail bp-dos-window" bpReveal aria-live="polite">
+        <div class="bp-dos-window__bar">
+          <span>inspect_system.map</span>
+          <span class="project-detail__window-close" aria-hidden="true">×</span>
+        </div>
+        <div class="bp-dos-window__body project-detail__map-detail-body">
+          <p class="bp-eyebrow">{{ selection().activeArchitectureNode().role }}</p>
+          <h3>{{ selection().activeArchitectureNode().label }}</h3>
+          <p>{{ selection().activeArchitectureNode().text }}</p>
+          <ul>
+            @for (connection of selection().activeArchitectureNode().connections; track $index) {
+            <li>{{ connection }}</li>
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+  }
+
+</div>

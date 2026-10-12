@@ -1,0 +1,45 @@
+<!-- src/app/shared/reference-case-study/views/case-lightbox.view.html -->
+<div class="project-detail__lightbox-panel" [class.is-lightbox-fading-out]="lightbox().phase() === 'fade-out'" [class.is-lightbox-fading-in]="lightbox().phase() === 'fade-in'" [class.project-detail__lightbox-panel--switch-next]="lightbox().direction() === 1" [class.project-detail__lightbox-panel--switch-prev]="lightbox().direction() === -1" [style.--gallery-bg]="lightbox().background()" (click)="$event.stopPropagation()">
+  <button type="button" class="project-detail__lightbox-close" [attr.aria-label]="content().projectsIntro.lightboxCloseLabel" (click)="lightbox().close()">
+    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+  </button>
+
+  <div class="project-detail__lightbox-visual">
+    @if (item().image) {
+    <img [src]="item().image" [alt]="item().alt ?? item().title" draggable="false" dcrProtectedAsset />
+    <span class="project-detail__lightbox-shield" aria-hidden="true"></span>
+    } @else {
+    <div class="project-detail__lightbox-placeholder">
+      <span class="material-symbols-outlined" aria-hidden="true">{{ item().icon ?? 'image' }}</span>
+      <strong>{{ item().title }}</strong>
+      <small>{{ item().imageHint }}</small>
+    </div>
+    }
+  </div>
+
+  <div class="project-detail__lightbox-copy">
+    @if (item().year) {
+    <p class="bp-eyebrow">{{ item().year }}</p>
+    }
+    <h3>{{ item().title }}</h3>
+    <p>{{ item().detail ?? item().text }}</p>
+    @if ((item().tools?.length ?? 0) > 0) {
+    <ul>
+      @for (tool of item().tools ?? []; track tool) {
+      <li>{{ tool }}</li>
+      }
+    </ul>
+    }
+  </div>
+
+  @if (project().gallery.length > 1) {
+  <div class="project-detail__lightbox-actions">
+    <button type="button" [attr.aria-label]="content().projectsIntro.lightboxPreviousLabel" (click)="lightbox().selectAdjacent(-1)">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+    </button>
+    <button type="button" [attr.aria-label]="content().projectsIntro.lightboxNextLabel" (click)="lightbox().selectAdjacent(1)">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+    </button>
+  </div>
+  }
+</div>

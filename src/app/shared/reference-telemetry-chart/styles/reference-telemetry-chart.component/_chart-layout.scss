@@ -1,0 +1,241 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _chart-layout.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Chart Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Chart Layout
+   ========================================================================== */
+  :host {
+    display: block;
+    min-width: 0;
+  }
+  .telemetry-chart {
+    --chart-tone-0: var(--bp-color-accent);
+    --chart-tone-1: var(--bp-color-accent-2);
+    --chart-tone-2: var(--bp-color-accent-3);
+    --chart-tone-3: color-mix(in srgb, var(--bp-color-accent) 58%, var(--bp-color-text));
+    --chart-tone-4: color-mix(in srgb, var(--bp-color-accent-2) 62%, var(--bp-color-text));
+    position: relative;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: var(--telemetry-chart-gap, 0.8rem);
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    border: 2px solid var(--bp-color-border-strong);
+    border-radius: 0;
+    padding: var(--telemetry-chart-padding, clamp(0.9rem, 1.4vw, 1.25rem));
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bp-color-border) 40%, transparent) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--bp-color-border) 32%, transparent) 1px, transparent 1px),
+      color-mix(in srgb, var(--bp-color-surface-solid) 94%, transparent);
+    background-size: 16px 16px;
+    box-shadow: var(--bp-arcade-shadow-sm, 5px 5px 0 var(--bp-color-border-strong));
+    color: var(--bp-color-accent-text);
+  }
+  .telemetry-chart::before,
+  .telemetry-chart::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 18px;
+    height: 6px;
+    background: var(--bp-color-accent);
+    pointer-events: none;
+  }
+  .telemetry-chart::before {
+    top: 0;
+    left: 0;
+  }
+  .telemetry-chart::after {
+    right: 0;
+    bottom: 0;
+  }
+  .telemetry-chart__head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 1rem;
+    align-items: end;
+    color: var(--bp-color-text);
+  }
+  .telemetry-chart__head span,
+  .telemetry-chart__head h3,
+  .telemetry-chart__head p,
+  .telemetry-chart__legend {
+    font-family: var(--bp-font-tech, Consolas, 'Cascadia Mono', monospace);
+  }
+  .telemetry-chart__head span {
+    display: block;
+    margin-bottom: 0.28rem;
+    color: var(--bp-color-accent-text);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .telemetry-chart__head h3 {
+    margin: 0;
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
+    line-height: 1.08;
+    text-transform: uppercase;
+  }
+  .telemetry-chart__head p {
+    align-self: start;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--bp-color-text-muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    transform: translateY(-0.2rem);
+    transition:
+      max-height 180ms ease,
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+  .telemetry-chart:hover .telemetry-chart__head p,
+  .telemetry-chart:focus-within .telemetry-chart__head p {
+    max-height: 5rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .telemetry-chart__viewport {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+  }
+  .telemetry-chart svg {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+    overflow: visible;
+  }
+  .telemetry-chart__radial {
+    width: 100%;
+    max-width: 410px;
+    height: var(--telemetry-radial-height, auto);
+    max-height: var(--telemetry-radial-max-height, 100%);
+  }
+  .telemetry-chart__radial-track,
+  .telemetry-chart__radial-value {
+    fill: none;
+    stroke-width: 10;
+  }
+  .telemetry-chart__radial-track {
+    stroke: color-mix(in srgb, var(--bp-color-border-strong) 30%, transparent);
+  }
+  .telemetry-chart__radial-value {
+    stroke: var(--chart-tone-0);
+    stroke-dashoffset: 100;
+    stroke-linecap: butt;
+    transition:
+      stroke-width 140ms steps(2, end),
+      filter 140ms linear;
+  }
+  .telemetry-chart__radial-value--1 {
+    stroke: var(--chart-tone-1);
+  }
+  .telemetry-chart__radial-value--2 {
+    stroke: var(--chart-tone-2);
+  }
+  .telemetry-chart__radial-value--3 {
+    stroke: var(--chart-tone-3);
+  }
+  .telemetry-chart__radial-value--4 {
+    stroke: var(--chart-tone-4);
+  }
+  .telemetry-chart__radial-value:hover {
+    stroke-width: 14;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  .telemetry-chart__radial-core text:first-child {
+    fill: var(--bp-color-text);
+    font-family: var(--bp-font-tech, Consolas, monospace);
+    font-size: 2rem;
+    font-weight: 900;
+  }
+  .telemetry-chart__radial-core text:last-child {
+    fill: var(--bp-color-text-muted);
+    font-family: var(--bp-font-tech, Consolas, monospace);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+  .telemetry-chart__area {
+    width: 100%;
+    height: var(--telemetry-area-height, auto);
+    max-height: var(--telemetry-area-max-height, 270px);
+    color: var(--bp-color-accent-text);
+  }
+  .telemetry-chart__grid line {
+    stroke: color-mix(in srgb, var(--bp-color-border-strong) 30%, transparent);
+    stroke-width: 1;
+    stroke-dasharray: 2 8;
+  }
+  .telemetry-chart__scale text {
+    fill: var(--bp-color-text-muted);
+    font-family: var(--bp-font-tech, Consolas, monospace);
+    font-size: 9px;
+    font-weight: 800;
+  }
+  .telemetry-chart__fill {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .telemetry-chart__line {
+    fill: none;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke: currentColor;
+    stroke-width: 4;
+    vector-effect: non-scaling-stroke;
+  }
+  .telemetry-chart__line--step {
+    stroke-width: 5;
+    shape-rendering: crispEdges;
+  }
+  .telemetry-chart__point {
+    opacity: 0;
+    fill: var(--bp-color-surface-solid);
+    stroke: currentColor;
+    stroke-width: 4;
+    outline: none;
+    transition:
+      transform 120ms steps(2, end),
+      fill 120ms linear;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .telemetry-chart__point:hover,
+  .telemetry-chart__point:focus-visible {
+    fill: currentColor;
+    transform: scale(1.6);
+  }
+  .telemetry-chart__point--step {
+    shape-rendering: crispEdges;
+  }
+}

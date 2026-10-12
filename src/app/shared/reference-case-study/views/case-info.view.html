@@ -1,0 +1,39 @@
+<!-- src/app/shared/reference-case-study/views/case-info.view.html -->
+<div class="bp-container project-detail__info-grid">
+  <aside class="project-detail__meta bp-card" [attr.aria-label]="content().projectsIntro.metaAriaLabel" bpReveal>
+    <dl>
+      <div>
+        <dt>{{ content().projectsIntro.typeLabel }}</dt>
+        <dd>{{ project().type }}</dd>
+      </div>
+      <div>
+        <dt>{{ content().projectsIntro.yearLabel }}</dt>
+        <dd>{{ project().year }}</dd>
+      </div>
+      <div>
+        <dt>{{ content().projectsIntro.stackLabel }}</dt>
+        <dd>{{ project().techStack.join(' · ') }}</dd>
+      </div>
+    </dl>
+  </aside>
+
+  <div class="project-detail__copy" bpReveal>
+    <section>
+      <h2 [dcrTextReveal]="content().projectsIntro.descriptionLabel"></h2>
+      <p [dcrTextReveal]="project().description"></p>
+    </section>
+    <section>
+      <h2 [dcrTextReveal]="content().projectsIntro.goalLabel"></h2>
+      <p [dcrTextReveal]="project().goal"></p>
+      <ul>
+        @for (requirement of project().requirements; track requirement) {
+        <li>{{ requirement }}</li>
+        }
+      </ul>
+    </section>
+    <section>
+      <h2 [dcrTextReveal]="content().projectsIntro.roleLabel"></h2>
+      <p [dcrTextReveal]="project().role"></p>
+    </section>
+  </div>
+</div>

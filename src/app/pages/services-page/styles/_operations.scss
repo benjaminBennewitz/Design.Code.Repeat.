@@ -1,0 +1,217 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _operations.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Operations
+   02 Animation Keyframes
+   03 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Operations
+   ========================================================================== */
+  .ops-section {
+    --dcr-heading-size: clamp(2.25rem, min(4vw, 6vh), 4.2rem);
+    --dcr-heading-overflow-wrap: normal;
+    --dcr-heading-hyphens: auto;
+    --dcr-section-bg: var(--services-transition-color);
+    --dcr-section-text-color: var(--services-transition-on-color);
+    --dcr-heading-accent-text: var(--services-transition-on-color);
+    --dcr-section-next-bg: var(--dcr-color-contrast-dark);
+    color: var(--services-transition-on-color);
+    padding-top: calc(var(--dcr-section-y) * 2);
+  }
+
+  .ops-section.dcr-section-flow::after {
+    height: clamp(22rem, 52vh, 40rem);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 6%, transparent) 12%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 22%, transparent) 34%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 52%, transparent) 58%,
+      color-mix(in srgb, var(--dcr-color-contrast-dark) 82%, transparent) 80%,
+      var(--dcr-color-contrast-dark) 100%
+    );
+  }
+
+  .ops-section__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .ops-section__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .ops-map {
+    color: var(--services-transition-on-color);
+  }
+
+  .ops-map__core {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: min(100%, 25rem);
+    margin-inline: auto;
+    border-block: 1px solid currentColor;
+    padding: 1.25rem 0;
+  }
+
+  .ops-map__server {
+    font-size: 3rem;
+    font-variation-settings: 'wght' 200;
+  }
+
+  .ops-map__eyebrow {
+    margin: 0 0 0.4rem;
+    font: 600 0.65rem/1.4 var(--dcr-font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ops-map__core h3 {
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.2rem, 1.7vw, 1.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .ops-map__activity {
+    display: flex;
+    gap: 0.3rem;
+    margin-left: auto;
+  }
+
+  .ops-map__activity i {
+    width: 0.3rem;
+    height: 1.5rem;
+    background: currentColor;
+    animation: ops-activity 4s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  .ops-map__activity i:nth-child(2) {
+    animation-delay: -1.3s;
+  }
+
+  .ops-map__activity i:nth-child(3) {
+    animation-delay: -2.6s;
+  }
+
+  .ops-map__routes {
+    display: block;
+    width: 100%;
+    height: clamp(4rem, 7vw, 7rem);
+    overflow: visible;
+  }
+
+  .ops-map__routes path {
+    fill: none;
+    stroke: currentColor;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .ops-map__tracks path {
+    stroke-width: 1;
+    opacity: 0.25;
+  }
+
+  .ops-map__packets path {
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 2 45;
+    animation: ops-data-flow 8s linear infinite;
+  }
+
+  .ops-map__packets path:nth-child(2) {
+    animation-delay: -2.5s;
+  }
+
+  .ops-map__packets path:nth-child(3) {
+    animation-delay: -5s;
+  }
+
+  .ops-map__modules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ops-map__module {
+    min-width: 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    padding: 1.25rem 0.75rem;
+    text-align: center;
+  }
+
+  .ops-map__module > .material-symbols-outlined {
+    font-size: 1.8rem;
+    font-variation-settings: 'wght' 300;
+  }
+
+  .ops-map__module h4 {
+    margin: 0.65rem 0 0.4rem;
+    font-size: clamp(0.7rem, 0.95vw, 0.95rem);
+    overflow-wrap: normal;
+    hyphens: auto;
+  }
+
+  .ops-map__module p {
+    max-width: 20ch;
+    margin: 0 auto;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
+  @keyframes ops-data-flow {
+    to {
+      stroke-dashoffset: -188;
+    }
+  }
+
+  @keyframes ops-activity {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.45;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :host-context(:root[data-motion='reduced']) :is(.ops-map__packets path, .ops-map__activity i),
+  :host-context(:root[data-motion='off']) :is(.ops-map__packets path, .ops-map__activity i) {
+    animation: none;
+  }
+}

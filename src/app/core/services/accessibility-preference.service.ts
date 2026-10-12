@@ -1,3 +1,4 @@
+/* src/app/core/services/accessibility-preference.service.ts */
 /**
  * @file Globale Accessibility- und Comfort-Präferenzen der Studio-Website.
  * @description Persistiert Bewegungs-, Komplexitäts-, Kontrast- und Farbseh-Modi und synchronisiert sie über HTML-Data-Attribute.
@@ -29,70 +30,80 @@ export interface AccessibilityPreferences {
 /** Verwaltet globale Accessibility- und Comfort-Einstellungen der Studio-Website. */
 @Injectable({ providedIn: 'root' })
 export class AccessibilityPreferenceService {
-  /** Versionsierter LocalStorage-Key, damit spätere Schemaänderungen sauber migrierbar bleiben. */
-  private readonly storageKey = 'dcr-studio-accessibility-v1';
-
-  /** Browser-Dokument für Data-Attribute und sichere Window-Auflösung. */
-  private readonly document = inject(DOCUMENT);
-
-  /** Interner Zustand der Accessibility-Einstellungen. */
-  private readonly preferencesSignal = signal<AccessibilityPreferences>(this.readInitialPreferences());
-
-  /** Aktuelle Accessibility-Einstellungen. */
-  readonly preferences = computed<AccessibilityPreferences>(() => this.preferencesSignal());
-
-  /** Aktueller Bewegungsmodus. */
-  readonly motionMode = computed<MotionMode>(() => this.preferences().motion);
-
-  /** Aktueller Comfort-Modus. */
-  readonly comfortMode = computed<ComfortMode>(() => this.preferences().comfort);
-
-  /** Aktueller Kontrastmodus. */
-  readonly contrastMode = computed<ContrastMode>(() => this.preferences().contrast);
-
-  /** Aktueller Farbseh-Modus. */
-  readonly colorVisionMode = computed<ColorVisionMode>(() => this.preferences().colorVision);
-
-  /** True, wenn JavaScript-Animationen uneingeschränkt laufen dürfen. */
-  readonly allowsMotion = computed<boolean>(() => this.motionMode() === 'full');
-
-  /** True, wenn Animationen reduziert oder deaktiviert werden sollen. */
-  readonly reducesMotion = computed<boolean>(() => this.motionMode() !== 'full');
-
-  /** True, wenn die Oberfläche bewusst visuell ruhiger dargestellt werden soll. */
-  readonly usesSimpleMode = computed<boolean>(() => this.comfortMode() === 'simple');
+  private readonly storageKey = 'dcr-studio-accessibility-v1';                                          // Versionsierter Persistenzschlüssel der Präferenzen.
+  private readonly document = inject(DOCUMENT);                                                         // Browser-Dokument für Data-Attribute und sichere Window-Auflösung.
+  private readonly preferencesSignal = signal<AccessibilityPreferences>(this.readInitialPreferences()); // Interner Zustand der Accessibility-Einstellungen.
+  readonly preferences = computed<AccessibilityPreferences>(
+    /** Liest den internen Präferenzzustand. */ () => this.preferencesSignal(),
+  ); // Aktuelle Accessibility-Einstellungen.
+  readonly motionMode = computed<MotionMode>(/** Aktueller Bewegungsmodus. */ () => this.preferences().motion);      // Aktueller Bewegungsmodus.
+  readonly comfortMode = computed<ComfortMode>(/** Aktueller Comfort-Modus. */ () => this.preferences().comfort);    // Aktueller Comfort-Modus.
+  readonly contrastMode = computed<ContrastMode>(/** Aktueller Kontrastmodus. */ () => this.preferences().contrast); // Aktueller Kontrastmodus.
+  readonly colorVisionMode = computed<ColorVisionMode>(
+    /** Aktueller Farbseh-Modus. */ () => this.preferences().colorVision,
+  ); // Aktueller Farbseh-Modus.
+  readonly allowsMotion = computed<boolean>(/** Prüft uneingeschränkte Bewegung. */ () => this.motionMode() === 'full'); // Uneingeschränkt erlaubte Bewegung.
+  readonly reducesMotion = computed<boolean>(
+    /** Prüft reduzierte oder deaktivierte Bewegung. */ () => this.motionMode() !== 'full',
+  ); // Reduzierte oder deaktivierte Bewegung.
+  readonly usesSimpleMode = computed<boolean>(
+    /** Prüft die vereinfachte Darstellung. */ () => this.comfortMode() === 'simple',
+  ); // Vereinfachte Darstellung der Oberfläche.
 
   /** Synchronisiert Präferenzen mit CSS und LocalStorage. */
   constructor() {
-    effect(() => {
-      const preferences = this.preferences();
-      const root = this.document.documentElement;
-
-      root.dataset['motion'] = preferences.motion;
-      root.dataset['comfort'] = preferences.comfort;
-      root.dataset['contrast'] = preferences.contrast;
-      root.dataset['colorVision'] = preferences.colorVision;
-
-      this.writePreferences(preferences);
-    });
+    effect(this.synchronizePreferences.bind(this));
   }
 
-  /** Setzt den Bewegungsmodus. */
+  /** Synchronisiert die aktiven Präferenzen mit HTML-Attributen und Persistenz. */
+  private synchronizePreferences(): void {
+    /**
+     * Aktuelle Präferenzen für die gemeinsame Dokumentaktualisierung.
+     */
+    const preferences = this.preferences();
+    this.updateDocumentPreferences(preferences);
+    this.writePreferences(preferences);
+  }
+
+  /**
+   * Überträgt die Präferenzen in die bestehenden globalen CSS-Attribute.
+   * @param preferences Aktueller Satz der Accessibility-Einstellungen.
+   */
+  private updateDocumentPreferences(preferences: AccessibilityPreferences): void {
+    this.document.documentElement.dataset['motion'] = preferences.motion;
+    this.document.documentElement.dataset['comfort'] = preferences.comfort;
+    this.document.documentElement.dataset['contrast'] = preferences.contrast;
+    this.document.documentElement.dataset['colorVision'] = preferences.colorVision;
+  }
+
+  /**
+   * Setzt den Bewegungsmodus.
+   * @param motion Gewünschter Bewegungsmodus.
+   */
   setMotionMode(motion: MotionMode): void {
     this.patchPreferences({ motion });
   }
 
-  /** Setzt den Comfort-Modus. */
+  /**
+   * Setzt den Comfort-Modus.
+   * @param comfort Gewünschter Comfort-Modus.
+   */
   setComfortMode(comfort: ComfortMode): void {
     this.patchPreferences({ comfort });
   }
 
-  /** Setzt den Kontrastmodus. */
+  /**
+   * Setzt den Kontrastmodus.
+   * @param contrast Gewünschter Kontrastmodus.
+   */
   setContrastMode(contrast: ContrastMode): void {
     this.patchPreferences({ contrast });
   }
 
-  /** Setzt den Farbseh-Modus. */
+  /**
+   * Setzt den Farbseh-Modus.
+   * @param colorVision Gewünschte Farbseh-Anpassung.
+   */
   setColorVisionMode(colorVision: ColorVisionMode): void {
     this.patchPreferences({ colorVision });
   }
@@ -107,46 +118,73 @@ export class AccessibilityPreferenceService {
     });
   }
 
-  /** Setzt alle manuellen Overrides auf die Studio-Standarddarstellung zurück. */
+  /** Setzt manuelle Overrides auf die bisherigen Studio- und Systemstandards zurück. */
   resetPreferences(): void {
-    this.preferencesSignal.set({
-      motion: this.systemPrefersReducedMotion() ? 'reduced' : 'full',
-      comfort: 'expressive',
-      contrast: 'normal',
-      colorVision: 'default',
-    });
+    this.preferencesSignal.set(this.defaultPreferences());
   }
 
-  /** Aktualisiert einzelne Werte ohne die übrigen Präferenzen zu verlieren. */
+  /**
+   * Aktualisiert einzelne Werte ohne die übrigen Präferenzen zu verlieren.
+   * @param patch Einzeln zu aktualisierende Accessibility-Einstellungen.
+   */
   private patchPreferences(patch: Partial<AccessibilityPreferences>): void {
-    this.preferencesSignal.update((preferences) => ({ ...preferences, ...patch }));
+    this.preferencesSignal.update(
+      /**
+       * Ersetzt ausschließlich die angegebenen Präferenzfelder.
+       * @param preferences Bisheriger Satz der Accessibility-Einstellungen.
+       */
+      (preferences) => ({ ...preferences, ...patch }),
+    );
   }
 
-  /** Ermittelt initiale Werte aus Persistenz und Systemeinstellung. */
+  /** Liest gespeicherte Einstellungen und ersetzt ungültige Werte durch die bisherigen Standards. */
   private readInitialPreferences(): AccessibilityPreferences {
-    const fallback: AccessibilityPreferences = {
-      motion: this.systemPrefersReducedMotion() ? 'reduced' : 'full',
-      comfort: 'expressive',
-      contrast: 'normal',
-      colorVision: 'default',
-    };
-
+    /**
+     * Standardwerte für fehlende, ungültige oder nicht lesbare Einstellungen.
+     */
+    const fallback = this.defaultPreferences();
     try {
+      /**
+       * Unveränderter JSON-Wert aus dem lokalen Präferenzspeicher.
+       */
       const savedValue = this.document.defaultView?.localStorage.getItem(this.storageKey);
-      const parsedValue = savedValue ? JSON.parse(savedValue) as Partial<AccessibilityPreferences> : null;
-
-      return {
-        motion: this.validMotionMode(parsedValue?.motion) ? parsedValue.motion : fallback.motion,
-        comfort: this.validComfortMode(parsedValue?.comfort) ? parsedValue.comfort : fallback.comfort,
-        contrast: this.validContrastMode(parsedValue?.contrast) ? parsedValue.contrast : fallback.contrast,
-        colorVision: this.validColorVisionMode(parsedValue?.colorVision) ? parsedValue.colorVision : fallback.colorVision,
-      };
+      return this.normalizePreferences(savedValue ? JSON.parse(savedValue) : null, fallback);
     } catch {
       return fallback;
     }
   }
 
-  /** Persistiert Einstellungen nur, wenn Browser-Storage verfügbar ist. */
+  /** Liefert die bisherigen Standardwerte unter Berücksichtigung der Systembewegung. */
+  private defaultPreferences(): AccessibilityPreferences {
+    return {
+      motion: this.systemPrefersReducedMotion() ? 'reduced' : 'full',
+      comfort: 'expressive',
+      contrast: 'normal',
+      colorVision: 'default',
+    };
+  }
+
+  /**
+   * Übernimmt ausschließlich gültige Präferenzwerte aus dem gespeicherten Objekt.
+   * @param savedValue Noch ungeprüfte Werte aus dem lokalen Speicher.
+   * @param fallback Standardwerte für fehlende oder ungültige Felder.
+   */
+  private normalizePreferences(
+    savedValue: Partial<AccessibilityPreferences> | null,
+    fallback: AccessibilityPreferences,
+  ): AccessibilityPreferences {
+    return {
+      motion: this.validMotionMode(savedValue?.motion) ? savedValue.motion : fallback.motion,
+      comfort: this.validComfortMode(savedValue?.comfort) ? savedValue.comfort : fallback.comfort,
+      contrast: this.validContrastMode(savedValue?.contrast) ? savedValue.contrast : fallback.contrast,
+      colorVision: this.validColorVisionMode(savedValue?.colorVision) ? savedValue.colorVision : fallback.colorVision,
+    };
+  }
+
+  /**
+   * Persistiert Einstellungen nur, wenn Browser-Storage verfügbar ist.
+   * @param preferences Aktueller Satz der Accessibility-Einstellungen.
+   */
   private writePreferences(preferences: AccessibilityPreferences): void {
     try {
       this.document.defaultView?.localStorage.setItem(this.storageKey, JSON.stringify(preferences));
@@ -160,27 +198,41 @@ export class AccessibilityPreferenceService {
     return this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
   }
 
-  /** Validiert persistierte Bewegungsstufen. */
+  /**
+   * Validiert persistierte Bewegungsstufen.
+   * @param value Noch ungeprüfter Wert aus dem lokalen Speicher.
+   */
   private validMotionMode(value: unknown): value is MotionMode {
     return value === 'full' || value === 'reduced' || value === 'off';
   }
 
-  /** Validiert persistierte Comfort-Stufen. */
+  /**
+   * Validiert persistierte Comfort-Stufen.
+   * @param value Noch ungeprüfter Wert aus dem lokalen Speicher.
+   */
   private validComfortMode(value: unknown): value is ComfortMode {
     return value === 'expressive' || value === 'simple';
   }
 
-  /** Validiert persistierte Kontraststufen. */
+  /**
+   * Validiert persistierte Kontraststufen.
+   * @param value Noch ungeprüfter Wert aus dem lokalen Speicher.
+   */
   private validContrastMode(value: unknown): value is ContrastMode {
     return value === 'normal' || value === 'high';
   }
 
-  /** Validiert persistierte Farbseh-Modi. */
+  /**
+   * Validiert persistierte Farbseh-Modi.
+   * @param value Noch ungeprüfter Wert aus dem lokalen Speicher.
+   */
   private validColorVisionMode(value: unknown): value is ColorVisionMode {
-    return value === 'default'
-      || value === 'deuteranopia'
-      || value === 'protanopia'
-      || value === 'tritanopia'
-      || value === 'achromatopsia';
+    return (
+      value === 'default' ||
+      value === 'deuteranopia' ||
+      value === 'protanopia' ||
+      value === 'tritanopia' ||
+      value === 'achromatopsia'
+    );
   }
 }

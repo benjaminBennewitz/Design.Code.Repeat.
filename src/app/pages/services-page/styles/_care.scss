@@ -1,0 +1,139 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _care.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Care
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Care
+   ========================================================================== */
+  .services-page > dcr-signal-divider {
+    margin-block: calc(var(--dcr-section-y) * 3);
+  }
+
+  .care-section {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+    background: var(--dcr-color-bg);
+  }
+
+  .care-section__layout {
+    display: grid;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .care-section__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 1rem 4rem;
+    align-items: end;
+  }
+
+  .care-section__head .dcr-eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .care-section__head h2 {
+    max-width: 22ch;
+    margin: 0;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+    overflow-wrap: normal;
+    hyphens: auto;
+  }
+
+  .care-section__head > p:last-child,
+  .care-section__footer > p {
+    max-width: 55ch;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    line-height: 1.65;
+  }
+
+  .care-plans {
+    border-top: 1px solid var(--dcr-color-border-strong);
+  }
+
+  .care-plan {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1.1fr) minmax(9rem, auto);
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+    align-items: start;
+    border-bottom: 1px solid var(--dcr-color-border-strong);
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .care-plan__index {
+    padding-top: 0.5rem;
+    color: var(--dcr-color-primary-text);
+    font: 500 0.75rem/1 var(--dcr-font-mono);
+  }
+
+  .care-plan h3 {
+    margin: 0 0 0.55rem;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(1.3rem, 2vw, 2rem);
+    letter-spacing: -0.04em;
+  }
+
+  .care-plan__copy p {
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .care-plan ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .care-plan li {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.5rem;
+    color: var(--dcr-color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .care-plan li .material-symbols-outlined {
+    color: var(--dcr-color-primary-text);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .care-plan__price {
+    padding-top: 0.3rem;
+    font: 600 clamp(0.95rem, 1.3vw, 1.2rem)/1.5 var(--dcr-font-mono);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .care-section__footer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

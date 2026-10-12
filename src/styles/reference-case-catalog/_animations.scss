@@ -1,0 +1,165 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _animations.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Animation Keyframes
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+  @keyframes projectCatalogOrbMorph {
+
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      border-radius: 52% 48% 64% 36% / 38% 58% 42% 62%;
+    }
+
+    33% {
+      transform: translate3d(-1.2rem, 0.7rem, 0) rotate(9deg) scale(1.06);
+      border-radius: 38% 62% 42% 58% / 59% 39% 61% 41%;
+    }
+
+    66% {
+      transform: translate3d(1rem, -0.85rem, 0) rotate(-7deg) scale(0.94);
+      border-radius: 66% 34% 54% 46% / 35% 63% 37% 65%;
+    }
+  }
+
+  @keyframes projectCatalogPageTurnNextPrimary {
+    from {
+      transform: perspective(1800px) rotateY(-7deg) translate3d(1.15rem, 0, 0) scale(0.992);
+    }
+
+    to {
+      transform: perspective(1800px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogPageTurnPreviousPrimary {
+    from {
+      transform: perspective(1800px) rotateY(7deg) translate3d(-1.15rem, 0, 0) scale(0.992);
+    }
+
+    to {
+      transform: perspective(1800px) rotateY(0deg) translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogPageTurnNextSecondary {
+    from {
+      transform: translate3d(-0.55rem, 0, 0) scale(0.996);
+    }
+
+    to {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogPageTurnPreviousSecondary {
+    from {
+      transform: translate3d(0.55rem, 0, 0) scale(0.996);
+    }
+
+    to {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogPageSweepNext {
+    0% {
+      opacity: 0;
+      transform: translateX(-42%);
+    }
+
+    35% {
+      opacity: 0.55;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(42%);
+    }
+  }
+
+  @keyframes projectCatalogPageSweepPrevious {
+    0% {
+      opacity: 0;
+      transform: translateX(42%);
+    }
+
+    35% {
+      opacity: 0.55;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(-42%);
+    }
+  }
+
+  @keyframes projectCatalogCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogTocIn {
+    from {
+      opacity: 0;
+      transform: translateX(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes projectCatalogLightboxVisualFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(var(--lightbox-reveal-offset, 10px)) scale(0.996);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes projectCatalogLightboxCopyFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

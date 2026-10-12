@@ -1,0 +1,105 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _accent.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Accent
+   02 Theme Overrides
+   03 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Accent
+   ========================================================================== */
+  .dcr-case .project-detail {
+    --project-detail-icon-fg: #101010;
+    --project-detail-hero-tag-fg: #000000;
+    --project-detail-hero-bg: #08090d;
+    --project-detail-hero-panel: rgba(20, 22, 28, 0.86);
+    --project-detail-ink: #f6f0e8;
+    --project-detail-muted: rgba(246, 240, 232, 0.72);
+    --project-detail-grid-soft: rgba(246, 240, 232, 0.045);
+    --project-detail-halftone: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--bp-color-accent), transparent 70%) 1px,
+      transparent 1.9px
+    );
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] {
+    --bp-color-accent: #ff4d63;
+    --bp-color-accent-text: #ff4d63;
+    --bp-color-on-accent: #101010;
+    --project-detail-blood-ok: #3ff2a0;
+    --project-detail-blood-watch: #ffd166;
+    --project-detail-blood-high: #ff6b81;
+    --project-detail-blood-low: #8fb7ff;
+  }
+
+  /* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+
+  :root[data-theme='light'] .dcr-case .project-detail[data-project='blutanalyse'],
+  :root[data-theme='light'] .dcr-case .project-detail[data-project='blutanalyse'],
+  [data-theme='light'] .dcr-case .project-detail[data-project='blutanalyse'] {
+    --bp-color-accent: #cc3045;
+    --bp-color-accent-text: #cc3045;
+    --bp-color-on-accent: #fffaf1;
+    --project-detail-blood-ok: #087f5b;
+    --project-detail-blood-watch: #9a5f00;
+    --project-detail-blood-high: #b42334;
+    --project-detail-blood-low: #3451b2;
+  }
+
+  :root[data-theme='light'] .dcr-case .project-detail,
+  :root[data-theme='light'] .dcr-case .project-detail,
+  [data-theme='light'] .dcr-case .project-detail {
+    --project-detail-icon-fg: #f6f0e8;
+    --project-detail-hero-bg: #071020;
+    --project-detail-hero-panel: rgba(9, 18, 33, 0.9);
+    --project-detail-ink: #fffaf1;
+    --project-detail-muted: rgba(255, 250, 241, 0.78);
+    --project-detail-grid-soft: rgba(255, 250, 241, 0.055);
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail[data-project='blutanalyse'],
+  :root[data-color-vision='achromatopsia'] .dcr-case .project-detail[data-project='blutanalyse'],
+  [data-color-vision='achromatopsia'] .dcr-case .project-detail[data-project='blutanalyse'] {
+    --bp-color-accent: #f0f0f0;
+    --bp-color-accent-text: #f0f0f0;
+  }
+
+  :root[data-theme='light'][data-color-vision='achromatopsia'] .dcr-case .project-detail[data-project='blutanalyse'],
+  [data-theme='light'][data-color-vision='achromatopsia'] .dcr-case .project-detail[data-project='blutanalyse'] {
+    --bp-color-accent: #101010;
+    --bp-color-accent-text: #101010;
+  }
+
+  :root[data-theme='light'][data-color-vision='achromatopsia']
+    .dcr-case
+    .project-detail:not([data-project='kanban-klon']):not([data-project='grafikdesign-katalog']),
+  [data-theme='light'][data-color-vision='achromatopsia']
+    .dcr-case
+    .project-detail:not([data-project='kanban-klon']):not([data-project='grafikdesign-katalog']) {
+    --project-detail-hero-tag-fg: #ffffff;
+  }
+}

@@ -1,5 +1,30 @@
-/* src/app/shared/horizontal-scroll-hint/horizontal-scroll-hint.component.scss */
+/*###############################
+###
+###     Design. Code. Repeat.
+###     horizontal-scroll-hint.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
 
+/*
+   INHALTSVERZEICHNIS
+   01 Horizontal Scroll Hint
+   02 Animation Keyframes
+   03 Responsive Layout
+   04 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Horizontal Scroll Hint
+   ========================================================================== */
 :host {
   position: absolute;
   z-index: 7;
@@ -19,7 +44,9 @@
   padding: 0.55rem 0.72rem;
   background: color-mix(in srgb, var(--dcr-color-surface-solid) 76%, transparent);
   color: var(--dcr-color-text);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 24px transparent;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent),
+    0 0 24px transparent;
   font-family: var(--dcr-font-mono);
   font-size: 0.6rem;
   font-weight: 900;
@@ -28,7 +55,10 @@
   pointer-events: none;
   text-transform: uppercase;
   transform: translateX(0.8rem) scale(0.96);
-  transition: opacity 220ms ease, transform 260ms var(--dcr-ease-out), background 180ms ease;
+  transition:
+    opacity 220ms ease,
+    transform 260ms var(--dcr-ease-out),
+    background 180ms ease;
 }
 
 .horizontal-scroll-hint .material-symbols-outlined {
@@ -47,23 +77,40 @@
   opacity: 1;
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes horizontal-scroll-hint-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.72;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 24px transparent;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent),
+      0 0 24px transparent;
   }
 
   50% {
     opacity: 1;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent), 0 0 26px color-mix(in srgb, var(--dcr-color-primary) 48%, transparent);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--dcr-color-bg) 45%, transparent),
+      0 0 26px color-mix(in srgb, var(--dcr-color-primary) 48%, transparent);
   }
 }
+
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
 
 @media (max-width: 900px) {
   :host {
     display: block;
   }
 }
+
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .horizontal-scroll-hint,

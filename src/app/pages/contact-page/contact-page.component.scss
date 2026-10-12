@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     contact-page.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Contact Page
+   02 Responsive Layout
+   03 Contact Page (2)
+*/
+
+/* ==========================================================================
+   Contact Page
+   ========================================================================== */
 .contact-page__section {
   --dcr-section-bg: color-mix(in srgb, var(--dcr-color-primary) 4%, var(--dcr-color-bg));
   --dcr-section-next-bg: var(--dcr-color-contrast-dark);
@@ -36,15 +62,45 @@
   color: var(--dcr-color-on-lime);
 }
 
-.contact-page__direct h2 { margin: 0 0 0.5rem; font-size: 1rem; }
-.contact-page__direct p { margin: 0 0 0.6rem; color: var(--dcr-color-text-muted); font-size: 0.82rem; line-height: 1.55; }
-.contact-page__direct a { color: var(--dcr-color-primary-text); font-family: var(--dcr-font-mono); font-size: 0.72rem; font-weight: 900; }
+.contact-page__direct h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+.contact-page__direct p {
+  margin: 0 0 0.6rem;
+  color: var(--dcr-color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.contact-page__direct a {
+  color: var(--dcr-color-primary-text);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
 
 @media (max-width: 900px) {
-  .contact-page__layout { grid-template-columns: 1fr; align-items: start; }
+  .contact-page__layout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
 }
+
+/* ==========================================================================
+   Contact Page (2)
+   ========================================================================== */
 
 .contact-page__section.dcr-section-flow::after {
   height: clamp(18rem, 44vh, 34rem);
-  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--dcr-color-contrast-dark) 8%, transparent) 16%, color-mix(in srgb, var(--dcr-color-contrast-dark) 34%, transparent) 44%, color-mix(in srgb, var(--dcr-color-contrast-dark) 72%, transparent) 72%, var(--dcr-color-contrast-dark) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--dcr-color-contrast-dark) 8%, transparent) 16%,
+    color-mix(in srgb, var(--dcr-color-contrast-dark) 34%, transparent) 44%,
+    color-mix(in srgb, var(--dcr-color-contrast-dark) 72%, transparent) 72%,
+    var(--dcr-color-contrast-dark) 100%
+  );
 }

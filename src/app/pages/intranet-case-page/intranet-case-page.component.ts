@@ -1,3 +1,4 @@
+/* src/app/pages/intranet-case-page/intranet-case-page.component.ts */
 /**
  * @file Lokale Intranet-Case-Study.
  * @description Bindet die aus B²Folio gespiegelte Detailansicht fest an die DCR-Route.

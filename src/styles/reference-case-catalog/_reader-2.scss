@@ -1,0 +1,53 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _reader-2.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Reader
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Reader
+   ========================================================================== */
+  .dcr-case .project-detail__catalog-toc-list span {
+    display: grid;
+    width: 1.55rem;
+    aspect-ratio: 1;
+    grid-row: span 3;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 82%);
+    color: var(--bp-color-accent-text);
+    font-weight: 900;
+  }
+
+  .dcr-case .project-detail__catalog-toc-list strong {
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__catalog-toc-list em,
+  .dcr-case .project-detail__catalog-toc-list small {
+    color: var(--bp-color-text-muted);
+    font-size: 0.64rem;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}

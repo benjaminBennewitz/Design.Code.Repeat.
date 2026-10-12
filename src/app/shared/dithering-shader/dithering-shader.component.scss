@@ -1,5 +1,27 @@
-/* src/app/shared/dithering-shader/dithering-shader.component.scss */
+/*###############################
+###
+###     Design. Code. Repeat.
+###     dithering-shader.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
 
+/*
+   INHALTSVERZEICHNIS
+   01 Dithering Shader
+*/
+
+/* ==========================================================================
+   Dithering Shader
+   ========================================================================== */
 :host {
   position: absolute;
   inset: 0;

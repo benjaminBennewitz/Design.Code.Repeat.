@@ -1,3 +1,4 @@
+/* src/app/layout/footer/footer.component.ts */
 /**
  * @file Interaktiver Studio-Footer.
  * @description Bündelt Sitemap und Rechtliches in einer großen typografischen Footer-Bühne mit kontrollierten Slides.
@@ -5,6 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { FOOTER_UI } from './footer-ui.data';
 import { CookieConsentService } from '../../core/services/cookie-consent.service';
 import { LanguageService } from '../../core/services/language.service';
 
@@ -18,58 +20,19 @@ import { LanguageService } from '../../core/services/language.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  /** Aktuelle Sprache und Website-Inhalte. */
-  private readonly languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);                                                          // Aktuelle Sprache und Website-Inhalte.
+  private readonly router = inject(Router);                                                                            // Router für wiederholbare Quicklinks zum gemeinsamen Leistungsanker.
+  readonly cookieConsentService = inject(CookieConsentService);                                                        // Privacy-Control-Zustand für den Cookie-Einstellungslink.
+  readonly content = computed(/** Sprachabhängiger Gesamtcontent. */ () => this.languageService.content());            // Sprachabhängiger Gesamtcontent.
+  readonly activePanel = signal<number>(0);                                                                            // Aktives Footer-Panel: Sitemap oder Rechtliches.
+  readonly year = new Date().getFullYear();                                                                            // Aktuelles Jahr.
+  readonly ui = computed(/** Sprachabhängige Footer-Steuertexte. */ () => FOOTER_UI[this.languageService.language()]); // Sprachabhängige Footer-Steuertexte.
 
-  /** Router für wiederholbare Quicklinks zum gemeinsamen Leistungsanker. */
-  private readonly router = inject(Router);
-
-  /** Privacy-Control-Zustand für den Cookie-Einstellungslink. */
-  readonly cookieConsentService = inject(CookieConsentService);
-
-  /** Sprachabhängiger Gesamtcontent. */
-  readonly content = computed(() => this.languageService.content());
-
-  /** Aktives Footer-Panel: Sitemap oder Rechtliches. */
-  readonly activePanel = signal<number>(0);
-
-  /** Aktuelles Jahr. */
-  readonly year = new Date().getFullYear();
-
-  /** Sprachabhängige Footer-Steuertexte. */
-  readonly ui = computed(() => this.languageService.language() === 'de'
-    ? {
-        previous: 'Vorheriger Footer-Bereich',
-        next: 'Nächster Footer-Bereich',
-        panelLabel: 'Footer-Bereich',
-        sitemap: 'Sitemap',
-        legal: 'Rechtliches',
-        cookie: 'Cookie-Einstellungen',
-        notice: 'Impressum',
-        privacy: 'Datenschutz',
-        home: 'Start',
-        process: 'Prozess',
-        faq: 'FAQ',
-        portfolio: 'Portfolio',
-        social: 'Social',
-      }
-    : {
-        previous: 'Previous footer section',
-        next: 'Next footer section',
-        panelLabel: 'Footer section',
-        sitemap: 'Sitemap',
-        legal: 'Legal',
-        cookie: 'Cookie settings',
-        notice: 'Legal notice',
-        privacy: 'Privacy',
-        home: 'Home',
-        process: 'Process',
-        faq: 'FAQ',
-        portfolio: 'Portfolio',
-        social: 'Social',
-      });
-
-  /** Navigiert auch bei identischer URL erneut; modifizierte Klicks bleiben native Links. */
+  /**
+   * Navigiert auch bei identischer URL erneut; modifizierte Klicks bleiben native Links.
+   * @param event Auslösendes Klick- oder Router-Ereignis.
+   * @param slug Gewählter Leistungsbereich.
+   */
   openService(event: MouseEvent, slug: string): void {
     if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
       return;
@@ -83,13 +46,24 @@ export class FooterComponent {
     });
   }
 
+  /** Aktiviert zyklisch das jeweils andere der beiden Footer-Panels. */
+  private advancePanel(): void {
+    this.activePanel.update(
+      /**
+       * Wählt den anderen Index der beiden Footer-Panels.
+       * @param current Aktueller Panel-Index.
+       */
+      (current) => (current + 1) % 2,
+    );
+  }
+
   /** Aktiviert den vorherigen Panel-Index zyklisch. */
   previousPanel(): void {
-    this.activePanel.update((current) => (current + 1) % 2);
+    this.advancePanel();
   }
 
   /** Aktiviert den nächsten Panel-Index zyklisch. */
   nextPanel(): void {
-    this.activePanel.update((current) => (current + 1) % 2);
+    this.advancePanel();
   }
 }

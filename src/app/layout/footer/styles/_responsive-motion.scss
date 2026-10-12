@@ -1,0 +1,128 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive-motion.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 900px), (max-height: 799px) {
+    .site-footer {
+      height: auto;
+      min-height: calc(100svh - var(--dcr-header-height));
+      overflow: visible;
+      padding-block: 1.5rem;
+    }
+
+    .site-footer__stage {
+      grid-template-rows: auto clamp(5rem, 15vw, 7rem) auto;
+      height: auto;
+      min-height: 760px;
+    }
+
+    .site-footer__panel-copy {
+      min-height: 34rem;
+    }
+
+    .site-footer__panel {
+      grid-template-columns: 1fr;
+      align-content: start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .site-footer__toolbar {
+      grid-template-columns: 1fr auto;
+    }
+
+    .site-footer__status {
+      display: none;
+    }
+
+    .site-footer__sitemap,
+    .site-footer__legal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem 0.9rem;
+    }
+
+    .site-footer__legal-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .site-footer__socials {
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      min-width: 0;
+    }
+
+    .site-footer__socials a span {
+      display: none;
+    }
+
+    .site-footer__stage {
+      grid-template-rows: auto clamp(7rem, 25vw, 9rem) auto;
+      min-height: 680px;
+    }
+
+    .site-footer__panel-copy {
+      min-height: 26rem;
+    }
+
+    .site-footer__character--fuelli {
+      bottom: clamp(4.4rem, 15vw, 5.4rem);
+    }
+
+    .site-footer__wordmark-state {
+      bottom: 0.08em;
+      font-size: clamp(2.9rem, 13.5vw, 5.2rem);
+      line-height: 0.82;
+      white-space: nowrap;
+    }
+
+    .site-footer__wordmark-state--design > span {
+      display: block;
+    }
+  }
+
+  @media (min-width: 2200px) {
+    .site-footer__toolbar,
+    .site-footer__stage {
+      width: calc(100% - (var(--dcr-page-gutter) * 2));
+      max-width: none;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :host-context(:root[data-motion='reduced']) .site-footer__panel,
+  :host-context(:root[data-motion='off']) .site-footer__panel,
+  :host-context(:root[data-motion='reduced']) .site-footer__wordmark-state,
+  :host-context(:root[data-motion='off']) .site-footer__wordmark-state {
+    transition: none;
+  }
+
+  :host-context(:root[data-motion='reduced']) .site-footer__character,
+  :host-context(:root[data-motion='off']) .site-footer__character {
+    transition: none;
+  }
+}

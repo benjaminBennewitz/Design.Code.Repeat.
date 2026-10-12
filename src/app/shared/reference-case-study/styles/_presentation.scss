@@ -1,0 +1,240 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _presentation.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Presentation
+   02 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Presentation
+   ========================================================================== */
+  .dcr-case .project-detail__presentation-note {
+    padding: clamp(0.75rem, 1.6vw, 1.25rem) 0 clamp(1.5rem, 3vw, 2.75rem);
+    background: transparent;
+  }
+
+  .dcr-case .project-detail__presentation-note-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.7rem;
+    width: min(100%, 690px);
+    margin-left: auto;
+    border-left: 2px solid color-mix(in srgb, var(--bp-color-accent), transparent 44%);
+    padding: 0.85rem 0 0.6rem 0.9rem;
+    background: transparent;
+  }
+
+  .dcr-case .project-detail__presentation-note-inner .bp-eyebrow {
+    margin: 0 0 0.48rem;
+    font-size: 0.62rem;
+  }
+
+  .dcr-case .project-detail__presentation-note-text {
+    margin: 0;
+    color: var(--bp-color-text-muted);
+    font-size: clamp(0.74rem, 0.82vw, 0.82rem);
+    line-height: 1.48;
+  }
+
+  .dcr-case .project-detail__presentation-note-action {
+    margin-top: 0.85rem;
+    padding: 0.58rem 0.78rem;
+    font-size: 0.68rem;
+  }
+
+  .dcr-case .project-detail__presentation-note-action .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  .dcr-case .project-detail__presentation-note-icon {
+    margin-top: 0.08rem;
+    color: var(--bp-color-accent);
+    font-size: 1.05rem;
+  }
+
+  .dcr-case .project-detail[data-project='intranet'] .project-detail__presentation-note-inner {
+    width: min(100%, 760px);
+  }
+
+  .dcr-case .project-detail[data-project='intranet'] .project-detail__presentation-note-text {
+    font-size: clamp(0.81rem, 0.9vw, 0.9rem);
+  }
+
+  .dcr-case
+    .project-detail[data-project='intranet']
+    .project-detail__presentation-note.bp-reveal
+    .project-detail__presentation-note-text,
+  .dcr-case
+    .project-detail[data-project='intranet']
+    .project-detail__presentation-note.bp-reveal
+    .project-detail__presentation-note-inner
+    > div {
+    opacity: 0;
+    transform: translateX(-1.15rem);
+  }
+
+  .dcr-case
+    .project-detail[data-project='intranet']
+    .project-detail__presentation-note.bp-reveal--visible
+    .project-detail__presentation-note-text,
+  .dcr-case
+    .project-detail[data-project='intranet']
+    .project-detail__presentation-note.bp-reveal--visible
+    .project-detail__presentation-note-inner
+    > div {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 360ms ease,
+      transform 520ms var(--bp-ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+  }
+
+  .dcr-case
+    .project-detail[data-project='intranet']
+    .project-detail__presentation-note.bp-reveal--visible
+    .project-detail__presentation-note-text {
+    transition-delay: 90ms;
+  }
+
+  .dcr-case .project-detail__live-access {
+    padding-block: clamp(2.5rem, 5vw, 5rem);
+    background:
+      radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--bp-color-accent), transparent 84%), transparent 26%),
+      color-mix(in srgb, var(--bp-color-bg) 94%, black 6%);
+  }
+
+  .dcr-case .project-detail__live-access-panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+    min-height: clamp(280px, 30vw, 390px);
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bp-color-border-strong), transparent 10%);
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(1.6rem, 4vw, 3.5rem);
+    background:
+      radial-gradient(circle at 92% 12%, color-mix(in srgb, var(--bp-color-accent), transparent 62%), transparent 30%),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--bp-color-surface) 90%, var(--bp-color-accent) 10%),
+        var(--bp-color-surface)
+      );
+    color: var(--bp-color-text);
+    box-shadow: 0 1.4rem 3.5rem color-mix(in srgb, var(--bp-color-accent), transparent 86%);
+  }
+
+  .dcr-case .project-detail__live-access-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__live-access-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dcr-case .project-detail__live-access-copy {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1rem, 2vw, 1.4rem);
+    align-items: start;
+    min-width: 0;
+  }
+
+  .dcr-case .project-detail__live-access-icon {
+    display: grid;
+    width: 3.6rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 48%);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 82%);
+    color: var(--bp-color-accent);
+  }
+
+  .dcr-case .project-detail__live-access-icon svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: currentColor;
+  }
+
+  .dcr-case .project-detail__live-access-copy .bp-eyebrow {
+    margin: 0 0 0.55rem;
+  }
+
+  .dcr-case .project-detail__live-access-copy h2 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 0.96;
+  }
+
+  .dcr-case .project-detail__live-access-copy p:last-child {
+    max-width: 70ch;
+    margin: 0;
+    color: var(--bp-color-text-muted);
+    line-height: 1.6;
+  }
+
+  .dcr-case .project-detail__live-access-actions {
+    display: grid;
+    width: min(100%, 32rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .dcr-case .project-detail__live-access-actions .bp-button {
+    width: 100%;
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (max-width: 820px) {
+    .dcr-case .project-detail__live-access-panel {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .dcr-case .project-detail__live-access-actions {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .dcr-case .project-detail__live-access-copy {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .dcr-case .project-detail__live-access-actions {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,216 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _viewport-composition.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Viewport Composition
+   02 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Viewport Composition
+   ========================================================================== */
+  .home-services,
+  .hosting-strip,
+  .home-process,
+  .home-faq,
+  .home-contact {
+    display: grid;
+    align-items: center;
+  }
+
+  .hosting-strip {
+    overflow: clip;
+  }
+
+  .home-services > .dcr-container,
+  .hosting-strip__layout,
+  .home-process > .dcr-container,
+  .home-faq__layout,
+  .home-contact__layout {
+    min-height: 0;
+  }
+
+  .home-services dcr-section-heading {
+    --dcr-heading-size: clamp(3rem, min(5vw, 7vh), 5.4rem);
+    display: block;
+    max-width: min(72rem, 100%);
+    margin: 0;
+  }
+
+  .home-services.dcr-section {
+    align-items: stretch;
+    padding-top: clamp(6rem, 12vh, 8rem);
+    padding-bottom: clamp(2.5rem, 5vh, 4rem);
+  }
+
+  .home-services > .dcr-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    min-height: 0;
+  }
+
+  .home-services__grid {
+    min-height: 0;
+    padding: 0 0.8rem 0.8rem 0;
+  }
+
+  .hosting-strip__layout {
+    height: 100%;
+  }
+
+  .hosting-strip__points {
+    margin-block: clamp(1.1rem, 2vh, 1.6rem);
+  }
+
+  .home-faq__layout {
+    align-items: center;
+  }
+
+  .home-faq .faq-list__item {
+    border-color: var(--dcr-color-border-strong);
+  }
+
+  .home-faq .faq-list__trigger {
+    color: var(--dcr-color-text);
+  }
+
+  .home-faq .faq-list__trigger > span:first-child {
+    color: var(--dcr-color-primary-text);
+  }
+
+  .home-faq .faq-list p {
+    color: var(--dcr-color-text-muted);
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (min-width: 901px) and (min-height: 800px) {
+    .home-services > .dcr-container {
+      grid-template-rows: auto minmax(0, 1fr);
+      align-content: stretch;
+      height: 100%;
+    }
+
+    .home-services__grid {
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.65rem, 1.2vh, 0.9rem);
+      margin-top: clamp(1rem, 2vh, 1.5rem);
+    }
+
+    .service-card {
+      gap: clamp(0.65rem, 1.1vh, 0.9rem);
+      min-height: 0;
+      padding: clamp(0.85rem, 1.3vh, 1.05rem);
+    }
+
+    .service-card h3 {
+      font-size: clamp(1.45rem, min(2vw, 2.8vh), 2rem);
+    }
+
+    .service-card p:not(.service-card__kicker) {
+      margin-block: 0.45rem 0;
+      font-size: clamp(0.72rem, 0.78vw, 0.82rem);
+      line-height: 1.42;
+    }
+
+    .service-card__top .material-symbols-outlined {
+      width: 2.15rem;
+      height: 2.15rem;
+      font-size: 1.1rem;
+    }
+
+    .service-card__bottom a {
+      width: 2.35rem;
+      height: 2.35rem;
+    }
+
+    .hosting-strip__layout {
+      align-items: center;
+    }
+
+    .hosting-strip__mail {
+      gap: 0.65rem;
+      padding: clamp(1.25rem, 2.2vh, 1.8rem);
+    }
+
+    .home-process > .dcr-container,
+    .home-faq__layout {
+      display: grid;
+      align-content: center;
+      height: 100%;
+    }
+
+    .process-list {
+      margin-top: clamp(1rem, 2vh, 1.5rem);
+    }
+
+    .process-list li {
+      padding-block: clamp(0.65rem, 1.25vh, 0.9rem);
+    }
+
+    .faq-list__trigger {
+      padding-block: clamp(0.8rem, 1.35vh, 1rem);
+    }
+
+    .faq-list p {
+      margin-bottom: clamp(0.75rem, 1.2vh, 1rem);
+      line-height: 1.5;
+    }
+  }
+
+  @media (min-width: 901px) and (max-height: 799px) {
+    .home-services dcr-section-heading {
+      --dcr-heading-size: clamp(3rem, min(4.6vw, 8vh), 4.4rem);
+    }
+
+    .home-services__grid {
+      grid-auto-rows: minmax(13rem, auto);
+      gap: 0.7rem;
+      margin-top: clamp(1rem, 2.5vh, 1.5rem);
+    }
+
+    .service-card {
+      gap: 0.7rem;
+      min-height: 13rem;
+      padding: 0.9rem;
+    }
+
+    .service-card h3 {
+      font-size: clamp(1.55rem, 2vw, 2rem);
+    }
+
+    .service-card p:not(.service-card__kicker) {
+      margin-block: 0.4rem 0;
+      font-size: 0.78rem;
+      line-height: 1.42;
+    }
+
+    .service-card__top .material-symbols-outlined {
+      width: 2.15rem;
+      height: 2.15rem;
+      font-size: 1.1rem;
+    }
+
+    .service-card__bottom a {
+      width: 2.35rem;
+      height: 2.35rem;
+    }
+  }
+}

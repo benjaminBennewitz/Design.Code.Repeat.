@@ -1,0 +1,51 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _tags.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Tags
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Tags
+   ========================================================================== */
+  .bp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bp-tag {
+    display: inline-flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid var(--bp-color-border);
+    padding: 0.5rem 0.72rem;
+    background: color-mix(in srgb, var(--bp-color-surface-solid) 72%, transparent);
+    color: var(--bp-color-text-muted);
+    font-family: var(--bp-font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+}

@@ -1,3 +1,4 @@
+/* src/app/layout/accessibility-panel/accessibility-panel.component.ts */
 /**
  * @file Globales Accessibility-Panel der Studio-Website.
  * @description Bietet persistente Einstellungen für Motion, visuelle Komplexität, Kontrast und Farbseh-Anpassungen.
@@ -43,58 +44,65 @@ interface AccessibilityPanelTexts {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccessibilityPanelComponent {
-  /** Native Dialog-Referenz für Focus Management und Escape-Verhalten. */
-  @ViewChild('accessibilityDialog') private dialog?: ElementRef<HTMLDialogElement>;
+  @ViewChild('accessibilityDialog') private dialog?: ElementRef<HTMLDialogElement>; // Native Dialog-Referenz für Focus Management und Escape-Verhalten.
+  readonly accessibility = inject(AccessibilityPreferenceService);                  // Persistierte Accessibility-Einstellungen.
+  private readonly panelService = inject(AccessibilityPanelService);                // UI-Controller für zusätzliche Trigger außerhalb dieser Komponente.
+  private readonly languageService = inject(LanguageService);                       // Sprachservice für DE/EN-Texte.
+  readonly motionModes: readonly MotionMode[] = ['full', 'reduced', 'off'];         // Verfügbare Motion-Optionen.
+  readonly comfortModes: readonly ComfortMode[] = ['expressive', 'simple'];         // Verfügbare Comfort-Optionen.
+  readonly contrastModes: readonly ContrastMode[] = ['normal', 'high'];             // Verfügbare Kontrast-Optionen.
+  readonly colorModes: readonly ColorVisionMode[] = [
+    'default',
+    'deuteranopia',
+    'protanopia',
+    'tritanopia',
+    'achromatopsia',
+  ]; // Verfügbare Farbseh-Optionen.
+  readonly texts = computed<AccessibilityPanelTexts>(
+    /** Übersetzte Texte der aktiven Sprache. */ () => PANEL_TEXTS[this.languageService.language()],
+  ); // Übersetzte Texte der aktiven Sprache.
 
-  /** Persistierte Accessibility-Einstellungen. */
-  readonly accessibility = inject(AccessibilityPreferenceService);
-
-  /** UI-Controller für zusätzliche Trigger außerhalb dieser Komponente. */
-  private readonly panelService = inject(AccessibilityPanelService);
-
-  /** Sprachservice für DE/EN-Texte. */
-  private readonly languageService = inject(LanguageService);
-
-  /** Verfügbare Motion-Optionen. */
-  readonly motionModes: readonly MotionMode[] = ['full', 'reduced', 'off'];
-
-  /** Verfügbare Comfort-Optionen. */
-  readonly comfortModes: readonly ComfortMode[] = ['expressive', 'simple'];
-
-  /** Verfügbare Kontrast-Optionen. */
-  readonly contrastModes: readonly ContrastMode[] = ['normal', 'high'];
-
-  /** Verfügbare Farbseh-Optionen. */
-  readonly colorModes: readonly ColorVisionMode[] = ['default', 'deuteranopia', 'protanopia', 'tritanopia', 'achromatopsia'];
-
-  /** Übersetzte Texte der aktiven Sprache. */
-  readonly texts = computed<AccessibilityPanelTexts>(() => PANEL_TEXTS[this.languageService.language()]);
-
+  /** Verbindet die Komponente mit ihren reaktiven Dokumentzuständen. */
   constructor() {
-    effect(() => {
-      const request = this.panelService.openRequest();
-      if (request === 0) {
-        return;
-      }
+    effect(
+      /** Synchronisiert den reaktiven Zustand der Komponente. */ () => {
+        /**
+         * Aktuelle Anfrage-ID zum Öffnen des Accessibility-Panels.
+         */
+        const request = this.panelService.openRequest();
+        if (request === 0) {
+          return;
+        }
 
-      queueMicrotask(() => this.open());
-    });
+        queueMicrotask(/** Öffnet den Dialog nach dem aktuellen Render-Durchlauf. */ () => this.open());
+      },
+    );
   }
 
-  /** Kompakter Status für den festen Trigger. */
-  readonly statusText = computed<string>(() => {
-    const texts = this.texts();
-    const preferences = this.accessibility.preferences();
+  readonly statusText = computed<string>(
+    /** Kompakter Status für den festen Trigger. */ () => {
+      /**
+       * Steuertexte in der aktuell gewählten Sprache.
+       */
+      const texts = this.texts();
+      /**
+       * Aktive Accessibility-Einstellungen des Dokuments.
+       */
+      const preferences = this.accessibility.preferences();
 
-    return [
-      texts.motion[preferences.motion],
-      texts.contrast[preferences.contrast],
-      texts.color[preferences.colorVision],
-    ].join(' · ');
-  });
+      return [
+        texts.motion[preferences.motion],
+        texts.contrast[preferences.contrast],
+        texts.color[preferences.colorVision],
+      ].join(' · ');
+    },
+  ); // Kompakter Status für den festen Trigger.
 
   /** Öffnet den nativen Modal-Dialog inklusive browserseitigem Focus Management. */
   open(): void {
+    /**
+     * Nach dem Rendern verfügbare native Dialoginstanz.
+     */
     const dialog = this.dialog?.nativeElement;
     if (dialog && !dialog.open) {
       dialog.showModal();
@@ -106,29 +114,44 @@ export class AccessibilityPanelComponent {
     this.dialog?.nativeElement.close();
   }
 
-  /** Schließt nur bei einem Klick auf die native Dialog-Backdrop-Fläche. */
+  /**
+   * Schließt nur bei einem Klick auf die native Dialog-Backdrop-Fläche.
+   * @param event Auslösendes Klick- oder Router-Ereignis.
+   */
   closeOnBackdrop(event: MouseEvent): void {
     if (event.target === event.currentTarget) {
       this.close();
     }
   }
 
-  /** Setzt den Bewegungsmodus. */
+  /**
+   * Setzt den Bewegungsmodus.
+   * @param mode Gewünschter Accessibility-Modus.
+   */
   setMotionMode(mode: MotionMode): void {
     this.accessibility.setMotionMode(mode);
   }
 
-  /** Setzt die visuelle Komplexität. */
+  /**
+   * Setzt die visuelle Komplexität.
+   * @param mode Gewünschter Accessibility-Modus.
+   */
   setComfortMode(mode: ComfortMode): void {
     this.accessibility.setComfortMode(mode);
   }
 
-  /** Setzt den Kontrastmodus. */
+  /**
+   * Setzt den Kontrastmodus.
+   * @param mode Gewünschter Accessibility-Modus.
+   */
   setContrastMode(mode: ContrastMode): void {
     this.accessibility.setContrastMode(mode);
   }
 
-  /** Setzt die Farbseh-Anpassung. */
+  /**
+   * Setzt die Farbseh-Anpassung.
+   * @param mode Gewünschter Accessibility-Modus.
+   */
   setColorVisionMode(mode: ColorVisionMode): void {
     this.accessibility.setColorVisionMode(mode);
   }

@@ -1,0 +1,76 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 900px) {
+    .studio-hero__layout,
+    .studio-intro__layout,
+    .studio-collaboration__layout,
+    .studio-region__layout {
+      grid-template-columns: 1fr;
+    }
+    .studio-hero__identity {
+      border-left: 0;
+      border-top: 1px solid var(--dcr-color-border-strong);
+      padding: 1.5rem 0 0;
+    }
+    .studio-hero__signature {
+      font-size: 5rem;
+    }
+    .studio-hero__facets {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .studio-intro__identity {
+      width: min(60%, 18rem);
+    }
+    .studio-intro__b2 {
+      font-size: clamp(9rem, 40vw, 18rem);
+    }
+    .studio-principles__layout {
+      height: auto;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .studio-hero__facets {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .studio-hero h1 {
+      font-size: clamp(2.6rem, 12vw, 4.2rem);
+    }
+    .studio-hero__copy {
+      gap: 1rem;
+    }
+    .studio-region__cities {
+      grid-template-columns: 1fr;
+    }
+    .studio-region__cities li {
+      grid-template-columns: 4rem minmax(0, 1fr);
+      align-items: center;
+    }
+  }
+}

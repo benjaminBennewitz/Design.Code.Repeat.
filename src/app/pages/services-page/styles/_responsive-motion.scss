@@ -1,0 +1,136 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive-motion.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Accessibility Overrides
+   02 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .ops-map__packets path,
+    .ops-map__activity i {
+      animation: none;
+    }
+  }
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
+  @media (max-width: 760px) {
+    .care-section__head {
+      grid-template-columns: 1fr;
+    }
+    .care-plan {
+      grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+      gap: 1rem;
+    }
+    .care-plan ul {
+      grid-column: 2 / -1;
+      grid-row: 2;
+    }
+    .care-plan__price {
+      font-size: 0.8rem;
+    }
+    .care-section__footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .care-plan {
+      grid-template-columns: 1.25rem minmax(0, 1fr);
+    }
+    .care-plan__price {
+      grid-column: 2;
+      text-align: left;
+    }
+    .ops-map__module {
+      padding-inline: 0.35rem;
+    }
+  }
+
+  @media (max-width: 980px), (max-height: 799px) {
+    .services-page > dcr-signal-divider {
+      margin-block: calc(var(--dcr-section-y) * 1.5);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .ops-section {
+      height: auto;
+      padding-bottom: calc(clamp(22rem, 52vh, 40rem) + var(--dcr-section-y));
+    }
+
+    .ops-section__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .services-hero__copy {
+      width: 100%;
+      min-height: 0;
+    }
+
+    .services-hero__visual {
+      display: none;
+    }
+
+    .services-offers__head,
+    .service-index__head {
+      grid-template-columns: 1fr;
+    }
+
+    .services-offers__list {
+      grid-template-columns: 1fr;
+    }
+
+    .service-console {
+      grid-template-columns: 1fr;
+    }
+
+    .service-console__tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, auto);
+      border-right: 0;
+      border-bottom: 1px solid var(--dcr-color-border);
+    }
+
+    .service-console__tabs button.is-active {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .services-hero h1 {
+      font-size: clamp(2.8rem, 13vw, 5rem);
+    }
+
+    .service-console__tabs {
+      grid-template-columns: 1fr;
+    }
+
+    .service-console__quick,
+    .service-console__quick ul {
+      grid-template-columns: 1fr;
+    }
+  }
+}

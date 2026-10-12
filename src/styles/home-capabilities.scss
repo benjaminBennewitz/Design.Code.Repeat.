@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     home-capabilities.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Home Capabilities
+   02 Responsive Layout
+   03 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Home Capabilities
+   ========================================================================== */
 .home-capabilities {
   padding-block: clamp(3.5rem, 6vw, 6rem);
   background: var(--dcr-color-bg);
@@ -94,7 +120,9 @@
 
 .home-capabilities__arrow {
   font-size: 1.25rem;
-  transition: color 250ms ease, transform 350ms var(--dcr-ease-out);
+  transition:
+    color 250ms ease,
+    transform 350ms var(--dcr-ease-out);
 }
 
 .home-capabilities__icon {
@@ -102,7 +130,9 @@
   margin-block: 0.75rem;
   color: var(--capability-accent);
   font-size: clamp(2.5rem, 3.2vw, 3.5rem);
-  font-variation-settings: 'FILL' 0, 'wght' 200;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 200;
   transition: transform 350ms var(--dcr-ease-out);
 }
 
@@ -141,7 +171,10 @@
 
 .home-capabilities__description p {
   grid-area: 1 / 1;
-  transition: opacity 220ms ease, transform 350ms var(--dcr-ease-out), visibility 220ms;
+  transition:
+    opacity 220ms ease,
+    transform 350ms var(--dcr-ease-out),
+    visibility 220ms;
 }
 
 .home-capabilities__detail {
@@ -182,32 +215,83 @@
   outline-offset: -2px;
 }
 
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+
 @media (max-width: 900px) {
-  .home-capabilities__layout { grid-template-columns: 1fr; }
-  .home-capabilities__intro { padding: 2rem 0; }
-  .home-capabilities__intro h2 { max-width: 26ch; }
-  .home-capabilities__lead { max-width: 65ch; }
-  .home-capabilities__signature { display: none; }
-  .home-capabilities__grid { border-top: 1px solid var(--dcr-color-border-strong); }
-  .home-capabilities__item:nth-child(odd) { border-left: 0; }
+  .home-capabilities__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .home-capabilities__intro {
+    padding: 2rem 0;
+  }
+
+  .home-capabilities__intro h2 {
+    max-width: 26ch;
+  }
+
+  .home-capabilities__lead {
+    max-width: 65ch;
+  }
+
+  .home-capabilities__signature {
+    display: none;
+  }
+
+  .home-capabilities__grid {
+    border-top: 1px solid var(--dcr-color-border-strong);
+  }
+
+  .home-capabilities__item:nth-child(odd) {
+    border-left: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  .home-capabilities__item { min-height: 13rem; padding: 1rem; }
-  .home-capabilities__copy h3 { font-size: clamp(1.1rem, 5vw, 1.5rem); }
-  .home-capabilities__copy p { font-size: 0.75rem; overflow-wrap: anywhere; }
+  .home-capabilities__item {
+    min-height: 13rem;
+    padding: 1rem;
+  }
+
+  .home-capabilities__copy h3 {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  .home-capabilities__copy p {
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (hover: none) {
-  .home-capabilities__kicker { display: none; }
-  .home-capabilities__detail { visibility: visible; opacity: 1; transform: none; }
+  .home-capabilities__kicker {
+    display: none;
+  }
+
+  .home-capabilities__detail {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
 }
 
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
+
   .home-capabilities__description p,
   .home-capabilities__item::before,
   .home-capabilities__arrow,
-  .home-capabilities__icon { transition: none; }
+  .home-capabilities__icon {
+    transition: none;
+  }
+
   .home-capabilities__item:is(:hover, :focus-visible) .home-capabilities__arrow,
-  .home-capabilities__item:is(:hover, :focus-visible) .home-capabilities__icon { transform: none; }
+  .home-capabilities__item:is(:hover, :focus-visible) .home-capabilities__icon {
+    transform: none;
+  }
 }

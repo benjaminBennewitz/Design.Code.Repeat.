@@ -1,0 +1,324 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _case-rows.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Case Rows
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Case Rows
+   ========================================================================== */
+  .case-study {
+    --reference-accent: var(--dcr-color-primary);
+    --case-reveal-x: -18vw;
+    --case-reveal-rotate-y: 24deg;
+    --case-reveal-rotate-z: -8deg;
+    --reference-on-accent: var(--dcr-color-on-primary);
+    --reference-accent-text: var(--dcr-color-primary-text);
+    --dcr-section-bg: var(--dcr-color-bg-soft);
+    --dcr-section-next-bg: var(--dcr-color-bg);
+    display: grid;
+    align-items: center;
+  }
+
+  .case-study:nth-of-type(even) {
+    --dcr-section-bg: var(--dcr-color-bg);
+    --dcr-section-next-bg: var(--dcr-color-bg-soft);
+    --case-reveal-x: 18vw;
+    --case-reveal-rotate-y: -24deg;
+    --case-reveal-rotate-z: 8deg;
+  }
+
+  .case-study[data-accent='lime'] {
+    --reference-accent: var(--dcr-color-lime);
+    --reference-accent-text: var(--dcr-color-lime-text);
+    --reference-on-accent: var(--dcr-color-on-lime);
+  }
+
+  .case-study[data-accent='pink'] {
+    --reference-accent: var(--dcr-color-pink);
+    --reference-accent-text: var(--dcr-color-pink-text);
+    --reference-on-accent: var(--dcr-color-on-pink);
+  }
+
+  .case-study[data-accent='violet'] {
+    --reference-accent: var(--dcr-color-violet);
+    --reference-accent-text: var(--dcr-color-violet-text);
+    --reference-on-accent: var(--dcr-color-on-violet);
+  }
+
+  .case-study[data-accent='orange'] {
+    --reference-accent: var(--dcr-color-orange);
+    --reference-accent-text: var(--dcr-color-orange-text);
+    --reference-on-accent: var(--dcr-color-on-orange);
+  }
+
+  .reference-row {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+    min-height: min(70vh, 640px);
+    border: 2px solid var(--dcr-color-border-strong);
+    overflow: hidden;
+    background: var(--dcr-color-surface-solid);
+    box-shadow: 12px 12px 0 color-mix(in srgb, var(--reference-accent) 26%, transparent);
+  }
+
+  :host(.is-reveal-ready) .reference-row[data-case-study-card] {
+    opacity: 0;
+    filter: blur(8px);
+    transform: perspective(1600px) translate3d(var(--case-reveal-x), 10vh, -980px) rotateX(18deg)
+      rotateY(var(--case-reveal-rotate-y)) rotateZ(var(--case-reveal-rotate-z)) scale(0.64);
+    transform-origin: 50% 60%;
+    transition:
+      opacity 520ms ease,
+      filter 760ms ease,
+      transform 1100ms var(--dcr-ease-out);
+    will-change: opacity, filter, transform;
+  }
+
+  :host(.is-reveal-ready) .reference-row[data-case-study-card].is-revealed {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1600px) translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  }
+
+  .reference-row__visual {
+    position: relative;
+    isolation: isolate;
+    min-height: 0;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--reference-accent) 24%, transparent), transparent 58%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--reference-accent) 74%, black 26%),
+        color-mix(in srgb, var(--dcr-color-bg) 86%, black 14%)
+      );
+  }
+
+  .reference-row__visual img,
+  .reference-row__visual-fallback {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .reference-row__visual img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    object-fit: cover;
+    object-position: top left;
+    filter: saturate(0.94) brightness(0.84) contrast(1.03);
+    transition:
+      transform 240ms var(--dcr-ease-out),
+      filter 240ms ease;
+  }
+
+  .reference-row[data-reference='design-archive'] .reference-row__visual {
+    background: #000;
+  }
+
+  .reference-row[data-reference='design-archive'] .reference-row__visual img {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .reference-row:is(:hover, :focus-within) .reference-row__visual img {
+    transform: scale(1.025);
+    filter: saturate(1.02) brightness(0.94) contrast(1.04);
+  }
+
+  .reference-row__visual-fallback {
+    display: grid;
+    align-content: end;
+    gap: 0.5rem;
+    padding: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .reference-row__visual-fallback span,
+  .reference-row__visual-fallback strong {
+    position: relative;
+    z-index: 2;
+  }
+
+  .reference-row__visual-fallback span {
+    color: color-mix(in srgb, var(--reference-on-accent) 82%, transparent);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  .reference-row__visual-fallback strong {
+    color: var(--reference-on-accent);
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2.7rem, 7vw, 5.2rem);
+    line-height: 0.82;
+    letter-spacing: -0.07em;
+  }
+
+  .reference-row__visual-raster,
+  .reference-row__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .reference-row__visual-raster {
+    z-index: 1;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--reference-on-accent) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--reference-on-accent) 10%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.44;
+  }
+
+  .reference-row__visual::after {
+    z-index: 1;
+    background:
+      linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--reference-accent) 42%, transparent) 0%,
+        color-mix(in srgb, var(--reference-accent) 18%, transparent) 42%,
+        transparent 78%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 46%,
+        color-mix(in srgb, var(--reference-accent) 26%, var(--dcr-color-bg) 24%) 100%
+      );
+  }
+
+  .reference-row__index {
+    position: absolute;
+    z-index: 3;
+    top: 1rem;
+    left: 1rem;
+    border: 1px solid color-mix(in srgb, var(--reference-on-accent) 24%, transparent);
+    padding: 0.34rem 0.46rem;
+    background: var(--reference-accent);
+    color: var(--reference-on-accent);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.64rem;
+    font-weight: 900;
+  }
+
+  .reference-row__content {
+    display: grid;
+    min-width: 0;
+    gap: clamp(0.75rem, 1.4vh, 1rem);
+    align-content: center;
+    padding: clamp(1.5rem, 3vw, 2.8rem);
+  }
+
+  .reference-row__meta {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.62rem;
+  }
+
+  .reference-row h2 {
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2.35rem, min(4.8vw, 5.8vh), 5rem);
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+  }
+
+  .reference-row p,
+  .reference-row small {
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(0.8rem, 0.94vw, 0.96rem);
+    line-height: 1.62;
+  }
+
+  .reference-row__details {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reference-row__details li {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.5rem;
+    min-width: 0;
+    color: var(--dcr-color-text);
+    font-size: 0.78rem;
+    line-height: 1.52;
+  }
+
+  .reference-row__details .material-symbols-outlined {
+    color: var(--reference-accent-text);
+    font-size: 1rem;
+    line-height: 1.52;
+  }
+
+  .reference-row ul:not(.reference-row__details) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reference-row ul:not(.reference-row__details) li {
+    border: 1px solid var(--dcr-color-border);
+    padding: 0.28rem 0.42rem;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.58rem;
+  }
+
+  .reference-row a {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    border: 2px solid var(--reference-accent);
+    padding: 0.5rem 0.7rem;
+    background: var(--reference-accent);
+    color: var(--reference-on-accent);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.68rem;
+    font-weight: 900;
+    text-decoration: none;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .reference-row a:hover,
+  .reference-row a:focus-visible {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--dcr-color-border-strong);
+  }
+}

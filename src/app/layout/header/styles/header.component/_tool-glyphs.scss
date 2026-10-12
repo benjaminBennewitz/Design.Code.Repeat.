@@ -1,0 +1,108 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _tool-glyphs.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Header Tool Glyphs
+*/
+
+/* ==========================================================================
+   Header Tool Glyphs
+   ========================================================================== */
+
+@mixin render {
+  .site-header__tool-glyph {
+    display: inline-grid;
+    min-width: 1.5rem;
+    place-items: center;
+    font-family: var(--dcr-font-mono);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .site-header__tool-glyph--text {
+    font-size: 0.58rem;
+    letter-spacing: -0.04em;
+  }
+
+  .site-header__controls > :is(button, a),
+  .site-header__menu-tools button,
+  .site-header__close {
+    position: absolute;
+    --header-fill: var(--dcr-color-lime);
+    --header-fill-text: var(--dcr-color-on-lime);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      color 240ms ease,
+      border-color 240ms ease;
+  }
+
+  .site-header__close {
+    position: absolute;
+    --header-fill: var(--dcr-color-pink);
+    --header-fill-text: var(--dcr-color-on-pink);
+  }
+
+  .site-header__controls > :is(button, a)::before,
+  .site-header__menu-tools button::before,
+  .site-header__close::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    background: var(--header-fill);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 320ms var(--dcr-ease-out);
+    pointer-events: none;
+  }
+
+  .site-header__controls > :is(button, a):is(:hover, :focus-visible),
+  .site-header__menu-tools button:is(:hover, :focus-visible),
+  .site-header__close:is(:hover, :focus-visible) {
+    border-color: var(--header-fill);
+    color: var(--header-fill-text);
+  }
+
+  .site-header__controls > :is(button, a):is(:hover, :focus-visible)::before,
+  .site-header__menu-tools button:is(:hover, :focus-visible)::before,
+  .site-header__close:is(:hover, :focus-visible)::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  .site-header__menu-button b {
+    transition: transform 320ms var(--dcr-ease-out);
+  }
+
+  .site-header__menu-button[aria-expanded='true'] b {
+    transform: rotate(45deg);
+  }
+
+  @keyframes dcr-menu-close-reveal {
+    from {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

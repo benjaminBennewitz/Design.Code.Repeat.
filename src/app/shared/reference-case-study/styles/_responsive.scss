@@ -1,0 +1,205 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 1280px) {
+    .dcr-case .project-detail__metric-strip {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .dcr-case .project-detail__metric:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .dcr-case .project-detail__metric:last-child {
+      border-right: 1px solid var(--bp-color-border);
+    }
+  }
+
+  @media (max-width: 1180px) {
+    .dcr-case .project-detail__hero-grid,
+    .dcr-case .project-detail__map,
+    .dcr-case .project-detail__architecture-head {
+      grid-template-columns: 1fr;
+    }
+
+    .dcr-case .project-detail__hero-stage {
+      min-height: 680px;
+    }
+
+    .dcr-case .project-detail__floating-window--status {
+      inset: 0 auto auto 0;
+    }
+
+    .dcr-case .project-detail__floating-window--events {
+      inset: 0 0 auto auto;
+    }
+
+    .dcr-case .project-detail__floating-window--auth {
+      inset: auto auto 0 0;
+    }
+
+    .dcr-case .project-detail__floating-window--queue {
+      inset: auto 0 0 auto;
+    }
+
+    .dcr-case .project-detail__chapter-grid,
+    .dcr-case .project-detail__highlight-grid,
+    .dcr-case .project-detail__app-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dcr-case .project-detail__evidence-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .dcr-case .project-detail__info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dcr-case .project-detail__meta {
+      position: relative;
+      top: auto;
+    }
+
+    .dcr-case .project-detail__blueprint {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: none;
+      min-height: auto;
+    }
+
+    .dcr-case .project-detail__map-node,
+    .dcr-case .project-detail__map-node:nth-of-type(1),
+    .dcr-case .project-detail__map-node:nth-of-type(2),
+    .dcr-case .project-detail__map-node:nth-of-type(3),
+    .dcr-case .project-detail__map-node:nth-of-type(4),
+    .dcr-case .project-detail__map-node:nth-of-type(5),
+    .dcr-case .project-detail__map-node:nth-of-type(6),
+    .dcr-case .project-detail__map-node:nth-of-type(7) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .dcr-case .project-detail__map-node::after {
+      content: none;
+    }
+
+    .dcr-case .project-detail__flow-legend {
+      position: relative;
+      inset: auto;
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .dcr-case .project-detail__hero-grid {
+      min-height: auto;
+    }
+
+    .dcr-case .project-detail__hero-stage {
+      min-height: auto;
+    }
+
+    .dcr-case .project-detail__app-stack {
+      position: relative;
+      inset: auto;
+      display: grid;
+      justify-items: center;
+      width: min(100%, 360px);
+      height: auto;
+      min-height: 410px;
+      gap: var(--bp-space-3);
+      margin-inline: auto;
+      padding-bottom: 4.4rem;
+      transform: none;
+    }
+
+    .dcr-case .project-detail__stack-card,
+    .dcr-case .project-detail__stack-card:hover,
+    .dcr-case .project-detail__stack-card:focus-visible,
+    .dcr-case .project-detail__stack-card.is-active,
+    .dcr-case .project-detail__app-focus {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      min-height: auto;
+      opacity: 1;
+      transform: none;
+    }
+
+    .dcr-case .project-detail__stack-card {
+      display: none;
+    }
+
+    .dcr-case .project-detail__floating-windows {
+      position: absolute;
+      z-index: 70;
+      inset: auto auto 4.95rem 50%;
+      display: block;
+      width: min(82vw, 250px);
+      margin: 0;
+      transform: translateX(-50%);
+    }
+
+    .dcr-case .project-detail__floating-window,
+    .dcr-case .project-detail__floating-window--status,
+    .dcr-case .project-detail__floating-window--events,
+    .dcr-case .project-detail__floating-window--auth,
+    .dcr-case .project-detail__floating-window--queue {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      transform: none;
+    }
+
+    .dcr-case .project-detail__floating-window:not(.project-detail__floating-window--status) {
+      display: none;
+    }
+
+    .dcr-case .project-detail__metric-strip,
+    .dcr-case .project-detail__chapter-grid,
+    .dcr-case .project-detail__highlight-grid,
+    .dcr-case .project-detail__app-grid,
+    .dcr-case .project-detail__blueprint {
+      grid-template-columns: 1fr;
+    }
+
+    .dcr-case .project-detail__metric,
+    .dcr-case .project-detail__metric:nth-child(4n),
+    .dcr-case .project-detail__metric:last-child {
+      border-right: 0;
+      border-bottom: 1px solid var(--bp-color-border);
+    }
+
+    .dcr-case .project-detail__metric:last-child {
+      border-bottom: 0;
+    }
+
+    .dcr-case .project-detail__evidence-grid {
+      column-count: 1;
+    }
+  }
+}

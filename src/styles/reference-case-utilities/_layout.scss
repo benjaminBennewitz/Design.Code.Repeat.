@@ -1,0 +1,99 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _layout.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Layout
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Layout
+   ========================================================================== */
+  .bp-page-shell {
+    position: relative;
+    min-height: 100svh;
+  }
+
+  .bp-scroll-main {
+    scroll-snap-type: y proximity;
+  }
+
+  .bp-section {
+    position: relative;
+    display: grid;
+    width: 100%;
+    align-items: center;
+    min-height: 100svh;
+    padding: calc(var(--bp-header-height) + var(--bp-space-6)) var(--bp-stage-gutter) var(--bp-space-7);
+    overflow-x: clip;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  .bp-container {
+    min-width: 0;
+    width: min(100%, var(--bp-content-max-width));
+    max-width: var(--bp-content-max-width);
+    margin: 0 auto;
+  }
+
+  .bp-grid-two {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+    gap: var(--bp-space-6);
+    align-items: center;
+  }
+
+  .bp-grid-two>* {
+    min-width: 0;
+  }
+
+  .bp-eyebrow {
+    display: inline-flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.55rem;
+    width: fit-content;
+    margin: 0 0 var(--bp-space-3);
+    border: 1px solid var(--bp-color-accent);
+    padding: 0.42rem 0.7rem;
+    background: color-mix(in srgb, var(--bp-color-bg) 74%, transparent);
+    color: var(--bp-color-accent-text);
+    font-family: var(--bp-font-mono);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 24%, transparent);
+    overflow-wrap: anywhere;
+  }
+
+  .bp-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    border: 0;
+    white-space: nowrap;
+  }
+}

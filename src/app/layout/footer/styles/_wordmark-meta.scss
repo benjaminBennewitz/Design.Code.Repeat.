@@ -1,0 +1,101 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _wordmark-meta.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Wordmark Meta
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Wordmark Meta
+   ========================================================================== */
+  .site-footer__wordmark {
+    position: relative;
+    z-index: 1;
+    min-height: 0;
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .site-footer__wordmark-state {
+    position: absolute;
+    right: 0;
+    bottom: 0.02em;
+    left: 0;
+    overflow: visible;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(5.5rem, 12.5vw, 12.5rem);
+    line-height: 0.7;
+    letter-spacing: -0.105em;
+    opacity: 0;
+    transform: translateY(80%);
+    transition:
+      opacity 260ms ease,
+      transform 420ms var(--dcr-ease-out);
+  }
+
+  .site-footer__wordmark-state--design {
+    right: 0;
+    width: 100%;
+  }
+
+  .site-footer__wordmark-state--design > span {
+    display: inline;
+  }
+
+  .site-footer__dot {
+    margin-left: 0.08em;
+    letter-spacing: 0;
+  }
+
+  .site-footer__wordmark-state--repeat {
+    right: auto;
+    width: max-content;
+  }
+
+  .site-footer__wordmark-state.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .site-footer__meta {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.2rem;
+    justify-content: space-between;
+    padding-top: 0.55rem;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.56rem;
+  }
+
+  .site-footer__meta::before {
+    position: absolute;
+    top: 0;
+    right: clamp(4.75rem, 8vw, 8rem);
+    left: 0;
+    height: 1px;
+    content: '';
+    background: color-mix(in srgb, currentColor 22%, transparent);
+    pointer-events: none;
+  }
+
+  .site-footer__meta a {
+    color: inherit;
+  }
+}

@@ -1,0 +1,65 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _light-theme.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Theme Overrides
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Theme Overrides
+   ========================================================================== */
+  :root[data-theme='light'] .bp-eyebrow {
+    background: rgba(255, 253, 248, 0.92);
+    color: #101010;
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 22%, transparent);
+  }
+
+  :root[data-theme='light'] .bp-button {
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 72%, #111111 12%);
+  }
+
+  :root[data-theme='light'] .bp-button:hover,
+  :root[data-theme='light'] .bp-button:focus-visible {
+    box-shadow: 8px 8px 0 color-mix(in srgb, var(--bp-color-accent) 78%, #111111 14%);
+  }
+
+  :root[data-theme='light'] .bp-button--accent {
+    border-color: color-mix(in srgb, #101010 78%, var(--bp-color-accent) 22%);
+    background: var(--bp-action-primary-bg);
+    color: var(--bp-action-primary-fg);
+    box-shadow:
+      4px 4px 0 color-mix(in srgb, var(--bp-color-accent) 68%, #111111 18%),
+      0 14px 34px var(--bp-color-shadow);
+  }
+
+  :root[data-theme='light'] .bp-button--accent:hover,
+  :root[data-theme='light'] .bp-button--accent:focus-visible {
+    box-shadow:
+      10px 10px 0 color-mix(in srgb, var(--bp-color-accent) 62%, #111111 26%),
+      0 0 0 3px color-mix(in srgb, var(--bp-color-accent) 28%, transparent),
+      0 24px 64px var(--bp-color-shadow);
+  }
+
+  :root[data-theme='light'] .bp-button--accent:hover,
+  :root[data-theme='light'] .bp-button--accent:focus-visible,
+  :root[data-theme='light'] .bp-button--accent:hover>*,
+  :root[data-theme='light'] .bp-button--accent:focus-visible>* {
+    color: var(--bp-action-primary-fg);
+  }
+}

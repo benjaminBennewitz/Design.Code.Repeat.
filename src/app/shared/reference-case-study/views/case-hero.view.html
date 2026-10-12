@@ -1,0 +1,221 @@
+<!-- src/app/shared/reference-case-study/views/case-hero.view.html -->
+@if (project().catalogShowcase) {
+<div class="project-detail__catalog-flow" [class.is-paused]="!flow().isVisible()" aria-hidden="true">
+  <canvas #catalogFlowCanvas class="project-detail__catalog-flow-canvas"></canvas>
+  <span class="project-detail__catalog-flow-orb project-detail__catalog-flow-orb--primary"></span>
+  <span class="project-detail__catalog-flow-orb project-detail__catalog-flow-orb--secondary"></span>
+</div>
+}
+
+<div class="project-detail__hero-grid bp-container">
+  <div class="project-detail__hero-copy">
+    <a class="project-detail__back" routerLink="/referenzen">
+      <span class="material-symbols-outlined" aria-hidden="true">keyboard_backspace</span>
+      <span>{{ content().projectsIntro.overviewLabel }}</span>
+    </a>
+
+    <p class="bp-eyebrow project-detail__hero-kicker">B² · {{ project().kicker }}</p>
+    <h1 class="bp-title project-detail__hero-title">
+      @if (project().titleLines; as titleLines) {
+      @for (line of titleLines; track line) {
+      <span [dcrTextReveal]="line"></span>
+      }
+      } @else {
+      <span [dcrTextReveal]="project().name"></span>
+      }
+    </h1>
+    <p class="bp-subtitle project-detail__hero-summary" [dcrTextReveal]="project().summary"></p>
+
+    <ul class="project-detail__hero-tags" [attr.aria-label]="content().projectsIntro.techStackAriaLabel">
+      @for (stack of project().techStack; track stack) {
+      <li>
+        <span>{{ stack }}</span>
+      </li>
+      }
+    </ul>
+
+    <div class="project-detail__hero-actions">
+      <a class="bp-button bp-button--accent" [routerLink]="canonicalPath()" [fragment]="selection().primaryDetailFragment()">
+        <span>{{ project().boardShowcase?.ctaLabel ?? project().bloodShowcase?.ctaLabel ?? project().catalogShowcase?.ctaLabel ?? content().projectsIntro.caseStudyLabel }}</span>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
+
+      @if (project().liveDemo; as demo) {
+      @if (demo.status === 'available' && demo.url) {
+      <a class="bp-button bp-button--ghost" [href]="demo.url" target="_blank" rel="noopener noreferrer">
+        <span>{{ content().projectsIntro.openDemoLabel }}</span>
+        <svg class="project-detail__external-link-icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path d="M7 17 17 7H9V5h12v12h-2V9L9 19l-2-2Z" />
+        </svg>
+      </a>
+      }
+      }
+    </div>
+  </div>
+
+  @if (!project().catalogShowcase) {
+  <div class="project-detail__hero-stage" [attr.aria-label]="content().projectsIntro.previewAriaLabel">
+    @if (project().boardShowcase; as boardShowcase) {
+    <div class="project-detail__task-cloud" [attr.aria-label]="boardShowcase.boardLabel">
+      @for (task of boardShowcase.heroTasks; track task.title; let index = $index) {
+      <article class="project-detail__floating-task" [style.--task-index]="index">
+        <header class="project-detail__floating-task-head">
+          <span>{{ boardShowcase.heroTaskLabels.todo }}</span>
+          <span class="material-symbols-outlined" aria-hidden="true">more_horiz</span>
+        </header>
+
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.excerpt }}</p>
+
+        <div class="project-detail__floating-task-meta">
+          <span class="project-detail__floating-task-owner" [attr.aria-label]="boardShowcase.heroTaskLabels.owner + ': ' + task.ownerInitials">{{ task.ownerInitials }}</span>
+          <time [attr.datetime]="task.dueDateIso" [attr.aria-label]="boardShowcase.heroTaskLabels.dueDate + ': ' + task.dueDate">
+            <span class="material-symbols-outlined" aria-hidden="true">event</span>
+            <span>{{ task.dueDate }}</span>
+          </time>
+        </div>
+
+        <ul class="project-detail__floating-task-kpis">
+          <li [attr.aria-label]="boardShowcase.heroTaskLabels.attachments + ': ' + task.attachmentCount">
+            <span class="material-symbols-outlined" aria-hidden="true">attachment</span>
+            <strong>{{ task.attachmentCount }}</strong>
+          </li>
+          <li [attr.aria-label]="boardShowcase.heroTaskLabels.comments + ': ' + task.commentCount">
+            <span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span>
+            <strong>{{ task.commentCount }}</strong>
+          </li>
+          <li [class.is-active]="task.hasRule" [attr.aria-label]="boardShowcase.heroTaskLabels.rule + ': ' + (task.hasRule ? '1' : '0')">
+            <span class="material-symbols-outlined" aria-hidden="true">automation</span>
+            <strong>{{ task.hasRule ? '1' : '0' }}</strong>
+          </li>
+        </ul>
+      </article>
+      }
+    </div>
+    } @else if (project().bloodShowcase; as bloodShowcase) {
+    <aside class="project-detail__blood-showcase project-detail__blood-showcase--objects" [attr.aria-label]="bloodShowcase.previewLabel">
+      <div class="project-detail__blood-hero-objects">
+        <span class="project-detail__blood-grid-plane" aria-hidden="true"></span>
+        <span class="project-detail__blood-data-orb project-detail__blood-data-orb--primary" aria-hidden="true"></span>
+        <span class="project-detail__blood-data-orb project-detail__blood-data-orb--secondary" aria-hidden="true"></span>
+
+        <section class="project-detail__blood-object project-detail__blood-object--bars" [attr.aria-label]="bloodShowcase.heroChartTitle">
+          <header>
+            <span class="material-symbols-outlined" aria-hidden="true">bar_chart_4_bars</span>
+            <div>
+              <strong>{{ bloodShowcase.heroChartTitle }}</strong>
+              <small>{{ bloodShowcase.status }}</small>
+            </div>
+          </header>
+
+          <div class="project-detail__blood-object-bars" aria-hidden="true">
+            @for (value of bloodShowcase.values; track value.label) {
+            <div [class]="'project-detail__blood-object-bar project-detail__blood-object-bar--' + value.tone" [style.--blood-position]="value.position + '%'">
+              <span>{{ value.label }}</span>
+              <i></i>
+              <strong>{{ value.value }}</strong>
+            </div>
+            }
+          </div>
+        </section>
+
+        <section class="project-detail__blood-object project-detail__blood-object--line" aria-label="Trenddiagramm">
+          <span>{{ bloodShowcase.eyebrow }}</span>
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M12 118 L68 86 L122 98 L178 42 L238 66 L308 28"></path>
+            <circle cx="178" cy="42" r="7"></circle>
+            <circle cx="308" cy="28" r="7"></circle>
+          </svg>
+          <strong>{{ bloodShowcase.heroChartText }}</strong>
+        </section>
+
+        <section class="project-detail__blood-object project-detail__blood-object--range" aria-label="Referenzbereiche">
+          @for (value of bloodShowcase.values.slice(0, 3); track value.label) {
+          <div [class]="'project-detail__blood-object-range project-detail__blood-object-range--' + value.tone" [style.--blood-position]="value.position + '%'">
+            <span>{{ value.label }}</span>
+            <i><b></b></i>
+          </div>
+          }
+        </section>
+      </div>
+    </aside>
+    } @else if ((project().appModules?.length ?? 0) > 0) {
+    <div class="project-detail__app-stack" [style.--stack-active]="selection().activeAppModuleIndex()" aria-label="Interaktive App-Karten">
+      @for (app of project().appModules ?? []; track app.id; let index = $index) {
+      <article class="project-detail__stack-card" [class.is-active]="selection().activeAppModule()?.id === app.id" [style.--stack-index]="index" [style.--stack-offset]="index - selection().activeAppModuleIndex()" aria-hidden="true">
+        <span class="material-symbols-outlined" aria-hidden="true">{{ app.icon }}</span>
+        <strong>{{ app.title }}</strong>
+        <small>{{ app.badge }}</small>
+      </article>
+      }
+
+      @if (selection().activeAppModule(); as selectedApp) {
+      <article class="project-detail__app-focus" aria-live="polite">
+        <div class="project-detail__app-focus-bar">
+          <span>app_focus.exe</span>
+          <span aria-hidden="true">×</span>
+        </div>
+        <div class="project-detail__app-focus-body">
+          <span class="project-detail__app-star material-symbols-outlined" aria-hidden="true">star</span>
+          <span class="material-symbols-outlined project-detail__app-focus-icon" aria-hidden="true">{{ selectedApp.icon }}</span>
+          <div>
+            <p>{{ selectedApp.badge }}</p>
+            <h2>{{ selectedApp.title }}</h2>
+            <span>{{ selectedApp.text }}</span>
+          </div>
+        </div>
+      </article>
+      }
+
+      <div class="project-detail__stack-controls" aria-label="App-Karten durchschalten">
+        <button type="button" class="project-detail__stack-control" aria-label="Vorherige App anzeigen" (click)="selection().selectAdjacentAppModule(-1)">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        </button>
+
+        <div class="project-detail__stack-dots">
+          @for (app of project().appModules ?? []; track app.id) {
+          <button type="button" [class.is-active]="selection().activeAppModule()?.id === app.id" [attr.aria-label]="app.title" [attr.aria-pressed]="selection().activeAppModule()?.id === app.id" (click)="selection().selectAppModule(app.id)"></button>
+          }
+        </div>
+
+        <button type="button" class="project-detail__stack-control" aria-label="Nächste App anzeigen" (click)="selection().selectAdjacentAppModule(1)">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+    } @else if ((project().terminalLines?.length ?? 0) > 0 && selection().isTerminalVisible()) {
+    <bp-system-dialog class="project-detail__terminal" [title]="project().terminalTitle ?? 'project.inspect.exe'"
+      [ariaLabel]="project().terminalTitle ?? project().name" [closeLabel]="content().projectsIntro.dialogCloseLabel"
+      (closed)="selection().closeTerminal()">
+      <div class="bp-dos-window__body project-detail__terminal-body">
+        @for (line of project().terminalLines ?? []; track $index) {
+        <p>{{ line }}</p>
+        }
+      </div>
+    </bp-system-dialog>
+    }
+
+    @if ((project().terminalWidgets?.length ?? 0) > 0) {
+    <div class="project-detail__floating-windows" aria-label="Technische Statusfenster">
+      @for (widget of project().terminalWidgets ?? []; track widget.id) {
+      @if (selection().isTerminalWidgetVisible(widget.id)) {
+      <bp-system-dialog class="project-detail__floating-window"
+        [class.project-detail__floating-window--status]="widget.position === 'status'"
+        [class.project-detail__floating-window--events]="widget.position === 'events'"
+        [class.project-detail__floating-window--auth]="widget.position === 'auth'"
+        [class.project-detail__floating-window--queue]="widget.position === 'queue'"
+        [title]="widget.title" [closeLabel]="content().projectsIntro.dialogCloseLabel"
+        (closed)="selection().closeTerminalWidget(widget.id)">
+        <div class="bp-dos-window__body project-detail__floating-window-body">
+          @for (line of widget.lines; track line) {
+          <p>{{ line }}</p>
+          }
+        </div>
+      </bp-system-dialog>
+      }
+      }
+    </div>
+    }
+  </div>
+  }
+</div>

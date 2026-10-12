@@ -1,0 +1,222 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Accessibility Overrides
+   03 Animation Keyframes
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 1439px) {
+    .dcr-case .project-detail__lightbox-panel {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .dcr-case .project-detail__lightbox-copy {
+      justify-content: start;
+      padding-bottom: 3.8rem;
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .dcr-case .project-detail__catalog-showcase {
+      width: min(100%, 680px);
+      transform: rotate(-1.5deg);
+    }
+  }
+
+  @media (max-width: 820px) {
+    .dcr-case .project-detail__masonry-gallery {
+      column-count: 3;
+      column-gap: 0.85rem;
+    }
+
+    .dcr-case .project-detail__masonry-card {
+      margin-bottom: 0.85rem;
+    }
+
+    .dcr-case .project-detail__masonry-image {
+      min-height: 210px;
+    }
+
+    .dcr-case .project-detail__masonry-card--sm .project-detail__masonry-image {
+      min-height: 160px;
+    }
+
+    .dcr-case .project-detail__masonry-card--lg .project-detail__masonry-image {
+      min-height: 290px;
+    }
+
+    .dcr-case .project-detail__catalog-book:not(.project-detail__catalog-book--reader) {
+      grid-template-columns: 1fr;
+      aspect-ratio: auto;
+    }
+
+    .dcr-case .project-detail__catalog-book:not(.project-detail__catalog-book--reader)::after {
+      content: none;
+    }
+
+    .dcr-case .project-detail__catalog-book--reader {
+      width: min(100%, calc((100svh - var(--bp-header-height) - 5rem) * 1.68));
+      height: auto;
+      max-height: none;
+    }
+
+    .dcr-case .project-detail__catalog-page {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .dcr-case .project-detail__catalog-showcase {
+      transform: none;
+    }
+
+    .dcr-case .project-detail__catalog-reader-section {
+      padding-right: 0.65rem;
+      padding-left: 0.65rem;
+    }
+
+    .dcr-case .project-detail__catalog-reader-frame {
+      height: calc(100svh - var(--bp-header-height) - 1.6rem);
+      padding: 0.45rem;
+    }
+
+    .dcr-case .project-detail__catalog-menu-button strong {
+      display: none;
+    }
+
+    .dcr-case .project-detail__catalog-reader-controls span {
+      max-width: 18ch;
+    }
+
+    .dcr-case .project-detail__masonry-gallery {
+      column-count: 2;
+      column-gap: 0.65rem;
+    }
+
+    .dcr-case .project-detail__masonry-card {
+      margin-bottom: 0.65rem;
+    }
+
+    .dcr-case .project-detail__masonry-card button {
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.14);
+    }
+
+    .dcr-case .project-detail__masonry-image {
+      min-height: 145px;
+    }
+
+    .dcr-case .project-detail__masonry-card--sm .project-detail__masonry-image {
+      min-height: 112px;
+    }
+
+    .dcr-case .project-detail__masonry-card--lg .project-detail__masonry-image {
+      min-height: 205px;
+    }
+
+    .dcr-case .project-detail__masonry-caption {
+      gap: 0.24rem;
+      padding: 0.58rem 0.6rem 0.66rem;
+    }
+
+    .dcr-case .project-detail__masonry-caption strong {
+      font-size: clamp(0.76rem, 4.2vw, 0.98rem);
+      letter-spacing: -0.045em;
+    }
+
+    .dcr-case .project-detail__masonry-caption small {
+      font-size: 0.68rem;
+      line-height: 1.32;
+    }
+
+    .dcr-case .project-detail__catalog-head {
+      padding-inline: 1rem;
+    }
+
+    .dcr-case .project-detail__lightbox {
+      inset: var(--bp-header-height) 0 0;
+      padding: 0.5rem max(0.5rem, env(safe-area-inset-right)) max(0.5rem, env(safe-area-inset-bottom)) max(0.5rem, env(safe-area-inset-left));
+    }
+
+    .dcr-case .project-detail__lightbox-panel {
+      width: calc(100svw - 1rem);
+      height: min(88svh, calc(100svh - var(--bp-header-height) - 1rem - env(safe-area-inset-bottom)));
+      max-height: calc(100svh - var(--bp-header-height) - 1rem - env(safe-area-inset-bottom));
+      padding-top: 0.9rem;
+    }
+
+    .dcr-case .project-detail__lightbox-close {
+      top: 0.55rem;
+      right: 0.55rem;
+    }
+
+    .dcr-case .project-detail__lightbox-copy {
+      padding-bottom: 4.6rem;
+    }
+
+    .dcr-case .project-detail__lightbox-actions {
+      right: auto;
+      bottom: max(0.65rem, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  :root[data-motion='reduced'] .dcr-case .project-detail__catalog-loader-mark i,
+  :root[data-motion='off'] .dcr-case .project-detail__catalog-loader-mark i {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .dcr-case .project-detail__catalog-loader-mark i,
+    .dcr-case .project-detail__catalog-page,
+    .dcr-case .project-detail__masonry-card,
+    .dcr-case .project-detail__catalog-reader-meta,
+    .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-in .project-detail__lightbox-visual,
+    .dcr-case .project-detail__lightbox-panel.is-lightbox-fading-in .project-detail__lightbox-copy {
+      animation: none;
+    }
+  }
+
+  /* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
+  @keyframes projectCatalogLoaderPulse {
+    from {
+      opacity: 0.35;
+      transform: scale(0.72);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

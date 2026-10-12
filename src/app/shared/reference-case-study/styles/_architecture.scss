@@ -1,0 +1,256 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _architecture.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Architecture
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Architecture
+   ========================================================================== */
+  .dcr-case .project-detail__architecture {
+    display: grid;
+    gap: var(--bp-space-5);
+    margin-bottom: var(--bp-space-6);
+  }
+
+  .dcr-case .project-detail__architecture-head {
+    display: grid;
+    grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr);
+    gap: var(--bp-space-5);
+    align-items: end;
+  }
+
+  .dcr-case .project-detail__architecture-head h3,
+  .dcr-case .project-detail__map-detail h3,
+  .dcr-case .project-detail__chapter h3,
+  .dcr-case .project-detail__evidence-card h3 {
+    margin: 0;
+    font-family: var(--bp-font-display);
+    font-size: clamp(1.35rem, 2.2vw, 2.55rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .dcr-case .project-detail__architecture-head p {
+    max-width: 760px;
+    margin: 0;
+    color: var(--bp-color-text-muted);
+    line-height: 1.65;
+  }
+
+  .dcr-case .project-detail__map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.36fr);
+    gap: var(--bp-space-4);
+    align-items: stretch;
+  }
+
+  .dcr-case .project-detail__blueprint {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(124px, 1fr));
+    gap: var(--bp-space-3);
+    min-height: 560px;
+    border: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 58%);
+    border-radius: 0;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bp-color-accent), transparent 91%) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--bp-color-accent), transparent 93%) 1px, transparent 1px),
+      color-mix(in srgb, var(--bp-color-surface), transparent 8%);
+    background-size: 42px 42px;
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__blueprint::before,
+  .dcr-case .project-detail__blueprint::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__blueprint::before {
+    inset: 24% 8% auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bp-color-accent), transparent);
+    opacity: 0.44;
+  }
+
+  .dcr-case .project-detail__blueprint::after {
+    inset: 51% 8% auto;
+    height: 1px;
+    border-top: 1px dashed color-mix(in srgb, var(--bp-color-accent), transparent 36%);
+    opacity: 0.7;
+  }
+
+  .dcr-case .project-detail__flow-legend {
+    position: absolute;
+    z-index: 4;
+    inset: auto auto var(--bp-space-4) var(--bp-space-4);
+    display: grid;
+    gap: 0.44rem;
+    border: 1px solid var(--bp-color-border);
+    border-radius: 0;
+    padding: 0.75rem;
+    background: color-mix(in srgb, var(--bp-color-bg), transparent 10%);
+    color: var(--bp-color-text-muted);
+    font-family: var(--bp-font-mono);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dcr-case .project-detail__map-node {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 0.72rem;
+    min-width: 0;
+    align-content: start;
+    border: 1px solid var(--bp-color-border);
+    border-radius: 0;
+    padding: var(--bp-space-3);
+    background:
+      radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--bp-color-accent), transparent 90%), transparent 42%),
+      color-mix(in srgb, var(--bp-color-surface), transparent 7%);
+    color: var(--bp-color-text);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      transform 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(3) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(4) {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(6) {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(7) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .dcr-case .project-detail__map-node::after {
+    content: '';
+    position: absolute;
+    inset: 50% -1.3rem auto auto;
+    width: 1.3rem;
+    border-top: 1px solid color-mix(in srgb, var(--bp-color-accent), transparent 38%);
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__map-node:nth-of-type(4)::after,
+  .dcr-case .project-detail__map-node:nth-of-type(6)::after,
+  .dcr-case .project-detail__map-node:nth-of-type(7)::after {
+    content: none;
+  }
+
+  .dcr-case .project-detail__map-node:hover,
+  .dcr-case .project-detail__map-node:focus-visible,
+  .dcr-case .project-detail__map-node.is-active {
+    border-color: var(--bp-color-accent);
+    background: color-mix(in srgb, var(--bp-color-accent), transparent 90%);
+    box-shadow: 0 20px 44px color-mix(in srgb, var(--bp-color-accent), transparent 88%);
+    transform: translateY(-4px);
+  }
+
+  .dcr-case .project-detail__map-node small {
+    color: var(--bp-color-text-muted);
+    font-family: var(--bp-font-mono);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .dcr-case .project-detail__map-node strong {
+    font-family: var(--bp-font-display);
+    font-size: clamp(1rem, 1.45vw, 1.42rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .dcr-case .project-detail__map-detail {
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__map-detail-body {
+    display: grid;
+    align-content: start;
+    gap: var(--bp-space-3);
+    min-height: 100%;
+  }
+
+  .dcr-case .project-detail__map-detail .bp-eyebrow {
+    margin: 0;
+    border-color: color-mix(in srgb, var(--bp-color-accent), #111111 16%);
+    background: var(--bp-color-accent);
+    color: var(--bp-color-on-accent);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.34);
+  }
+
+  .dcr-case .project-detail__map-detail p,
+  .dcr-case .project-detail__map-detail li {
+    margin: 0;
+    color: #111111;
+    line-height: 1.68;
+  }
+
+  .dcr-case .project-detail__map-detail li::before {
+    color: color-mix(in srgb, var(--bp-color-accent), #111111 18%);
+  }
+}

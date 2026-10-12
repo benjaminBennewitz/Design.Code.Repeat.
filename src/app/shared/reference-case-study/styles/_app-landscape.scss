@@ -1,0 +1,87 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _app-landscape.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 App Landscape
+*/
+
+@mixin render {
+  /* ==========================================================================
+   App Landscape
+   ========================================================================== */
+  .dcr-case .project-detail__apps {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 93% 12%, color-mix(in srgb, var(--bp-color-accent), transparent 83%), transparent 23%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bp-color-bg) 86%, black 14%), var(--bp-color-bg));
+  }
+
+  .dcr-case .project-detail__apps::after {
+    content: '';
+    position: absolute;
+    inset: auto -8% 8% auto;
+    width: min(36vw, 520px);
+    aspect-ratio: 1;
+    background: var(--project-detail-halftone);
+    background-size: 9px 9px;
+    opacity: 0.32;
+    mask-image: radial-gradient(circle, black, transparent 74%);
+    pointer-events: none;
+  }
+
+  .dcr-case .project-detail__app-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--bp-space-3);
+  }
+
+  .dcr-case .project-detail__app-card {
+    display: grid;
+    min-width: 0;
+    min-height: 265px;
+    align-content: start;
+    gap: var(--bp-space-3);
+    border-radius: 0;
+    padding: var(--bp-space-4);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 30%),
+      color-mix(in srgb, var(--bp-color-surface), transparent 4%);
+    overflow: hidden;
+  }
+
+  .dcr-case .project-detail__app-badge {
+    position: absolute;
+    inset: 1rem 1rem auto auto;
+    display: inline-flex;
+    min-width: 2.15rem;
+    min-height: 2.15rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.2rem 0.48rem;
+    background: color-mix(in srgb, var(--bp-color-warning), transparent 42%);
+    color: #ffe600;
+    font-family: var(--bp-font-mono);
+    font-size: 0.6rem;
+    font-weight: 950;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}

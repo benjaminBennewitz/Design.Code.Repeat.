@@ -1,3 +1,4 @@
+/* src/app/pages/studio-page/studio-page.component.ts */
 /**
  * @file Studio-/Über-mich-Seite.
  * @description Erklärt die persönliche Arbeitsstruktur hinter Design. Code. Repeat. mit eigenständigem Hero und wiederverwendbarem Tech-Marquee.
@@ -18,48 +19,76 @@ import { TextRevealDirective } from '../../shared/text-reveal.directive';
 @Component({
   selector: 'dcr-studio-page',
   standalone: true,
-  imports: [TextRevealDirective, ScrollRevealDirective, RouterLink, ActionButtonComponent, InfiniteMarqueeComponent, SectionHeadingComponent, SystemGridComponent],
+  imports: [
+    TextRevealDirective,
+    ScrollRevealDirective,
+    RouterLink,
+    ActionButtonComponent,
+    InfiniteMarqueeComponent,
+    SectionHeadingComponent,
+    SystemGridComponent,
+  ],
   templateUrl: './studio-page.component.html',
   styleUrl: './studio-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudioPageComponent {
-  /** Aktuelle Sprache. */
-  private readonly languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService); // Aktuelle Sprache.
+  private readonly seoService = inject(SeoService);           // SEO-Metadaten der Route.
+  readonly content = computed(
+    /** Sprachabhängiger Content. */
+    () => this.languageService.content(),
+  ); // Sprachabhängiger Content.
+  readonly principlesSystemAside = computed(
+    /** Erstes Prinzip als Kontextblock der großen Systemfläche. */
+    () => {
+      /**
+       * Erstes Studio-Prinzip für die große Systemfläche.
+       */
+      const principle = this.content().studioPage.principles[0];
 
-  /** SEO-Metadaten der Route. */
-  private readonly seoService = inject(SeoService);
+      return {
+        eyebrow: '01 // PRINCIPLE',
+        title: principle.title,
+        text: principle.text,
+      };
+    },
+  ); // Erstes Prinzip als Kontextblock der großen Systemfläche.
+  readonly principlesSystemPanels = computed(
+    /** Übrige drei Prinzipien für die wiederkehrenden Sekundärflächen. */
+    () =>
+      this.content()
+        .studioPage.principles.slice(1, 4)
+        .map(
+          /**
+           * Übrige drei Prinzipien für die wiederkehrenden Sekundärflächen.
+           * @param principle Prinzip aus den zentralen Studio-Inhalten.
+           * @param index Position des ausgewählten Eintrags.
+           */
+          (principle, index) => ({
+            eyebrow: `0${index + 2} // PRINCIPLE`,
+            title: principle.title,
+            text: principle.text,
+          }),
+        ),
+  ); // Übrige drei Prinzipien für die wiederkehrenden Sekundärflächen.
+  readonly stackLabel = computed(
+    /** Zugängliche Beschriftung des Tech-Marquees. */
+    () => (this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack'),
+  ); // Zugängliche Beschriftung des Tech-Marquees.
+  readonly practiceItems = computed(
+    /** Ergänzende Begriffe für die zweite Marquee-Spur. */
+    () =>
+      this.languageService.language() === 'de'
+        ? ['Architektur', 'UX', 'Accessibility', 'Performance', 'Security', 'SEO', 'Deployment', 'Monitoring']
+        : ['Architecture', 'UX', 'Accessibility', 'Performance', 'Security', 'SEO', 'Deployment', 'Monitoring'],
+  ); // Ergänzende Begriffe für die zweite Marquee-Spur.
 
-  /** Sprachabhängiger Content. */
-  readonly content = computed(() => this.languageService.content());
-
-  /** Erstes Prinzip als Kontextblock der großen Systemfläche. */
-  readonly principlesSystemAside = computed(() => {
-    const principle = this.content().studioPage.principles[0];
-
-    return {
-      eyebrow: '01 // PRINCIPLE',
-      title: principle.title,
-      text: principle.text,
-    };
-  });
-
-  /** Übrige drei Prinzipien für die wiederkehrenden Sekundärflächen. */
-  readonly principlesSystemPanels = computed(() => this.content().studioPage.principles.slice(1, 4).map((principle, index) => ({
-    eyebrow: `0${index + 2} // PRINCIPLE`,
-    title: principle.title,
-    text: principle.text,
-  })));
-
-  /** Zugängliche Beschriftung des Tech-Marquees. */
-  readonly stackLabel = computed(() => this.languageService.language() === 'de' ? 'Technologie-Stack' : 'Technology stack');
-
-  /** Ergänzende Begriffe für die zweite Marquee-Spur. */
-  readonly practiceItems = computed(() => this.languageService.language() === 'de'
-    ? ['Architektur', 'UX', 'Accessibility', 'Performance', 'Security', 'SEO', 'Deployment', 'Monitoring']
-    : ['Architecture', 'UX', 'Accessibility', 'Performance', 'Security', 'SEO', 'Deployment', 'Monitoring']);
-
+  /** Verbindet die Seite mit ihrer lokalisierten SEO-Ausgabe. */
   constructor() {
-    effect(() => this.seoService.setPage(this.content().studioPage.seo, '/studio'));
+    effect(
+      /** Aktualisiert die SEO-Ausgabe beim Wechsel der Sprache. */
+      () => this.seoService.setPage(this.content().studioPage.seo, '/studio'),
+    );
   }
 }

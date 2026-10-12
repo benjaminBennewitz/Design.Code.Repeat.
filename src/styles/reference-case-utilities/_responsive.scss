@@ -1,0 +1,84 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 920px) {
+    .bp-grid-two {
+      grid-template-columns: 1fr;
+    }
+
+    .bp-scroll-main {
+      scroll-snap-type: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .bp-section {
+      min-height: auto;
+      padding-top: calc(var(--bp-header-height) + var(--bp-space-5));
+    }
+  }
+
+  @media (max-width: 360px) {
+    .bp-section {
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .bp-title {
+      font-size: clamp(2rem, 16vw, 3.2rem);
+      line-height: 0.88;
+    }
+
+    .bp-subtitle {
+      font-size: 0.94rem;
+      line-height: 1.58;
+    }
+
+    .bp-eyebrow {
+      max-width: 100%;
+      font-size: 0.62rem;
+      line-height: 1.35;
+    }
+
+    .bp-button {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.72rem 0.78rem;
+      font-size: 0.72rem;
+    }
+
+    .bp-tag {
+      padding: 0.42rem 0.54rem;
+      font-size: 0.66rem;
+    }
+  }
+
+  @media (min-width: 1921px) {
+    .bp-section {
+      background-position: center top;
+    }
+  }
+}

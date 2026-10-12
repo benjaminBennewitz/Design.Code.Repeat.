@@ -1,0 +1,155 @@
+/* src/app/core/data/reference-projects/design-archive.de.ts */
+import type { PortfolioProject } from '../../models/reference-project.models';
+import { createDesignCatalogTocItems, createDesignCatalogSpreads } from '../design-catalog/catalog-reader';
+import { createDesignCatalogGalleryItems } from '../design-catalog/catalog-gallery';
+
+/**
+ * Deutsche Case-Study-Inhalte des Designarchivs.
+ */
+export const DESIGN_ARCHIVE_DE_PROJECT: PortfolioProject = {
+  slug: 'grafikdesign-katalog',
+  name: 'Design Archiv',
+  titleLines: ['Design', 'Archiv'],
+  kicker: 'Editorial',
+  summary:
+    'Ein visuelles Archiv ausgewählter Arbeiten aus den Jahren 2017–2023: Editorial-Layouts, Motive, Retuschen und Designexperimente werden als kuratierter WebP-Katalog und als Masonry-Galerie präsentiert.',
+  description:
+    'Das Designarchiv bündelt freie und angewandte Arbeiten aus 2017–2023. Im Mittelpunkt stehen Bildbearbeitung, Komposition, Farbe, Typografie, Layoutgefühl und selbst erstellte Assets. Präsentiert wird die Sammlung als performancefreundlicher WebP-Katalog und als visuelle Masonry-Galerie mit erweitertem Archivkontext.',
+  goal: 'Ziel ist eine portfolioartige Archivbühne, die Entwicklung, Stilbreite und gestalterische Handschrift sichtbar macht: groß, ruhig, bildstark und mit genug Kontext, damit Betrachter Werkzeug, Motiv und Entscheidung verstehen.',
+  role: 'Bildauswahl, Retusche, Farblook, Composing, Vektorarbeit, Typografie, Layoutaufbau, Seitenrhythmus und digitale Inszenierung des Katalogs.',
+  year: '2017–2023',
+  type: 'Grafikdesign / Editorial',
+  accent: 'pink',
+  techStack: ['Photoshop', 'Lightroom', 'Illustrator', 'Composing', 'Editorial Design'],
+  highlights: ['WebP-Katalogseiten', 'Katalog-Bildlupe', 'Masonry-Galerie', 'Lightbox mit Bilddetails'],
+  requirements: [
+    'Komplette Katalogseiten als WebP zeigen',
+    'Sonderformat proportional darstellen',
+    'Bilddetails sichtbar machen',
+    'Werkzeuge nennen',
+    'Keine technische Case Study',
+    'Responsive Galerie',
+    'Tastaturbedienbare Lightbox',
+    'Assets performancefreundlich austauschbar halten',
+  ],
+  detailMode: 'editorial',
+  metrics: [
+    { value: '2017–23', label: 'Archivarbeiten', text: 'Ausgewählte Archivarbeiten aus den Jahren 2017 bis 2023.' },
+    {
+      value: '21×25 cm',
+      label: 'Print-Ursprung',
+      text: 'Ursprünglich als gedrucktes Booklet im handlichen Sonderformat angelegt.',
+    },
+    { value: 'PS', label: 'Photoshop', text: 'Composings, Retuschen, Freisteller und Bildmontagen.' },
+    { value: 'LR', label: 'Lightroom', text: 'Bildlook, Farbserien, Kontrast und konsistente Stimmungen.' },
+    { value: 'AI', label: 'Illustrator', text: 'Vektoren, Zeichen, Layoutgrafiken und präzise Formen.' },
+    {
+      value: 'Masonry+',
+      label: 'Galerie',
+      text: 'Die Masonry-Galerie erweitert den Katalog um zusätzliche Arbeiten und Detailkontexte.',
+    },
+  ],
+  telemetry: {
+    eyebrow: 'archive_telemetry.exe',
+    title: 'Gestaltung als System, nicht als Bilderordner.',
+    subtitle:
+      'Die Werte beschreiben den relativen Scope der dokumentierten Editorial-, Archiv- und Interaktionsbereiche des digitalen Katalogs.',
+    statusLabel: 'Archive',
+    statusValue: 'EDITORIAL / INTERACTIVE',
+    source: 'Source: catalog structure',
+    kpiAriaLabel: 'Grafikdesign-Katalog-Projektkennzahlen',
+    charts: [
+      {
+        id: 'scope',
+        eyebrow: 'design_scope.radial',
+        title: 'Design Surface',
+        description: 'Relative Gewichtung der zentralen Gestaltungsbereiche.',
+        variant: 'radial',
+        maxValue: 5,
+        data: [
+          { label: 'Editorial', value: 5 },
+          { label: 'Visual', value: 5 },
+          { label: 'Archive', value: 4 },
+          { label: 'Interaction', value: 4 },
+          { label: 'Type', value: 4 },
+        ],
+      },
+      {
+        id: 'flow',
+        eyebrow: 'reader_flow.area',
+        title: 'Reader Interaction Flow',
+        description: 'Relative Interaktionstiefe vom Einstieg bis zur Detailansicht.',
+        variant: 'area',
+        maxValue: 5,
+        data: [
+          { label: 'Cover', value: 1 },
+          { label: 'TOC', value: 2 },
+          { label: 'Spread', value: 4 },
+          { label: 'Loupe', value: 5 },
+          { label: 'Gallery', value: 4 },
+        ],
+      },
+      {
+        id: 'layers',
+        eyebrow: 'editorial.step',
+        title: 'Editorial Layers',
+        description: 'Digitale Ebenen des Readers von Inhalt bis Interaktion.',
+        variant: 'step',
+        maxValue: 5,
+        data: [
+          { label: 'Content', value: 2 },
+          { label: 'Layout', value: 3 },
+          { label: 'Assets', value: 4 },
+          { label: 'Reader', value: 5 },
+          { label: 'Lightbox', value: 4 },
+        ],
+      },
+    ],
+  },
+  catalogShowcase: {
+    eyebrow: 'digital_catalog.indd',
+    title: 'Digitales Editorial',
+    status: 'Static WebP Editorial',
+    lead: 'Das Archiv wird nicht als technische Demo erzählt, sondern als kuratierte Bildstrecke: vorbereitete WebP-Seiten, ruhige Betrachtung und eine Galerie, die Arbeiten aus 2017 bis 2023 portfoliofähig zusammenführt.',
+    ctaLabel: 'Arbeiten ansehen',
+    chips: ['Photoshop', 'Lightroom', 'Illustrator', 'WebP Reader'],
+    readerLabel: 'Designarchiv mit vorbereiteten WebP-Katalogseiten',
+    readerEyebrow: 'Katalog Reader',
+    readerTitle: 'Ausgewählte Arbeiten',
+    readerHint: '',
+    tocOpenLabel: 'Inhaltsverzeichnis öffnen',
+    tocCloseLabel: 'Inhaltsverzeichnis schließen',
+    tocTitle: 'Inhaltsverzeichnis',
+    previousLabel: 'Vorherige Doppelseite',
+    nextLabel: 'Nächste Doppelseite',
+    galleryEyebrow: 'Masonry Gallery',
+    galleryTitle: 'Ausgewählte Arbeiten als Bildwand',
+    lightboxOpenLabel: 'Bilddetails öffnen',
+    lightboxCloseLabel: 'Lightbox schließen',
+    lightboxPreviousLabel: 'Vorheriges Bild',
+    lightboxNextLabel: 'Nächstes Bild',
+    tocItems: createDesignCatalogTocItems(),
+    spreads: createDesignCatalogSpreads(),
+  },
+  chapters: [
+    {
+      eyebrow: 'Konzept',
+      title: 'Individueller Printkatalog als Archivformat',
+      text: 'Das ursprüngliche Katalogkonzept sollte kreativ, informativ und bewusst eigenständig wirken. Wichtig waren ein handliches 21×25-cm-Format, starke Schwarz-Weiß-Kontraste, helle und dunkle Seitenrhythmen sowie eine breite Auswahl an Arbeiten, die unterschiedliche gestalterische Skills sichtbar macht.',
+      points: ['21×25-cm-Booklet', 'Schwarz-Weiß-Kontraste', 'Breite Skill-Bandbreite'],
+    },
+    {
+      eyebrow: 'Werkzeuge',
+      title: 'Photoshop, Lightroom und Illustrator als Kern',
+      text: 'Die Arbeiten entstanden über Retusche, Composing, Farblook, Vektorformen, Typografie und Layoutentscheidungen. Jedes Werkzeug hatte eine klare Rolle im visuellen Ergebnis und wurde je nach Motiv bewusst kombiniert.',
+      points: ['Photoshop für Composing', 'Lightroom für Look', 'Illustrator für Vektorarbeit'],
+    },
+    {
+      eyebrow: 'Inszenierung',
+      title: 'Blättern, Zoomen, Betrachten',
+      text: 'Der Reader zeigt vollständige Archivseiten als WebP, damit Layout, Motiv und Bildwirkung erhalten bleiben. Die Masonry-Bilder werden lazy geladen; aktive Reader-Seiten bleiben bewusst direkt verfügbar. Navigation, Hover-Lupe und Lightbox machen die Sammlung angenehm prüfbar.',
+      points: ['Proportionaler WebP-Reader', 'Lazy geladene Masonry-Galerie', 'Bilddetails per Lupe'],
+    },
+  ],
+  gallery: createDesignCatalogGalleryItems('de'),
+};

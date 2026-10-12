@@ -1,0 +1,164 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _cards-windows.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Cards Windows
+*/
+
+@mixin render {
+
+  /* ==========================================================================
+   Cards Windows
+   ========================================================================== */
+  .bp-card {
+    position: relative;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    border: 1px solid var(--bp-color-border);
+    background: var(--bp-color-surface);
+    box-shadow: 0 24px 80px var(--bp-color-shadow);
+    backdrop-filter: blur(18px);
+  }
+
+  .bp-terminal {
+    min-width: 0;
+    max-width: 100%;
+    border: 1px solid var(--bp-color-border);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--bp-color-bg) 78%, black 18%);
+    box-shadow:
+      8px 8px 0 color-mix(in srgb, var(--bp-color-accent) 18%, transparent),
+      0 24px 80px var(--bp-color-shadow);
+  }
+
+  .bp-terminal__bar {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--bp-color-border);
+    padding: 0.65rem 0.85rem;
+    background: color-mix(in srgb, var(--bp-color-surface-strong) 86%, transparent);
+    color: var(--bp-color-text-muted);
+    font-family: var(--bp-font-mono);
+    font-size: 0.78rem;
+  }
+
+  .bp-terminal__bar>* {
+    min-width: 0;
+  }
+
+  .bp-terminal__dots {
+    display: inline-flex;
+    gap: 0.35rem;
+  }
+
+  .bp-terminal__dots i {
+    width: 0.7rem;
+    height: 0.7rem;
+    background: var(--bp-color-accent-2);
+  }
+
+  .bp-terminal__dots i:nth-child(2) {
+    background: var(--bp-color-warning);
+  }
+
+  .bp-terminal__dots i:nth-child(3) {
+    background: var(--bp-color-accent);
+  }
+
+  .bp-terminal__body {
+    padding: var(--bp-space-4);
+  }
+
+  .bp-dos-window {
+    border: 2px solid #101010;
+    background: #d6d6d6;
+    color: #101010;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.72);
+    font-family: var(--bp-font-mono);
+  }
+
+  .bp-dos-window__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 2px solid #101010;
+    padding: 0.42rem 0.58rem;
+    background: #101010;
+    color: #f2f2f2;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .bp-dos-window__bar button {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #ff2b2b;
+    padding: 0;
+    background: #ff2b2b;
+    color: #ffffff;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.36);
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms var(--bp-ease-out),
+      box-shadow 160ms ease;
+  }
+
+  .bp-dos-window__bar button:hover,
+  .bp-dos-window__bar button:focus-visible {
+    border-color: #ffffff;
+    background: #c91515;
+    color: #ffffff;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+    transform: translate(-1px, -1px);
+  }
+
+  .bp-dos-window__bar .material-symbols-outlined {
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .bp-dos-window__body {
+    display: grid;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: #d6d6d6;
+    color: #101010;
+    font-size: 0.8rem;
+    font-weight: 900;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+  .bp-dos-window__body p {
+    margin: 0;
+    color: #101010;
+  }
+}

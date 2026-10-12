@@ -1,0 +1,141 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive-motion.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Accessibility Overrides
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 900px) {
+    .reference-row,
+    .delivered-card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .reference-row {
+      min-height: 0;
+    }
+
+    .reference-row__visual {
+      min-height: 280px;
+    }
+
+    .delivered-projects {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+
+    .delivered-projects__sticky {
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .delivered-projects__track {
+      width: 100%;
+      max-width: 100vw;
+      height: auto;
+      padding-inline: var(--dcr-page-gutter);
+      scroll-padding-inline: var(--dcr-page-gutter);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .delivered-card {
+      flex: 0 0 calc(100vw - (var(--dcr-page-gutter) * 2));
+      width: calc(100vw - (var(--dcr-page-gutter) * 2));
+      max-width: calc(100vw - (var(--dcr-page-gutter) * 2));
+      min-width: 0;
+      min-height: 0;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    .delivered-card__preview {
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+
+    .delivered-card__body,
+    .delivered-card__body > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .delivered-projects__end {
+      flex-basis: max(5rem, var(--dcr-page-gutter));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .reference-row__content {
+      padding: 1.25rem;
+    }
+
+    .reference-row__visual {
+      min-height: 250px;
+    }
+  }
+
+  @media (min-width: 901px) and (min-height: 800px) {
+    .delivered-projects__sticky {
+      position: sticky;
+      top: var(--dcr-header-height);
+      height: calc(100svh - var(--dcr-header-height));
+      min-height: 0;
+    }
+
+    .delivered-projects.is-scroll-pinned .delivered-projects__track {
+      align-items: center;
+      overflow-x: hidden;
+      scroll-snap-type: none;
+      scrollbar-width: none;
+    }
+
+    .delivered-card {
+      height: clamp(560px, 72vh, 740px);
+      min-height: 0;
+    }
+  }
+
+  /* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .reference-category__jump .material-symbols-outlined {
+      transition: none;
+    }
+    :host(.is-reveal-ready) .reference-row[data-case-study-card] {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  :host-context(:root[data-motion='reduced']) .reference-row[data-case-study-card],
+  :host-context(:root[data-motion='off']) .reference-row[data-case-study-card] {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,122 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _wide-screen.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Wide Screen
+   03 Responsive Layout (2)
+*/
+
+@mixin render {
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (min-width: 1921px) {
+    .dcr-case .project-detail__hero::before {
+      right: calc(var(--bp-viewport-gutter) - 9rem);
+      width: min(46vw, 900px);
+    }
+
+    .dcr-case .project-detail__hero::after,
+    .dcr-case .project-detail__chapters-section::after {
+      right: var(--bp-viewport-gutter);
+    }
+
+    .dcr-case .project-detail__runner-track {
+      overflow: hidden;
+    }
+  }
+
+  /* ==========================================================================
+   Wide Screen
+   ========================================================================== */
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlights {
+    display: grid;
+    min-height: 100svh;
+    align-content: center;
+    padding-top: calc(var(--bp-header-height) + clamp(1.25rem, 2vw, 2.25rem));
+    padding-bottom: clamp(1.5rem, 2.4vw, 2.6rem);
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlight-grid {
+    gap: clamp(0.72rem, 1.1vw, 1rem);
+    margin-top: clamp(1rem, 1.7vw, 1.45rem);
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlight-card {
+    min-height: clamp(142px, 17vh, 184px);
+    gap: 0.68rem;
+    padding: clamp(0.9rem, 1.4vw, 1.15rem);
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlight-card .material-symbols-outlined {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlight-card h3 {
+    font-size: clamp(0.98rem, 1.22vw, 1.32rem);
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlight-card p {
+    font-size: 0.82rem;
+    line-height: 1.42;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric-strip {
+    margin-top: clamp(0.8rem, 1.4vw, 1.15rem);
+    padding: 0.45rem;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric {
+    gap: 0.4rem 0.55rem;
+    padding: 0.68rem 0.58rem;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric > .material-symbols-outlined {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric strong {
+    font-size: clamp(1.1rem, 1.8vw, 1.7rem);
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric h3 {
+    font-size: 0.58rem;
+  }
+
+  .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__metric p {
+    margin-top: 0.28rem;
+    font-size: 0.68rem;
+    line-height: 1.32;
+    -webkit-line-clamp: 2;
+  }
+
+  /* ==========================================================================
+   Responsive Layout (2)
+   ========================================================================== */
+
+  @media (max-width: 1180px) {
+    .dcr-case .project-detail[data-project='blutanalyse'] .project-detail__highlights {
+      min-height: auto;
+    }
+  }
+}

@@ -1,3 +1,29 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     scroll-to-top.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Scroll To Top
+   02 Animation Keyframes
+   03 Responsive Layout
+*/
+
+/* ==========================================================================
+   Scroll To Top
+   ========================================================================== */
 :host {
   display: contents;
 }
@@ -17,7 +43,11 @@
   color: var(--dcr-color-text);
   box-shadow: 6px 6px 0 color-mix(in srgb, var(--dcr-color-primary) 28%, transparent);
   cursor: pointer;
-  transition: transform 160ms var(--dcr-ease-out), background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  transition:
+    transform 160ms var(--dcr-ease-out),
+    background-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
   animation: scroll-top-in 240ms var(--dcr-ease-out) both;
 }
 
@@ -33,10 +63,24 @@
   font-size: 1.35rem;
 }
 
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
 @keyframes scroll-top-in {
-  from { opacity: 0; transform: translateY(0.75rem); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
 
 @media (max-width: 560px) {
   .scroll-top {
