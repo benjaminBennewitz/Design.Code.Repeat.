@@ -1,6 +1,8 @@
 dcr/
 ├── .angular/
 │   └── ...
+├── dist/
+│   └── ...
 ├── docs/
 │   ├── readme/
 │   │   └── dcr-readme-banner.svg
@@ -305,27 +307,20 @@ dcr/
 │   │   │   │   │   ├── gallery-typography.webp
 │   │   │   │   │   └── gallery-vector.webp
 │   │   │   │   ├── intranet/
-│   │   │   │   │   ├── screens/
-│   │   │   │   │   │   ├── document-share.webp
-│   │   │   │   │   │   ├── intranet-app-overview.webp
-│   │   │   │   │   │   ├── intranet-control-panel.webp
-│   │   │   │   │   │   ├── intranet-dashboard.webp
-│   │   │   │   │   │   ├── intranet-db-health.webp
-│   │   │   │   │   │   ├── intranet-import-inbox.webp
-│   │   │   │   │   │   ├── intranet-login.webp
-│   │   │   │   │   │   ├── intranet-maintenance-modal.webp
-│   │   │   │   │   │   ├── intranet-order-history-modal.webp
-│   │   │   │   │   │   ├── intranet-order-status.webp
-│   │   │   │   │   │   ├── intranet-user-rights-modal.webp
-│   │   │   │   │   │   ├── projects-board.webp
-│   │   │   │   │   │   ├── projects-inbox.webp
-│   │   │   │   │   │   └── projects-welcome.webp
 │   │   │   │   │   ├── document-share.webp
 │   │   │   │   │   ├── intranet-app-overview.webp
 │   │   │   │   │   ├── intranet-control-panel.webp
 │   │   │   │   │   ├── intranet-dashboard.webp
+│   │   │   │   │   ├── intranet-db-health.webp
+│   │   │   │   │   ├── intranet-import-inbox.webp
+│   │   │   │   │   ├── intranet-login.webp
+│   │   │   │   │   ├── intranet-maintenance-modal.webp
+│   │   │   │   │   ├── intranet-order-history-modal.webp
 │   │   │   │   │   ├── intranet-order-status.webp
-│   │   │   │   │   └── projects-board.webp
+│   │   │   │   │   ├── intranet-user-rights-modal.webp
+│   │   │   │   │   ├── projects-board.webp
+│   │   │   │   │   ├── projects-inbox.webp
+│   │   │   │   │   └── projects-welcome.webp
 │   │   │   │   ├── design-archive.webp
 │   │   │   │   └── globi-flow.webp
 │   │   │   └── studio/
