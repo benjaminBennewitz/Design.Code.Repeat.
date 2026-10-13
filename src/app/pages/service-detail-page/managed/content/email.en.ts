@@ -1,0 +1,50 @@
+/* src/app/pages/service-detail-page/managed/content/email.en.ts */
+import { ManagedServiceContent } from '../managed-service.models';
+
+export const EMAIL_EN: ManagedServiceContent = { // Englische Kundeninformationen zur ergänzenden E-Mail-Betreuung.
+  back: 'All services', eyebrow: 'Email / managed add-on',
+  headline: 'Your domain. Your address. Personally set up.',
+  introduction: 'A professional email address belongs to your business. I set up the agreed mailboxes and aliases around your domain and help with configuration. As an addition to website or hosting support, technical setup stays in one place.',
+  promise: 'You write the messages. I take care of the setup.',
+  promiseText: 'You do not need to work through domain settings and technical terminology yourself. I handle the agreed configuration, support setup and remain your point of contact for the agreed technical support.',
+  priceLabel: 'Your pricing framework',
+  priceNote: 'An addition to your hosting proposal. Mailboxes, setup and desired support are discussed beforehand and specified in the proposal.',
+  availabilityLabel: 'Setup timing', availability: 'Coordinated with hosting',
+  availabilityNote: 'Adding email later can also be reviewed together. Timing and requirements are agreed before changes to existing addresses are made.',
+  priceFactors: ['Number of mailboxes and intended use', 'New setup or transfer of existing addresses', 'Assistance and ongoing support scope'],
+  offerLabel: 'How your requirements are priced',
+  offerText: 'A single mailbox requires less setup than several team addresses. Transferring existing messages and configuring devices also affect the work involved. You receive an agreed scope with clearly stated costs.',
+  benefitsTitle: 'Professional email without setting everything up yourself.',
+  benefits: [
+    { title: 'Your address on your own domain', text: 'Instead of a generic free email address, you use an address that fits your business. We agree on naming and the accounts you need.' },
+    { title: 'Mailboxes and aliases that fit your use', text: 'We clarify who needs their own login and which additional addresses should point to an existing mailbox. This keeps the structure understandable.' },
+    { title: 'Technical setup taken care of', text: 'I configure the agreed domain and email settings. Assistance with setting up your email application can be included in the agreed scope.' },
+    { title: 'Support alongside your hosting', text: 'Email, domain and website are coordinated. Technical questions have a personal point of contact instead of leaving you to mediate between different providers.' },
+  ],
+  scopeTitle: 'What email support can cover', includedTitle: 'What we agree for your setup',
+  processTitle: 'From your preferred address to a usable mailbox',
+  steps: [
+    { title: 'Plan the addresses', text: 'We discuss your domain, mailboxes, aliases and the people who will use them.' },
+    { title: 'Review the existing setup', text: 'For existing addresses, we clarify the current provider, required access and what should happen to existing messages.' },
+    { title: 'Coordinate configuration', text: 'I configure the agreed setup and support its introduction within the defined scope.' },
+    { title: 'Agree on use and support', text: 'You receive the agreed handover. Additional accounts, changes and technical assistance are discussed directly.' },
+  ],
+  faqTitle: 'Questions about email setup',
+  faqs: [
+    { title: 'Can I use my existing domain?', text: 'We review this together. The necessary domain settings must be accessible for changes. You do not need to configure them yourself; required access and approvals are agreed beforehand.' },
+    { title: 'What is the difference between a mailbox and an alias?', text: 'A mailbox is a separate account for receiving and managing messages. An alias is an additional address assigned to an existing mailbox. Whether a separate account is needed depends on who will use the address.' },
+    { title: 'Can I keep my existing messages?', text: 'We review a transfer based on the previous provider and available access. Scope, approach and effort are clarified beforehand. A complete migration is not automatically included in every new setup.' },
+    { title: 'Can you help set up my computer and smartphone?', text: 'Setup assistance can be agreed. We clarify which devices and applications you use and what help you need. This makes the included scope clear.' },
+    { title: 'How much does a mailbox cost?', text: 'There is no fixed individual mailbox price here. Email is offered around hosting, the number of accounts and setup and support requirements. Costs and included services are stated before commissioning.' },
+    { title: 'Can I book email without website or hosting support?', text: 'This offer is designed as an addition to website or hosting support rather than a standalone mass-market email hosting service. If your project is already supported, we can discuss a suitable addition.' },
+    { title: 'Do you then handle all my communication?', text: 'I support the agreed technical setup. Writing, reading and organising daily messages remain with you. Technical problems and requested changes are discussed within the agreed support scope.' },
+  ],
+  nextTitle: 'An address that fits your business.',
+  nextText: 'Tell me which domain you use, how many addresses you need and whether mailboxes already exist. We can discuss setup, costs and suitable timing.',
+  linksTitle: 'Useful next steps',
+  links: [
+    { route: '/kontakt', title: 'Discuss email setup', text: 'Clarify addresses, setup and pricing' },
+    { route: '/leistungen/managed-hosting', title: 'Managed hosting', text: 'Have technical operations taken care of' },
+    { route: '/leistungen', title: 'All services', text: 'Explore websites, software and support' },
+  ],
+};

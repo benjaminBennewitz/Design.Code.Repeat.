@@ -1,0 +1,50 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _transitions.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Long Color Transitions
+*/
+
+/* ==========================================================================
+   Long Color Transitions
+   ========================================================================== */
+.managed-promise,
+.managed-faq {
+  --managed-transition-height: clamp(10rem, 22vh, 20rem);
+  padding-bottom: calc(var(--dcr-section-y) + var(--managed-transition-height));
+}
+.managed-promise::after,
+.managed-faq::after {
+  position: absolute;
+  z-index: 0;
+  inset: auto 0 -1px;
+  height: var(--managed-transition-height);
+  content: '';
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--dcr-color-bg) 8%, transparent) 18%,
+    color-mix(in srgb, var(--dcr-color-bg) 30%, transparent) 42%,
+    color-mix(in srgb, var(--dcr-color-bg) 65%, transparent) 68%,
+    color-mix(in srgb, var(--dcr-color-bg) 90%, transparent) 88%,
+    var(--dcr-color-bg) 100%);
+  pointer-events: none;
+}
+.managed-promise > .dcr-container,
+.managed-faq > .dcr-container {
+  position: relative;
+  z-index: 1;
+}

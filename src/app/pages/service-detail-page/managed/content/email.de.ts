@@ -1,0 +1,53 @@
+/* src/app/pages/service-detail-page/managed/content/email.de.ts */
+import { ManagedServiceContent } from '../managed-service.models';
+
+export const EMAIL_DE: ManagedServiceContent = { // Kundeninformationen zur ergänzenden E-Mail-Einrichtung und Betreuung.
+  back: 'Alle Leistungen',
+  eyebrow: 'E-Mail / betreute Zusatzleistung',
+  headline: 'Deine Domain. Deine Adresse. Persönlich eingerichtet.',
+  introduction: 'Eine professionelle E-Mail-Adresse gehört zu deinem Unternehmen. Ich richte die vereinbarten Postfächer und Aliase passend zu deiner Domain ein und unterstütze dich bei der Einrichtung. Als Ergänzung zu Website oder Hosting bleibt die Technik in einer Hand.',
+  promise: 'Du schreibst die Nachrichten. Ich kümmere mich um das Setup.',
+  promiseText: 'Du musst dich nicht selbst durch Domain-Einstellungen und technische Begriffe arbeiten. Ich übernehme die vereinbarte Konfiguration, begleite die Einrichtung und bin dein Ansprechpartner für die abgestimmte Betreuung.',
+  priceLabel: 'Dein Preisrahmen',
+  priceNote: 'Als Ergänzung zu deinem Hosting-Angebot. Postfächer, Einrichtung und gewünschte Betreuung werden vorab besprochen und im Angebot ausgewiesen.',
+  availabilityLabel: 'Einrichtung',
+  availability: 'Passend zum Hosting-Start',
+  availabilityNote: 'Eine spätere Ergänzung prüfen wir ebenfalls gemeinsam. Zeitpunkt und Voraussetzungen stimmen wir ab, bevor Änderungen an bestehenden Adressen vorgenommen werden.',
+  priceFactors: ['Anzahl der Postfächer und gewünschte Nutzung', 'Neue Einrichtung oder Übernahme bestehender Adressen', 'Unterstützung und laufender Betreuungsumfang'],
+  offerLabel: 'So wird dein Bedarf kalkuliert',
+  offerText: 'Ein einzelnes Postfach benötigt weniger Einrichtung als mehrere Adressen für ein Team. Auch die Übernahme vorhandener Nachrichten und die Einrichtung auf Geräten beeinflussen den Aufwand. Du erhältst einen abgestimmten Umfang mit klar benannten Kosten.',
+  benefitsTitle: 'Professionelle E-Mail, ohne selbst alles einzurichten.',
+  benefits: [
+    { title: 'Deine Adresse unter eigener Domain', text: 'Statt einer allgemeinen Freemail-Adresse nutzt du eine zu deinem Unternehmen passende Adresse. Benennung und benötigte Konten stimmen wir gemeinsam ab.' },
+    { title: 'Postfächer und Aliase passend zur Nutzung', text: 'Wir klären, wer eine eigene Anmeldung braucht und welche zusätzlichen Adressen auf ein vorhandenes Postfach zeigen sollen. So bleibt die Struktur verständlich.' },
+    { title: 'Technische Einrichtung übernommen', text: 'Die vereinbarten Domain- und Mail-Einstellungen richte ich ein. Auf Wunsch gehört die Unterstützung bei der Einrichtung deiner E-Mail-Anwendung zum abgestimmten Umfang.' },
+    { title: 'Betreuung zusammen mit dem Hosting', text: 'E-Mail, Domain und Website werden aufeinander abgestimmt. Bei technischen Fragen hast du einen persönlichen Ansprechpartner statt selbst zwischen verschiedenen Zuständigkeiten vermitteln zu müssen.' },
+  ],
+  scopeTitle: 'Was zur E-Mail-Betreuung gehören kann',
+  includedTitle: 'Was wir für dein Setup vereinbaren',
+  processTitle: 'Von der Wunschadresse zum nutzbaren Postfach',
+  steps: [
+    { title: 'Adressen planen', text: 'Wir besprechen Domain, benötigte Postfächer, Aliase und die Personen, die damit arbeiten sollen.' },
+    { title: 'Bestand prüfen', text: 'Bei vorhandenen Adressen klären wir den bisherigen Anbieter, benötigte Zugänge und den Umgang mit bestehenden Nachrichten.' },
+    { title: 'Einrichtung abstimmen', text: 'Ich richte die vereinbarte Konfiguration ein und begleite die Inbetriebnahme im festgelegten Umfang.' },
+    { title: 'Nutzung und Betreuung klären', text: 'Du erhältst die vereinbarte Übergabe. Zusätzliche Konten, Änderungen und technische Unterstützung stimmen wir direkt miteinander ab.' },
+  ],
+  faqTitle: 'Fragen zur E-Mail-Einrichtung',
+  faqs: [
+    { title: 'Kann ich meine vorhandene Domain verwenden?', text: 'Das prüfen wir gemeinsam. Voraussetzung ist, dass die nötigen Domain-Einstellungen angepasst werden können. Du musst die technische Konfiguration nicht selbst vornehmen; die notwendigen Zugänge und Freigaben stimmen wir vorab ab.' },
+    { title: 'Was unterscheidet ein Postfach von einem Alias?', text: 'Ein Postfach ist ein eigenes Konto zum Empfangen und Verwalten von Nachrichten. Ein Alias ist eine zusätzliche Adresse, die einem vorhandenen Postfach zugeordnet wird. Ob ein eigenes Konto nötig ist, hängt davon ab, wer die Adresse nutzen soll.' },
+    { title: 'Kann ich meine bisherigen Nachrichten behalten?', text: 'Eine Übernahme prüfen wir anhand des bisherigen Anbieters und der vorhandenen Zugänge. Umfang, Vorgehen und Aufwand werden vorab geklärt. Eine vollständige Migration ist nicht automatisch Teil jeder Neueinrichtung.' },
+    { title: 'Hilfst du bei der Einrichtung auf Computer und Smartphone?', text: 'Unterstützung bei der Einrichtung kann vereinbart werden. Wir klären vorab, welche Geräte und Anwendungen genutzt werden und welche Hilfe benötigt wird. So weißt du, was im Angebot enthalten ist.' },
+    { title: 'Was kostet ein Postfach?', text: 'Es gibt hier keinen pauschal festgelegten Einzelpreis. Die E-Mail-Leistung wird passend zum Hosting, der Anzahl der Konten und dem Einrichtungs- und Betreuungsaufwand angeboten. Kosten und enthaltene Leistungen werden vor der Beauftragung benannt.' },
+    { title: 'Ist E-Mail auch ohne Website- oder Hosting-Betreuung buchbar?', text: 'Das Angebot ist als Zusatzleistung zur Website- oder Hosting-Betreuung gedacht. Es ist kein eigenständiges Massenangebot für E-Mail-Hosting. Wenn du bereits ein Projekt betreuen lässt, können wir die passende Ergänzung besprechen.' },
+    { title: 'Übernimmst du danach die gesamte Kommunikation?', text: 'Ich betreue die vereinbarte technische Einrichtung. Schreiben, Lesen und die tägliche Organisation deiner Nachrichten bleiben bei dir. Technische Probleme und gewünschte Änderungen besprechen wir im Rahmen der vereinbarten Betreuung.' },
+  ],
+  nextTitle: 'Eine Adresse, die zu deinem Unternehmen passt.',
+  nextText: 'Sag mir, welche Domain du nutzt, wie viele Adressen du brauchst und ob bereits Postfächer bestehen. Wir klären Einrichtung, Preis und den passenden Zeitpunkt.',
+  linksTitle: 'Passende nächste Schritte',
+  links: [
+    { route: '/kontakt', title: 'E-Mail-Setup besprechen', text: 'Adressen, Einrichtung und Kosten klären' },
+    { route: '/leistungen/managed-hosting', title: 'Managed Hosting', text: 'Den technischen Betrieb betreuen lassen' },
+    { route: '/leistungen', title: 'Alle Leistungen', text: 'Website, Software und Betreuung entdecken' },
+  ],
+};

@@ -18,13 +18,14 @@
    INHALTSVERZEICHNIS
    01 Service Detail Page
    02 Responsive Layout
-   03 Service Detail Page (2)
+   03 Related Services and Navigation
 */
 
 /* ==========================================================================
    Service Detail Page
    ========================================================================== */
 .service-detail {
+  --dcr-section-y: clamp(4.5rem, 8vw, 8rem);
   --service-accent: var(--dcr-color-primary);
   --service-on-accent: var(--dcr-color-on-primary);
 }
@@ -194,10 +195,13 @@
     align-items: start;
     flex-direction: column;
   }
+  .service-detail__cta-layout > div {
+    flex-basis: auto;
+  }
 }
 
 /* ==========================================================================
-   Service Detail Page (2)
+   Related Services and Navigation
    ========================================================================== */
 
 .service-detail__hero {
@@ -256,4 +260,27 @@
 .service-detail__process:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 0.3rem;
+}
+
+.service-detail__related li {
+  display: block;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+.service-detail__related a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.7rem 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+.service-detail__cta-layout > div {
+  flex: 1 1 30rem;
+  min-width: 0;
+}
+.service-detail__cta-layout > .dcr-button {
+  flex-shrink: 0;
+  max-width: 100%;
+  white-space: normal;
 }

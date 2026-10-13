@@ -258,6 +258,7 @@
   }
 
   .services-offers__note {
+    padding-bottom: clamp(2rem, 4vw, 4rem);
     max-width: 760px;
     margin: 0;
     color: var(--dcr-color-text-muted);

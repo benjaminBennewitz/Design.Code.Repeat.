@@ -85,6 +85,14 @@
     min-width: 0;
   }
 
+  .site-footer__services-title {
+    margin: 0 0 0.6rem;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
   .site-footer__sitemap nav {
     display: grid;
     gap: 0.3rem;

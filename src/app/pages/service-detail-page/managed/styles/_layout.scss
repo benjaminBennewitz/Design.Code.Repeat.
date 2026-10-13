@@ -1,0 +1,264 @@
+@charset "UTF-8";
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _layout.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+/*
+   INHALTSVERZEICHNIS
+   01 Design and Typography
+   02 Hero and Pricing
+*/
+/* ==========================================================================
+   Design and Typography
+   ========================================================================== */
+:host {
+  display: block;
+}
+
+.managed-page {
+  --dcr-section-y: clamp(4.5rem, 8vw, 8rem);
+  --managed-accent: var(--dcr-color-orange);
+  --managed-on-accent: var(--dcr-color-on-orange);
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+.managed-page[data-accent='primary'] {
+  --managed-accent: var(--dcr-color-primary);
+  --managed-on-accent: var(--dcr-color-on-primary);
+}
+
+
+.managed-page[data-accent='lime'] {
+  --managed-accent: var(--dcr-color-lime);
+  --managed-on-accent: var(--dcr-color-on-lime);
+}
+.managed-page[data-accent='pink'] {
+  --managed-accent: var(--dcr-color-pink);
+  --managed-on-accent: var(--dcr-color-on-pink);
+}
+.managed-page[data-accent='violet'] {
+  --managed-accent: var(--dcr-color-violet);
+  --managed-on-accent: var(--dcr-color-on-violet);
+}
+
+.managed-page .dcr-section {
+  height: auto;
+  min-height: 0;
+}
+
+.managed-page h1,
+.managed-page[data-service='softwareentwicklung'] h1,
+.managed-page[data-service='webentwicklung'] h1 {
+  font-size: clamp(1.45rem, 3.8vw, 4.1rem);
+  white-space: nowrap;
+}
+.managed-page h2 {
+  font-family: var(--dcr-font-display);
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.managed-page h1 {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  margin: 1rem 0;
+  font-size: clamp(2rem, 4.5vw, 4.8rem);
+  line-height: 0.98;
+}
+
+.managed-page[data-service='softwareentwicklung'] h1,
+.managed-page[data-service='webentwicklung'] h1 {
+  font-size: clamp(1.45rem, 3.8vw, 4.1rem);
+  white-space: nowrap;
+}
+.managed-page h2 {
+  max-width: 23ch;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2rem, 4vw, 4.2rem);
+  line-height: 1.06;
+}
+
+.managed-page h3 {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  line-height: 1.3;
+}
+
+.managed-page p {
+  line-height: 1.75;
+}
+
+.managed-page a {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.managed-page :is(a, summary):focus-visible {
+  outline: 3px solid var(--dcr-focus-ring-color);
+  outline-offset: 5px;
+}
+
+.managed-back,
+.managed-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 44px;
+  color: var(--dcr-color-text);
+  text-underline-offset: 0.3em;
+}
+
+.managed-back {
+  margin-bottom: 2rem;
+  font-family: var(--dcr-font-mono);
+  font-size: 0.8rem;
+}
+
+.managed-button {
+  background: var(--managed-accent);
+  color: var(--managed-on-accent);
+  border-color: var(--managed-accent);
+}
+
+.managed-button:hover {
+  background: var(--dcr-color-text);
+  color: var(--dcr-color-bg);
+  border-color: var(--dcr-color-text);
+}
+
+/* ==========================================================================
+   Hero and Pricing
+   ========================================================================== */
+.managed-hero {
+  background: radial-gradient(ellipse at 90% 0%, color-mix(in srgb, var(--managed-accent) 13%, transparent), transparent 60%);
+}
+
+.managed-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.managed-hero__copy {
+  min-width: 0;
+}
+
+.managed-hero__headline {
+  max-width: 28ch;
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  font-weight: 800;
+  line-height: 1.35 !important;
+}
+
+.managed-lead {
+  max-width: 60ch;
+  margin-bottom: 2rem;
+  color: var(--dcr-color-text-muted);
+  font-size: 1.05rem;
+}
+
+.managed-offer {
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 2.8rem);
+  border: 2px solid var(--dcr-color-border-strong);
+  border-top: 7px solid var(--managed-accent);
+  background: var(--dcr-color-surface-solid);
+  box-shadow: var(--dcr-shadow-hard);
+}
+
+.managed-offer__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--dcr-font-mono);
+  font-size: 0.8rem;
+}
+
+.managed-offer__top > span:last-child {
+  color: var(--dcr-color-pink-text);
+  font-weight: 900;
+}
+
+.managed-offer__location {
+  margin: 1.3rem 0 0;
+  padding: 0.7rem 0.9rem;
+  background: var(--dcr-color-lime);
+  color: var(--dcr-color-on-lime);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.managed-offer__price {
+  margin: 1.4rem 0 1rem;
+  font-family: var(--dcr-font-display);
+  font-size: clamp(1.9rem, 3.8vw, 3.8rem);
+  line-height: 1.1 !important;
+  letter-spacing: -0.05em;
+  overflow-wrap: break-word;
+}
+
+.managed-offer__note {
+  color: var(--dcr-color-text-muted);
+  font-size: 0.95rem;
+}
+
+.managed-offer__availability {
+  margin-top: 1.7rem;
+  padding-block: 1.3rem;
+  border-block: 1px solid var(--dcr-color-border-strong);
+}
+
+.managed-offer__availability > span {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--dcr-font-mono);
+  font-size: 0.75rem;
+  color: var(--dcr-color-text-muted);
+}
+
+.managed-offer__availability strong {
+  display: block;
+  font-size: 1.25rem;
+}
+
+.managed-offer__availability p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--dcr-color-text-muted);
+}
+
+.managed-offer ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.managed-offer li {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.managed-offer li > span {
+  color: var(--dcr-color-lime-text);
+  font-weight: 900;
+}

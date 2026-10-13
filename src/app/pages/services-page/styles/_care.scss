@@ -24,7 +24,7 @@
    Care
    ========================================================================== */
   .services-page > dcr-signal-divider {
-    margin-block: calc(var(--dcr-section-y) * 3);
+    margin-block: clamp(1.5rem, 3vw, 3rem);
   }
 
   .care-section {

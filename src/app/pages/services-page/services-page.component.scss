@@ -18,6 +18,7 @@
    INHALTSVERZEICHNIS
    01 Module Imports
    02 Style Output
+   03 Section Spacing
 */
 
 /* ==========================================================================
@@ -41,3 +42,11 @@
 @include operations.render;
 @include responsive-motion.render;
 @include console-actions.render;
+
+/* ==========================================================================
+   Section Spacing
+   ========================================================================== */
+.services-page {
+  --dcr-section-y: clamp(3rem, 5vw, 5rem);
+  --dcr-section-transition-height: clamp(12rem, 28vh, 24rem);
+}

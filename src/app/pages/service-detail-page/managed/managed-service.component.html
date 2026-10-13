@@ -1,0 +1,100 @@
+<!-- src/app/pages/service-detail-page/managed/managed-service.component.html -->
+<main class="managed-page" [attr.data-service]="service().slug" [attr.data-accent]="service().accent">
+  <section class="managed-hero dcr-section" aria-labelledby="managed-title">
+    <div class="dcr-container managed-hero__layout">
+      <div class="managed-hero__copy">
+        <a class="managed-back" routerLink="/leistungen"><span aria-hidden="true">←</span> {{ content().back }}</a>
+        <p class="dcr-eyebrow">{{ content().eyebrow }}</p>
+        <h1 id="managed-title" [dcrTextReveal]="service().title"></h1>
+        <p class="managed-hero__headline" [dcrTextReveal]="content().headline"></p>
+        <p class="managed-lead" [dcrTextReveal]="content().introduction"></p>
+        <dcr-service-guidance />
+        <a class="dcr-button managed-button" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a>
+      </div>
+      <aside class="managed-offer" [attr.aria-label]="content().priceLabel">
+        <div class="managed-offer__top"><span>{{ content().priceLabel }}</span><span aria-hidden="true">B²</span></div>
+        @if (content().location; as location) { <p class="managed-offer__location">{{ location }}</p> }
+        <p class="managed-offer__price">{{ service().price }}</p>
+        <p class="managed-offer__note">{{ content().priceNote }}</p>
+        <div class="managed-offer__availability">
+          <span>{{ content().availabilityLabel }}</span>
+          <strong>{{ content().availability }}</strong>
+          <p>{{ content().availabilityNote }}</p>
+        </div>
+        <ul>
+          @for (factor of content().priceFactors; track factor) {
+            <li><span aria-hidden="true">+</span>{{ factor }}</li>
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="managed-promise dcr-section" aria-labelledby="managed-promise-title">
+    <div class="dcr-container managed-promise__layout">
+      <span class="managed-promise__mark" aria-hidden="true">↗</span>
+      <div><h2 id="managed-promise-title" [dcrTextReveal]="content().promise"></h2><p>{{ content().promiseText }}</p></div>
+    </div>
+  </section>
+
+  <section class="managed-benefits dcr-section" aria-labelledby="managed-benefits-title">
+    <div class="dcr-container">
+      <h2 id="managed-benefits-title" [dcrTextReveal]="content().benefitsTitle"></h2>
+      <div class="managed-benefits__grid">
+        @for (benefit of content().benefits; track benefit.title; let index = $index) {
+          <article class="managed-card"><span class="managed-index" aria-hidden="true">0{{ index + 1 }}</span><h3>{{ benefit.title }}</h3><p>{{ benefit.text }}</p></article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="managed-scope dcr-section" aria-labelledby="managed-scope-title">
+    <div class="dcr-container managed-scope__grid">
+      <article><h2 id="managed-scope-title" [dcrTextReveal]="content().scopeTitle"></h2><ul>
+        @for (feature of service().features; track feature) { <li><span aria-hidden="true">✓</span>{{ feature }}</li> }
+      </ul></article>
+      <article><h2 [dcrTextReveal]="content().includedTitle"></h2><ul>
+        @for (included of service().includes; track included) { <li><span aria-hidden="true">+</span>{{ included }}</li> }
+      </ul></article>
+    </div>
+  </section>
+
+  <section class="managed-pricing dcr-section" aria-labelledby="managed-pricing-title">
+    <div class="dcr-container managed-pricing__layout">
+      <div><h2 id="managed-pricing-title" [dcrTextReveal]="content().offerLabel"></h2><p>{{ content().offerText }}</p></div>
+      <div class="managed-pricing__price"><strong>{{ service().price }}</strong><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <section class="managed-process dcr-section" aria-labelledby="managed-process-title">
+    <div class="dcr-container"><h2 id="managed-process-title" [dcrTextReveal]="content().processTitle"></h2>
+      <ol class="managed-process__list">
+        @for (step of content().steps; track step.title; let index = $index) {
+          <li><span class="managed-index" aria-hidden="true">0{{ index + 1 }}</span><div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div></li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="managed-faq dcr-section" aria-labelledby="managed-faq-title">
+    <div class="dcr-container managed-faq__layout"><h2 id="managed-faq-title" [dcrTextReveal]="content().faqTitle"></h2>
+      <div class="managed-faq__list">
+        @for (faq of content().faqs; track faq.title) {
+          <details><summary>{{ faq.title }}<span aria-hidden="true">+</span></summary><p>{{ faq.text }}</p></details>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="managed-next dcr-section" aria-labelledby="managed-next-title">
+    <div class="dcr-container"><div class="managed-next__intro"><h2 id="managed-next-title" [dcrTextReveal]="content().nextTitle"></h2><p>{{ content().nextText }}</p></div>
+      <nav [attr.aria-label]="content().linksTitle"><h3>{{ content().linksTitle }}</h3>
+        <div class="managed-links">
+          @for (link of content().links; track link.route) {
+            <a [routerLink]="link.route"><strong>{{ link.title }}</strong><span>{{ link.text }}</span><span class="managed-links__arrow" aria-hidden="true">↗</span></a>
+          }
+        </div>
+      </nav>
+    </div>
+  </section>
+</main>

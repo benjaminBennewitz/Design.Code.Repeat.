@@ -42,8 +42,9 @@
           </nav>
 
           <nav [attr.aria-label]="content().footer.servicesTitle">
+            <h3 class="site-footer__services-title">{{ content().footer.servicesTitle }}</h3>
             @for (service of content().services; track service.slug) {
-              <a [href]="'/leistungen?service=' + service.slug + '#service-index'" (click)="openService($event, service.slug)">{{ service.shortTitle }}</a>
+              <a [href]="'/leistungen/' + service.slug" (click)="openService($event, service.slug)">{{ service.title }}</a>
             }
           </nav>
         </div>

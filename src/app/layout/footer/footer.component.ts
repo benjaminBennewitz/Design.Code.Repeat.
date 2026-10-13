@@ -21,7 +21,7 @@ import { LanguageService } from '../../core/services/language.service';
 })
 export class FooterComponent {
   private readonly languageService = inject(LanguageService);                                                          // Aktuelle Sprache und Website-Inhalte.
-  private readonly router = inject(Router);                                                                            // Router für wiederholbare Quicklinks zum gemeinsamen Leistungsanker.
+  private readonly router = inject(Router);                                                                            // Router für direkte Links zu den vorhandenen Leistungsdetailseiten.
   readonly cookieConsentService = inject(CookieConsentService);                                                        // Privacy-Control-Zustand für den Cookie-Einstellungslink.
   readonly content = computed(/** Sprachabhängiger Gesamtcontent. */ () => this.languageService.content());            // Sprachabhängiger Gesamtcontent.
   readonly activePanel = signal<number>(0);                                                                            // Aktives Footer-Panel: Sitemap oder Rechtliches.
@@ -39,9 +39,7 @@ export class FooterComponent {
     }
 
     event.preventDefault();
-    void this.router.navigate(['/leistungen'], {
-      queryParams: { service: slug },
-      fragment: 'service-index',
+    void this.router.navigate(['/leistungen', slug], {
       onSameUrlNavigation: 'reload',
     });
   }

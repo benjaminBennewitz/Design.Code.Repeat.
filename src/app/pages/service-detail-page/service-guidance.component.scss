@@ -1,0 +1,45 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     service-guidance.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Customer Guidance
+*/
+
+/* ==========================================================================
+   Customer Guidance
+   ========================================================================== */
+:host {
+  display: block;
+  margin-block: 1.8rem 2rem;
+}
+aside {
+  padding: 1.2rem 1.4rem;
+  border-left: 4px solid var(--dcr-color-primary-text);
+  background: var(--dcr-color-surface-solid);
+  color: var(--dcr-color-text);
+}
+strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+p {
+  margin: 0.6rem 0 0;
+  color: var(--dcr-color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}

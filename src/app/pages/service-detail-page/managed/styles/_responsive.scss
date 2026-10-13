@@ -1,0 +1,81 @@
+@charset "UTF-8";
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _responsive.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+/*
+   INHALTSVERZEICHNIS
+   01 Responsive Layout
+   02 Accessibility Overrides
+*/
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .managed-hero__layout,
+  .managed-faq__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .managed-offer {
+    max-width: 48rem;
+  }
+  .managed-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .managed-links a {
+    min-height: 7rem;
+  }
+}
+@media (max-width: 680px) {
+  .managed-benefits__grid,
+  .managed-scope__grid,
+  .managed-pricing__layout,
+  .managed-process__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .managed-promise__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .managed-promise__mark {
+    font-size: 3rem;
+  }
+  .managed-page h1 {
+    font-size: clamp(1.9rem, 7.5vw, 3rem);
+  }
+  .managed-page .dcr-button {
+    max-width: 100%;
+    white-space: normal;
+  }
+  .managed-faq__list p {
+    padding-right: 0;
+  }
+}
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+:host-context(:root[data-motion=reduced]) :is(.managed-links a, .managed-faq__list summary > span),
+:host-context(:root[data-motion=off]) :is(.managed-links a, .managed-faq__list summary > span),
+:host-context(:root[data-comfort=simple]) :is(.managed-links a, .managed-faq__list summary > span) {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .managed-links a,
+  .managed-faq__list summary > span {
+    transition: none;
+  }
+  .managed-links a:hover {
+    transform: none;
+  }
+}
