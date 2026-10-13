@@ -1,11 +1,12 @@
 <div class="app-shell">
-  <a class="skip-link" [routerLink]="[]" fragment="main-content">{{ languageService.language() === 'de' ? 'Zum Hauptinhalt' : 'Skip to main content' }}</a>
+  <a class="skip-link" [routerLink]="[]" fragment="main-content">{{ languageService.language() === 'de' ? 'Zum
+    Hauptinhalt' : 'Skip to main content' }}</a>
   <dcr-header />
 
   @defer (on timer(3500ms)) {
-    <dcr-accessibility-panel />
-    <dcr-cookie-banner />
-    <dcr-scroll-to-top />
+  <dcr-accessibility-panel />
+  <dcr-cookie-banner />
+  <dcr-scroll-to-top />
   }
 
   <div id="main-content" tabindex="-1" [class.is-route-changing]="isRouteChanging()">
@@ -13,8 +14,8 @@
   </div>
 
   @defer (on viewport) {
-    <dcr-footer [class.is-route-changing]="isRouteChanging()" />
+  <dcr-footer [class.is-route-changing]="isRouteChanging()" />
   } @placeholder {
-    <div class="site-footer-placeholder" aria-hidden="true"></div>
+  <div class="site-footer-placeholder" aria-hidden="true"></div>
   }
 </div>
