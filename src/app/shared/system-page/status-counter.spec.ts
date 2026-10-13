@@ -9,31 +9,38 @@ function verifyCounter(): void {
   it('benötigt außerhalb des Browsers keine Animation', verifyServer);
 }
 
-/** Erstellt ein kontrollierbares Browserfenster für einzelne Animationsframes. */
-function createBrowser() {
-  /**
-   * Aufgezeichneter Callback für den nächsten Browserframe.
-   */
-  let callback: FrameRequestCallback = () => undefined;
-  /**
-   * Minimales Fenster mit kontrollierter Frameplanung.
-   */
-  const browser = {
-    requestAnimationFrame: vi.fn(
-      /**
-       * Speichert den nächsten Animationsschritt.
-       * @param next Callback des angeforderten Frames.
-       */
-      (next: FrameRequestCallback) => { callback = next; return 1; },
-    ),
+/** Kontrolliert angeforderte Browserframes ohne reale Zeitabhängigkeit. */
+class FrameControl {
+  private callback: FrameRequestCallback = ignoreFrame; // Zuletzt angeforderter Browserframe.
+  readonly browser = { // Minimales Browserfenster mit kontrollierter Frameplanung.
+    requestAnimationFrame: vi.fn(this.requestFrame.bind(this)),
     cancelAnimationFrame: vi.fn(),
-  };
-  return { browser, advance:
-    /**
-     * Führt den zuletzt angeforderten Frame aus.
-     * @param time Zeitstempel des Browserframes.
-     */
-    (time: number) => callback(time) };
+  }; // Kontrolliertes Browserfenster der Frame-Simulation.
+
+  /**
+   * Speichert den nächsten angeforderten Animationsschritt.
+   * @param next Callback des angeforderten Frames.
+   */
+  private requestFrame(next: FrameRequestCallback): number {
+    this.callback = next;
+    return 1;
+  }
+
+  /**
+   * Führt den zuletzt angeforderten Frame mit dem Testzeitstempel aus.
+   * @param time Zeitstempel des simulierten Browserframes.
+   */
+  advance(time: number): void {
+    this.callback(time);
+  }
+}
+
+/** Bleibt ohne Wirkung, solange noch kein Browserframe angefordert wurde. */
+function ignoreFrame(): void { }
+
+/** Erstellt ein kontrollierbares Browserfenster für einzelne Animationsframes. */
+function createBrowser(): FrameControl {
+  return new FrameControl();
 }
 
 /** Prüft Endwert, übersprungene Frames und die einmalige Ausführung. */

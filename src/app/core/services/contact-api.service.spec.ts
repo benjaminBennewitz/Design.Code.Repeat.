@@ -11,7 +11,7 @@ const request: ContactRequest = {
   email: 'max@example.com',
   message: 'Thema: Website\n\nEine ausreichend lange Testnachricht.',
   website: '',
-};
+}; // Erlaubte Kontakt-Payload für die API-Regressionstests.
 
 /** Registriert Prüfungen für CSRF, Retry, Fehlerklassen und parallele Submits. */
 function registerContactTests(): void {

@@ -13,7 +13,7 @@ const API_ERROR_FIELDS: Partial<Record<ContactApiErrorCode, keyof ErrorTexts>> =
   'rate-limit': 'rateLimit',
   unavailable: 'unavailable',
   network: 'network',
-};
+}; // Zuordnung der Validierungsfehler zu Formularfeldern.
 
 /**
  * Liefert den bisherigen lokalisierten Fehlertext für ein sichtbares Feldproblem.

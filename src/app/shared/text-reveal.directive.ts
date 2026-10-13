@@ -26,15 +26,18 @@ export class TextRevealDirective {
   }
 
   /**
-  * Erhält Leerraum und natürliche Wortgrenzen ohne doppelte Screenreader-Texte.
-  * @param text Aktueller Text einschließlich seiner natürlichen Wortabstände.
-  */
+   * Erhält Leerraum und natürliche Wortgrenzen ohne doppelte Screenreader-Texte.
+   * @param text Aktueller Text einschließlich seiner natürlichen Wortabstände.
+   */
   private renderText(text: string): void {
     this.clearText();
     /**
-    * Laufender Wortindex für die begrenzte Reveal-Verzögerung.
-    */
+     * Laufender Wortindex für die begrenzte Reveal-Verzögerung.
+     */
     let wordIndex = 0;
+    /**
+     * Aktueller Textteil einschließlich unverändertem Leerraum.
+     */
     for (const part of text.split(/(\s+)/u).filter(Boolean)) {
       if (/^\s+$/u.test(part)) this.appendSpace(part);
       else this.appendWord(part, wordIndex++);
@@ -49,22 +52,22 @@ export class TextRevealDirective {
   }
 
   /**
-  * Fügt den unveränderten Wortabstand als Textknoten ein.
-  * @param space Ursprünglicher Leerraum zwischen zwei Wörtern.
-  */
+   * Fügt den unveränderten Wortabstand als Textknoten ein.
+   * @param space Ursprünglicher Leerraum zwischen zwei Wörtern.
+   */
   private appendSpace(space: string): void {
     this.renderer.appendChild(this.element, this.renderer.createText(space));
   }
 
   /**
-  * Erzeugt eine einzelne Wortspanne mit begrenzter Reveal-Verzögerung.
-  * @param text Sichtbarer Text der Wortspanne.
-  * @param index Position des Wortes im gesamten Text.
-  */
+   * Erzeugt eine einzelne Wortspanne mit begrenzter Reveal-Verzögerung.
+   * @param text Sichtbarer Text der Wortspanne.
+   * @param index Position des Wortes im gesamten Text.
+   */
   private appendWord(text: string, index: number): void {
     /**
-    * Einzelne Wortspanne für die vorhandene CSS-Animation.
-    */
+     * Einzelne Wortspanne für die vorhandene CSS-Animation.
+     */
     const word = this.renderer.createElement('span');
     this.renderer.addClass(word, 'dcr-text-reveal__word');
     this.renderer.setStyle(word, '--dcr-word-delay', `${Math.min(index, 24) * 18}ms`);

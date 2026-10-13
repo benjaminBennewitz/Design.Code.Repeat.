@@ -26,4 +26,12 @@ const appConfig: ApplicationConfig = {
 };
 
 bootstrapApplication(AppComponent, appConfig)
-  .catch((error: unknown) => console.error('Studio bootstrap failed.', error));
+  .catch(reportBootstrapError);
+
+/**
+ * Meldet einen fehlgeschlagenen Angular-Start.
+ * @param error Vom Bootstrap zurückgegebener Fehler.
+ */
+function reportBootstrapError(error: unknown): void {
+  console.error('Studio bootstrap failed.', error);
+}

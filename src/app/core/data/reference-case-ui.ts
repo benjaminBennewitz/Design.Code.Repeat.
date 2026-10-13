@@ -106,4 +106,4 @@ export const REFERENCE_CASE_UI: Record<PortfolioLanguage, ReferenceCaseUiContent
     notFoundTitle: 'Case study not found',
     notFoundText: 'The requested DCR case study is not available.',
   },
-};
+}; // Lokalisierte Beschriftungen der gemeinsamen Case-Study-Ansichten.
