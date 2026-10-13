@@ -420,6 +420,8 @@ dcr/
 │   │   │   │   ├── terminal-panel.component.html
 │   │   │   │   ├── terminal-panel.component.scss
 │   │   │   │   └── terminal-panel.component.ts
+│   │   │   ├── faq-disclosure.directive.spec.ts
+│   │   │   ├── faq-disclosure.directive.ts
 │   │   │   ├── horizontal-wheel-scroll.directive.ts
 │   │   │   ├── reference-reveal-on-scroll.directive.ts
 │   │   │   ├── scroll-reveal.directive.ts

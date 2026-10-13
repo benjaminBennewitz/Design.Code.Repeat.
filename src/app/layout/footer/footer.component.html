@@ -61,7 +61,7 @@
             <a routerLink="/impressum">{{ ui().notice }}</a>
             <a routerLink="/datenschutz">{{ ui().privacy }}</a>
             <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
-            <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} ↗</a>
+            <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} <span class="dcr-link-glyph" aria-hidden="true">↗</span></a>
           </div>
 
           <nav class="site-footer__socials" [attr.aria-label]="ui().social">

@@ -125,7 +125,7 @@
           <p class="dcr-eyebrow">mail.addon</p>
           <h3>{{ content().home.hosting.emailTitle }}</h3>
           <p [dcrTextReveal]="content().home.hosting.emailText"></p>
-          <a routerLink="/leistungen/email">{{ content().services[5].title }} →</a>
+          <a routerLink="/leistungen/email">{{ content().services[5].title }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a>
         </aside>
       </div>
     </section>
@@ -139,7 +139,7 @@
         <dcr-section-heading [eyebrow]="content().home.references.eyebrow" [title]="content().home.references.title" [text]="content().home.references.text" />
         <div class="home-references__control">
           <span>VERTICAL INPUT / HORIZONTAL OUTPUT</span>
-          <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} →</a>
+          <a class="dcr-text-link" routerLink="/referenzen">{{ content().referencesPage.heading.title }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a>
         </div>
       </div>
   
@@ -220,7 +220,7 @@
 @defer (on viewport; when anchorTarget()) {
     <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
       <div class="dcr-container home-faq__layout">
-        <div><dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" /><a class="dcr-button" routerLink="/faq">{{ faqPageLabel() }} <span aria-hidden="true">↗</span></a></div>
+        <div><dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" /><a class="dcr-button" routerLink="/faq">{{ faqPageLabel() }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div>
   
         <div class="faq-list">
           @for (item of content().faq; track item.question; let index = $index) {
@@ -246,7 +246,7 @@
                 <div class="faq-list__content-inner">
                   <p>{{ item.answer }}</p>
                   @if (item.relatedLink; as link) {
-                    <p class="faq-list__related"><a [routerLink]="link.route" [fragment]="link.fragment" [attr.tabindex]="openFaqIndex() === index ? null : -1">{{ link.label }} →</a></p>
+                    <p class="faq-list__related"><a [routerLink]="link.route" [fragment]="link.fragment" [attr.tabindex]="openFaqIndex() === index ? null : -1">{{ link.label }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a></p>
                   }
                 </div>
               </div>

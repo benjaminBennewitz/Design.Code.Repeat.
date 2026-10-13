@@ -7,7 +7,7 @@
     (click)="pressed.emit($event)">
     <span>{{ label() }}</span>
     @if (icon() === 'arrow_outward') {
-      <span class="dcr-button__glyph" aria-hidden="true">↗</span>
+      <span class="dcr-button__glyph dcr-link-glyph" aria-hidden="true">↗</span>
     } @else if (icon()) {
       <span class="material-symbols-outlined" aria-hidden="true">{{ icon() }}</span>
     }
@@ -22,7 +22,7 @@
     (click)="pressed.emit($event)">
     <span>{{ label() }}</span>
     @if (icon() === 'arrow_outward') {
-      <span class="dcr-button__glyph" aria-hidden="true">↗</span>
+      <span class="dcr-button__glyph dcr-link-glyph" aria-hidden="true">↗</span>
     } @else if (icon()) {
       <span class="material-symbols-outlined" aria-hidden="true">{{ icon() }}</span>
     }

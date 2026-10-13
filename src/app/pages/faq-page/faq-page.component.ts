@@ -1,3 +1,4 @@
+import { FaqDisclosureDirective } from '../../shared/faq-disclosure.directive';
 /* src/app/pages/faq-page/faq-page.component.ts */
 import { ChangeDetectionStrategy, Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -12,7 +13,7 @@ import { FaqGroup } from './faq.models';
 /** Zentrale Fragenübersicht mit thematischen Zweispaltenlisten und lokaler Suche. */
 @Component({
   selector: 'dcr-faq-page', standalone: true,
-  imports: [RouterLink, TextRevealDirective],
+  imports: [FaqDisclosureDirective, RouterLink, TextRevealDirective],
   templateUrl: './faq-page.component.html', styleUrl: './faq-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

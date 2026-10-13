@@ -65,15 +65,15 @@
 /* ==========================================================================
    Accessibility Overrides
    ========================================================================== */
-:host-context(:root[data-motion=reduced]) :is(.managed-links a, .managed-faq__list summary > span),
-:host-context(:root[data-motion=off]) :is(.managed-links a, .managed-faq__list summary > span),
-:host-context(:root[data-comfort=simple]) :is(.managed-links a, .managed-faq__list summary > span) {
+:host-context(:root[data-motion=reduced]) :is(.managed-links a, .managed-faq__list summary > .faq-toggle-icon),
+:host-context(:root[data-motion=off]) :is(.managed-links a, .managed-faq__list summary > .faq-toggle-icon),
+:host-context(:root[data-comfort=simple]) :is(.managed-links a, .managed-faq__list summary > .faq-toggle-icon) {
   transition: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .managed-links a,
-  .managed-faq__list summary > span {
+  .managed-faq__list summary > .faq-toggle-icon {
     transition: none;
   }
   .managed-links a:hover {

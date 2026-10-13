@@ -20,7 +20,7 @@
         <h2 [id]="'faq-heading-' + group.id"><span class="material-symbols-outlined" aria-hidden="true">{{ group.icon }}</span>{{ group.title }}</h2>
         <div class="faq-grid">
           @for (item of group.items; track item.id) {
-            <details [id]="item.id"><summary>{{ item.question }}<span aria-hidden="true">+</span></summary><div class="faq-answer"><p>{{ item.answer }}</p><a [routerLink]="item.route" [fragment]="item.fragment">{{ ui().related }} <span aria-hidden="true">↗</span></a></div></details>
+            <details dcrFaqDisclosure [id]="item.id"><summary><span class="faq-label">{{ item.question }}</span><span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer"><p>{{ item.answer }}</p><a [routerLink]="item.route" [fragment]="item.fragment">{{ ui().related }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div></details>
           }
         </div>
       </section>
@@ -28,5 +28,5 @@
       <section class="faq-empty"><h2>{{ ui().emptyTitle }}</h2><p>{{ ui().emptyText }}</p><a class="dcr-button" routerLink="/kontakt">{{ ui().contact }}</a></section>
     }
   </div>
-  <section class="faq-contact dcr-section"><div class="dcr-container"><h2>{{ ui().contactTitle }}</h2><p>{{ ui().contactText }}</p><a class="dcr-button" routerLink="/kontakt">{{ ui().contact }} <span aria-hidden="true">↗</span></a></div></section>
+  <section class="faq-contact dcr-section"><div class="dcr-container"><h2>{{ ui().contactTitle }}</h2><p>{{ ui().contactText }}</p><a class="dcr-button" routerLink="/kontakt">{{ ui().contact }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div></section>
 </main>

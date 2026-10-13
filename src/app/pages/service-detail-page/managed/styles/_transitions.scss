@@ -22,14 +22,12 @@
 /* ==========================================================================
    Long Color Transitions
    ========================================================================== */
-.managed-promise,
 .managed-faq,
 .managed-next {
   --managed-transition-height: clamp(12rem, 28vh, 24rem);
   --managed-transition-target: var(--dcr-color-bg);
   padding-bottom: calc(var(--dcr-section-y) + var(--managed-transition-height));
 }
-.managed-promise::after,
 .managed-faq::after,
 .managed-next::after {
   position: absolute;
@@ -46,7 +44,6 @@
     var(--managed-transition-target) 100%);
   pointer-events: none;
 }
-.managed-promise > .dcr-container,
 .managed-faq > .dcr-container,
 .managed-next > .dcr-container {
   position: relative;
@@ -54,3 +51,9 @@
 }
 
 .managed-next { --managed-transition-target: var(--dcr-color-contrast-dark); }
+
+/* Kompakter Abschluss ohne den großen Übergangsraum der Schlusssektion. */
+.managed-faq {
+  --managed-transition-height: 2rem;
+  padding-bottom: 3rem;
+}

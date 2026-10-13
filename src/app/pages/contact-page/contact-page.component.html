@@ -9,7 +9,7 @@
           <div>
             <h2 [dcrTextReveal]="content().contactPage.directTitle"></h2>
             <p [dcrTextReveal]="content().contactPage.directText"></p>
-            <a [href]="'mailto:' + content().contactPage.email">{{ content().contactPage.emailLabel }} →</a>
+            <a [href]="'mailto:' + content().contactPage.email">{{ content().contactPage.emailLabel }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a>
           </div>
         </aside>
 

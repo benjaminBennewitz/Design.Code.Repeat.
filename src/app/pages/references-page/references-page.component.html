@@ -197,7 +197,7 @@
         }
         <nav class="references-closing__services" [attr.aria-label]="content().footer.servicesTitle">
           @for (service of content().services.slice(0, 3); track service.slug) {
-            <a [routerLink]="'/leistungen/' + service.slug">{{ service.title }} →</a>
+            <a [routerLink]="'/leistungen/' + service.slug">{{ service.title }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a>
           }
         </nav>
         <a class="references-closing__link" routerLink="/kontakt">

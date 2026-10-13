@@ -28,6 +28,12 @@ html:has(dcr-studio-page) {
   scroll-snap-type: y proximity;
 }
 
+/* Dekorative Zeichen bilden eigene Boxen außerhalb der Textunterstreichung. */
+a :is(.dcr-link-glyph, [aria-hidden='true'], .material-symbols-outlined) {
+  display: inline-block;
+  text-decoration: none;
+}
+
 .dcr-container {
   width: min(calc(100% - (var(--dcr-page-gutter) * 2)), var(--dcr-content-width));
   margin-inline: auto;

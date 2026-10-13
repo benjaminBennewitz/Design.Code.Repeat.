@@ -146,7 +146,7 @@
             </div>
             <div class="service-console__actions">
               <dcr-action-button [label]="indexLabels().contact" route="/kontakt" variant="primary" icon="arrow_outward" />
-              <a class="service-console__details" [routerLink]="'/leistungen/' + service.slug">{{ service.shortTitle }}: {{ indexLabels().details }} →</a>
+              <a class="service-console__details" [routerLink]="'/leistungen/' + service.slug">{{ service.shortTitle }}: {{ indexLabels().details }} <span class="dcr-link-glyph" aria-hidden="true">→</span></a>
             </div>
           </article>
         }

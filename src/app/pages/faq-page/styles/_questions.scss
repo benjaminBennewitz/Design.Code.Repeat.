@@ -72,18 +72,18 @@
   display: none;
 }
 
-.faq-grid summary > span {
+.faq-grid summary > .faq-toggle-icon {
   flex-shrink: 0;
   color: var(--dcr-color-primary-text);
   font-family: var(--dcr-font-mono);
   font-size: 1.6rem;
 }
 
-.faq-grid details[open] summary > span {
+.faq-grid details[open] summary > .faq-toggle-icon {
   transform: rotate(45deg);
 }
 
-.faq-grid summary:hover {
+.faq-grid summary:hover .faq-label {
   text-decoration: underline;
   text-underline-offset: 0.3em;
 }

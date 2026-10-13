@@ -3,13 +3,13 @@
   <section class="managed-hero dcr-section" aria-labelledby="managed-title">
     <div class="dcr-container managed-hero__layout">
       <div class="managed-hero__copy">
-        <a class="managed-back" routerLink="/leistungen"><span aria-hidden="true">←</span> {{ content().back }}</a>
+        <a class="managed-back" routerLink="/leistungen"><span aria-hidden="true" class="dcr-link-glyph">←</span> {{ content().back }}</a>
         <p class="dcr-eyebrow">{{ content().eyebrow }}</p>
         <h1 id="managed-title" [dcrTextReveal]="service().title"></h1>
         <p class="managed-hero__headline" [dcrTextReveal]="content().headline"></p>
         <p class="managed-lead" [dcrTextReveal]="content().introduction"></p>
         <dcr-service-guidance />
-        <a class="dcr-button managed-button" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a>
+        <a class="dcr-button managed-button" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a>
       </div>
       <aside class="managed-offer" [attr.aria-label]="content().priceLabel">
         <div class="managed-offer__top"><span>{{ content().priceLabel }}</span><span aria-hidden="true">B²</span></div>
@@ -66,7 +66,7 @@
   <section class="managed-pricing dcr-section" aria-labelledby="managed-pricing-title">
     <div class="dcr-container managed-pricing__layout">
       <div><h2 id="managed-pricing-title" [dcrTextReveal]="content().offerLabel"></h2><p>{{ content().offerText }}</p></div>
-      <div class="managed-pricing__price"><strong>{{ service().price }}</strong><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a></div>
+      <div class="managed-pricing__price"><strong>{{ service().price }}</strong><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div>
     </div>
   </section>
 
@@ -77,7 +77,7 @@
         @for (plan of carePlans(); track plan.name) {
           <article><h3>{{ plan.name }}</h3><strong>{{ plan.price }}</strong><p>{{ plan.text }}</p><ul>
             @for (feature of plan.features; track feature) { <li>{{ feature }}</li> }
-          </ul><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a></article>
+          </ul><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></article>
         }
       </div>
       <p class="managed-plans__note">{{ content().carePlanNote }}</p>
@@ -109,20 +109,20 @@
     <div class="dcr-container managed-faq__layout"><h2 id="managed-faq-title" [dcrTextReveal]="content().faqTitle"></h2>
       <div class="managed-faq__list">
         @for (faq of content().faqs; track faq.title) {
-          <details><summary>{{ faq.title }}<span aria-hidden="true">+</span></summary><p>{{ faq.text }}</p></details>
+          <details dcrFaqDisclosure><summary><span class="faq-label">{{ faq.title }}</span><span class="faq-toggle-icon" aria-hidden="true">+</span></summary><p>{{ faq.text }}</p></details>
         }
+        <div class="managed-faq-link"><a class="managed-text-link" routerLink="/faq">{{ content().back === 'Alle Leistungen' ? 'Alle Fragen durchsuchen' : 'Search all questions' }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div>
       </div>
     </div>
   </section>
 
-  <div class="dcr-container managed-faq-link"><a class="managed-text-link" routerLink="/faq">{{ content().back === 'Alle Leistungen' ? 'Alle Fragen durchsuchen' : 'Search all questions' }} <span aria-hidden="true">↗</span></a></div>
 
   <section class="managed-next dcr-section" aria-labelledby="managed-next-title">
     <div class="dcr-container"><div class="managed-next__intro"><h2 id="managed-next-title" [dcrTextReveal]="content().nextTitle"></h2><p>{{ content().nextText }}</p></div>
       <nav [attr.aria-label]="content().linksTitle"><h3>{{ content().linksTitle }}</h3>
         <div class="managed-links">
           @for (link of content().links; track link.route) {
-            <a [routerLink]="link.route"><strong>{{ link.title }}</strong><span>{{ link.text }}</span><span class="managed-links__arrow" aria-hidden="true">↗</span></a>
+            <a [routerLink]="link.route"><strong>{{ link.title }}</strong><span>{{ link.text }}</span><span class="managed-links__arrow dcr-link-glyph" aria-hidden="true">↗</span></a>
           }
         </div>
       </nav>
