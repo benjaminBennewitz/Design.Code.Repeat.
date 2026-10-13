@@ -42,7 +42,7 @@ export const CARE_DE: ManagedServiceContent = {
     }
   ],
   scopeTitle: "Wobei ich dein Projekt unterstützen kann",
-  offerText: "Der Einstieg ab 15 € im Monat setzt einen entsprechend begrenzten Betreuungsumfang voraus. System, Zustand und gewünschte Aufgaben bestimmen das passende Angebot. Größere Änderungen, besondere Reaktionszeiten und Hosting werden ausdrücklich abgestimmt.",
+  offerText: "Du kannst zwischen Basic Care für 15 €, Content Care für 39 € und Priority Care für 79 € pro Monat wählen. Die Pakete unterscheiden sich nach Art und Häufigkeit der Aufgaben. Systemzustand, größere Erweiterungen und besondere Betriebsanforderungen werden zusätzlich eingeordnet.",
   steps: [
     {
       title: "Vorhandenen Stand prüfen",
@@ -68,8 +68,8 @@ export const CARE_DE: ManagedServiceContent = {
       text: "Nein. Du kannst dein Anliegen in deinen eigenen Worten beschreiben. Ich kümmere mich um die technische Einordnung und erkläre, welche Schritte sinnvoll sind."
     },
     {
-      title: "Was ist ab 15 € im Monat enthalten?",
-      text: "Der Einstiegspreis gehört zu einem entsprechend kleinen, konkret vereinbarten Umfang. Welche Checks oder Aufgaben enthalten sind, wird vor der Beauftragung festgehalten. Unbegrenzte Änderungen oder ständige Bereitschaft sind damit nicht automatisch verbunden."
+      title: "Welche Wartungspakete gibt es und was enthalten sie?",
+      text: "Basic Care: 15 € pro Monat für kleine Text-/Bildänderungen und einen kurzen technischen Monatscheck. Content Care: 39 € pro Monat für regelmäßige Content-Updates, kleine Layoutanpassungen und wichtige SEO-Snippets. Priority Care: 79 € pro Monat für priorisierte Änderungen, Monitoring-Checks und kurze technische Beratung. Der konkrete Umfang wird für dein Projekt vereinbart."
     },
     {
       title: "Betreust du auch Projekte anderer Entwickler?",
@@ -106,5 +106,17 @@ export const CARE_DE: ManagedServiceContent = {
       title: "Passende Ergänzung",
       text: "Umsetzung und Betreuung weiterdenken"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "Die passende Betreuung statt eines zu großen Pakets.",
+      text: "Basic, Content oder Priority Care: Wir schauen auf die Aufgaben, die tatsächlich regelmäßig anfallen, und wählen den passenden Umfang."
+    },
+    {
+      title: "Ein kleiner Fehler oder ein konkreter Änderungswunsch?",
+      text: "Beschreibe dein Anliegen. Ich prüfe den vorhandenen Stand und erkläre, was zur vereinbarten Betreuung gehört und was zusätzliche Arbeit ist."
+    }
+  ],
+  carePlanTitle: "Drei Betreuungsoptionen im Vergleich",
+  carePlanNote: "Basic Care passt zu seltenen kleinen Änderungen, Content Care zu regelmäßig gepflegten Inhalten und Priority Care zu häufigeren Aufgaben mit priorisierter Bearbeitung. Welcher Umfang zu deinem Projekt passt, klären wir vor der Beauftragung; konkrete Aufgaben und Reaktionszeiten werden vereinbart."
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

@@ -46,6 +46,7 @@ export const HOSTING_DE: ManagedServiceContent = { // Kundeninformationen zur pe
     { title: 'Sind E-Mail-Postfächer enthalten?', text: 'E-Mail kann als Zusatzleistung ergänzt werden. Anzahl der Postfächer, Aliase, Einrichtung und Betreuung werden passend zu deiner Domain und dem Hosting-Angebot abgestimmt. E-Mail ist nicht automatisch in jedem Hosting-Setup enthalten.' },
     { title: 'Sind Änderungen an meiner Website automatisch inklusive?', text: 'Technischer Betrieb und inhaltliche Weiterentwicklung sind unterschiedliche Aufgaben. Welche kleinen Anpassungen dazugehören, halten wir im Angebot fest. Neue Seiten, Funktionen oder größere Änderungen werden separat abgestimmt.' },
   ],
+  hooks: [{"title": "Technik abgeben. Den eigenen Alltag im Blick behalten.", "text": "Du brauchst keine Server- oder Mailkenntnisse. Wir klären dein Ziel und die Betreuung, die dafür sinnvoll ist."}, {"title": "Ein Ansprechpartner für den nächsten Schritt.", "text": "Beschreibe deinen vorhandenen Stand und deinen gewünschten Start. Ich erkläre verständlich, wie wir Einrichtung und Betrieb abstimmen."}],
   nextTitle: 'Weniger Technik auf deiner To-do-Liste.',
   nextText: 'Beschreibe kurz dein Projekt, dein bisheriges Hosting und deinen gewünschten Start. Daraus entwickeln wir ein Setup, dessen Betreuung zu deinem Alltag passt.',
   linksTitle: 'Passende nächste Schritte',

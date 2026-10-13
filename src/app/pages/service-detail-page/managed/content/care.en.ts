@@ -42,7 +42,7 @@ export const CARE_EN: ManagedServiceContent = {
     }
   ],
   scopeTitle: "How I can support your project",
-  offerText: "The starting price of €15 per month assumes a correspondingly limited support scope. The system, its condition and desired tasks determine a suitable proposal. Larger changes, special response times and hosting are explicitly agreed.",
+  offerText: "Choose Basic Care at €15, Content Care at €39 or Priority Care at €79 per month. The plans differ by type and frequency of tasks. System condition, larger extensions and special operational requirements are assessed separately.",
   steps: [
     {
       title: "Review the existing setup",
@@ -68,8 +68,8 @@ export const CARE_EN: ManagedServiceContent = {
       text: "No. Explain the request in your own words. I assess the technical situation and explain useful next steps."
     },
     {
-      title: "What is included from €15 per month?",
-      text: "The starting price applies to a small, specifically agreed scope. Included checks or tasks are defined before commissioning. Unlimited changes or permanent availability are not automatically included."
+      title: "Which support plans are available and what is included?",
+      text: "Basic Care: €15 per month for small text/image changes and a short monthly technical check. Content Care: €39 per month for regular content updates, small layout changes and important SEO snippets. Priority Care: €79 per month for prioritised changes, monitoring checks and short technical advice. Specific scope is agreed for your project."
     },
     {
       title: "Can you support projects built by other developers?",
@@ -106,5 +106,17 @@ export const CARE_EN: ManagedServiceContent = {
       title: "Related service",
       text: "Plan implementation and ongoing support"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "Suitable support rather than an oversized package.",
+      text: "Basic, Content or Priority Care: we review the tasks that actually recur and select a suitable scope."
+    },
+    {
+      title: "A small issue or a specific change?",
+      text: "Describe the request. I review the existing setup and explain which work belongs to agreed support and which is additional."
+    }
+  ],
+  carePlanTitle: "Compare three support options",
+  carePlanNote: "Basic Care suits occasional small changes, Content Care suits regularly maintained content, and Priority Care suits more frequent tasks with prioritised handling. We agree on suitable scope, specific tasks and response times before commissioning."
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

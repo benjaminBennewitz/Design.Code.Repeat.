@@ -106,5 +106,15 @@ export const DESIGN_DE: ManagedServiceContent = {
       title: "Passende Ergänzung",
       text: "Umsetzung und Betreuung weiterdenken"
     }
+  ],
+  hooks: [
+    {
+      title: "Dein Produkt soll klarer und eigenständiger wirken?",
+      text: "Wir starten bei den Menschen, die es nutzen. Daraus entstehen eine nachvollziehbare Struktur und ein passender visueller Auftritt."
+    },
+    {
+      title: "Von einer guten Idee zu einer nutzbaren Oberfläche.",
+      text: "Ich verbinde Gestaltung mit technischer Machbarkeit. Wir klären, welche Ansichten, Zustände und Komponenten dein Projekt wirklich braucht."
+    }
   ]
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

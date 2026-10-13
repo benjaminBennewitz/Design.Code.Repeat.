@@ -86,6 +86,14 @@ export const SOFTWARE_EN: ManagedServiceContent = {
     {
       title: "What happens after handover?",
       text: "Hosting, technical support and further development can be added. Responsibilities and scope are documented so ongoing operation remains understandable."
+    },
+    {
+      title: "Can the application run on my own Linux servers or VMs?",
+      text: "Yes, provided the environment meets the requirements. We review resources, access and responsibilities. Own servers, virtual machines and managed hosting are assessed around the project, including databases, deployment and later operations."
+    },
+    {
+      title: "Why might Redis or Celery be needed?",
+      text: "You do not need to select these tools yourself. Redis can support fast temporary state or caching. Celery processes suitable background tasks such as imports or reports. I explain whether and why either is useful for your workflow."
     }
   ],
   nextTitle: "Which workflow currently wastes your time?",
@@ -106,5 +114,54 @@ export const SOFTWARE_EN: ManagedServiceContent = {
       title: "Related service",
       text: "Plan implementation and ongoing support"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "Which task currently takes too much time?",
+      text: "A concrete workflow is the best starting point. We assess whether a small automation is enough or a custom application is useful."
+    },
+    {
+      title: "Plan the application and infrastructure together.",
+      text: "Existing servers, virtual machines and databases can form part of the solution. I assess operations around your actual process."
+    }
+  ],
+  technicalTitle: "From the interface to your own server system",
+  technical: [
+    {
+      title: "Own servers and Linux",
+      text: "Applications can run on your own servers, existing infrastructure or managed hosting. Linux environments and required services are planned around the project."
+    },
+    {
+      title: "Virtual machines and separate environments",
+      text: "VMs can separate applications and operational environments. Development, testing and production are planned so the setup remains understandable and manageable."
+    },
+    {
+      title: "Databases and PostgreSQL",
+      text: "I plan data models, access and migrations around real workflows. Relationships, permissions and future development are considered together."
+    },
+    {
+      title: "Redis for fast data and communication",
+      text: "Depending on the application, Redis can support caching, fast temporary state or communication between services. It serves a specific purpose rather than an unnecessarily long tool list."
+    },
+    {
+      title: "Celery and background tasks",
+      text: "Imports, reports and repeated processing can run through Celery outside a direct user request, keeping the interface usable while larger tasks are processed."
+    },
+    {
+      title: "Interfaces and ongoing operations",
+      text: "APIs, permissions, deployment and agreed support form part of the overall plan. The application and its infrastructure are considered together."
+    }
+  ],
+  seo: {
+    title: "Custom Software, Linux & Server Systems | Design. Code. Repeat.",
+    description: "Web applications and internal tools using Angular, Django, PostgreSQL, Redis and Celery. Own Linux servers and VMs matched to your project. From €1,650.",
+    keywords: [
+      "custom software development",
+      "Linux server systems",
+      "virtual machines",
+      "PostgreSQL",
+      "Redis",
+      "Celery"
+    ]
+  }
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

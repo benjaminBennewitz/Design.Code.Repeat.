@@ -85,6 +85,18 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'faq',
+    loadComponent:
+      /** Lädt die zentrale Fragenübersicht erst beim Aufruf ihrer eigenen Route. */
+      () => import('./pages/faq-page/faq-page.component').then(
+        /**
+         * Wählt die exportierte FAQ-Komponente aus dem geladenen Modul.
+         * @param module Geladenes Modul der Fragenübersicht.
+         */
+        (module) => module.FaqPageComponent,
+      ),
+  },
+  {
     path: 'kontakt', loadComponent:
       /** Lädt die Seitenkomponente erst bei Aufruf der zugehörigen Route. */
       () => import('./pages/contact-page/contact-page.component').then(

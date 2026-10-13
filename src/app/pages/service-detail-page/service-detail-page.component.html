@@ -1,6 +1,6 @@
 <!-- src/app/pages/service-detail-page/service-detail-page.component.html -->
 @if (service(); as item) {
   @if (managedContent(); as details) {
-    <dcr-managed-service [service]="item" [content]="details" />
+    <dcr-managed-service [service]="item" [content]="details" [carePlans]="carePlans()" />
   }
 }

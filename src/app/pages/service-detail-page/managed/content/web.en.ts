@@ -19,7 +19,7 @@ export const WEB_EN: ManagedServiceContent = {
   linksTitle: "Useful next steps",
   eyebrow: "Web development / personally guided",
   headline: "A website that clearly represents your business.",
-  introduction: "Your website should explain your offer, build trust and make enquiries straightforward. I combine structure, design and development into a site that fits your business and works on phones, tablets and desktop screens.",
+  introduction: "A WordPress website or a custom-built web presence: your site should explain your offer, build trust and support enquiries. I combine structure, design and development with a suitable approach to later content maintenance.",
   promise: "You know your business. I translate it into a website.",
   promiseText: "No technical knowledge is required. We discuss your offer, customers and goals. I turn that into a clear structure and implementation, explaining the decisions along the way.",
   benefitsTitle: "More than a good-looking homepage.",
@@ -39,6 +39,10 @@ export const WEB_EN: ManagedServiceContent = {
     {
       title: "A maintainable foundation",
       text: "Reusable design rules and a clear technical structure make later additions easier. Your website can develop alongside your business."
+    },
+    {
+      title: "WordPress when you want to maintain content yourself",
+      text: "WordPress can be a suitable foundation for regularly edited websites. Pages, text and images can be maintained through an administration interface. I match design, functionality and support to your requirements."
     }
   ],
   scopeTitle: "What we build for your website",
@@ -86,6 +90,10 @@ export const WEB_EN: ManagedServiceContent = {
     {
       title: "Are hosting and later changes included?",
       text: "Hosting and ongoing care are additional services. The proposal states what belongs to website creation and which support is agreed after launch."
+    },
+    {
+      title: "Do you also build WordPress websites?",
+      text: "Yes. WordPress can be useful when you want to update content regularly yourself. Custom development may be more suitable for specialised functionality or a deliberately lean implementation. We choose the foundation around your project and clarify maintenance, extensions and hosting."
     }
   ],
   nextTitle: "A website that fits your business.",
@@ -106,5 +114,25 @@ export const WEB_EN: ManagedServiceContent = {
       title: "Related service",
       text: "Plan implementation and ongoing support"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "A website should make your work easier.",
+      text: "Whether WordPress or custom development, we clarify how the site informs customers and how you want to maintain it later."
+    },
+    {
+      title: "Already have a website?",
+      text: "Show me the existing setup. We discuss what can stay, what should improve and which level of work makes sense."
+    }
+  ],
+  seo: {
+    title: "Web Development & WordPress Websites | Design. Code. Repeat.",
+    description: "WordPress websites and custom web development: clear design, responsive implementation, technical SEO foundations and personal support. Projects from €500.",
+    keywords: [
+      "web development",
+      "WordPress websites",
+      "business website",
+      "responsive web design"
+    ]
+  }
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

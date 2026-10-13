@@ -48,6 +48,10 @@
     </div>
   </section>
 
+  <section class="managed-hook dcr-section"><div class="dcr-container">
+    <dcr-service-hook [content]="content().hooks[0]" [label]="service().ctaLabel" />
+  </div></section>
+
   <section class="managed-scope dcr-section" aria-labelledby="managed-scope-title">
     <div class="dcr-container managed-scope__grid">
       <article><h2 id="managed-scope-title" [dcrTextReveal]="content().scopeTitle"></h2><ul>
@@ -66,6 +70,27 @@
     </div>
   </section>
 
+  @if (service().slug === 'wartung') {
+    <section class="managed-plans dcr-section" aria-labelledby="managed-plans-title"><div class="dcr-container">
+      <h2 id="managed-plans-title">{{ content().carePlanTitle }}</h2>
+      <div class="managed-plans__grid">
+        @for (plan of carePlans(); track plan.name) {
+          <article><h3>{{ plan.name }}</h3><strong>{{ plan.price }}</strong><p>{{ plan.text }}</p><ul>
+            @for (feature of plan.features; track feature) { <li>{{ feature }}</li> }
+          </ul><a class="managed-text-link" routerLink="/kontakt">{{ service().ctaLabel }} <span aria-hidden="true">↗</span></a></article>
+        }
+      </div>
+      <p class="managed-plans__note">{{ content().carePlanNote }}</p>
+    </div></section>
+  }
+  @if (content().technical; as topics) {
+    <section class="managed-technical dcr-section" aria-labelledby="managed-technical-title"><div class="dcr-container">
+      <h2 id="managed-technical-title">{{ content().technicalTitle }}</h2><div class="managed-benefits__grid">
+        @for (topic of topics; track topic.title) { <article class="managed-card"><h3>{{ topic.title }}</h3><p>{{ topic.text }}</p></article> }
+      </div>
+    </div></section>
+  }
+
   <section class="managed-process dcr-section" aria-labelledby="managed-process-title">
     <div class="dcr-container"><h2 id="managed-process-title" [dcrTextReveal]="content().processTitle"></h2>
       <ol class="managed-process__list">
@@ -76,6 +101,10 @@
     </div>
   </section>
 
+  <section class="managed-hook dcr-section"><div class="dcr-container">
+    <dcr-service-hook [content]="content().hooks[1]" [label]="service().ctaLabel" />
+  </div></section>
+
   <section class="managed-faq dcr-section" aria-labelledby="managed-faq-title">
     <div class="dcr-container managed-faq__layout"><h2 id="managed-faq-title" [dcrTextReveal]="content().faqTitle"></h2>
       <div class="managed-faq__list">
@@ -85,6 +114,8 @@
       </div>
     </div>
   </section>
+
+  <div class="dcr-container managed-faq-link"><a class="managed-text-link" routerLink="/faq">{{ content().back === 'Alle Leistungen' ? 'Alle Fragen durchsuchen' : 'Search all questions' }} <span aria-hidden="true">↗</span></a></div>
 
   <section class="managed-next dcr-section" aria-labelledby="managed-next-title">
     <div class="dcr-container"><div class="managed-next__intro"><h2 id="managed-next-title" [dcrTextReveal]="content().nextTitle"></h2><p>{{ content().nextText }}</p></div>

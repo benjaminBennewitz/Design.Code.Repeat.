@@ -106,5 +106,15 @@ export const DESIGN_EN: ManagedServiceContent = {
       title: "Related service",
       text: "Plan implementation and ongoing support"
     }
+  ],
+  hooks: [
+    {
+      title: "Should your product feel clearer and more distinctive?",
+      text: "We start with the people who use it, then develop an understandable structure and suitable visual identity."
+    },
+    {
+      title: "From an idea to a usable interface.",
+      text: "I connect design with technical feasibility. We clarify which views, states and components your project actually needs."
+    }
   ]
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

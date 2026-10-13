@@ -43,6 +43,7 @@ export const HOSTING_EN: ManagedServiceContent = { // Englische Kundeninformatio
     { title: 'Are email accounts included?', text: 'Email can be added as an optional service. Mailboxes, aliases, setup and support are agreed around your domain and hosting proposal. Email is not automatically included in every hosting setup.' },
     { title: 'Are website changes automatically included?', text: 'Technical operations and content development are different tasks. Any included small changes are defined in the proposal. New pages, features or larger changes are agreed separately.' },
   ],
+  hooks: [{"title": "Hand over technical tasks. Focus on your working day.", "text": "You do not need server or email expertise. We clarify your goal and the support that makes sense for it."}, {"title": "One point of contact for the next step.", "text": "Describe your existing setup and preferred start. I explain how we can coordinate configuration and operations."}],
   nextTitle: 'Less technical work on your to-do list.',
   nextText: 'Tell me about your project, current hosting and preferred start. Together we can plan a managed setup that fits your working day.',
   linksTitle: 'Useful next steps',

@@ -1,5 +1,7 @@
 /* src/app/pages/service-detail-page/managed/managed-service.models.ts */
 
+import { SeoPageContent } from '../../../core/models/studio.models';
+
 /** Eigenständiger Informationsblock der betreuten Leistungen. */
 export interface ManagedInfo {
   readonly title: string;
@@ -8,6 +10,12 @@ export interface ManagedInfo {
 
 /** Eigene Kundeninformationen und FAQs einer Leistungsdetailseite. */
 export interface ManagedServiceContent {
+  readonly seo?: SeoPageContent;
+  readonly hooks: readonly ManagedInfo[];
+  readonly technicalTitle?: string;
+  readonly technical?: readonly ManagedInfo[];
+  readonly carePlanTitle?: string;
+  readonly carePlanNote?: string;
   readonly back: string;
   readonly eyebrow: string;
   readonly headline: string;

@@ -40,6 +40,10 @@ export class HomePageComponent {
   private readonly languageService = inject(LanguageService);                                // Aktive Sprache und zentrale Inhalte.
   private readonly seoService = inject(SeoService);                                          // SEO-Metadaten der aktuellen Route.
   readonly anchorTarget = toSignal(inject(ActivatedRoute).fragment, { initialValue: null }); // Materialisiert bei Sprunglinks auch die vorausgehenden Abschnitte für stabile Geometrie.
+  readonly faqPageLabel = computed(
+    /** Liest die Beschriftung der vollständigen zentralen Fragenübersicht. */
+    () => this.languageService.language() === 'de' ? 'Alle Fragen durchsuchen' : 'Search all questions',
+  ); // Direkter Einstieg in die neue zentrale FAQ-Route.
   readonly content = computed(
     /** Inhalte in der aktiven Sprache. */
     () => this.languageService.content(),

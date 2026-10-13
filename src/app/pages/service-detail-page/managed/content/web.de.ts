@@ -19,7 +19,7 @@ export const WEB_DE: ManagedServiceContent = {
   linksTitle: "Passende nächste Schritte",
   eyebrow: "Webentwicklung / persönlich begleitet",
   headline: "Eine Website, die dein Unternehmen verständlich zeigt.",
-  introduction: "Deine Website soll erklären, Vertrauen schaffen und den Weg zur Anfrage erleichtern. Ich verbinde Struktur, Gestaltung und Entwicklung zu einem Webauftritt, der zu deinem Unternehmen passt und auf Smartphone, Tablet und Desktop funktioniert.",
+  introduction: "WordPress-Website oder individuell entwickelte Webpräsenz: Deine Website soll erklären, Vertrauen schaffen und Anfragen erleichtern. Ich verbinde Struktur, Gestaltung und Entwicklung mit der passenden Möglichkeit zur späteren Inhaltspflege.",
   promise: "Du kennst dein Unternehmen. Ich übersetze es ins Web.",
   promiseText: "Technisches Vorwissen ist nicht erforderlich. Wir besprechen dein Angebot, deine Kunden und deine Ziele. Ich leite daraus Seitenstruktur, Gestaltung und Umsetzung ab und führe dich verständlich durch die Entscheidungen.",
   benefitsTitle: "Mehr als eine schöne Startseite.",
@@ -39,6 +39,10 @@ export const WEB_DE: ManagedServiceContent = {
     {
       title: "Eine wartbare Grundlage",
       text: "Wiederverwendbare Gestaltung und eine klare technische Struktur erleichtern spätere Ergänzungen. Dein Auftritt kann mit deinem Unternehmen weiterentwickelt werden."
+    },
+    {
+      title: "WordPress, wenn du Inhalte selbst pflegen möchtest",
+      text: "Für redaktionell gepflegte Websites kann WordPress eine passende Grundlage sein. Seiten, Texte und Bilder lassen sich über eine Verwaltungsoberfläche bearbeiten. Ich stimme Gestaltung, Funktionen und Betreuung auf deinen Bedarf ab."
     }
   ],
   scopeTitle: "Was wir für deine Website umsetzen",
@@ -86,6 +90,10 @@ export const WEB_DE: ManagedServiceContent = {
     {
       title: "Sind Hosting und spätere Änderungen enthalten?",
       text: "Hosting und laufende Pflege sind ergänzende Leistungen. Im Angebot wird klar benannt, was zur Erstellung gehört und welche Betreuung nach dem Start vereinbart wird."
+    },
+    {
+      title: "Entwickelst du auch Websites mit WordPress?",
+      text: "Ja. WordPress kann sinnvoll sein, wenn du Inhalte regelmäßig selbst pflegen möchtest. Individuelle Entwicklung bietet sich an, wenn besondere Funktionen oder eine gezielt schlanke Umsetzung wichtiger sind. Wir wählen die Grundlage passend zu deinem Projekt und klären auch Pflege, Erweiterungen und Hosting."
     }
   ],
   nextTitle: "Ein Webauftritt, der zu dir passt.",
@@ -106,5 +114,25 @@ export const WEB_DE: ManagedServiceContent = {
       title: "Passende Ergänzung",
       text: "Umsetzung und Betreuung weiterdenken"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "Eine Website soll dir Arbeit abnehmen.",
+      text: "Ob WordPress oder individuelle Entwicklung: Wir klären, wie dein Auftritt Kunden informiert und wie du ihn später pflegen möchtest."
+    },
+    {
+      title: "Schon eine Website vorhanden?",
+      text: "Zeige mir den aktuellen Stand. Wir besprechen, was bleiben kann, was verbessert werden sollte und welcher Aufwand dafür sinnvoll ist."
+    }
+  ],
+  seo: {
+    title: "Webentwicklung & WordPress-Websites | Design. Code. Repeat.",
+    description: "WordPress-Websites und individuelle Webentwicklung: klare Gestaltung, responsive Umsetzung, SEO-Grundlagen und persönliche Betreuung. Projekte ab 500 €.",
+    keywords: [
+      "Webentwicklung",
+      "WordPress-Websites",
+      "Unternehmenswebsite",
+      "responsive Webdesign"
+    ]
+  }
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

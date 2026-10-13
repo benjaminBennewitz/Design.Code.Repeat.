@@ -22,6 +22,7 @@ export const DE_SERVICES_CONTENT: Pick<StudioContent, 'services'> = {
       outcomes: ['klarer digitaler Auftritt', 'schnelle Ladezeiten', 'wartbare Frontend-Struktur'],
       features: [
         'Unternehmenswebsites und Landingpages',
+        'WordPress-Websites und redaktionelle Inhaltspflege',
         'Angular oder bewusst schlanker HTML/JS-Stack',
         'Responsive UI und Designsystem',
         'SEO-Basics, Meta-Daten und interne Struktur',
@@ -54,6 +55,8 @@ export const DE_SERVICES_CONTENT: Pick<StudioContent, 'services'> = {
         'Angular Frontends',
         'Django / Django REST APIs',
         'PostgreSQL und Datenmodelle',
+        'Eigene Linux-Serversysteme und virtuelle Maschinen',
+        'Redis und Celery für passende Hintergrundprozesse',
         'Rollen- und Rechtekonzepte',
         'Automatisierungen und Hintergrundjobs',
       ],

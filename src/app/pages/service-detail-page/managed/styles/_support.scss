@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _support.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+/*
+   INHALTSVERZEICHNIS
+   01 Hooks Packages and Contact
+*/
+/* ==========================================================================
+   Hooks Packages and Contact
+   ========================================================================== */
+.managed-hook {
+  padding-block: clamp(1.5rem, 3vw, 3rem);
+}
+
+.managed-plans__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.managed-plans__grid article {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+  border: 1px solid var(--dcr-color-border-strong);
+  background: var(--dcr-color-surface-solid);
+}
+
+.managed-plans__grid strong {
+  font-family: var(--dcr-font-display);
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  color: var(--dcr-color-primary-text);
+}
+
+.managed-plans__grid li {
+  margin-bottom: 0.7rem;
+  line-height: 1.6;
+}
+
+.managed-plans__grid a {
+  margin-top: auto;
+}
+
+.managed-plans__note {
+  max-width: 85ch;
+  margin-top: 2rem;
+  color: var(--dcr-color-text-muted);
+}
+
+.managed-faq-link {
+  padding-block: 1rem 2rem;
+}
+
+.managed-next {
+  background: var(--managed-accent);
+  color: var(--managed-on-accent);
+}
+
+.managed-next .managed-next__intro p {
+  color: inherit;
+}

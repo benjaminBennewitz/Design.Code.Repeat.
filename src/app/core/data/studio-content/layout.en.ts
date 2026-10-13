@@ -22,7 +22,7 @@ export const EN_LAYOUT_CONTENT: Pick<StudioContent, 'meta' | 'navigation' | 'foo
       { label: 'References', href: '/referenzen' },
       { label: 'Studio', href: '/studio' },
       { label: 'Process', href: '/#prozess' },
-      { label: 'FAQ', href: '/#faq' },
+      { label: 'FAQ', href: '/faq' },
     ],
   },
   footer: {

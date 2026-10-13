@@ -39,6 +39,7 @@ export const EMAIL_EN: ManagedServiceContent = { // Englische Kundeninformatione
     { title: 'Can I book email without website or hosting support?', text: 'This offer is designed as an addition to website or hosting support rather than a standalone mass-market email hosting service. If your project is already supported, we can discuss a suitable addition.' },
     { title: 'Do you then handle all my communication?', text: 'I support the agreed technical setup. Writing, reading and organising daily messages remain with you. Technical problems and requested changes are discussed within the agreed support scope.' },
   ],
+  hooks: [{"title": "Hand over technical tasks. Focus on your working day.", "text": "You do not need server or email expertise. We clarify your goal and the support that makes sense for it."}, {"title": "One point of contact for the next step.", "text": "Describe your existing setup and preferred start. I explain how we can coordinate configuration and operations."}],
   nextTitle: 'An address that fits your business.',
   nextText: 'Tell me which domain you use, how many addresses you need and whether mailboxes already exist. We can discuss setup, costs and suitable timing.',
   linksTitle: 'Useful next steps',

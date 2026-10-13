@@ -153,6 +153,19 @@ dcr/
 │   │   │   │   ├── design-archive-case-page.component.html
 │   │   │   │   ├── design-archive-case-page.component.scss
 │   │   │   │   └── design-archive-case-page.component.ts
+│   │   │   ├── faq-page/
+│   │   │   │   ├── styles/
+│   │   │   │   │   ├── _layout.scss
+│   │   │   │   │   └── _questions.scss
+│   │   │   │   ├── faq.models.ts
+│   │   │   │   ├── faq-content.ts
+│   │   │   │   ├── faq-page.component.html
+│   │   │   │   ├── faq-page.component.scss
+│   │   │   │   ├── faq-page.component.spec.ts
+│   │   │   │   ├── faq-page.component.ts
+│   │   │   │   ├── faq-search.spec.ts
+│   │   │   │   ├── faq-search.ts
+│   │   │   │   └── faq-ui.data.ts
 │   │   │   ├── home-page/
 │   │   │   │   ├── styles/
 │   │   │   │   │   ├── _contact-responsive.scss
@@ -197,9 +210,39 @@ dcr/
 │   │   │   │   ├── references-page.component.scss
 │   │   │   │   └── references-page.component.ts
 │   │   │   ├── service-detail-page/
+│   │   │   │   ├── managed/
+│   │   │   │   │   ├── content/
+│   │   │   │   │   │   ├── care.de.ts
+│   │   │   │   │   │   ├── care.en.ts
+│   │   │   │   │   │   ├── design.de.ts
+│   │   │   │   │   │   ├── design.en.ts
+│   │   │   │   │   │   ├── email.de.ts
+│   │   │   │   │   │   ├── email.en.ts
+│   │   │   │   │   │   ├── hosting.de.ts
+│   │   │   │   │   │   ├── hosting.en.ts
+│   │   │   │   │   │   ├── managed-service-content.ts
+│   │   │   │   │   │   ├── software.de.ts
+│   │   │   │   │   │   ├── software.en.ts
+│   │   │   │   │   │   ├── web.de.ts
+│   │   │   │   │   │   └── web.en.ts
+│   │   │   │   │   ├── styles/
+│   │   │   │   │   │   ├── _layout.scss
+│   │   │   │   │   │   ├── _responsive.scss
+│   │   │   │   │   │   ├── _sections.scss
+│   │   │   │   │   │   ├── _support.scss
+│   │   │   │   │   │   └── _transitions.scss
+│   │   │   │   │   ├── managed-service.component.html
+│   │   │   │   │   ├── managed-service.component.scss
+│   │   │   │   │   ├── managed-service.component.spec.ts
+│   │   │   │   │   ├── managed-service.component.ts
+│   │   │   │   │   ├── managed-service.models.ts
+│   │   │   │   │   ├── service-hook.component.scss
+│   │   │   │   │   └── service-hook.component.ts
 │   │   │   │   ├── service-detail-page.component.html
 │   │   │   │   ├── service-detail-page.component.scss
-│   │   │   │   └── service-detail-page.component.ts
+│   │   │   │   ├── service-detail-page.component.ts
+│   │   │   │   ├── service-guidance.component.scss
+│   │   │   │   └── service-guidance.component.ts
 │   │   │   ├── services-page/
 │   │   │   │   ├── styles/
 │   │   │   │   │   ├── _care.scss

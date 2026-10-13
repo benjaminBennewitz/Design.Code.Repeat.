@@ -50,6 +50,10 @@ export class ServiceDetailPageComponent {
         (item: StudioService) => item.slug === this.slug(),
       ),
   ); // Gefundener Service der aktiven Sprache.
+  readonly carePlans = computed(
+    /** Liest die bestehenden Wartungsoptionen aus dem zentralen Content. */
+    () => this.languageService.content().carePlans,
+  ); // Gemeinsame Preise und Leistungen von Übersicht und Wartungsdetailseite.
   readonly managedContent = computed(
     /** Wählt zusätzliche Kundeninformationen der aktiven Leistung und Sprache. */
     () => managedServiceContent(this.languageService.language(), this.slug()),
@@ -80,7 +84,7 @@ export class ServiceDetailPageComponent {
     /**
      * Titel, Beschreibung und Keywords der ausgewählten Leistung.
      */
-    const seo: SeoPageContent = {
+    const seo: SeoPageContent = this.managedContent()?.seo ?? {
       title: `${service.title} | Design. Code. Repeat.`,
       description: service.summary,
       keywords: [service.title, ...service.features.slice(0, 4)],

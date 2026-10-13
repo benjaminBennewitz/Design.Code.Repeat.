@@ -42,6 +42,7 @@ export const EMAIL_DE: ManagedServiceContent = { // Kundeninformationen zur erg�
     { title: 'Ist E-Mail auch ohne Website- oder Hosting-Betreuung buchbar?', text: 'Das Angebot ist als Zusatzleistung zur Website- oder Hosting-Betreuung gedacht. Es ist kein eigenständiges Massenangebot für E-Mail-Hosting. Wenn du bereits ein Projekt betreuen lässt, können wir die passende Ergänzung besprechen.' },
     { title: 'Übernimmst du danach die gesamte Kommunikation?', text: 'Ich betreue die vereinbarte technische Einrichtung. Schreiben, Lesen und die tägliche Organisation deiner Nachrichten bleiben bei dir. Technische Probleme und gewünschte Änderungen besprechen wir im Rahmen der vereinbarten Betreuung.' },
   ],
+  hooks: [{"title": "Technik abgeben. Den eigenen Alltag im Blick behalten.", "text": "Du brauchst keine Server- oder Mailkenntnisse. Wir klären dein Ziel und die Betreuung, die dafür sinnvoll ist."}, {"title": "Ein Ansprechpartner für den nächsten Schritt.", "text": "Beschreibe deinen vorhandenen Stand und deinen gewünschten Start. Ich erkläre verständlich, wie wir Einrichtung und Betrieb abstimmen."}],
   nextTitle: 'Eine Adresse, die zu deinem Unternehmen passt.',
   nextText: 'Sag mir, welche Domain du nutzt, wie viele Adressen du brauchst und ob bereits Postfächer bestehen. Wir klären Einrichtung, Preis und den passenden Zeitpunkt.',
   linksTitle: 'Passende nächste Schritte',

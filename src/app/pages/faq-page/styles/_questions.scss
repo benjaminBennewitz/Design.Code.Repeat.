@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _questions.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+/*
+   INHALTSVERZEICHNIS
+   01 Thematic Questions
+   02 Empty State and Responsive Layout
+*/
+/* ==========================================================================
+   Thematic Questions
+   ========================================================================== */
+.faq-body {
+  padding-bottom: 2rem;
+}
+
+.faq-topic {
+  padding-top: clamp(2.5rem, 5vw, 5rem);
+}
+
+.faq-topic h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.2rem;
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  line-height: 1.25;
+}
+
+.faq-topic h2 > span {
+  color: var(--dcr-color-primary-text);
+  font-size: 1.8rem;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2.5rem;
+  align-items: start;
+}
+
+.faq-grid details {
+  border-bottom: 1px solid var(--dcr-color-border-strong);
+}
+
+.faq-grid summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 72px;
+  padding-block: 1.2rem;
+  font-weight: 800;
+  line-height: 1.6;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-grid summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-grid summary > span {
+  flex-shrink: 0;
+  color: var(--dcr-color-primary-text);
+  font-family: var(--dcr-font-mono);
+  font-size: 1.6rem;
+}
+
+.faq-grid details[open] summary > span {
+  transform: rotate(45deg);
+}
+
+.faq-grid summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.faq-answer {
+  padding-bottom: 1.5rem;
+}
+
+.faq-answer p {
+  margin: 0 0 1rem;
+  color: var(--dcr-color-text-muted);
+  line-height: 1.8;
+}
+
+.faq-answer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  color: var(--dcr-color-primary-text);
+  text-underline-offset: 0.3em;
+}
+
+/* ==========================================================================
+   Empty State and Responsive Layout
+   ========================================================================== */
+.faq-empty {
+  padding-block: 3rem;
+}
+
+.faq-empty p {
+  max-width: 65ch;
+  margin-bottom: 2rem;
+  color: var(--dcr-color-text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .faq-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

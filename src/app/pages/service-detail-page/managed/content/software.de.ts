@@ -86,6 +86,14 @@ export const SOFTWARE_DE: ManagedServiceContent = {
     {
       title: "Was passiert nach der Übergabe?",
       text: "Hosting, technische Betreuung und Weiterentwicklung können ergänzt werden. Zuständigkeiten und Umfang werden dokumentiert, damit auch der laufende Betrieb verständlich geregelt ist."
+    },
+    {
+      title: "Kann die Anwendung auf eigenen Linux-Servern oder VMs laufen?",
+      text: "Ja, wenn die vorhandene Umgebung die Anforderungen erfüllt. Wir prüfen Ressourcen, Zugänge und Zuständigkeiten. Eigene Server, virtuelle Maschinen oder betreutes Hosting werden passend zum Projekt eingeordnet. Datenbank, Deployment und späterer Betrieb sind Teil dieser Abstimmung."
+    },
+    {
+      title: "Wofür brauche ich Redis oder Celery?",
+      text: "Du musst diese Werkzeuge nicht selbst auswählen. Redis kann beispielsweise schnelle Zwischenzustände oder Caching unterstützen. Celery verarbeitet geeignete Aufgaben im Hintergrund, etwa Importe oder Berichte. Ich erkläre, ob und warum das für deinen Ablauf sinnvoll ist."
     }
   ],
   nextTitle: "Welcher Ablauf kostet dich heute unnötig Zeit?",
@@ -106,5 +114,54 @@ export const SOFTWARE_DE: ManagedServiceContent = {
       title: "Passende Ergänzung",
       text: "Umsetzung und Betreuung weiterdenken"
     }
-  ]
+  ],
+  hooks: [
+    {
+      title: "Welcher Arbeitsschritt kostet heute zu viel Zeit?",
+      text: "Ein konkreter Ablauf ist der beste Einstieg. Wir prüfen, ob eine kleine Automatisierung genügt oder eine eigene Anwendung sinnvoll ist."
+    },
+    {
+      title: "Anwendung und Infrastruktur gemeinsam planen.",
+      text: "Vorhandene Server, virtuelle Maschinen und Datenbanken können Teil der Lösung sein. Ich ordne den Betrieb passend zu deinem Prozess ein."
+    }
+  ],
+  technicalTitle: "Von der Oberfläche bis zum eigenen Serversystem",
+  technical: [
+    {
+      title: "Eigene Server und Linux",
+      text: "Anwendungen können auf eigenen Serversystemen, bestehender Infrastruktur oder betreutem Hosting betrieben werden. Linux-Umgebungen und die benötigten Dienste werden passend zum Projekt geplant."
+    },
+    {
+      title: "Virtuelle Maschinen und getrennte Umgebungen",
+      text: "VMs können Anwendungen und Betriebsumgebungen voneinander trennen. Entwicklung, Tests und produktiver Einsatz werden so geplant, dass das Setup verständlich und betreubar bleibt."
+    },
+    {
+      title: "Datenbanken und PostgreSQL",
+      text: "Ich plane Datenmodelle, Zugriffe und Migrationen passend zu den fachlichen Abläufen. Beziehungen, Berechtigungen und die spätere Weiterentwicklung werden gemeinsam betrachtet."
+    },
+    {
+      title: "Redis für schnelle Daten und Kommunikation",
+      text: "Redis kann je nach Anwendung für Caching, schnelle Zwischenzustände oder die Kommunikation zwischen Diensten eingesetzt werden. Der Einsatz folgt einer konkreten Aufgabe, nicht einer möglichst langen Werkzeugliste."
+    },
+    {
+      title: "Celery und Hintergrundaufgaben",
+      text: "Importe, Berichte oder wiederkehrende Verarbeitung können über Celery außerhalb der direkten Benutzeranfrage laufen. So bleibt die Oberfläche bedienbar, während umfangreichere Aufgaben verarbeitet werden."
+    },
+    {
+      title: "Schnittstellen und laufender Betrieb",
+      text: "APIs, Berechtigungen, Deployment und die vereinbarte Betreuung gehören zur Gesamtplanung. Anwendung und Infrastruktur werden nicht als voneinander unabhängige Baustellen behandelt."
+    }
+  ],
+  seo: {
+    title: "Individuelle Software, Linux & Serversysteme | Design. Code. Repeat.",
+    description: "Webanwendungen und interne Tools mit Angular, Django, PostgreSQL, Redis und Celery. Eigene Linux-Server und VMs passend zum Projekt. Ab 1.650 €.",
+    keywords: [
+      "individuelle Softwareentwicklung",
+      "Linux-Serversysteme",
+      "virtuelle Maschinen",
+      "PostgreSQL",
+      "Redis",
+      "Celery"
+    ]
+  }
 }; // Eigene Kundeninformationen und FAQ-Einträge dieser Leistung.

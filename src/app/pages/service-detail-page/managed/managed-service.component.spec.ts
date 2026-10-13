@@ -46,6 +46,7 @@ function verifyRendering(language: 'de' | 'en', slug: string): void {
   expect(fixture.nativeElement.querySelector('.managed-offer__price').textContent).toBe(fixture.componentInstance.service().price);
   verifyNavigation(fixture.nativeElement, content);
   verifyGuidance(fixture.nativeElement, language);
+  verifyPlans(fixture.nativeElement, slug);
 }
 
 /**
@@ -62,6 +63,7 @@ function renderPage(language: 'de' | 'en', slug: string, content: ManagedService
   const fixture = TestBed.createComponent(ManagedServiceComponent);
   fixture.componentRef.setInput('service', serviceFor(language, slug));
   fixture.componentRef.setInput('content', content);
+  fixture.componentRef.setInput('carePlans', STUDIO_TRANSLATIONS[language].carePlans);
   fixture.detectChanges();
   return fixture;
 }
@@ -127,8 +129,8 @@ function verifyGuidance(element: HTMLElement, language: 'de' | 'en'): void {
 
 /** Prüft die vollständige Zuordnung und die inhaltliche Trennung der Leistungen. */
 function verifyServiceBoundary(): void {
-  expect(managedServiceContent('de', 'webentwicklung')?.faqs).toHaveLength(6);
-  expect(managedServiceContent('en', 'softwareentwicklung')?.faqs).toHaveLength(6);
+  expect(managedServiceContent('de', 'webentwicklung')?.faqs).toHaveLength(7);
+  expect(managedServiceContent('en', 'softwareentwicklung')?.faqs).toHaveLength(8);
   expect(managedServiceContent('de', 'unknown')).toBeUndefined();
   expect(managedServiceContent('de', 'email')?.faqs).not.toEqual(managedServiceContent('de', 'managed-hosting')?.faqs);
 }
@@ -140,5 +142,15 @@ describe('ManagedServiceComponent', registerTests);
  * @param slug Kennung der aktuell geprüften Leistungsseite.
  */
 function faqCountFor(slug: string): number {
-  return slug === 'managed-hosting' ? 8 : slug === 'email' ? 7 : 6;
+  return ['managed-hosting', 'softwareentwicklung'].includes(slug) ? 8 : ['email', 'webentwicklung'].includes(slug) ? 7 : 6;
+}
+
+/**
+ * Prüft, dass alle drei bestehenden Wartungsoptionen nur auf ihrer Detailseite stehen.
+ * @param element Gerenderte Leistungsseite.
+ * @param slug Kennung der ausgewählten Leistung.
+ */
+function verifyPlans(element: HTMLElement, slug: string): void {
+  expect(element.querySelectorAll('.managed-plans__grid article')).toHaveLength(slug === 'wartung' ? 3 : 0);
+  expect(element.querySelectorAll('dcr-service-hook')).toHaveLength(2);
 }

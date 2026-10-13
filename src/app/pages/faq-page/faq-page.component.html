@@ -1,0 +1,32 @@
+<!-- src/app/pages/faq-page/faq-page.component.html -->
+<main class="faq-page">
+  <section class="faq-hero dcr-section" aria-labelledby="faq-page-title"><div class="dcr-container">
+    <div class="faq-hero__panel"><p class="dcr-eyebrow">{{ ui().eyebrow }}</p><h1 id="faq-page-title" [dcrTextReveal]="ui().title"></h1><p>{{ ui().introduction }}</p></div>
+    <div class="faq-search"><label for="faq-search-input">{{ ui().search }}</label><div class="faq-search__row">
+      <input #faqSearch id="faq-search-input" type="search" maxlength="200" autocomplete="off" [value]="query()" [placeholder]="ui().placeholder" (input)="updateQuery($event)" />
+      <button type="button" class="dcr-button" (click)="resetSearch()">{{ ui().reset }}</button>
+    </div></div>
+    <nav class="faq-topics" [attr.aria-label]="ui().topics">
+      <button type="button" [attr.aria-pressed]="category() === 'all'" (click)="category.set('all')">{{ ui().all }}</button>
+      @for (group of groups(); track group.id) {
+        <button type="button" [attr.aria-pressed]="category() === group.id" (click)="category.set(group.id)">{{ group.title }} <span>{{ group.items.length }}</span></button>
+      }
+    </nav>
+    <p class="faq-results" role="status" aria-live="polite" aria-atomic="true">{{ resultCount() }} {{ ui().results }}</p>
+  </div></section>
+  <div class="dcr-container faq-body">
+    @for (group of visibleGroups(); track group.id) {
+      <section class="faq-topic" [attr.aria-labelledby]="'faq-heading-' + group.id">
+        <h2 [id]="'faq-heading-' + group.id"><span class="material-symbols-outlined" aria-hidden="true">{{ group.icon }}</span>{{ group.title }}</h2>
+        <div class="faq-grid">
+          @for (item of group.items; track item.id) {
+            <details [id]="item.id"><summary>{{ item.question }}<span aria-hidden="true">+</span></summary><div class="faq-answer"><p>{{ item.answer }}</p><a [routerLink]="item.route" [fragment]="item.fragment">{{ ui().related }} <span aria-hidden="true">↗</span></a></div></details>
+          }
+        </div>
+      </section>
+    } @empty {
+      <section class="faq-empty"><h2>{{ ui().emptyTitle }}</h2><p>{{ ui().emptyText }}</p><a class="dcr-button" routerLink="/kontakt">{{ ui().contact }}</a></section>
+    }
+  </div>
+  <section class="faq-contact dcr-section"><div class="dcr-container"><h2>{{ ui().contactTitle }}</h2><p>{{ ui().contactText }}</p><a class="dcr-button" routerLink="/kontakt">{{ ui().contact }} <span aria-hidden="true">↗</span></a></div></section>
+</main>

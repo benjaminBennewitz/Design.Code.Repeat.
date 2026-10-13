@@ -21,6 +21,7 @@ export const EN_SERVICES_CONTENT: Pick<StudioContent, 'services'> = {
       outcomes: ['clear digital presence', 'fast loading', 'maintainable frontend structure'],
       features: [
         'Company websites and landing pages',
+        'WordPress websites and editorial content maintenance',
         'Angular or intentionally lean HTML/JS stack',
         'Responsive UI and design system',
         'SEO basics, metadata and internal structure',
@@ -49,6 +50,8 @@ export const EN_SERVICES_CONTENT: Pick<StudioContent, 'services'> = {
         'Angular frontends',
         'Django / Django REST APIs',
         'PostgreSQL data models',
+        'Own Linux servers and virtual machines',
+        'Redis and Celery for suitable background tasks',
         'Role and permission concepts',
         'Automation and background jobs',
       ],
