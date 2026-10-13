@@ -16,37 +16,165 @@
 
 /*
    INHALTSVERZEICHNIS
-   01 Not Found Page
+   01 Shared Layout
+   02 Error Artwork
+   03 Glitch Animation
+   04 Responsive Layout
+   05 Accessibility Overrides
 */
 
 /* ==========================================================================
-   Not Found Page
+   Shared Layout
    ========================================================================== */
-.system-page__section {
+@use '../../shared/system-page/system-page-layout' as layout;
+@include layout.render;
+/* ==========================================================================
+   Error Artwork
+   ========================================================================== */
+.error-art {
   display: grid;
-  place-items: center;
-  overflow: hidden;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  padding: clamp(1.2rem, 3vw, 2.4rem);
+  border: 2px solid var(--dcr-color-border-strong);
+  background: var(--dcr-color-surface-solid);
 }
-.system-page__box {
-  max-width: 900px;
-  text-align: center;
+.error-art__grid {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--dcr-color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dcr-color-border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.5;
 }
-.system-page__code {
+.error-art__head,
+.error-art__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  font-family: var(--dcr-font-mono);
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  font-weight: 700;
+}
+.error-art__head {
+  align-self: start;
+}
+.error-art__signal {
+  padding: 0.4rem 0.55rem;
+  background: var(--dcr-color-primary);
+  color: var(--dcr-color-on-primary);
+}
+.error-art__number {
+  position: relative;
+  width: 100%;
   margin: 0;
+  color: var(--dcr-color-text);
+  font-family: var(--dcr-font-display);
+  font-size: clamp(6rem, 20vw, 17.5rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 0.85;
+  letter-spacing: -0.11em;
+  text-align: center;
+  transform: translateX(-0.025em);
+}
+.error-art__number::before,
+.error-art__number::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-value);
+  opacity: 0;
+  pointer-events: none;
+}
+.error-art__number::before {
   color: var(--dcr-color-primary-text);
-  font-family: var(--dcr-font-display);
-  font-size: clamp(8rem, 25vw, 24rem);
-  line-height: 0.65;
-  letter-spacing: -0.12em;
-  opacity: 0.22;
+  clip-path: inset(28% 0 48%);
 }
-.system-page h1 {
-  margin: 1rem 0;
-  font-family: var(--dcr-font-display);
-  font-size: clamp(2.8rem, 6vw, 6rem);
-  line-height: 0.88;
+.error-art__number::after {
+  color: var(--dcr-color-pink-text);
+  clip-path: inset(63% 0 15%);
 }
-.system-page p:not(.system-page__code) {
+.error-art__footer {
+  align-self: end;
+  padding-top: 1rem;
+  border-top: 1px solid var(--dcr-color-border-strong);
   color: var(--dcr-color-text-muted);
-  line-height: 1.6;
+}
+.error-art__footer > span:last-child {
+  color: var(--dcr-color-primary-text);
+  font-size: 2rem;
+  line-height: 0.7;
+}
+.error-art__cross {
+  position: absolute;
+  color: var(--dcr-color-pink-text);
+  font-family: var(--dcr-font-mono);
+  font-size: 2rem;
+  line-height: 1;
+}
+.error-art__cross--first {
+  top: 22%;
+  right: 6%;
+}
+.error-art__cross--second {
+  bottom: 19%;
+  left: 4%;
+  color: var(--dcr-color-violet-text);
+  font-size: 3rem;
+}
+/* ==========================================================================
+   Glitch Animation
+   ========================================================================== */
+.is-animated.is-complete .error-art__number::before {
+  animation: route-glitch 320ms steps(1, end) 80ms both;
+}
+.is-animated.is-complete .error-art__number::after {
+  animation: route-glitch 320ms steps(1, end) 120ms reverse both;
+}
+@keyframes route-glitch {
+  0%,
+  75%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 0.45;
+    transform: translateX(-5px);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translateX(4px);
+  }
+}
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+@media (max-width: 900px) {
+  .error-art__number {
+    font-size: clamp(8rem, 31vw, 12rem);
+  }
+}
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+:host-context(.dcr-app-hidden) .error-art__number::before,
+:host-context(.dcr-app-hidden) .error-art__number::after,
+:host-context(:root[data-motion='reduced']) .error-art__number::before,
+:host-context(:root[data-motion='reduced']) .error-art__number::after,
+:host-context(:root[data-motion='off']) .error-art__number::before,
+:host-context(:root[data-motion='off']) .error-art__number::after,
+:host-context(:root[data-comfort='simple']) .error-art__number::before,
+:host-context(:root[data-comfort='simple']) .error-art__number::after {
+  animation: none;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .error-art__number::before,
+  .error-art__number::after {
+    animation: none !important;
+    opacity: 0;
+  }
 }

@@ -1,0 +1,127 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _system-page-layout.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Status Page Layout
+   02 Responsive Layout
+*/
+
+/* ==========================================================================
+   Status Page Layout
+   ========================================================================== */
+@mixin render {
+  :host {
+    display: block;
+  }
+  .system-page {
+    max-width: 1920px;
+    margin-inline: auto;
+  }
+  .system-status {
+    display: grid;
+    align-items: center;
+    height: auto;
+    padding-block: clamp(2.5rem, 6vh, 5rem);
+  }
+  .system-status__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 7rem);
+  }
+  .system-status__copy {
+    min-width: 0;
+    padding-block: 1rem;
+  }
+  .system-status h1 {
+    max-width: 11ch;
+    margin: 1rem 0 1.6rem;
+    font-family: var(--dcr-font-display);
+    font-size: clamp(2.8rem, 5.6vw, 6.7rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .system-status__text {
+    max-width: 39rem;
+    margin: 0;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    line-height: 1.7;
+  }
+  .system-status__note {
+    margin: 1.4rem 0 0;
+    font-family: var(--dcr-font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+    color: var(--dcr-color-text-muted);
+  }
+  .system-status__note span {
+    color: var(--dcr-color-pink-text);
+  }
+  .status-art {
+    position: relative;
+    width: 100%;
+    max-width: 36rem;
+    aspect-ratio: 1;
+    min-width: 0;
+    justify-self: center;
+    isolation: isolate;
+  }
+  .system-status__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+  @media (max-width: 900px) {
+    .system-status__layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+    .status-art {
+      width: min(100%, 24rem);
+    }
+    .system-status__copy {
+      padding-block: 0;
+    }
+    .system-status h1 {
+      max-width: 15ch;
+      font-size: clamp(2.8rem, 8vw, 4.8rem);
+    }
+  }
+  @media (max-width: 480px) {
+    .status-art {
+      width: min(100%, 20rem);
+    }
+    .system-status {
+      padding-top: 2rem;
+    }
+    .system-status h1 {
+      margin-block: 0.8rem 1.2rem;
+    }
+  }
+}

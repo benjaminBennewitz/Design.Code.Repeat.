@@ -1,7 +1,8 @@
+/* src/app/shared/terminal-panel/terminal-panel.component.ts */
 /**
- * @file Kontrolliertes Terminal-UI-Element.
- * @description Liefert den visuellen Bezug zum Portfolio, ohne die Firmenwebsite in eine vollständige Terminal-Experience zu verwandeln.
- */
+* @file Kontrolliertes Terminal-UI-Element.
+* @description Liefert den visuellen Bezug zum Portfolio, ohne die Firmenwebsite in eine vollständige Terminal-Experience zu verwandeln.
+*/
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
@@ -14,8 +15,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TerminalPanelComponent {
-  /** Fenstertitel. */
-  readonly title = input<string>('system.status');
-  /** Zeilen innerhalb des Terminalfensters. */
-  readonly lines = input.required<readonly string[]>();
+  readonly title = input<string>('system.status'); // Fenstertitel.
+  readonly lines = input.required<readonly string[]>(); // Zeilen innerhalb des Terminalfensters.
 }

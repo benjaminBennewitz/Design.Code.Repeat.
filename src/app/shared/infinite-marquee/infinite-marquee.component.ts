@@ -1,7 +1,8 @@
+/* src/app/shared/infinite-marquee/infinite-marquee.component.ts */
 /**
- * @file Wiederverwendbares Infinite-Marquee.
- * @description Rendert eine kontinuierliche, rein CSS-basierte Tech-/Keyword-Leiste und respektiert globale Motion-Einstellungen.
- */
+* @file Wiederverwendbares Infinite-Marquee.
+* @description Rendert eine kontinuierliche, rein CSS-basierte Tech-/Keyword-Leiste und respektiert globale Motion-Einstellungen.
+*/
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
@@ -17,15 +18,11 @@ type MarqueeTone = 'surface' | 'primary' | 'pink';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfiniteMarqueeComponent {
-  /** Sichtbare Einträge. */
-  readonly items = input.required<readonly string[]>();
+  readonly items = input.required<readonly string[]>(); // Sichtbare Einträge.
 
-  /** Zugängliche Beschriftung des Listeninhalts. */
-  readonly ariaLabel = input<string>('Technology stack');
+  readonly ariaLabel = input<string>('Technology stack'); // Zugängliche Beschriftung des Listeninhalts.
 
-  /** Laufrichtung. */
-  readonly reverse = input<boolean>(false);
+  readonly reverse = input<boolean>(false); // Laufrichtung.
 
-  /** Flächenvariante für neutrale oder harte farbige Trenner. */
-  readonly tone = input<MarqueeTone>('surface');
+  readonly tone = input<MarqueeTone>('surface'); // Flächenvariante für neutrale oder harte farbige Trenner.
 }

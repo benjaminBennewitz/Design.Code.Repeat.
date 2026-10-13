@@ -1,10 +1,30 @@
-<main class="system-page">
-  <section id="anfrage-gesendet" class="system-page__section dcr-section dcr-viewport-section">
-    <div class="dcr-container system-page__box">
-      <p class="dcr-eyebrow">status=202</p>
-      <h1 [dcrTextReveal]="content().title"></h1>
-      <p [dcrTextReveal]="content().text"></p>
-      <a class="dcr-button dcr-button--primary" routerLink="/">{{ content().cta }}</a>
+<!-- src/app/pages/thank-you-page/thank-you-page.component.html -->
+<main class="system-page system-page--success">
+  <section id="anfrage-gesendet" class="system-status dcr-section dcr-viewport-section" aria-labelledby="success-title">
+    <div class="dcr-container system-status__layout">
+      <div class="success-art status-art" aria-hidden="true">
+        <div class="success-art__grid"></div>
+        <div class="success-art__backplate"></div>
+        <div class="success-art__card">
+          <div class="success-art__card-head"><span>MESSAGE / IN</span><span>01</span></div>
+          <svg class="success-art__check" viewBox="0 0 160 160" focusable="false">
+            <path d="M34 82 L66 114 L130 45" pathLength="1" />
+          </svg>
+          <div class="success-art__card-footer"><span>request.received</span><span>↗</span></div>
+        </div>
+        <span class="success-art__stamp">202<br />ACCEPTED</span>
+        <span class="success-art__spark success-art__spark--first"
+          ><svg viewBox="0 0 100 100" focusable="false"><path d="M50 8v84 M8 50h84 M20 20l60 60 M80 20L20 80" /></svg
+        ></span>
+        <span class="success-art__spark success-art__spark--second">+</span>
+      </div>
+      <div class="system-status__copy">
+        <p class="dcr-eyebrow">{{ ui().eyebrow }}</p>
+        <h1 id="success-title" [dcrTextReveal]="ui().title"></h1>
+        <p class="system-status__text" [dcrTextReveal]="content().text"></p>
+        <p class="success-receipt"><span class="success-receipt__dot" aria-hidden="true"></span>{{ ui().status }}</p>
+        <dcr-system-page-links />
+      </div>
     </div>
   </section>
 </main>

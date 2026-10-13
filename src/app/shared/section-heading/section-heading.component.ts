@@ -1,7 +1,8 @@
+/* src/app/shared/section-heading/section-heading.component.ts */
 /**
- * @file Wiederverwendbare Section-Überschrift.
- * @description Vereinheitlicht Eyebrow, H2 und optionalen Lead-Text ohne zusätzliche Content-Logik.
- */
+* @file Wiederverwendbare Section-Überschrift.
+* @description Vereinheitlicht Eyebrow, H2 und optionalen Lead-Text ohne zusätzliche Content-Logik.
+*/
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TextRevealDirective } from '../text-reveal.directive';
@@ -16,12 +17,8 @@ import { TextRevealDirective } from '../text-reveal.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionHeadingComponent {
-  /** Textausrichtung der Section-Überschrift für bewusst variierende Layouts. */
-  readonly align = input<'left' | 'center' | 'right'>('left');
-  /** Terminal-artige Vorzeile. */
-  readonly eyebrow = input.required<string>();
-  /** Hauptüberschrift. */
-  readonly title = input.required<string>();
-  /** Optionaler erläuternder Text. */
-  readonly text = input<string | undefined>('');
+  readonly align = input<'left' | 'center' | 'right'>('left'); // Textausrichtung der Section-Überschrift für bewusst variierende Layouts.
+  readonly eyebrow = input.required<string>(); // Terminal-artige Vorzeile.
+  readonly title = input.required<string>(); // Hauptüberschrift.
+  readonly text = input<string | undefined>(''); // Optionaler erläuternder Text.
 }

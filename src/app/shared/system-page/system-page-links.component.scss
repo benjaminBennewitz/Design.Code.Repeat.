@@ -1,0 +1,152 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     system-page-links.component.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/*
+   INHALTSVERZEICHNIS
+   01 Quicklinks
+   02 Responsive Layout
+   03 Accessibility Overrides
+*/
+
+/* ==========================================================================
+   Quicklinks
+   ========================================================================== */
+:host {
+  display: block;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+.status-links__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.8rem;
+  font-family: var(--dcr-font-mono);
+  font-size: 0.7rem;
+  color: var(--dcr-color-text-muted);
+}
+.status-links__label > span {
+  color: var(--dcr-color-primary-text);
+}
+.status-links__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+.status-links__item {
+  --link-accent: var(--dcr-color-primary-text);
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 9rem;
+  padding: 1rem;
+  border: 1px solid var(--dcr-color-border-strong);
+  border-top: 3px solid var(--link-accent);
+  background: var(--dcr-color-surface-solid);
+  color: var(--dcr-color-text);
+  text-decoration: none;
+  transition:
+    transform 180ms var(--dcr-ease-out),
+    border-color 180ms ease;
+}
+.status-links__item:nth-child(2) {
+  --link-accent: var(--dcr-color-pink-text);
+}
+.status-links__item:nth-child(3) {
+  --link-accent: var(--dcr-color-violet-text);
+}
+.status-links__item strong {
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+}
+.status-links__index {
+  font-family: var(--dcr-font-mono);
+  font-size: 0.65rem;
+  color: var(--link-accent);
+}
+.status-links__description {
+  max-width: 15ch;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--dcr-color-text-muted);
+}
+.status-links__arrow {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.8rem;
+  color: var(--link-accent);
+  font-size: 1.2rem;
+}
+.status-links__item:is(:hover, :focus-visible) {
+  transform: translateY(-4px);
+  border-color: var(--link-accent);
+}
+.status-links__item:focus-visible {
+  outline: var(--dcr-focus-ring-width) solid var(--dcr-focus-ring-color);
+  outline-offset: var(--dcr-focus-ring-offset);
+}
+.status-links__item:active {
+  transform: translateY(0);
+}
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+@media (max-width: 560px) {
+  .status-links__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .status-links__item {
+    grid-template-columns: 1.5rem minmax(0, 1fr) 1.5rem;
+    grid-template-rows: auto auto;
+    column-gap: 0.75rem;
+    row-gap: 0.25rem;
+    min-height: 4.5rem;
+    padding: 0.9rem 1rem;
+  }
+  .status-links__index {
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+  .status-links__description {
+    grid-column: 2;
+    max-width: none;
+  }
+  .status-links__arrow {
+    position: static;
+    grid-column: 3;
+    grid-row: 1 / 3;
+    align-self: center;
+    justify-self: end;
+  }
+}
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+:host-context(:root[data-motion='reduced']) .status-links__item,
+:host-context(:root[data-motion='off']) .status-links__item,
+:host-context(:root[data-comfort='simple']) .status-links__item {
+  transition: none;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-links__item {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,7 +1,8 @@
+/* src/app/shared/ambient-field/ambient-field.component.ts */
 /**
- * @file Dekoratives Ambient-Feld für Hero-Sections.
- * @description Kapselt subtile Raster-, Orbit- und Signalbewegungen, damit Hero-Hintergründe wiederverwendbar und Accessibility-konform bleiben.
- */
+* @file Dekoratives Ambient-Feld für Hero-Sections.
+* @description Kapselt subtile Raster-, Orbit- und Signalbewegungen, damit Hero-Hintergründe wiederverwendbar und Accessibility-konform bleiben.
+*/
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
@@ -17,6 +18,5 @@ export type AmbientFieldVariant = 'services' | 'studio';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AmbientFieldComponent {
-  /** Legt Dichte und Bewegungscharakter fest. */
-  readonly variant = input<AmbientFieldVariant>('services');
+  readonly variant = input<AmbientFieldVariant>('services'); // Legt Dichte und Bewegungscharakter fest.
 }

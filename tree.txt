@@ -365,6 +365,14 @@ dcr/
 │   │   │   │   ├── system-grid.component.html
 │   │   │   │   ├── system-grid.component.scss
 │   │   │   │   └── system-grid.component.ts
+│   │   │   ├── system-page/
+│   │   │   │   ├── _system-page-layout.scss
+│   │   │   │   ├── status-counter.spec.ts
+│   │   │   │   ├── status-counter.ts
+│   │   │   │   ├── system-page-links.component.html
+│   │   │   │   ├── system-page-links.component.scss
+│   │   │   │   ├── system-page-links.component.ts
+│   │   │   │   └── system-page-ui.data.ts
 │   │   │   ├── terminal-panel/
 │   │   │   │   ├── terminal-panel.component.html
 │   │   │   │   ├── terminal-panel.component.scss

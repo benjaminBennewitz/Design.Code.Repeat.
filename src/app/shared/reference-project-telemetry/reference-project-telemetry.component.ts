@@ -1,7 +1,8 @@
+/* src/app/shared/reference-project-telemetry/reference-project-telemetry.component.ts */
 /**
- * @file Vollflächige Project-Telemetry-Section.
- * @description Kombiniert echte Projekt-KPIs mit Arcade-Tech-Charts zu einem dichten 100vh-Dashboard.
- */
+* @file Vollflächige Project-Telemetry-Section.
+* @description Kombiniert echte Projekt-KPIs mit Arcade-Tech-Charts zu einem dichten 100vh-Dashboard.
+*/
 
 import { Component, Input } from '@angular/core';
 import { PortfolioProject } from '../../core/models/reference-case.models';
@@ -16,8 +17,7 @@ import { TelemetryChartComponent } from '../reference-telemetry-chart/reference-
   styleUrl: './reference-project-telemetry.component.scss',
 })
 export class ProjectTelemetryComponent {
-  /** Projekt inklusive lokalisierter Telemetriedaten. */
-  @Input({ required: true }) project!: PortfolioProject;
+  @Input({ required: true }) project!: PortfolioProject; // Projekt inklusive lokalisierter Telemetriedaten.
 
   /** Archivansicht mit verdichteter Telemetry ohne Charts. */
   get isArchiveTelemetryProject(): boolean {

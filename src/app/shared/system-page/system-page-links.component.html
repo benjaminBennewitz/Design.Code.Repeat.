@@ -1,0 +1,14 @@
+<!-- src/app/shared/system-page/system-page-links.component.html -->
+<nav class="status-links" [attr.aria-label]="ui().navigation">
+  <p class="status-links__label">{{ ui().navigation }} <span aria-hidden="true">↗</span></p>
+  <div class="status-links__grid">
+    @for (link of links(); track link.href; let index = $index) {
+      <a class="status-links__item" [routerLink]="link.href">
+        <span class="status-links__index" aria-hidden="true">0{{ index + 1 }}</span>
+        <strong>{{ link.label }}</strong>
+        <span class="status-links__description">{{ descriptionFor(link.href) }}</span>
+        <span class="status-links__arrow" aria-hidden="true">↗</span>
+      </a>
+    }
+  </div>
+</nav>

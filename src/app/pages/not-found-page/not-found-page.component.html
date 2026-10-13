@@ -1,1 +1,27 @@
-<main class="system-page"><section id="error-404" class="system-page__section dcr-section dcr-viewport-section"><div class="dcr-container system-page__box"><p class="system-page__code">404</p><h1 [dcrTextReveal]="content().title"></h1><p [dcrTextReveal]="content().text"></p><a class="dcr-button dcr-button--primary" routerLink="/">{{ content().cta }}</a></div></section></main>
+<!-- src/app/pages/not-found-page/not-found-page.component.html -->
+<main
+  class="system-page system-page--error"
+  [class.is-animated]="allowsAnimation()"
+  [class.is-complete]="counter.complete()"
+>
+  <section id="error-404" class="system-status dcr-section dcr-viewport-section" aria-labelledby="error-title">
+    <div class="dcr-container system-status__layout">
+      <div class="error-art status-art" aria-hidden="true">
+        <div class="error-art__grid"></div>
+        <div class="error-art__head"><span>ERROR / 404</span><span class="error-art__signal">NO MATCH</span></div>
+        <p class="error-art__number" [attr.data-value]="counter.display()">{{ counter.display() }}</p>
+        <span class="error-art__cross error-art__cross--first">+</span>
+        <span class="error-art__cross error-art__cross--second">+</span>
+        <div class="error-art__footer"><span>route.not_found</span><span>↗</span></div>
+      </div>
+      <div class="system-status__copy">
+        <p class="dcr-eyebrow">{{ ui().eyebrow }}</p>
+        <h1 id="error-title" [dcrTextReveal]="ui().title"></h1>
+        <p class="system-status__sr-only">404 — {{ ui().label }}</p>
+        <p class="system-status__text" [dcrTextReveal]="content().text"></p>
+        <p class="system-status__note"><span aria-hidden="true">//</span> {{ ui().note }}</p>
+        <dcr-system-page-links />
+      </div>
+    </div>
+  </section>
+</main>

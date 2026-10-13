@@ -1,7 +1,8 @@
+/* src/app/shared/system-grid/system-grid.component.ts */
 /**
- * @file Wiederverwendbare, flächenbasierte System-Section.
- * @description Überträgt die visuelle Logik von studio.system auf Unterseiten, ohne deren Inhalte oder Semantik zu duplizieren.
- */
+* @file Wiederverwendbare, flächenbasierte System-Section.
+* @description Überträgt die visuelle Logik von studio.system auf Unterseiten, ohne deren Inhalte oder Semantik zu duplizieren.
+*/
 
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { ScrollRevealDirective } from '../scroll-reveal.directive';
@@ -34,36 +35,29 @@ export interface SystemGridItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SystemGridComponent {
-  /** Technische Vorzeile der Hauptfläche. */
-  readonly eyebrow = input.required<string>();
+  readonly eyebrow = input.required<string>(); // Technische Vorzeile der Hauptfläche.
 
-  /** Hauptüberschrift der Section. */
-  readonly title = input.required<string>();
+  readonly title = input.required<string>(); // Hauptüberschrift der Section.
 
-  /** Einleitender Beschreibungstext. */
-  readonly text = input<string | undefined>('');
+  readonly text = input<string | undefined>(''); // Einleitender Beschreibungstext.
 
-  /** ID der Hauptüberschrift für aria-labelledby-Verknüpfungen. */
-  readonly titleId = input<string | undefined>();
+  readonly titleId = input<string | undefined>(); // ID der Hauptüberschrift für aria-labelledby-Verknüpfungen.
 
-  /** Semantische Ebene der Hauptüberschrift. */
-  readonly titleLevel = input<1 | 2>(2);
+  readonly titleLevel = input<1 | 2>(2); // Semantische Ebene der Hauptüberschrift.
 
-  /** Rechter Kontextblock der großen oberen Fläche. */
-  readonly leadAside = input<SystemGridItem | null>(null);
+  readonly leadAside = input<SystemGridItem | null>(null); // Rechter Kontextblock der großen oberen Fläche.
 
-  /** Inhalte der beiden mittleren und der unteren Fläche. */
-  readonly panels = input<readonly SystemGridItem[]>([]);
+  readonly panels = input<readonly SystemGridItem[]>([]); // Inhalte der beiden mittleren und der unteren Fläche.
 
-  /** Blendet Meta-Werte auf Geräten mit Hover erst bei Interaktion ein. */
-  readonly revealMetaOnInteraction = input(false);
+  readonly revealMetaOnInteraction = input(false); // Blendet Meta-Werte auf Geräten mit Hover erst bei Interaktion ein.
 
-  /** Stellt die vorhandenen Flächen mit sichtbaren Abständen als Boxen dar. */
-  readonly boxed = input(false);
+  readonly boxed = input(false); // Stellt die vorhandenen Flächen mit sichtbaren Abständen als Boxen dar.
 
-  /** Aktiviert die einmalige, richtungsabhängige Einfahrt jeder Fläche. */
-  readonly animatePanels = input(false);
+  readonly animatePanels = input(false); // Aktiviert die einmalige, richtungsabhängige Einfahrt jeder Fläche.
 
-  /** Die Komponente besitzt bewusst exakt drei Sekundärflächen. */
-  readonly visiblePanels = computed(() => this.panels().slice(0, 3));
+  readonly visiblePanels = computed(
+    /**
+    * Die Komponente besitzt bewusst exakt drei Sekundärflächen.
+    */
+    () => this.panels().slice(0, 3)); // Die Komponente besitzt bewusst exakt drei Sekundärflächen.
 }

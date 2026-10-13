@@ -1,9 +1,10 @@
+/* src/app/shared/reference-system-dialog/reference-system-dialog.component.ts */
 /* src/app/shared/system-dialog/system-dialog.component.ts */
 
 /**
- * @file Wiederverwendbares Arcade-Tech-Systemfenster.
- * @description Zentralisiert Titelzeile, Close-Button, Escape-Verhalten und ARIA für schließbare Portfolio-Dialoge.
- */
+* @file Wiederverwendbares Arcade-Tech-Systemfenster.
+* @description Zentralisiert Titelzeile, Close-Button, Escape-Verhalten und ARIA für schließbare Portfolio-Dialoge.
+*/
 
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
@@ -18,23 +19,17 @@ import { Component, EventEmitter, HostBinding, HostListener, Input, Output } fro
   },
 })
 export class SystemDialogComponent {
-  /** Sichtbarer Fenstertitel. */
-  @Input({ required: true }) title = '';
+  @Input({ required: true }) title = ''; // Sichtbarer Fenstertitel.
 
-  /** Barrierefreier Dialogname; fällt auf den sichtbaren Titel zurück. */
-  @Input() ariaLabel = '';
+  @Input() ariaLabel = ''; // Barrierefreier Dialogname; fällt auf den sichtbaren Titel zurück.
 
-  /** Barrierefreie Beschriftung des Close-Buttons. */
-  @Input() closeLabel = 'Dialog schließen';
+  @Input() closeLabel = 'Dialog schließen'; // Barrierefreie Beschriftung des Close-Buttons.
 
-  /** Kennzeichnet echte modale Dialoge für assistive Technologien. */
-  @Input() modal = false;
+  @Input() modal = false; // Kennzeichnet echte modale Dialoge für assistive Technologien.
 
-  /** Wird bei Close-Button oder Escape ausgelöst. */
-  @Output() readonly closed = new EventEmitter<void>();
+  @Output() readonly closed = new EventEmitter<void>(); // Wird bei Close-Button oder Escape ausgelöst.
 
-  /** Standardrolle für alle echten Systemdialoge. */
-  @HostBinding('attr.role') readonly role = 'dialog';
+  @HostBinding('attr.role') readonly role = 'dialog'; // Standardrolle für alle echten Systemdialoge.
 
   /** Liefert den barrierefreien Namen des Fensters. */
   @HostBinding('attr.aria-label')
@@ -48,7 +43,10 @@ export class SystemDialogComponent {
     return this.modal ? 'true' : null;
   }
 
-  /** Schließt den Dialog per Escape, wenn der Tastaturfokus innerhalb des Fensters liegt. */
+  /**
+  * Schließt den Dialog per Escape, wenn der Tastaturfokus innerhalb des Fensters liegt.
+  * @param event Auslösendes Tastatur- oder Mausereignis.
+  */
   @HostListener('keydown.escape', ['$event'])
   onEscape(event: Event): void {
     event.preventDefault();
@@ -56,7 +54,10 @@ export class SystemDialogComponent {
     this.closed.emit();
   }
 
-  /** Stoppt Elterninteraktionen und delegiert das eigentliche Schließen an den Besitzer des Zustands. */
+  /**
+  * Stoppt Elterninteraktionen und delegiert das eigentliche Schließen an den Besitzer des Zustands.
+  * @param event Auslösendes Tastatur- oder Mausereignis.
+  */
   requestClose(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
