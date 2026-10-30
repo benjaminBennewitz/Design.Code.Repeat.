@@ -18,11 +18,13 @@ Die API verantwortet die verbindliche Validierung, Missbrauchsschutz und den Mai
 
 ## Formular und API-Vertrag
 
-Das Frontend übermittelt ausschließlich `name`, `email`, `message` und das technische Feld `website`. Unternehmen und ausgewähltes Thema werden in den Nachrichtentext integriert.
+Das Frontend erstellt ein fest definiertes Datenmodell. Zusätzliche Formularangaben werden innerhalb des vorgesehenen Nachrichtentexts zusammengeführt.
 
 Empfänger, Absender und Mailbetreff werden serverseitig festgelegt. Das Frontend enthält keine Mailzugangsdaten und keine produktiven Geheimnisse.
 
 Frontend und API verwenden denselben Website-Ursprung. Der ContactApiService holt den für den Versand benötigten CSRF-Token ab und hält ihn ausschließlich im Arbeitsspeicher. Er verhindert parallele Submits und begrenzt die Wiederholung nach einer CSRF-Ablehnung.
+
+Der Versand besitzt eine Zeitbegrenzung und wird bei unklarem Ausgang nicht automatisch wiederholt. Das Formular berücksichtigt serverseitige Wartehinweise. Nur eine passende API-Bestätigung führt zum erfolgreichen Abschluss; bei Fehlern bleiben die Eingaben erhalten. Die endgültige Anfrage wird vor der Übertragung auf die vereinbarten Größenbeschränkungen geprüft.
 
 ## Eingaben und Darstellung
 

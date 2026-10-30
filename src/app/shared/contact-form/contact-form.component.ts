@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  DestroyRef,
   computed,
   inject,
   input,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ContactApiService, ContactRequest } from '../../core/services/contact-api.service';
+import { ContactApiError, ContactApiService, ContactRequest, prepareContactRequest } from '../../core/services/contact-api.service';
 import { LanguageService } from '../../core/services/language.service';
 import { ActionButtonComponent } from '../action-button/action-button.component';
 import { apiErrorMessage, fieldErrorMessage } from './contact-form.errors';
@@ -31,6 +32,15 @@ const MINIMUM_FILL_TIME_MS = 1200; // Bestehende Mindestdauer vor dem ersten Sub
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactFormComponent {
+  private readonly destroyRef = inject(DestroyRef);
+  private retryTimer: ReturnType<typeof setInterval> | undefined;
+  readonly retryAfterSeconds = signal(0);
+
+  /** Entfernt ausstehende Countdown-Aufträge beim Verlassen des Formulars. */
+  constructor() {
+    this.destroyRef.onDestroy(() => clearInterval(this.retryTimer));
+  }
+
   readonly idPrefix = input('contact'); // Eindeutiger DOM-Präfix der Formularinstanz.
   readonly compact = input(false);      // Kompakte Darstellung in begrenzten Flächen.
   readonly ids = computed(
@@ -78,7 +88,7 @@ export class ContactFormComponent {
 
   /** Startet ausschließlich einen vorbereiteten und noch nicht laufenden Submit. */
   async submit(): Promise<void> {
-    if (this.isSubmitting() || !this.prepareSubmission()) return;
+    if (this.isSubmitting() || this.retryAfterSeconds() > 0 || !this.prepareSubmission()) return;
     /**
      * Validierter und normalisierter API-Body der aktuellen Formularwerte.
      */
@@ -87,7 +97,11 @@ export class ContactFormComponent {
       this.status.set(this.content().errors.validation);
       return;
     }
-    await this.sendPayload(payload);
+    try {
+      await this.sendPayload(prepareContactRequest(payload));
+    } catch (error) {
+      this.status.set(apiErrorMessage(error, this.content().errors));
+    }
   }
 
   /** Prüft den bisherigen Submit-Zeitpunkt und die vorhandene Feldvalidierung. */
@@ -130,10 +144,30 @@ export class ContactFormComponent {
       this.resetSubmittedForm();
       await this.router.navigate(['/danke']);
     } catch (error) {
+      if (error instanceof ContactApiError && error.code === 'rate-limit' && error.retryAfterSeconds) {
+        this.startRetryCountdown(error.retryAfterSeconds);
+      }
       this.status.set(apiErrorMessage(error, this.content().errors));
     } finally {
       this.isSubmitting.set(false);
     }
+  }
+
+  /** Liefert die übersetzte Wartezeit ohne sekündliche Live-Region-Ansagen. */
+  retryCountdownLabel(): string {
+    return this.content().retryAfterLabel.replace('{seconds}', String(this.retryAfterSeconds()));
+  }
+
+  /** Berechnet den Countdown anhand der Uhr, auch nach einem inaktiven Browser-Tab. */
+  private startRetryCountdown(seconds: number): void {
+    clearInterval(this.retryTimer);
+    const until = Date.now() + seconds * 1000;
+    this.retryAfterSeconds.set(seconds);
+    this.retryTimer = setInterval(() => {
+      const remaining = Math.max(0, Math.ceil((until - Date.now()) / 1000));
+      this.retryAfterSeconds.set(remaining);
+      if (!remaining) clearInterval(this.retryTimer);
+    }, 1000);
   }
 
   /** Setzt nach bestätigtem Versand die Formularwerte und den Honeypot zurück. */

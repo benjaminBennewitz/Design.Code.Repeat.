@@ -274,6 +274,7 @@ export interface StudioContent {
     readonly privacyLabel: string;
     readonly submitLabel: string;
     readonly sendingLabel: string;
+    readonly retryAfterLabel: string;
     readonly requiredHint: string;
     readonly privacyTextBefore: string;
     readonly privacyLinkLabel: string;
@@ -296,6 +297,7 @@ export interface StudioContent {
       readonly network: string;
       readonly server: string;
       readonly tooFast: string;
+      readonly timeout: string;
     };
   };
   readonly legal: {

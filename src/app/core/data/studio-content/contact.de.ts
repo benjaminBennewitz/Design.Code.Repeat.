@@ -30,6 +30,7 @@ export const DE_CONTACT_CONTENT: Pick<StudioContent, 'contactPage' | 'contactFor
     privacyLabel: 'Datenschutzhinweise bestätigen',
     submitLabel: 'Anfrage senden',
     sendingLabel: 'Wird gesendet …',
+    retryAfterLabel: 'Erneut senden in {seconds} Sekunden.',
     requiredHint: 'Mit * markierte Felder sind erforderlich.',
     privacyTextBefore: 'Ich habe die ',
     privacyLinkLabel: 'Datenschutzhinweise',
@@ -61,6 +62,7 @@ export const DE_CONTACT_CONTENT: Pick<StudioContent, 'contactPage' | 'contactFor
         'Der Kontaktservice ist momentan nicht erreichbar. Bitte prüfe deine Verbindung oder versuche es später erneut.',
       server:
         'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut oder nutze die direkte E-Mail-Adresse.',
+      timeout: 'Der Versand dauert zu lange. Die Anfrage könnte bereits angekommen sein. Bitte sende sie nicht sofort erneut.',
       tooFast: 'Das Formular wurde ungewöhnlich schnell abgesendet. Bitte prüfe deine Angaben und versuche es erneut.',
     },
   },

@@ -62,6 +62,7 @@ function cleanUpSubmitTest(): void {
   fixture?.destroy();
   TestBed.resetTestingModule();
   vi.restoreAllMocks();
+  vi.useRealTimers();
 }
 
 /** Liefert die kontrollierte Zeit der aktuellen Formularprüfung. */
@@ -184,3 +185,55 @@ function expectFieldInteraction(): void {
 }
 
 describe('ContactFormComponent', registerSubmitTests);
+
+/** Prüft Größenfehler, Timeout-Rückmeldung und Serverwartezeit im Formular. */
+describe('ContactFormComponent request safeguards', () => {
+  beforeEach(prepareSubmitTest);
+  afterEach(cleanUpSubmitTest);
+
+  it('erhält Formularwerte und zeigt die lokalisierte Timeout-Meldung', async () => {
+    fillValidForm();
+    send.mockRejectedValueOnce(new ContactApiError('timeout'));
+    await component.submit();
+    expect(component.status()).toBe(STUDIO_TRANSLATIONS.de.contactForm.errors.timeout);
+    expect(component.form.controls.message.value).toBe('Eine ausreichend lange Testnachricht.');
+    expect(component.isSubmitting()).toBe(false);
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it('prüft auch die fertige Nachricht mit lokalisierten Metadaten', async () => {
+    fillValidForm();
+    const content = STUDIO_TRANSLATIONS.de.contactForm;
+    vi.spyOn(component, 'content').mockReturnValue({
+      ...content, topics: [{ value: 'website', label: 'x'.repeat(1100) }],
+    });
+    component.form.controls.message.setValue('x'.repeat(4000));
+    await component.submit();
+    expect(component.status()).toBe(content.errors.payloadTooLarge);
+    expect(send).not.toHaveBeenCalled();
+    expect(component.form.controls.message.value).toHaveLength(4000);
+  });
+
+  it('prüft die UTF-8-Bodygröße unabhängig von den Formulargrenzen', async () => {
+    fillValidForm();
+    component.website.set('😀'.repeat(4500));
+    await component.submit();
+    expect(component.status()).toBe(STUDIO_TRANSLATIONS.de.contactForm.errors.payloadTooLarge);
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it('sperrt den Submit bis zum Ende der Serverwartezeit', async () => {
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval', 'Date'] });
+    fillValidForm();
+    send.mockRejectedValueOnce(new ContactApiError('rate-limit', 429, 2));
+    await component.submit();
+    expect(component.retryAfterSeconds()).toBe(2);
+    expect(component.retryCountdownLabel()).toContain('2');
+    await component.submit();
+    expect(send).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(component.retryAfterSeconds()).toBe(0);
+    await component.submit();
+    expect(send).toHaveBeenCalledTimes(2);
+  });
+});

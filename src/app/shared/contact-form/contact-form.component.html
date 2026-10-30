@@ -88,7 +88,11 @@
     type="submit"
     variant="primary"
     icon="arrow_outward"
-    [disabled]="isSubmitting()" />
+    [disabled]="isSubmitting() || retryAfterSeconds() > 0" />
+
+  @if (retryAfterSeconds() > 0) {
+    <p class="contact-form__status">{{ retryCountdownLabel() }}</p>
+  }
 
   @if (status()) {
     <p class="contact-form__status" role="alert" aria-live="assertive">{{ status() }}</p>

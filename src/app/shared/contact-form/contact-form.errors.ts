@@ -13,6 +13,7 @@ const API_ERROR_FIELDS: Partial<Record<ContactApiErrorCode, keyof ErrorTexts>> =
   'rate-limit': 'rateLimit',
   unavailable: 'unavailable',
   network: 'network',
+  timeout: 'timeout',
 }; // Zuordnung der Validierungsfehler zu Formularfeldern.
 
 /**

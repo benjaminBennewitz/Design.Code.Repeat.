@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting, TestRequest } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { ContactApiErrorCode, ContactApiService, ContactRequest } from './contact-api.service';
+import { CONTACT_REQUEST_TIMEOUT_MS, ContactApiErrorCode, ContactApiService, ContactRequest } from './contact-api.service';
 
 let service: ContactApiService; // Kontaktservice der aktuellen Testinstanz.
 let http: HttpTestingController; // Kontrollierte HTTP-Anfragen des aktuellen Tests.
@@ -45,6 +45,7 @@ function cleanUpContactTest(): void {
     http.verify();
   } finally {
     TestBed.resetTestingModule();
+    vi.useRealTimers();
   }
 }
 
@@ -231,3 +232,117 @@ async function expectConcurrentSubmit(): Promise<void> {
 }
 
 describe('ContactApiService', registerContactTests);
+
+/** Prüft die zusätzliche Absicherung des tatsächlichen Transportablaufs. */
+describe('ContactApiService request safeguards', () => {
+  beforeEach(prepareContactTest);
+  afterEach(cleanUpContactTest);
+
+  it('entfernt zusätzliche Laufzeitfelder aus dem Request', async () => {
+    const result = service.send({ ...request, recipient: 'other@example.com' } as ContactRequest);
+    await flushCsrf();
+    const post = await vi.waitFor(findPostRequest);
+    expect(post.request.body).toEqual(request);
+    respondToPost(post, 202, 'Accepted');
+    await result;
+  });
+
+  it.each([
+    { ...request, name: 'x'.repeat(121) },
+    { ...request, email: 'x'.repeat(255) },
+    { ...request, message: 'x'.repeat(5001) },
+    { ...request, message: '😀'.repeat(4500) },
+  ])('prüft endgültige Feld- und UTF-8-Grenzen vor HTTP', async payload => {
+    await expect(service.send(payload)).rejects.toMatchObject({ code: 'payload-too-large' });
+    http.expectNone('/api/csrf/');
+    http.expectNone('/api/contact/');
+  });
+
+  it.each([
+    [200, { status: 'accepted' }],
+    [200, { status: 'error' }],
+    [202, { status: 'error' }],
+    [202, null],
+    [204, null],
+  ])('verwirft unerwartete Erfolgsmeldungen mit Status %s', async (status, body) => {
+    const result = service.send(request);
+    await flushCsrf();
+    const post = await vi.waitFor(findPostRequest);
+    post.flush(body, { status: status as number, statusText: 'Unexpected' });
+    await expect(result).rejects.toMatchObject({ code: 'server', status });
+  });
+
+  it.each(['csrf', 'post'] as const)('bricht einen hängenden %s ab und gibt den Service frei', async stage => {
+    vi.useFakeTimers();
+    const result = service.send(request);
+    const assertion = expect(result).rejects.toMatchObject({ code: 'timeout' });
+    const csrf = http.expectOne('/api/csrf/');
+    let pending = csrf;
+    if (stage === 'post') {
+      csrf.flush({ csrfToken: 'token' });
+      await vi.advanceTimersByTimeAsync(0);
+      pending = http.expectOne('/api/contact/');
+    }
+    await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS);
+    await assertion;
+    expect(pending.cancelled).toBe(true);
+    http.expectNone('/api/contact/');
+    const next = service.send(request);
+    if (stage === 'csrf') {
+      http.expectOne('/api/csrf/').flush({ csrfToken: 'token' });
+    }
+    await vi.advanceTimersByTimeAsync(0);
+    http.expectOne('/api/contact/').flush({ status: 'accepted' }, { status: 202, statusText: 'Accepted' });
+    await next;
+  });
+
+  it('teilt das Zeitbudget zwischen CSRF und POST', async () => {
+    vi.useFakeTimers();
+    const result = service.send(request);
+    const assertion = expect(result).rejects.toMatchObject({ code: 'timeout' });
+    const csrf = http.expectOne('/api/csrf/');
+    await vi.advanceTimersByTimeAsync(15000);
+    csrf.flush({ csrfToken: 'token' });
+    await vi.advanceTimersByTimeAsync(0);
+    const post = http.expectOne('/api/contact/');
+    await vi.advanceTimersByTimeAsync(5000);
+    await assertion;
+    expect(post.cancelled).toBe(true);
+  });
+
+  it.each(['2', 'date'] as const)('beachtet Retry-After als %s auch bei erneutem Submit', async header => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-10-30T12:00:00Z'));
+    const result = service.send(request);
+    const assertion = expect(result).rejects.toMatchObject({ code: 'rate-limit', retryAfterSeconds: 2 });
+    http.expectOne('/api/csrf/').flush({ csrfToken: 'token' });
+    await vi.advanceTimersByTimeAsync(0);
+    http.expectOne('/api/contact/').flush({}, {
+      status: 429, statusText: 'Too Many Requests',
+      headers: { 'Retry-After': header === 'date' ? new Date(Date.now() + 2000).toUTCString() : header },
+    });
+    await assertion;
+    await expect(service.send(request)).rejects.toMatchObject({ code: 'rate-limit' });
+    http.expectNone('/api/contact/');
+    await vi.advanceTimersByTimeAsync(2000);
+    const next = service.send(request);
+    await vi.advanceTimersByTimeAsync(0);
+    http.expectOne('/api/contact/').flush({ status: 'accepted' }, { status: 202, statusText: 'Accepted' });
+    await next;
+  });
+
+  it('verwendet bei ungültigem Retry-After keine erfundene Wartezeit', async () => {
+    const result = service.send(request);
+    await flushCsrf();
+    const post = await vi.waitFor(findPostRequest);
+    post.flush({}, { status: 429, statusText: 'Too Many Requests', headers: { 'Retry-After': 'invalid' } });
+    await expect(result).rejects.toMatchObject({ code: 'rate-limit', retryAfterSeconds: undefined });
+  });
+
+  it.each([null, { csrfToken: 123 }])('verwirft fehlerhafte CSRF-Antworten kontrolliert', async body => {
+    const result = service.send(request);
+    http.expectOne('/api/csrf/').flush(body);
+    await expect(result).rejects.toMatchObject({ code: 'csrf' });
+    http.expectNone('/api/contact/');
+  });
+});
