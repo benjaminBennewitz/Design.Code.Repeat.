@@ -1,5 +1,8 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="128" height="128" rx="28" fill="#111111"/>
-  <path d="M24 86V28h30c13 0 22 7 22 18 0 7-4 13-10 16 8 3 14 10 14 20 0 13-10 22-26 22H24Zm18-35h10c4 0 7-3 7-7s-3-7-7-7H42v14Zm0 39h13c5 0 8-3 8-8s-3-8-8-8H42v16Z" fill="#f6f0e8"/>
-  <path d="M83 100V28h18v72H83Z" fill="#a7ff19"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="[B²]">
+  <title>[B²] – Design. Code. Repeat.</title>
+  <rect width="128" height="128" rx="22" fill="#111111"/>
+  <path d="M33 28H19V100H33" fill="none" stroke="#f6f0e8" stroke-width="8" stroke-linejoin="miter"/>
+  <path d="M96 0H798C1121 0 1320 177 1320 422C1320 632 1166 769 974 776V792C1147 825 1262 953 1262 1118C1262 1344 1082 1490 742 1490H96ZM500 322V638H696C818 638 894 579 894 474C894 375 825 322 690 322ZM500 888V1172H672C772 1172 846 1121 846 1030C846 938 772 888 666 888Z" fill="#f6f0e8" transform="matrix(0.04084967 0 0 -0.03892617 34.07843137 102.00000000)"/>
+  <path d="M98 0H1242V322H660V332L800 448C1141 730 1226 878 1226 1050C1226 1328 999 1510 642 1510C295 1510 70 1317 70 1004H454C454 1129 529 1198 642 1198C753 1198 832 1129 832 1016C832 910 764 841 654 750L98 290Z" fill="#adff2f" transform="matrix(0.01962457 0 0 -0.01920530 79.62627986 53.00000000)"/>
+  <path d="M108 28H119V100H108" fill="none" stroke="#f6f0e8" stroke-width="8" stroke-linejoin="miter"/>
 </svg>

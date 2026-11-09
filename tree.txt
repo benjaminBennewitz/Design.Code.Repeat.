@@ -1,5 +1,7 @@
-dcr/
+Deign.Code.Repeat/
 ├── .angular/
+│   └── ...
+├── .vscode/
 │   └── ...
 ├── dist/
 │   └── ...
@@ -11,7 +13,6 @@ dcr/
 ├── node_modules/
 │   └── ...
 ├── scripts/
-│   ├── copy-fonts.ps1
 │   ├── deploy-dcr-local.cmd
 │   └── deploy-dcr-server.sh
 ├── src/

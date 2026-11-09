@@ -1,6 +1,6 @@
 # Architektur der Studio-Website
 
-Diese Datei beschreibt den aktuellen Aufbau von Design. Code. Repeat.
+Diese Datei beschreibt den aktuellen Aufbau von Design.Code.Repeat.
 
 ## Zweck und Abgrenzung
 
