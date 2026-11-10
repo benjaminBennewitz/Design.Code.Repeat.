@@ -9,6 +9,12 @@ interface AuditContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly lead: string;
+  readonly traceTitle: string;
+  readonly traceIdle: string;
+  readonly traceActive: string;
+  readonly traceBrowser: string;
+  readonly traceReport: string;
+  readonly traceScope: string;
   readonly formTitle: string;
   readonly urlLabel: string;
   readonly urlPlaceholder: string;
@@ -66,6 +72,12 @@ export const AUDIT_CONTENT: Record<StudioLanguage, AuditContent> = {
     eyebrow: 'tool.01 / lighthouse',
     title: 'DEINE WEBSITE. UNTER DEM MIKROSKOP.',
     lead: 'Vier Messbereiche. Konkrete Hinweise. Ohne Registrierung. Prüfe, was technisch besser funktionieren könnte.',
+    traceTitle: 'REQUEST / SYSTEMDIAGRAMM',
+    traceIdle: 'BEREIT',
+    traceActive: 'PRÜFUNG LÄUFT',
+    traceBrowser: 'BROWSER',
+    traceReport: 'BERICHT',
+    traceScope: 'EINE URL / VIER MESSBEREICHE',
     formTitle: 'Neue Prüfung',
     urlLabel: 'Öffentliche Seitenadresse (URL)',
     urlPlaceholder: 'https://deine-domain.de/unterseite',
@@ -134,6 +146,12 @@ export const AUDIT_CONTENT: Record<StudioLanguage, AuditContent> = {
     eyebrow: 'tool.01 / lighthouse',
     title: 'YOUR WEBSITE. UNDER THE MICROSCOPE.',
     lead: 'Four categories. Practical findings. No sign-up. See where your website has room to improve.',
+    traceTitle: 'REQUEST / SYSTEM DIAGRAM',
+    traceIdle: 'STANDBY',
+    traceActive: 'SCAN RUNNING',
+    traceBrowser: 'BROWSER',
+    traceReport: 'REPORT',
+    traceScope: 'ONE URL / FOUR CATEGORIES',
     formTitle: 'New scan',
     urlLabel: 'Public page address (URL)',
     urlPlaceholder: 'https://your-domain.com/another-page',

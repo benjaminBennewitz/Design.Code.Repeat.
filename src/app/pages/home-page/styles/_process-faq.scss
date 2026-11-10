@@ -81,6 +81,14 @@
     align-items: start;
   }
 
+  .home-faq__intro {
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    gap: clamp(1.75rem, 3.5vh, 2.5rem);
+    min-width: 0;
+  }
+
   .faq-list__item {
     border-top: 1px solid var(--dcr-color-border-strong);
   }

@@ -5,11 +5,39 @@
         <p class="dcr-eyebrow">{{ ui().eyebrow }}</p>
         <h1>{{ ui().title }}</h1>
         <p class="audit-page__lead">{{ ui().lead }}</p>
-        <div class="audit-page__decor" aria-hidden="true">
-          <span>LIGHTHOUSE / GOOGLE</span>
-          <span>01 / 04</span>
-          <div class="audit-page__radar"><i></i><i></i><i></i></div>
-          <span>SCAN. ANALYZE. IMPROVE.</span>
+        <div class="audit-page__trace" [class.is-running]="busy()" aria-hidden="true">
+          <div class="audit-page__trace-head">
+            <span>{{ ui().traceTitle }}</span>
+            <span class="audit-page__trace-state"><i></i>{{ busy() ? ui().traceActive : ui().traceIdle }}</span>
+          </div>
+          <div class="audit-page__trace-flow">
+            <div class="audit-page__trace-node">
+              <span class="material-symbols-outlined">language</span>
+              <strong>{{ ui().traceBrowser }}</strong>
+              <small>HTTPS</small>
+            </div>
+            <span class="audit-page__trace-link"><small>GET</small></span>
+            <div class="audit-page__trace-node audit-page__trace-node--core">
+              <span class="material-symbols-outlined">dns</span>
+              <strong>API</strong>
+              <small>LIGHTHOUSE</small>
+            </div>
+            <span class="audit-page__trace-link audit-page__trace-link--return"><small>JSON</small></span>
+            <div class="audit-page__trace-node">
+              <span class="material-symbols-outlined">analytics</span>
+              <strong>{{ ui().traceReport }}</strong>
+              <small>4 × SCORE</small>
+            </div>
+          </div>
+          <div class="audit-page__trace-log">
+            <span>01</span><code><b>GET</b> /pagespeedonline/v5/runPagespeed</code>
+            <span>02</span><code>strategy=<b>{{ strategy() }}</b></code>
+            <span>03</span><code>scope=<b>single_url</b> · format=json</code>
+          </div>
+          <div class="audit-page__trace-bottom">
+            <span class="audit-page__trace-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span>{{ ui().traceScope }}</span>
+          </div>
         </div>
       </div>
 

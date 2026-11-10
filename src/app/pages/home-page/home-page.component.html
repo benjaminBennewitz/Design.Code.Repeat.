@@ -222,7 +222,7 @@
 @defer (on viewport; when anchorTarget()) {
     <section class="home-faq dcr-section dcr-viewport-section dcr-section-flow" id="faq">
       <div class="dcr-container home-faq__layout">
-        <div><dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" /><a class="dcr-button" routerLink="/faq">{{ faqPageLabel() }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div>
+        <div class="home-faq__intro"><dcr-section-heading [eyebrow]="content().home.faq.eyebrow" [title]="content().home.faq.title" [text]="content().home.faq.text" /><a class="dcr-button" routerLink="/faq">{{ faqPageLabel() }} <span aria-hidden="true" class="dcr-link-glyph">↗</span></a></div>
   
         <div class="faq-list">
           @for (item of content().faq; track item.question; let index = $index) {
