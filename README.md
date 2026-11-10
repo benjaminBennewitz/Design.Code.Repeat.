@@ -256,3 +256,25 @@ Siehe [`LICENSE`](LICENSE).
   <strong>DESIGN. CODE. REPEAT.</strong><br>
   <code>B² // studio.system</code>
 </p>
+
+## Kostenloser Website-Check
+
+Die lazy geladene Route `/website-check` nutzt `GET /api/audit/config/` und `POST /api/audit/` über den vorhandenen Same-Origin-Proxy. Pro Aufruf wird genau eine URL auf Mobile oder Desktop geprüft; weitere Unterseiten benötigen eigene Messungen. Backend-Konfiguration und Google-API-Schlüssel sind im Infrastructure-API-Repository dokumentiert.
+
+## `website.audit // local preview`
+
+Der kostenlose Website-Check unter `/website-check` nutzt im Development-Build ausschließlich Mock-Daten.
+Es werden **keine** Google- oder Django-Anfragen gesendet und **kein** API-Schlüssel benötigt.
+
+```bash
+npm ci
+npm start
+```
+
+- `src/environments/environment.ts`: `auditDemoMode: true` – lokale Demo mit guten, mittleren und schlechten Scores sowie Fehlerzuständen.
+- `src/environments/environment.production.ts`: `auditDemoMode: false` – echte, serverseitige PageSpeed-Analyse über die Infrastructure API.
+- Mock-Daten: `src/app/core/services/website-audit.mock.ts`.
+- Jede Unterseite muss separat geprüft werden. Die aktuellen Nutzungsgrenzen kommen im Livebetrieb von der Backend-Config.
+- Der PDF-Button öffnet den Druckdialog („Als PDF speichern“). Der Anfrage-CTA trägt URL, Scores und bis zu drei Hinweise in das bestehende Kontaktformular ein. Ein Versand erfolgt erst nach explizitem Submit.
+
+Der Google-API-Schlüssel wird ausschließlich im Django-Backend verwaltet und darf niemals im Frontend oder Repository abgelegt werden.

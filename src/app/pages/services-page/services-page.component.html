@@ -12,6 +12,10 @@
             route="/kontakt"
             variant="primary"
             icon="arrow_outward" />
+          <a class="services-hero__jump" routerLink="/website-check">
+            <span>{{ auditLinkLabel() }}</span>
+            <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
+          </a>
           <a class="services-hero__jump" routerLink="/leistungen" fragment="service-index">
             <span>service.index</span>
             <span class="material-symbols-outlined" aria-hidden="true">south</span>
@@ -153,6 +157,8 @@
       </div>
     </div>
   </section>
+
+  <dcr-audit-promo />
 
   <section id="betreuung" class="care-section dcr-section" aria-labelledby="care-system-title">
     <div class="dcr-container care-section__layout">

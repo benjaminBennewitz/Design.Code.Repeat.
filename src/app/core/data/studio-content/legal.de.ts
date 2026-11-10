@@ -13,7 +13,7 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
     },
     privacySeo: {
       title: 'Datenschutz | Design. Code. Repeat.',
-      description: 'Datenschutzhinweise für die Website und das Kontaktformular von Design. Code. Repeat.',
+      description: 'Datenschutzhinweise für die Website, das Kontaktformular und den freiwilligen Website-Check von Design. Code. Repeat.',
       keywords: ['Datenschutz'],
     },
     noticeTitle: 'Impressum',
@@ -68,6 +68,14 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         ],
       },
       {
+        title: 'Website-Check mit Google PageSpeed Insights',
+        paragraphs: [
+          'Wenn du den optionalen Website-Check ausdrücklich startest, wird die von dir eingegebene öffentliche Seiten-URL zur Durchführung der Lighthouse-Messung an die Google PageSpeed Insights API übertragen. Google kann dabei weitere technische Daten im Rahmen seines Dienstes verarbeiten. Gib keine geheimen Links, Zugangsdaten oder vertraulichen URL-Parameter ein.',
+          'Der Server speichert den kompakten Messbericht unter einem nicht rückrechenbaren Cache-Schlüssel für bis zu 24 Stunden und erfasst pseudonymisierte, zeitlich begrenzte IP-basierte Kontingentzähler zur Missbrauchsabwehr. Der vollständige Google-Rohbericht und die IP-Adresse werden nicht in der Audit-Anwendung dauerhaft gespeichert. Die technische Verarbeitung dient der aktiv angeforderten Prüfung und dem sicheren Betrieb (Art. 6 Abs. 1 lit. f DSGVO).',
+          'Der Website-Check ist freiwillig. Ohne das Starten einer Prüfung wird keine zu analysierende URL an Google übermittelt. Weitere Informationen zur Datenverarbeitung durch Google bietet die Datenschutzerklärung von Google unter policies.google.com/privacy.',
+        ],
+      },
+      {
         title: 'Direkte Kontaktaufnahme per E-Mail',
         paragraphs: [
           'Wenn du direkt per E-Mail Kontakt aufnimmst, werden Absenderadresse, Nachrichteninhalt und die dabei technisch anfallenden Mail-Metadaten verarbeitet, soweit dies zur Bearbeitung und Beantwortung deiner Anfrage erforderlich ist. Sensible Unterlagen sollten im Erstkontakt nicht unverschlüsselt versendet werden.',
@@ -95,7 +103,7 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
       {
         title: 'Externe Dienste und Empfänger',
         paragraphs: [
-          'Material Symbols, Inter und JetBrains Mono werden lokal ausgeliefert. Die Website bindet keine externen Tracking-Skripte oder Social-Media-Widgets ein.',
+          'Material Symbols, Inter und JetBrains Mono werden lokal ausgeliefert. Die Website bindet keine externen Tracking-Skripte oder Social-Media-Widgets ein. Nur bei ausdrücklichem Start des Website-Checks wird die angegebene URL an Google PageSpeed Insights übertragen.',
           'Personenbezogene Daten werden nur an technische Empfänger weitergegeben, soweit dies für Betrieb, Kommunikation oder gesetzliche Pflichten erforderlich ist. Eine Weitergabe zu Werbezwecken oder ein Verkauf personenbezogener Daten findet nicht statt.',
         ],
       },
@@ -114,7 +122,7 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
       },
       {
         title: 'Stand',
-        paragraphs: ['Stand dieser Datenschutzhinweise: 01.09.2026.'],
+        paragraphs: ['Stand dieser Datenschutzhinweise: 10.11.2026.'],
       },
     ],
   },

@@ -85,6 +85,11 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'website-check',
+    loadComponent: () => import('./pages/website-audit-page/website-audit-page.component')
+      .then(module => module.WebsiteAuditPageComponent),
+  },
+  {
     path: 'faq',
     loadComponent:
       /** Lädt die zentrale Fragenübersicht erst beim Aufruf ihrer eigenen Route. */

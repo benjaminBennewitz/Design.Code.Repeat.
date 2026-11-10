@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { ContactDraftService } from '../../core/services/contact-draft.service';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
@@ -22,6 +23,7 @@ import { TextRevealDirective } from '../../shared/text-reveal.directive';
 })
 export class ContactPageComponent {
   private readonly languageService = inject(LanguageService); // Aktive Sprache und zentrale Inhalte.
+  readonly auditDraft = inject(ContactDraftService).consume();
   private readonly seoService = inject(SeoService);           // SEO-Metadaten der aktuellen Route.
   readonly content = computed(
     /** Inhalte in der aktiven Sprache. */

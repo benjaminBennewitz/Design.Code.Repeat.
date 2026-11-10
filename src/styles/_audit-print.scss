@@ -1,0 +1,81 @@
+/*###############################
+###
+###     Design. Code. Repeat.
+###     _audit-print.scss
+###     BASED ON: Angular 22, SCSS
+###     AUTHOR: Benjamin Bennewitz
+###
+###       ██████╗  ▀█
+###       ██╔══██╗ █▄
+###       ██████╦╝
+###       ██╔══██╗
+###       ██████╦╝
+###       ╚═════╝
+###
+#################################*/
+
+/** Druckansicht ausschließlich bei geöffnetem Ergebnisbericht. */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  body:has(.audit-page__results) {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body:has(.audit-page__results) dcr-header,
+  body:has(.audit-page__results) dcr-footer,
+  body:has(.audit-page__results) dcr-scroll-to-top,
+  body:has(.audit-page__results) dcr-cookie-banner,
+  body:has(.audit-page__results) dcr-accessibility-panel,
+  body:has(.audit-page__results) .skip-link,
+  body:has(.audit-page__results) .audit-page__hero,
+  body:has(.audit-page__results) .audit-page__report-actions,
+  body:has(.audit-page__results) .audit-page__cta {
+    display: none !important;
+  }
+
+  body:has(.audit-page__results) .audit-page__results {
+    padding: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body:has(.audit-page__results) .audit-page__result-head {
+    margin-bottom: 16px !important;
+  }
+
+  body:has(.audit-page__results) .audit-page__results * {
+    color: #111 !important;
+  }
+
+  body:has(.audit-page__results) .audit-page__score,
+  body:has(.audit-page__results) .audit-page__metrics div {
+    background: #fff !important;
+    border: 1px solid #888 !important;
+    break-inside: avoid;
+  }
+
+  body:has(.audit-page__results) .audit-page__score-value,
+  body:has(.audit-page__results) .audit-page__tested-url,
+  body:has(.audit-page__results) .audit-page__metrics dt,
+  body:has(.audit-page__results) .audit-page__interpretation {
+    color: #111 !important;
+  }
+
+  body:has(.audit-page__results) .audit-page__details {
+    break-inside: avoid;
+  }
+
+  body:has(.audit-page__results) .audit-page__scores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  body:has(.audit-page__results) .audit-page__score-value {
+    font-size: 28pt;
+  }
+}

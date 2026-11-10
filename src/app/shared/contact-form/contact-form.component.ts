@@ -5,6 +5,7 @@ import {
   ElementRef,
   DestroyRef,
   computed,
+  effect,
   inject,
   input,
   signal,
@@ -12,6 +13,7 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import type { ContactTopic } from '../../core/models/studio.models';
 import { ContactApiError, ContactApiService, ContactRequest, prepareContactRequest } from '../../core/services/contact-api.service';
 import { LanguageService } from '../../core/services/language.service';
 import { ActionButtonComponent } from '../action-button/action-button.component';
@@ -39,10 +41,18 @@ export class ContactFormComponent {
   /** Entfernt ausstehende Countdown-Aufträge beim Verlassen des Formulars. */
   constructor() {
     this.destroyRef.onDestroy(() => clearInterval(this.retryTimer));
+    effect(() => {
+      const message = this.initialMessage();
+      const topic = this.initialTopic();
+      if (message && !this.form.controls.message.value) this.form.controls.message.setValue(message);
+      if (topic && !this.form.controls.topic.value) this.form.controls.topic.setValue(topic);
+    });
   }
 
   readonly idPrefix = input('contact'); // Eindeutiger DOM-Präfix der Formularinstanz.
-  readonly compact = input(false);      // Kompakte Darstellung in begrenzten Flächen.
+  readonly compact = input(false);
+  readonly initialMessage = input('');
+  readonly initialTopic = input<ContactTopic | ''>('');      // Kompakte Darstellung in begrenzten Flächen.
   readonly ids = computed(
     /** Leitet die vorhandenen Feld-IDs aus dem aktuellen Instanzpräfix ab. */
     () => createContactFieldIds(this.idPrefix()),

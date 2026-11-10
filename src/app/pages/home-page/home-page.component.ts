@@ -10,6 +10,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { AuditPromoComponent } from '../../shared/audit-promo/audit-promo.component';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
 import { HorizontalWheelScrollDirective } from '../../shared/horizontal-wheel-scroll.directive';
@@ -26,6 +27,7 @@ import { TextRevealDirective } from '../../shared/text-reveal.directive';
     TextRevealDirective,
     RouterLink,
     ActionButtonComponent,
+    AuditPromoComponent,
     ContactFormComponent,
     HorizontalWheelScrollDirective,
     HorizontalScrollHintComponent,

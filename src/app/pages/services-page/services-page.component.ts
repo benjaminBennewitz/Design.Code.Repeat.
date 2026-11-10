@@ -11,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { AuditPromoComponent } from '../../shared/audit-promo/audit-promo.component';
 import { ActionButtonComponent } from '../../shared/action-button/action-button.component';
 import { AmbientFieldComponent } from '../../shared/ambient-field/ambient-field.component';
 import { SectionHeadingComponent } from '../../shared/section-heading/section-heading.component';
@@ -25,6 +26,7 @@ import { TextRevealDirective } from '../../shared/text-reveal.directive';
   imports: [
     TextRevealDirective,
     ActionButtonComponent,
+    AuditPromoComponent,
     RouterLink,
     AmbientFieldComponent,
     SectionHeadingComponent,
@@ -45,6 +47,7 @@ export class ServicesPageComponent {
     /** Vollständiger sprachabhängiger Content. */
     () => this.languageService.content(),
   ); // Vollständiger sprachabhängiger Content.
+  readonly auditLinkLabel = computed(() => this.languageService.language() === 'de' ? 'Kostenloser Website-Check' : 'Free Website Audit');
   readonly selectedServiceIndex = signal<number>(0); // Aktuell ausgewähltes Modul im Service-Console-Index.
   readonly selectedService = computed(
     /** Aktuell ausgewählter Service. */

@@ -1,0 +1,125 @@
+<main class="audit-page">
+  <section class="audit-page__hero dcr-section dcr-section-flow">
+    <div class="dcr-container audit-page__layout">
+      <div class="audit-page__heading">
+        <p class="dcr-eyebrow">{{ ui().eyebrow }}</p>
+        <h1>{{ ui().title }}</h1>
+        <p class="audit-page__lead">{{ ui().lead }}</p>
+        <div class="audit-page__decor" aria-hidden="true">
+          <span>LIGHTHOUSE / GOOGLE</span>
+          <span>01 / 04</span>
+          <div class="audit-page__radar"><i></i><i></i><i></i></div>
+          <span>SCAN. ANALYZE. IMPROVE.</span>
+        </div>
+      </div>
+
+      <div class="audit-page__console">
+        <div class="audit-page__console-top"><span>WEB.AUDIT // v1.0</span><span class="audit-page__live-dot" aria-hidden="true"></span></div>
+        @if (demoMode) {
+          <div class="audit-page__demo" role="note">
+            <strong>{{ ui().demoLabel }}</strong>
+            <p>{{ ui().demoIntro }}</p>
+            <label for="audit-demo-scenario">{{ ui().demoScenarioLabel }}</label>
+            <select id="audit-demo-scenario" [value]="demoScenario()" (change)="updateDemoScenario($event)" [disabled]="busy()">
+              @for (scenario of ui().demoScenarios; track scenario.id) {
+                <option [value]="scenario.id">{{ scenario.label }}</option>
+              }
+            </select>
+          </div>
+        }
+        <h2>{{ ui().formTitle }}</h2>
+        <form (submit)="submit($event)" novalidate>
+          <label for="audit-url">{{ ui().urlLabel }}</label>
+          <input id="audit-url" name="url" type="url" inputmode="url" autocomplete="url"
+            [placeholder]="ui().urlPlaceholder" [value]="url()" (input)="updateUrl($event)"
+            [disabled]="busy() || !config()?.enabled" [attr.aria-describedby]="error() ? 'audit-scope-note audit-error' : 'audit-scope-note'" required maxlength="2048" />
+          <fieldset [disabled]="busy() || !config()?.enabled">
+            <legend>{{ ui().strategyLabel }}</legend>
+            <label class="audit-page__choice" [class.is-selected]="strategy() === 'mobile'">
+              <input type="radio" name="strategy" value="mobile" [checked]="strategy() === 'mobile'" (change)="selectStrategy('mobile')" />
+              <span class="material-symbols-outlined" aria-hidden="true">smartphone</span>{{ ui().mobile }}
+            </label>
+            <label class="audit-page__choice" [class.is-selected]="strategy() === 'desktop'">
+              <input type="radio" name="strategy" value="desktop" [checked]="strategy() === 'desktop'" (change)="selectStrategy('desktop')" />
+              <span class="material-symbols-outlined" aria-hidden="true">desktop_windows</span>{{ ui().desktop }}
+            </label>
+          </fieldset>
+          <button class="audit-page__submit" type="submit" [disabled]="busy() || !config()?.enabled">
+            <span>{{ busy() ? ui().running : ui().submit }}</span>
+            <span class="material-symbols-outlined" aria-hidden="true">{{ busy() ? 'progress_activity' : 'arrow_outward' }}</span>
+          </button>
+        </form>
+        <div class="audit-page__status" aria-live="polite" aria-atomic="true">
+          @if (!config() && !configurationError()) { <p>{{ ui().preparing }}</p> }
+          @if (configurationError() || (config() && !config()!.enabled)) { <p>{{ ui().disabled }}</p> }
+          @if (busy()) { <p>{{ demoMode ? ui().demoChecking : ui().checking }}</p> }
+          @if (error()) { <p id="audit-error" class="audit-page__error" role="alert">{{ error() }}</p> }
+        </div>
+        <div class="audit-page__notices">
+          <p id="audit-scope-note"><span class="material-symbols-outlined" aria-hidden="true">info</span>{{ ui().singlePage }}</p>
+          @if (config() && !demoMode) { <p><span class="material-symbols-outlined" aria-hidden="true">schedule</span>{{ limits() }}</p> }
+          @if (!demoMode) { <p><span class="material-symbols-outlined" aria-hidden="true">policy</span>{{ ui().provider }} {{ ui().privacy }}</p> }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  @if (response(); as audit) {
+    <section class="audit-page__results dcr-section" id="audit-results" aria-labelledby="audit-results-title">
+      <div class="dcr-container">
+        <div class="audit-page__result-head">
+          <div>
+            <p class="dcr-eyebrow">{{ demoMode ? ui().demoResultLabel : audit.cached ? ui().cacheLabel : ui().freshLabel }}</p>
+            <h2 id="audit-results-title" tabindex="-1">{{ ui().reportTitle }}</h2>
+            <p class="audit-page__tested-url">{{ audit.result.finalUrl }}</p>
+            <p class="audit-page__timestamp">{{ ui().reportDateLabel }}: {{ reportDate() }}</p>
+          </div>
+          <div class="audit-page__report-actions">
+            <button type="button" class="audit-page__reset" (click)="printReport()" [attr.title]="ui().reportSaveHint">
+              <span class="material-symbols-outlined" aria-hidden="true">download</span> {{ ui().reportSave }}
+            </button>
+            <button type="button" class="audit-page__reset" (click)="reset()">{{ ui().again }} <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+
+        <h3>{{ ui().scoreLabel }}</h3>
+        <div class="audit-page__scores">
+          @for (category of categories; track category) {
+            <article class="audit-page__score" [attr.data-tone]="scoreTone(audit.result.scores[category])">
+              <span class="audit-page__score-value">{{ audit.result.scores[category] ?? '—' }}<small>/100</small></span>
+              <h4>{{ ui().categories[category] }}</h4>
+              <div class="audit-page__score-track" aria-hidden="true"><i [style.width.%]="audit.result.scores[category] ?? 0"></i></div>
+            </article>
+          }
+        </div>
+        <div class="audit-page__details">
+          <section aria-labelledby="audit-metrics-title">
+            <h3 id="audit-metrics-title">{{ ui().metricsTitle }}</h3>
+            <dl class="audit-page__metrics">
+              <div><dt>{{ ui().lcp }}</dt><dd>{{ formatMetric(audit.result.metrics.lcpMs, 's') }}</dd></div>
+              <div><dt>{{ ui().cls }}</dt><dd>{{ formatMetric(audit.result.metrics.cls, '') }}</dd></div>
+              <div><dt>{{ ui().tbt }}</dt><dd>{{ formatMetric(audit.result.metrics.tbtMs, 'ms') }}</dd></div>
+            </dl>
+          </section>
+          <section aria-labelledby="audit-hints-title">
+            <h3 id="audit-hints-title">{{ ui().hintsTitle }}</h3>
+            @if (audit.result.opportunities.length) {
+              <ol class="audit-page__hints">
+                @for (hint of audit.result.opportunities; track hint.id) {
+                  <li><strong>{{ hint.title }}</strong>
+                    @if (hint.savingsMs !== null) { <span>{{ ui().savings(hint.savingsMs) }}</span> }
+                  </li>
+                }
+              </ol>
+            } @else { <p class="audit-page__muted">{{ ui().noHints }}</p> }
+          </section>
+        </div>
+        <p class="audit-page__interpretation">{{ ui().interpretation }}</p>
+        <aside class="audit-page__cta">
+          <div><p class="dcr-eyebrow">NEXT.STEP →</p><h3>{{ ui().nextTitle }}</h3><p>{{ ui().nextText }}</p></div>
+          <button type="button" class="audit-page__cta-link" (click)="requestOptimization()">{{ ui().reportRequest }} <span aria-hidden="true">↗</span></button>
+        </aside>
+      </div>
+    </section>
+  }
+</main>

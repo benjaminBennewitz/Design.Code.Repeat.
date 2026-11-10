@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   siteUrl: 'http://localhost:4200',
   apiBaseUrl: '/api',
+  auditDemoMode: true,
   robots: 'noindex, nofollow',
 } as const;

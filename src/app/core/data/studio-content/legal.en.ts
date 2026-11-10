@@ -13,7 +13,7 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
     },
     privacySeo: {
       title: 'Privacy | Design. Code. Repeat.',
-      description: 'Privacy information for the Design. Code. Repeat. website and contact form.',
+      description: 'Privacy information for the Design. Code. Repeat. website, contact form and optional website audit.',
       keywords: ['privacy'],
     },
     noticeTitle: 'Legal Notice',
@@ -68,6 +68,14 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         ],
       },
       {
+        title: 'Website audit using Google PageSpeed Insights',
+        paragraphs: [
+          'If you expressly start the optional website audit, the public page URL you enter will be submitted to Google PageSpeed Insights for a Lighthouse analysis. Google may process additional technical data in connection with the service. Do not submit secret links, credentials or confidential URL parameters.',
+          'Our server caches the compact report under a hashed cache key for up to 24 hours and uses pseudonymized temporary IP-based counters to prevent abuse. Full Google reports and raw IP addresses are not stored permanently in the audit application. Processing supports the requested audit and secure operation (Art. 6(1)(f) GDPR).',
+          'The audit is optional. The inspected URL is not sent to Google unless you actively start the scan. Google’s privacy policy is available at policies.google.com/privacy.',
+        ],
+      },
+      {
         title: 'Direct contact by email',
         paragraphs: [
           'If you contact me directly by email, the sender address, message content and technically required mail metadata are processed to the extent necessary to handle and answer your inquiry. Sensitive documents should not be sent unencrypted in the initial contact.',
@@ -95,7 +103,7 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
       {
         title: 'External services and recipients',
         paragraphs: [
-          'Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets.',
+          'Material Symbols, Inter and JetBrains Mono are served locally. The website does not embed external tracking scripts or social-media widgets. A URL is sent to Google PageSpeed Insights only after the user explicitly starts an audit.',
           'Personal data is disclosed only to technical recipients where necessary for operation, communication or legal obligations. Personal data is not shared for advertising purposes or sold.',
         ],
       },
@@ -112,7 +120,7 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
           'You also have the right to lodge a complaint with a competent data protection supervisory authority. Privacy-related requests can be sent to kontakt@design-code-repeat.de.',
         ],
       },
-      { title: 'Last updated', paragraphs: ['Last updated: 1 September 2026.'] },
+      { title: 'Last updated', paragraphs: ['Last updated: 10 November 2026.'] },
     ],
   },
 };
