@@ -22,6 +22,14 @@
   body:has(.audit-page__results) .audit-page__metrics dt,
   body:has(.audit-page__results) .audit-page__interpretation { color: #111 !important; }
   body:has(.audit-page__results) .audit-page__details > section { break-inside: avoid; }
+  body:has(.audit-page__results) .audit-page__category-switcher { display: none !important; }
+  body:has(.audit-page__results) .audit-page__category-section { display: block !important; break-before: auto; }
+  body:has(.audit-page__results) .audit-page__category-section h4 { break-after: avoid; }
+  body:has(.audit-page__results) .audit-page__check-list li,
+  body:has(.audit-page__results) .audit-page__metrics div { break-inside: avoid; }
+  body:has(.audit-page__results) .audit-page__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body:has(.audit-page__results) .audit-page__checks,
+  body:has(.audit-page__results) .audit-page__metrics-section { margin-top: 22px !important; }
   body:has(.audit-page__results) .audit-page__hints li { break-inside: avoid; }
   body:has(.audit-page__results) .audit-page__scores { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   body:has(.audit-page__results) .audit-page__score-value { font-size: 28pt; }

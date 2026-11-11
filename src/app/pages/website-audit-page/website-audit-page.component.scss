@@ -359,3 +359,76 @@
 :host-context(:root[data-motion='off']) .audit-page__trace-link::after,
 :host-context(:root[data-motion='off']) .audit-page__trace-state i,
 :host-context(:root[data-motion='off']) .audit-page__trace-bars i { animation: none; }
+
+.audit-page {
+  &__score-checks { margin: 0 0 0.8rem; font: 700 0.61rem var(--dcr-font-mono); color: var(--dcr-color-text-muted); }
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1.4rem 0 0;
+    padding: 0.95rem 1.1rem;
+    border-left: 3px solid var(--dcr-color-primary);
+    background: var(--audit-panel);
+    font: 800 0.77rem var(--dcr-font-mono);
+  }
+  &__summary .material-symbols-outlined { font-size: 1.25rem; color: var(--dcr-color-primary-text); }
+  &__section-intro { max-width: 76ch; margin: -0.5rem 0 1.3rem; color: var(--dcr-color-text-muted); font-size: 0.86rem; line-height: 1.65; }
+  &__metrics-section { margin-top: clamp(2rem, 4vw, 3.5rem); }
+  &__metrics { grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.7rem; }
+  &__metrics div {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: start;
+    gap: 0.5rem;
+    padding: clamp(0.95rem, 1.6vw, 1.4rem);
+    background: var(--audit-panel);
+  }
+  &__metrics dt { font-size: 0.77rem; font-weight: 700; }
+  &__metrics dd { font-size: clamp(1rem, 1.65vw, 1.45rem); }
+  &__metrics p { grid-column: 1 / -1; margin: 0; color: var(--dcr-color-text-muted); font-size: 0.77rem; line-height: 1.6; }
+  &__details { display: block; margin-top: clamp(2rem, 4vw, 3.5rem); }
+  &__checks { margin-top: clamp(2rem, 4vw, 3.5rem); }
+  &__category-switcher { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; margin-bottom: 0.8rem; }
+  &__category-switcher button {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.95rem 0.85rem;
+    min-width: 0;
+    border: 1px solid var(--audit-border);
+    background: var(--audit-panel);
+    color: var(--dcr-color-text);
+    cursor: pointer;
+    font: 750 0.79rem var(--dcr-font-mono);
+    text-align: left;
+  }
+  &__category-switcher button span { overflow-wrap: anywhere; }
+  &__category-switcher button small { color: var(--dcr-color-text-muted); font-weight: 650; }
+  &__category-switcher button:hover, &__category-switcher button.is-active { border-color: var(--dcr-color-primary-text); }
+  &__category-switcher button.is-active { background: color-mix(in srgb, var(--dcr-color-primary) 13%, var(--audit-panel)); }
+  &__category-switcher button:focus-visible { outline: 3px solid var(--dcr-color-primary-text); outline-offset: 3px; }
+  &__category-section { display: none; padding: clamp(1rem, 2.4vw, 2rem); border: 1px solid var(--audit-border); background: var(--audit-panel); }
+  &__category-section.is-current { display: block; }
+  &__category-section h4 { margin: 0 0 0.5rem; font: 900 clamp(1.2rem, 2vw, 1.7rem) var(--dcr-font-display); }
+  &__category-counts, &__check-label { color: var(--dcr-color-text-muted); font: 700 0.74rem var(--dcr-font-mono); }
+  &__check-label { margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.07em; }
+  &__check-list { padding: 0; margin: 0.7rem 0 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+  &__check-list li { display: flex; gap: 0.75rem; align-items: start; min-width: 0; padding: 0.85rem; border: 1px solid var(--dcr-color-border); font-size: 0.83rem; line-height: 1.45; overflow-wrap: anywhere; }
+  &__check-state { flex: 0 0 auto; min-width: 5.4rem; font: 900 0.61rem var(--dcr-font-mono); color: var(--dcr-color-text-muted); }
+  &__check-list li[data-status='passed'] .audit-page__check-state { color: var(--dcr-color-lime-text); }
+  &__check-list li[data-status='attention'] .audit-page__check-state { color: var(--dcr-color-orange-text); }
+}
+
+@media (max-width: 760px) {
+  .audit-page__category-switcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .audit-page__check-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .audit-page__category-switcher button { padding: 0.8rem 0.6rem; font-size: 0.68rem; }
+  .audit-page__check-state { min-width: 4.6rem; }
+  .audit-page__summary { font-size: 0.68rem; }
+}

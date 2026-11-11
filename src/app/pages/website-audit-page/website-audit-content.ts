@@ -47,6 +47,18 @@ interface AuditContent {
   readonly scoreLabel: string;
   readonly categories: Readonly<Record<AuditCategory, string>>;
   readonly metricsTitle: string;
+  readonly metricsIntro: string;
+  readonly fcp: string;
+  readonly speedIndex: string;
+  readonly metricHelp: Readonly<Record<'fcp' | 'speedIndex' | 'lcp' | 'cls' | 'tbt', string>>;
+  readonly detailTitle: string;
+  readonly detailIntro: string;
+  readonly resultSummary: (passed: number, attention: number, manual: number) => string;
+  readonly checkStates: Readonly<Record<'passed' | 'attention' | 'manual' | 'informative', string>>;
+  readonly checksExcerpt: string;
+  readonly noCheckDetails: string;
+  readonly scanDevice: string;
+  readonly scanVersion: string;
   readonly lcp: string;
   readonly cls: string;
   readonly tbt: string;
@@ -115,11 +127,27 @@ export const AUDIT_CONTENT: Record<StudioLanguage, AuditContent> = {
     freshLabel: 'Neue Messung',
     scoreLabel: 'Lighthouse-Bewertungen',
     categories: { performance: 'Performance', accessibility: 'Barrierefreiheit', 'best-practices': 'Best Practices', seo: 'SEO' },
-    metricsTitle: 'Labormesswerte',
+    metricsTitle: 'Messwerte im Detail',
+    metricsIntro: 'Technische Labormessung dieser einzelnen Seite. Die Werte zeigen unterschiedliche Phasen beim Laden und Reagieren.',
+    fcp: 'FCP', speedIndex: 'Speed Index',
+    metricHelp: {
+      fcp: 'Wann der erste sichtbare Inhalt erscheint.',
+      speedIndex: 'Wie schnell sichtbare Inhalte aufgebaut werden.',
+      lcp: 'Wann das größte sichtbare Inhaltselement geladen ist.',
+      cls: 'Wie stark sich Elemente beim Laden verschieben.',
+      tbt: 'Wie lange der Browser durch Aufgaben blockiert wird.',
+    },
+    detailTitle: 'Lighthouse-Prüfprotokoll',
+    detailIntro: 'Prüfungen nach Messbereich. Die Summen enthalten alle bewerteten Checks; die Liste zeigt einen ausgewählten Auszug.',
+    resultSummary: (passed, attention, manual) => `${passed} bestanden · ${attention} auffällig · ${manual} manuell prüfen`,
+    checkStates: { passed: 'BESTANDEN', attention: 'PRÜFEN', manual: 'MANUELL', informative: 'INFO' },
+    checksExcerpt: 'Ausgewählte Lighthouse-Checks',
+    noCheckDetails: 'Für dieses zwischengespeicherte Ergebnis liegen noch keine Einzelprüfungen vor. Eine erneute Messung liefert den erweiterten Bericht.',
+    scanDevice: 'Testprofil', scanVersion: 'Lighthouse',
     lcp: 'LCP', cls: 'CLS', tbt: 'TBT',
     hintsTitle: 'Wichtige technische Hinweise',
     savings: ms => `Bis zu ca. ${Math.round(ms)} ms Potenzial laut Lighthouse`,
-    noHints: 'Keine priorisierten Hinweise aus dieser Messung verfügbar.',
+    noHints: 'Keine priorisierten Optimierungsmöglichkeiten erkannt. Die Einzelprüfungen unten dokumentieren dennoch, was Lighthouse kontrolliert hat.',
     interpretation: 'Momentaufnahme: Werte können je Durchlauf schwanken. Accessibility- und SEO-Scores ersetzen weder eine vollständige WCAG-Prüfung noch eine SEO-Fachanalyse.',
     nextTitle: 'Du möchtest gezielt verbessern?',
     nextText: 'Ich kann die Ergebnisse prüfen, Maßnahmen priorisieren und die technische Umsetzung übernehmen.',
@@ -190,7 +218,23 @@ export const AUDIT_CONTENT: Record<StudioLanguage, AuditContent> = {
     freshLabel: 'New scan',
     scoreLabel: 'Lighthouse scores',
     categories: { performance: 'Performance', accessibility: 'Accessibility', 'best-practices': 'Best Practices', seo: 'SEO' },
-    metricsTitle: 'Lab metrics',
+    metricsTitle: 'Performance metrics',
+    metricsIntro: 'Lab measurements for this page. Each metric covers a different aspect of rendering and responsiveness.',
+    fcp: 'FCP', speedIndex: 'Speed Index',
+    metricHelp: {
+      fcp: 'When the first visible content appears.',
+      speedIndex: 'How quickly visible content is rendered.',
+      lcp: 'When the largest visible content element loads.',
+      cls: 'How much elements shift during loading.',
+      tbt: 'How long the browser is blocked by tasks.',
+    },
+    detailTitle: 'Lighthouse audit log',
+    detailIntro: 'Checks by category. Counts include all scored checks; the list shows a selected sample.',
+    resultSummary: (passed, attention, manual) => `${passed} passed · ${attention} to review · ${manual} manual checks`,
+    checkStates: { passed: 'PASSED', attention: 'REVIEW', manual: 'MANUAL', informative: 'INFO' },
+    checksExcerpt: 'Selected Lighthouse checks',
+    noCheckDetails: 'Individual checks are not available for this cached report yet. A new scan will include expanded details.',
+    scanDevice: 'Test profile', scanVersion: 'Lighthouse',
     lcp: 'LCP', cls: 'CLS', tbt: 'TBT',
     hintsTitle: 'Technical findings',
     savings: ms => `Up to around ${Math.round(ms)} ms potential saving per Lighthouse`,

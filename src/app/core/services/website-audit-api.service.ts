@@ -31,6 +31,22 @@ export interface AuditOpportunity {
   readonly savingsMs: number | null;
 }
 
+/** Einzelprüfung aus dem kompakten Lighthouse-Bericht. */
+export interface AuditCheck {
+  readonly id: string;
+  readonly title: string;
+  readonly status: 'passed' | 'attention' | 'manual' | 'informative';
+}
+
+/** Summen umfassen alle bewerteten Prüfungen; die Liste ist eine Auswahl. */
+export interface AuditCategoryChecks {
+  readonly passed: number;
+  readonly attention: number;
+  readonly manual: number;
+  readonly informative: number;
+  readonly items: readonly AuditCheck[];
+}
+
 /** Kompaktbericht aus dem Backend. */
 export interface AuditResult {
   readonly url: string;
@@ -38,11 +54,15 @@ export interface AuditResult {
   readonly strategy: AuditStrategy;
   readonly scores: Readonly<Record<AuditCategory, number | null>>;
   readonly metrics: {
+    readonly fcpMs: number | null;
+    readonly speedIndexMs: number | null;
     readonly lcpMs: number | null;
     readonly cls: number | null;
     readonly tbtMs: number | null;
   };
   readonly opportunities: readonly AuditOpportunity[];
+  readonly checks?: Readonly<Record<AuditCategory, AuditCategoryChecks>>;
+  readonly lighthouseVersion?: string;
 }
 
 export interface AuditResponse {

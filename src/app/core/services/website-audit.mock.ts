@@ -17,7 +17,7 @@ export const AUDIT_MOCK_CONFIG: AuditConfiguration = {
 };
 
 const SCORE_SETS = {
-  good: [97, 98, 100, 100],
+  good: [100, 100, 100, 100],
   average: [62, 84, 95, 78],
   poor: [23, 48, 56, 39],
 } as const;
@@ -37,6 +37,8 @@ export function mockAuditResponse(
       url, finalUrl: url, strategy,
       scores: { performance, accessibility, 'best-practices': bestPractices, seo },
       metrics: {
+        fcpMs: rating === 'good' ? 750 : rating === 'poor' ? 4000 : 2100,
+        speedIndexMs: rating === 'good' ? 1200 : rating === 'poor' ? 8100 : 3600,
         lcpMs: rating === 'good' ? 1100 : rating === 'poor' ? 6500 : 3400,
         cls: rating === 'good' ? 0.012 : rating === 'poor' ? 0.37 : 0.14,
         tbtMs: rating === 'good' ? 40 : rating === 'poor' ? 1600 : 420,
@@ -44,6 +46,22 @@ export function mockAuditResponse(
       opportunities: rating === 'good' ? [] : labels.map((title, index) => ({
         id: `demo-${index}`, title, savingsMs: index === 2 ? null : (rating === 'poor' ? 850 : 270) - index * 80,
       })),
+      lighthouseVersion: '13.0.0',
+      checks: Object.fromEntries((['performance', 'accessibility', 'best-practices', 'seo'] as const).map(category => {
+        const attention = rating === 'good' ? 0 : rating === 'poor' ? 7 : 3;
+        const passed = rating === 'good' ? 17 : rating === 'poor' ? 6 : 12;
+        const successLabels = locale === 'de'
+          ? ['Dokument besitzt einen Titel', 'Bilder haben Alternativtexte', 'Text ist lesbar', 'Links sind benannt', 'HTTPS wird verwendet', 'Dokumentsprache ist definiert']
+          : ['Document has a title', 'Images have alternative text', 'Text is legible', 'Links have names', 'HTTPS is used', 'Document language is set'];
+        return [category, {
+          passed, attention, manual: 2, informative: 1,
+          items: [
+            ...labels.slice(0, attention).map((title, index) => ({ id: `${category}-issue-${index}`, title, status: 'attention' as const })),
+            ...successLabels.map((title, index) => ({ id: `${category}-passed-${index}`, title, status: 'passed' as const })),
+            { id: `${category}-manual`, title: locale === 'de' ? 'Manuelle Prüfung ergänzen' : 'Perform a manual check', status: 'manual' as const },
+          ],
+        }];
+      })) as NonNullable<import('./website-audit-api.service').AuditResult['checks']>,
     },
   };
 }

@@ -47,6 +47,7 @@ export class WebsiteAuditPageComponent {
   readonly response = signal<AuditResponse | null>(null);
   readonly reportTimestamp = signal<Date | null>(null);
   readonly reportDate = computed(() => this.reportTimestamp()?.toLocaleString(this.language.language() === 'de' ? 'de-DE' : 'en-GB') ?? '');
+  readonly selectedCategory = signal<AuditCategory>('performance');
   readonly categories: readonly AuditCategory[] = ['performance', 'accessibility', 'best-practices', 'seo'];
   readonly limits = computed(() => {
     const config = this.config();
@@ -104,6 +105,7 @@ export class WebsiteAuditPageComponent {
     try {
       const response = await this.api.analyze(normalized, this.strategy(), this.language.language(), this.demoScenario());
       this.response.set(response);
+      this.selectedCategory.set('performance');
       this.reportTimestamp.set(new Date());
       requestAnimationFrame(() => {
         document.getElementById('audit-results-title')?.focus({ preventScroll: true });
@@ -127,6 +129,23 @@ export class WebsiteAuditPageComponent {
     if (value >= 50) return 'average';
     return 'poor';
   }
+
+  /** Wechselt zwischen den vier Detailgruppen ohne erneuten Google-Aufruf. */
+  selectCategory(category: AuditCategory): void {
+    this.selectedCategory.set(category);
+  }
+
+  /** Gibt die Anzahl ausgewerteter Prüfungen über alle Bereiche zurück. */
+  readonly checkTotals = computed(() => {
+    const checks = this.response()?.result.checks;
+    return this.categories.reduce((totals, category) => {
+      const current = checks?.[category];
+      totals.passed += current?.passed ?? 0;
+      totals.attention += current?.attention ?? 0;
+      totals.manual += current?.manual ?? 0;
+      return totals;
+    }, { passed: 0, attention: 0, manual: 0 });
+  });
 
   /** Gibt reale Labormetriken in einer nachvollziehbaren Einheit aus. */
   formatMetric(value: number | null, unit: 'ms' | 's' | ''): string {
