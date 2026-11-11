@@ -3,7 +3,7 @@
  * @description Lädt keine externen Daten und wird nur im Development-Modus verwendet.
  */
 import type { StudioLanguage } from '../models/studio.models';
-import type { AuditConfiguration, AuditDemoScenario, AuditResponse, AuditStrategy } from './website-audit-api.service';
+import type { AuditCategory, AuditCategoryChecks, AuditConfiguration, AuditDemoScenario, AuditResponse, AuditStrategy } from './website-audit-api.service';
 
 /** Entspricht den voreingestellten, tatsächlich im Backend durchgesetzten Limits. */
 export const AUDIT_MOCK_CONFIG: AuditConfiguration = {
@@ -31,6 +31,23 @@ export function mockAuditResponse(
   const labels = locale === 'de'
     ? ['Bilder effizient bereitstellen', 'Nicht verwendetes JavaScript reduzieren', 'Kontrast von Text und Hintergrund prüfen']
     : ['Serve images efficiently', 'Reduce unused JavaScript', 'Check contrast between text and background'];
+  const successLabels = locale === 'de'
+    ? ['Dokument besitzt einen Titel', 'Bilder haben Alternativtexte', 'Text ist lesbar', 'Links sind benannt', 'HTTPS wird verwendet', 'Dokumentsprache ist definiert']
+    : ['Document has a title', 'Images have alternative text', 'Text is legible', 'Links have names', 'HTTPS is used', 'Document language is set'];
+
+  const createCategoryChecks = (category: AuditCategory): AuditCategoryChecks => {
+    const attention = rating === 'good' ? 0 : rating === 'poor' ? 7 : 3;
+    const passed = rating === 'good' ? 17 : rating === 'poor' ? 6 : 12;
+    return {
+      passed, attention, manual: 2, informative: 1,
+      items: [
+        ...labels.slice(0, attention).map((title, index) => ({ id: `${category}-issue-${index}`, title, status: 'attention' as const })),
+        ...successLabels.map((title, index) => ({ id: `${category}-passed-${index}`, title, status: 'passed' as const })),
+        { id: `${category}-manual`, title: locale === 'de' ? 'Manuelle Prüfung ergänzen' : 'Perform a manual check', status: 'manual' as const },
+      ],
+    };
+  };
+
   return {
     cached: false,
     result: {
@@ -47,21 +64,12 @@ export function mockAuditResponse(
         id: `demo-${index}`, title, savingsMs: index === 2 ? null : (rating === 'poor' ? 850 : 270) - index * 80,
       })),
       lighthouseVersion: '13.0.0',
-      checks: Object.fromEntries((['performance', 'accessibility', 'best-practices', 'seo'] as const).map(category => {
-        const attention = rating === 'good' ? 0 : rating === 'poor' ? 7 : 3;
-        const passed = rating === 'good' ? 17 : rating === 'poor' ? 6 : 12;
-        const successLabels = locale === 'de'
-          ? ['Dokument besitzt einen Titel', 'Bilder haben Alternativtexte', 'Text ist lesbar', 'Links sind benannt', 'HTTPS wird verwendet', 'Dokumentsprache ist definiert']
-          : ['Document has a title', 'Images have alternative text', 'Text is legible', 'Links have names', 'HTTPS is used', 'Document language is set'];
-        return [category, {
-          passed, attention, manual: 2, informative: 1,
-          items: [
-            ...labels.slice(0, attention).map((title, index) => ({ id: `${category}-issue-${index}`, title, status: 'attention' as const })),
-            ...successLabels.map((title, index) => ({ id: `${category}-passed-${index}`, title, status: 'passed' as const })),
-            { id: `${category}-manual`, title: locale === 'de' ? 'Manuelle Prüfung ergänzen' : 'Perform a manual check', status: 'manual' as const },
-          ],
-        }];
-      })) as NonNullable<import('./website-audit-api.service').AuditResult['checks']>,
+      checks: {
+        performance: createCategoryChecks('performance'),
+        accessibility: createCategoryChecks('accessibility'),
+        'best-practices': createCategoryChecks('best-practices'),
+        seo: createCategoryChecks('seo'),
+      },
     },
   };
 }
