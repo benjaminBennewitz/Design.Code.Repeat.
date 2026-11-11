@@ -95,6 +95,10 @@
   @if (response(); as audit) {
     <section class="audit-page__results dcr-section" id="audit-results" aria-labelledby="audit-results-title">
       <div class="dcr-container">
+        <div class="audit-page__print-header">
+          <strong>DESIGN. CODE. REPEAT. <span>B²</span></strong>
+          <span>LIGHTHOUSE / {{ ui().reportTitle }}</span>
+        </div>
         <div class="audit-page__result-head">
           <div>
             <p class="dcr-eyebrow">{{ demoMode ? ui().demoResultLabel : audit.cached ? ui().cacheLabel : ui().freshLabel }}</p>

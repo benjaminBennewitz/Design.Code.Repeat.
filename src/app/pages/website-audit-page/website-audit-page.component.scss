@@ -236,6 +236,7 @@
     color: var(--dcr-color-text-muted);
   }
   &__notices .material-symbols-outlined { color: var(--dcr-color-primary-text); font-size: 1.1rem; }
+  &__print-header { display: none; }
   &__results { padding-block: clamp(3rem, 7vw, 8rem); background: var(--dcr-color-bg-soft); }
   &__result-head { flex-wrap: wrap; margin-bottom: 3rem; }
   &__result-head h2 { margin: 0.6rem 0; }

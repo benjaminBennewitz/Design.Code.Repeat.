@@ -19,6 +19,7 @@ import {
   WebsiteAuditApiService,
 } from '../../core/services/website-audit-api.service';
 import { AUDIT_CONTENT } from './website-audit-content';
+import { printWebsiteAudit } from './website-audit-print';
 
 /** Öffentliche Audit-Seite, die keine Resultate oder Eingaben im Browser persistiert. */
 @Component({
@@ -155,9 +156,11 @@ export class WebsiteAuditPageComponent {
     return value.toFixed(3);
   }
 
-  /** Öffnet den Druckdialog; Besucher können darüber den Bericht als PDF speichern. */
+  /** Exportiert ausschließlich den Analysebericht in ein eigenständiges Druckdokument. */
   printReport(): void {
-    if (this.response()) window.print();
+    if (!this.response()) return;
+    const report = document.getElementById('audit-results');
+    if (report) printWebsiteAudit(report, this.ui().reportTitle, this.language.language());
   }
 
   /** Erstellt einen freiwillig versendbaren Formularentwurf ohne URL-Query-Parameter. */

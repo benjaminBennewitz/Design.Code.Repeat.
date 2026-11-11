@@ -280,7 +280,8 @@ dcr/
 │   │   │       ├── website-audit-content.ts
 │   │   │       ├── website-audit-page.component.html
 │   │   │       ├── website-audit-page.component.scss
-│   │   │       └── website-audit-page.component.ts
+│   │   │       ├── website-audit-page.component.ts
+│   │   │       └── website-audit-print.ts
 │   │   ├── shared/
 │   │   │   ├── action-button/
 │   │   │   │   ├── action-button.component.html
@@ -597,6 +598,8 @@ dcr/
 │   │   │       ├── ben-head.webp
 │   │   │       ├── ben-sip.webp
 │   │   │       └── fuelli.webp
+│   │   ├── print/
+│   │   │   └── website-audit-print.css
 │   │   └── favicon.svg
 │   ├── environments/
 │   │   ├── environment.production.ts
@@ -628,7 +631,6 @@ dcr/
 │   │   │       ├── _layout.scss
 │   │   │       ├── _motion.scss
 │   │   │       └── _responsive.scss
-│   │   ├── _audit-print.scss
 │   │   ├── base.scss
 │   │   ├── home-capabilities.scss
 │   │   ├── home-hero.scss
