@@ -5,12 +5,10 @@
     </div>
 
     <div class="site-footer__arrows">
-      @if (activePanel() === 1) {
-        <div><small>{{ ui().sitemap }}</small><button type="button" [attr.aria-label]="ui().previous + ': ' + ui().sitemap" (click)="previousPanel()"><span class="material-symbols-outlined" aria-hidden="true">west</span></button></div>
-      }
-      @if (activePanel() === 0) {
-        <div><small>{{ ui().legal }}</small><button type="button" [attr.aria-label]="ui().next + ': ' + ui().legal" (click)="nextPanel()"><span class="material-symbols-outlined" aria-hidden="true">east</span></button></div>
-      }
+      <button class="site-footer__switch" type="button" [class.is-previous]="activePanel() === 1" [attr.aria-label]="activePanel() === 1 ? ui().previous + ': ' + ui().sitemap : ui().next + ': ' + ui().legal" [attr.aria-controls]="activePanel() === 1 ? 'footer-sitemap' : 'footer-rechtliches'" (click)="activePanel() === 1 ? previousPanel() : nextPanel()">
+        <span class="site-footer__switch-label">{{ activePanel() === 1 ? ui().sitemap : ui().legal }}</span>
+        <span class="site-footer__switch-icon material-symbols-outlined" aria-hidden="true">{{ activePanel() === 1 ? 'west' : 'east' }}</span>
+      </button>
     </div>
 
     <div class="site-footer__status" aria-live="polite">
@@ -39,6 +37,7 @@
             <a routerLink="/" fragment="prozess">{{ ui().process }}</a>
             <a routerLink="/faq">{{ ui().faq }}</a>
             <a routerLink="/website-check">{{ content().navigation.items[6].label }}</a>
+            <a routerLink="/shop">Shop</a>
             <a routerLink="/kontakt">{{ content().navigation.ctaLabel }}</a>
           </nav>
 
@@ -47,6 +46,10 @@
             @for (service of content().services; track service.slug) {
               <a [href]="'/leistungen/' + service.slug" (click)="openService($event, service.slug)">{{ service.title }}</a>
             }
+            <a class="site-footer__withdraw" routerLink="/shop/widerruf">
+              {{ ui().withdraw }}
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+            </a>
           </nav>
         </div>
       </section>
@@ -61,8 +64,14 @@
           <div class="site-footer__legal-grid">
             <a routerLink="/impressum">{{ ui().notice }}</a>
             <a routerLink="/datenschutz">{{ ui().privacy }}</a>
+            <a routerLink="/shop/agb">{{ ui().shopTerms }}</a>
+            <a routerLink="/shop/widerrufsbelehrung">{{ ui().withdrawalNotice }}</a>
             <button type="button" (click)="cookieConsentService.openSettings()">{{ ui().cookie }}</button>
             <a href="https://b2folio.de" target="_blank" rel="noopener noreferrer">{{ ui().portfolio }} <span class="dcr-link-glyph" aria-hidden="true">↗</span></a>
+            <a class="site-footer__withdraw" routerLink="/shop/widerruf">
+              {{ ui().withdraw }}
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+            </a>
           </div>
 
           <nav class="site-footer__socials" [attr.aria-label]="ui().social">

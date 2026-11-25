@@ -79,7 +79,9 @@
     display: inline-flex;
     align-items: center;
     width: fit-content;
+    max-width: 100%;
     min-height: 2rem;
+    overflow-wrap: anywhere;
     border: 0;
     border-bottom: 1px solid color-mix(in srgb, currentColor 34%, transparent);
     padding: 0.2rem 0;
@@ -88,7 +90,7 @@
     cursor: pointer;
   }
 
-  .site-footer__legal-grid span {
+  .site-footer__legal-grid .dcr-link-glyph {
     font-size: 0.54rem;
     opacity: 0.68;
   }
@@ -100,5 +102,53 @@
     border-bottom-color: currentColor;
     background: transparent;
     color: inherit;
+  }
+
+  .site-footer__sitemap a.site-footer__withdraw,
+  .site-footer__legal-grid a.site-footer__withdraw {
+    display: inline-flex;
+    gap: 0.55rem;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 44px;
+    margin-top: 0.55rem;
+    border: 2px solid var(--dcr-color-on-lime);
+    padding: 0.55rem 0.85rem;
+    background: var(--dcr-color-on-lime);
+    color: var(--dcr-color-lime);
+    font-size: clamp(0.76rem, 0.95vw, 0.9rem);
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: none;
+    overflow-wrap: anywhere;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease;
+
+    .material-symbols-outlined {
+      flex: 0 0 auto;
+      font-size: 1.1rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--dcr-color-on-lime);
+      background: var(--dcr-color-lime);
+      color: var(--dcr-color-on-lime);
+      box-shadow: 3px 3px 0 var(--dcr-color-on-lime);
+      transform: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--dcr-color-on-lime);
+      outline-offset: 4px;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
   }
 }

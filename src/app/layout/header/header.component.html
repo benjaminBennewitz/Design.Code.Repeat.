@@ -13,9 +13,9 @@
     <button class="site-header__language site-header__desktop-tool" type="button" [attr.aria-label]="content().languageLabel" (click)="languageService.toggleLanguage()">
       {{ languageService.language() === 'de' ? 'EN' : 'DE' }}
     </button>
-    <button class="site-header__menu-button" type="button" [attr.aria-label]="content().menuLabel"
+    <button class="site-header__menu-button" type="button" [attr.aria-label]="menuOpen() ? content().closeLabel : content().menuLabel"
       aria-controls="studio-navigation" [attr.aria-expanded]="menuOpen()" (click)="toggleMenu()">
-      <span>{{ content().menuLabel }}</span><b aria-hidden="true">+</b>
+      <span>{{ menuOpen() ? content().closeLabel : content().menuLabel }}</span><b aria-hidden="true">+</b>
     </button>
     <a class="site-header__contact" routerLink="/kontakt" (click)="closeMenu()"><span>{{ content().ctaLabel }}</span><span aria-hidden="true" class="dcr-link-glyph">↗</span></a>
   </div>

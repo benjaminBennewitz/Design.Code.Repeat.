@@ -76,6 +76,13 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         ],
       },
       {
+        title: 'DCR//TOOLS – Shop-Vorschau',
+        paragraphs: [
+          'Der Shop befindet sich in der Vorschau. Die Eingaben in der simulierten Bestellung und Widerrufsfunktion werden ausschließlich im jeweiligen Formular im Browser verarbeitet und nicht an ein Shop-Backend übermittelt oder dauerhaft gespeichert. Bitte verwende ausschließlich Beispieldaten. Es werden keine Bestellungen, Zahlungen oder Widerrufe ausgelöst.',
+          'Individuelle Anfragen aus dem Shop werden über das bestehende Kontaktformular bearbeitet. Die dafür geltenden Datenschutzhinweise sind oben beschrieben. Sobald eine echte Bestellabwicklung eingerichtet ist, werden diese Hinweise vor Verkaufsbeginn um die tatsächliche Verarbeitung von Bestell-, Zahlungs-, Rechnungs- und Downloaddaten sowie Widerrufen ergänzt.',
+        ],
+      },
+      {
         title: 'Direkte Kontaktaufnahme per E-Mail',
         paragraphs: [
           'Wenn du direkt per E-Mail Kontakt aufnimmst, werden Absenderadresse, Nachrichteninhalt und die dabei technisch anfallenden Mail-Metadaten verarbeitet, soweit dies zur Bearbeitung und Beantwortung deiner Anfrage erforderlich ist. Sensible Unterlagen sollten im Erstkontakt nicht unverschlüsselt versendet werden.',
@@ -122,7 +129,7 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
       },
       {
         title: 'Stand',
-        paragraphs: ['Stand dieser Datenschutzhinweise: 10.11.2026.'],
+        paragraphs: ['Stand dieser Datenschutzhinweise: 25.11.2026.'],
       },
     ],
   },

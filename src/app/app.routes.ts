@@ -85,6 +85,11 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'shop',
+    /** Lädt den Produktkatalog und dessen Unterseiten bei Bedarf. */
+    loadChildren: () => import('./pages/shop/shop.routes').then(module => module.SHOP_ROUTES),
+  },
+  {
     path: 'website-check',
     loadComponent: () => import('./pages/website-audit-page/website-audit-page.component')
       .then(module => module.WebsiteAuditPageComponent),

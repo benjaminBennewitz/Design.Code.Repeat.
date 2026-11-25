@@ -1,0 +1,426 @@
+/**
+ * @author Benjamin Bennewitz
+ * Inhaltsverzeichnis
+ * 1. Layout und Typografie
+ * 2. Panels und Formulare
+ * 3. Checkout und Status
+ * 4. Responsive Anpassungen
+ */
+
+/* 1. Layout und Typografie */
+
+:host {
+  display: block;
+}
+
+.shop {
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--dcr-font-display);
+    line-height: 1.08;
+  }
+
+  h1 {
+    overflow-wrap: anywhere;
+    font-size: clamp(2rem, 6.4vw, 6.25rem);
+    letter-spacing: -0.075em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    letter-spacing: -0.04em;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 2vw, 1.55rem);
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .shop-lead {
+    max-width: 57ch;
+    color: var(--dcr-color-text-muted);
+    font-size: clamp(1rem, 1.8vw, 1.32rem);
+  }
+
+  .shop-demo {
+    padding: 0.7rem 1rem;
+    border-inline-start: 2px solid var(--dcr-color-lime-text);
+    background: var(--dcr-color-bg-soft);
+    color: var(--dcr-color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .shop-code {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+.shop-page {
+  display: grid;
+  gap: clamp(1rem, 2.7vw, 2.5rem);
+  min-height: 70svh;
+  padding-block: clamp(2rem, 4vw, 4rem) clamp(4rem, 8vw, 8rem);
+}
+
+.shop-heading {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.shop-back,
+.shop-legal-link,
+.shop-legal-links > a:not(.dcr-button),
+.shop-checkout-legal > a,
+.shop-summary > a:not(.dcr-button) {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--dcr-color-border-strong);
+  background: transparent;
+  color: var(--dcr-color-text);
+  font-family: var(--dcr-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--dcr-color-lime-text);
+    background: var(--dcr-color-lime);
+    color: var(--dcr-color-on-lime);
+  }
+
+  &:active {
+    background: var(--dcr-color-surface-strong);
+    color: var(--dcr-color-text);
+  }
+
+  .material-symbols-outlined {
+    flex: none;
+    font-size: 1.1rem;
+  }
+}
+
+.shop-back {
+  justify-self: start;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms var(--dcr-ease-out);
+
+  .material-symbols-outlined {
+    transition: transform 220ms var(--dcr-ease-out);
+  }
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 3px 3px 0 var(--dcr-color-border-strong);
+
+    .material-symbols-outlined {
+      transform: translateX(-4px);
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+
+    .material-symbols-outlined {
+      transform: none;
+    }
+  }
+}
+
+:host-context(:root[data-motion='reduced']) .shop-back,
+:host-context(:root[data-motion='off']) .shop-back {
+  &,
+  .material-symbols-outlined {
+    transition: none;
+  }
+
+  &:hover .material-symbols-outlined,
+  &:focus-visible .material-symbols-outlined {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-back {
+    &,
+    .material-symbols-outlined {
+      transition: none;
+    }
+
+    &:hover .material-symbols-outlined,
+    &:focus-visible .material-symbols-outlined {
+      transform: none;
+    }
+  }
+}
+
+.shop-eyebrow {
+  align-items: center;
+}
+
+.shop-dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: none;
+  background: var(--dcr-color-lime-text);
+}
+
+/* 2. Panels und Formulare */
+
+.shop-panel {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  justify-items: start;
+  gap: 1rem;
+  padding: clamp(0.95rem, 2.6vw, 2.1rem);
+  border: 1px solid var(--dcr-color-border);
+  background: var(--dcr-color-surface-solid);
+}
+
+.shop-field {
+  display: grid;
+  min-width: 0;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  input,
+  select {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--dcr-color-border-strong);
+    border-radius: 0;
+    background: var(--dcr-color-bg);
+    color: var(--dcr-color-text);
+    font: inherit;
+    font-weight: 500;
+    transition: border-color 180ms ease;
+
+    &:hover {
+      border-color: var(--dcr-color-primary-text);
+    }
+  }
+
+  input[aria-invalid='true'] {
+    border-color: var(--dcr-color-danger-text);
+  }
+}
+
+.shop-check {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+
+  input {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
+    margin: 0;
+    accent-color: var(--dcr-color-primary);
+  }
+}
+
+.shop-error {
+  color: var(--dcr-color-danger-text);
+  font-size: 0.82rem;
+}
+
+/* 3. Checkout und Status */
+
+.shop-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  max-width: 46rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    padding: 0.5rem 0;
+    border-bottom: 2px solid var(--dcr-color-border-strong);
+    color: var(--dcr-color-text-muted);
+    font-family: var(--dcr-font-mono);
+    font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  }
+
+  [aria-current='step'] {
+    border-color: var(--dcr-color-lime-text);
+    color: var(--dcr-color-lime-text);
+    font-weight: 700;
+  }
+}
+
+.shop-transaction-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.25rem);
+  align-items: start;
+}
+
+.shop-billing__fields {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.shop-total {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.45rem 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--dcr-color-border-strong);
+}
+
+.shop-transaction-page {
+  max-width: 76rem;
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+  }
+}
+
+.shop-transaction-grid .shop-panel {
+  gap: 1.25rem;
+}
+
+.shop-summary {
+  border-top: 3px solid var(--shop-accent, var(--dcr-color-lime));
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+  }
+
+  > p {
+    color: var(--dcr-color-text-muted);
+  }
+}
+
+.shop-billing__fields .shop-field:has([name='email']),
+.shop-billing__fields .shop-field:has([name='street']) {
+  grid-column: 1 / -1;
+}
+
+.shop-billing > .dcr-button[type='submit'] {
+  width: 100%;
+}
+
+.shop-total strong {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.shop-payment {
+  display: grid;
+  width: 100%;
+  gap: 0.65rem;
+  margin: 0;
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.3rem 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--dcr-color-border);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+}
+
+.shop-demo-select {
+  width: 100%;
+  max-width: 24rem;
+  margin-bottom: 0.4rem;
+}
+
+.shop-text-button {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--dcr-color-primary-text);
+  font: inherit;
+  text-align: start;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+/* 4. Responsive Anpassungen */
+
+@media (max-width: 760px) {
+  .shop-transaction-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 510px) {
+  .shop-billing__fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shop-checkout-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}

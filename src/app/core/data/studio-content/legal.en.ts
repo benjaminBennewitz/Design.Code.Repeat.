@@ -76,6 +76,13 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         ],
       },
       {
+        title: 'DCR//TOOLS – Shop preview',
+        paragraphs: [
+          'The shop is currently a preview. Inputs in the simulated order and withdrawal forms are processed only within the browser form and are not sent to a shop backend or stored permanently. Please use example data only. No orders, payments or withdrawals are initiated.',
+          'Custom inquiries from the shop use the existing contact form, as described above. Before sales begin, this policy will be extended to describe the actual processing of order, payment, invoice and download data and withdrawals.',
+        ],
+      },
+      {
         title: 'Direct contact by email',
         paragraphs: [
           'If you contact me directly by email, the sender address, message content and technically required mail metadata are processed to the extent necessary to handle and answer your inquiry. Sensitive documents should not be sent unencrypted in the initial contact.',
@@ -120,7 +127,7 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
           'You also have the right to lodge a complaint with a competent data protection supervisory authority. Privacy-related requests can be sent to kontakt@design-code-repeat.de.',
         ],
       },
-      { title: 'Last updated', paragraphs: ['Last updated: 10 November 2026.'] },
+      { title: 'Last updated', paragraphs: ['Last updated: 25 November 2026.'] },
     ],
   },
 };

@@ -44,6 +44,7 @@ function registerTests(): void {
   it('stellt gespeicherte Zurück-Positionen wieder her statt zum Ankeranfang zu springen', verifyRestoredPosition);
   it('bricht eine alte Korrektur beim nächsten Routenwechsel ab', verifyNavigationAbort);
   it('übernimmt nach manueller Scroll-Eingabe nicht erneut die Kontrolle', verifyManualScroll);
+  it('ignoriert Anker bei Navigationen mit explizit manueller Scroll-Steuerung', verifyManualNavigation);
 }
 
 /** Bereitet eine isolierte Testinstanz mit kontrollierten Browserzuständen vor. */
@@ -146,6 +147,13 @@ function verifyManualScroll(): void {
   renderFrame();
   expect(scrollTo).not.toHaveBeenCalled();
   expect(document.documentElement.classList.contains('dcr-anchor-is-scrolling')).toBe(false);
+}
+
+/** Lässt die Scrollposition bei Filter-Navigation mit unverändertem Anker unangetastet. */
+function verifyManualNavigation(): void {
+  events.next(new Scroll(new NavigationEnd(2, '/shop?free=1#shop-catalog', '/shop?free=1#shop-catalog'), null, 'shop-catalog', 'manual'));
+  expect(frames.size).toBe(0);
+  expect(scrollTo).not.toHaveBeenCalled();
 }
 
 describe('FragmentScrollService', registerTests);

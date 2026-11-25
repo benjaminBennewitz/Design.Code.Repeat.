@@ -26,27 +26,34 @@ export class SeoService {
    * @param content Routenabhängiger SEO-Inhalt in der aktiven Sprache.
    * @param path Relativer Pfad der Seite.
    * @param type Bisheriger Open-Graph-Seitentyp.
+   * @param robots Optionale Indexierungsregel für die aktuelle Route.
    */
-  setPage(content: SeoPageContent, path: string, type: 'website' | 'article' = 'website'): void {
+  setPage(
+    content: SeoPageContent,
+    path: string,
+    type: 'website' | 'article' = 'website',
+    robots: string = this.robotsDirective,
+  ): void {
     /**
      * Absolute Seitenadresse für Canonical, Open Graph und strukturierte Daten.
      */
     const url = this.absoluteUrl(path);
     this.tabTitle.setActiveTitle(content.title);
-    this.updatePageMeta(content);
+    this.updatePageMeta(content, robots);
     this.updateSocialMeta(content, url, type);
     this.setCanonical(url);
     this.setStructuredData([this.organizationSchema(), this.webPageSchema(content, url)]);
   }
 
   /**
-   * Überträgt Beschreibung, Keywords und die konfigurierte Indexierungsregel.
+   * Überträgt Beschreibung, Keywords und die Indexierungsregel.
    * @param content Routenabhängiger SEO-Inhalt.
+   * @param robots Indexierungsregel für die aktuelle Route.
    */
-  private updatePageMeta(content: SeoPageContent): void {
+  private updatePageMeta(content: SeoPageContent, robots: string): void {
     this.meta.updateTag({ name: 'description', content: content.description });
     this.meta.updateTag({ name: 'keywords', content: content.keywords.join(', ') });
-    this.meta.updateTag({ name: 'robots', content: this.robotsDirective });
+    this.meta.updateTag({ name: 'robots', content: robots });
   }
 
   /**
@@ -54,6 +61,7 @@ export class SeoService {
    * @param content Routenabhängiger SEO-Inhalt.
    * @param url Absolute Seitenadresse.
    * @param type Bisheriger Open-Graph-Seitentyp.
+   * @param robots Optionale Indexierungsregel für die aktuelle Route.
    */
   private updateSocialMeta(content: SeoPageContent, url: string, type: 'website' | 'article'): void {
     this.meta.updateTag({ property: 'og:site_name', content: 'Design. Code. Repeat.' });

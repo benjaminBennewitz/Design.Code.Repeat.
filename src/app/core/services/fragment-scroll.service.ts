@@ -25,7 +25,9 @@ export class FragmentScrollService {
    */
   private handleRouterEvent(event: Event): void {
     if (event instanceof NavigationStart) this.cancelScroll();
-    if (event instanceof Scroll && event.anchor) this.scrollToFragment(event.anchor, event.position);
+    if (event instanceof Scroll && event.anchor && event.scrollBehavior !== 'manual') {
+      this.scrollToFragment(event.anchor, event.position);
+    }
   }
 
   /**

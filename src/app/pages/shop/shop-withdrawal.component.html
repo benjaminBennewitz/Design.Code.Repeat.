@@ -1,0 +1,44 @@
+<main class="shop dcr-container shop-page shop-transaction-page shop-legal-page">
+  <a class="shop-back" routerLink="/shop"><span class="material-symbols-outlined" aria-hidden="true">west</span> {{ ui().back }}</a>
+  <header class="shop-heading">
+    <p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / LEGAL</p>
+    <h1>{{ ui().withdraw }}</h1>
+    <p>{{ ui().formIntro }}</p>
+    <p class="shop-demo">{{ ui().demo }}</p>
+  </header>
+  <form #withdrawForm class="shop-panel shop-withdraw-form" [formGroup]="form" (ngSubmit)="confirm(withdrawForm)" (input)="validated.set(false)" novalidate>
+    <h2>{{ ui().formTitle }}</h2>
+    <label class="shop-field">
+      {{ ui().name }}
+      <input name="name" formControlName="name" autocomplete="off" maxlength="150" required [attr.aria-invalid]="fieldError('name') ? 'true' : null" [attr.aria-describedby]="fieldError('name') ? 'withdraw-name-error' : null">
+      @if (fieldError('name'); as error) { <span class="shop-error" id="withdraw-name-error">{{ error }}</span> }
+    </label>
+    <label class="shop-field">
+      {{ ui().contract }}
+      <textarea name="contract" formControlName="contract" maxlength="2000" required [attr.aria-invalid]="fieldError('contract') ? 'true' : null" [attr.aria-describedby]="fieldError('contract') ? 'withdraw-contract-hint withdraw-contract-error' : 'withdraw-contract-hint'"></textarea>
+      <small id="withdraw-contract-hint">{{ ui().contractHint }}</small>
+      @if (fieldError('contract'); as error) { <span class="shop-error" id="withdraw-contract-error">{{ error }}</span> }
+    </label>
+    <label class="shop-field">
+      {{ ui().email }}
+      <input type="email" name="email" formControlName="email" autocomplete="off" maxlength="254" required [attr.aria-invalid]="fieldError('email') ? 'true' : null" [attr.aria-describedby]="fieldError('email') ? 'withdraw-email-error' : null">
+      @if (fieldError('email'); as error) { <span class="shop-error" id="withdraw-email-error">{{ error }}</span> }
+    </label>
+    <p>{{ ui().declaration }}</p>
+    <button class="dcr-button dcr-button--primary" type="submit">{{ ui().confirm }}</button>
+    <p role="status">@if (validated()) { {{ ui().demoResult }} }</p>
+    @if (validated()) { <button class="dcr-button dcr-button--ghost" type="button" (click)="reset()">{{ ui().reset }}</button> }
+  </form>
+  <section class="shop-panel shop-legal-content">
+    <p>{{ ui().otherWay }}</p>
+    <a class="shop-legal-link" href="mailto:kontakt@design-code-repeat.de">
+      <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+      <span>kontakt&#64;design-code-repeat.de</span>
+    </a>
+    <nav class="shop-legal-links" [attr.aria-label]="ui().notice">
+      <a routerLink="/shop/widerrufsbelehrung">{{ ui().notice }}</a>
+      <a routerLink="/shop/agb">{{ ui().terms }}</a>
+      <a routerLink="/datenschutz">{{ ui().privacy }}</a>
+    </nav>
+  </section>
+</main>

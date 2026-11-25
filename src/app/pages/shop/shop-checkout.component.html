@@ -1,0 +1,72 @@
+<main class="shop dcr-container shop-page shop-transaction-page">
+  <a class="shop-back" [routerLink]="product() ? ['/shop/product', product()?.slug] : ['/shop']">
+    <span class="material-symbols-outlined" aria-hidden="true">west</span> {{ product() ? ui().details : ui().back }}
+  </a>
+  <p class="shop-demo">{{ ui().demo }}</p>
+  <header class="shop-heading"><p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / {{ ui().checkout }}</p><h1>{{ ui().checkout }}</h1></header>
+  @if (product(); as item) {
+    @if (item.cents) {
+      <ol class="shop-steps" [attr.aria-label]="ui().steps">
+        <li aria-current="step">{{ ui().checkout }}</li><li>{{ ui().payment }}</li><li>{{ ui().download }}</li>
+      </ol>
+      <div class="shop-transaction-grid">
+        <form #billingForm [formGroup]="form" (ngSubmit)="submit(billingForm)" novalidate class="shop-panel shop-billing">
+          <h2>{{ ui().billing }}</h2>
+          <p>{{ ui().testOnly }}</p>
+          <button type="button" class="dcr-button dcr-button--ghost" (click)="fillExample()">{{ ui().demoFill }}</button>
+          <div class="shop-billing__fields">
+            <label class="shop-field">
+              {{ ui().customer }}
+              <select formControlName="customer"><option value="private">{{ ui().private }}</option><option value="business">{{ ui().business }}</option></select>
+            </label>
+            @if (customer() === 'business') {
+              <label class="shop-field">
+                {{ ui().company }}
+                <input type="text" name="company" formControlName="company" autocomplete="organization" maxlength="120" aria-required="true"
+                  [attr.aria-invalid]="fieldError('company') ? 'true' : null" [attr.aria-describedby]="fieldError('company') ? 'billing-company-error' : null">
+                @if (fieldError('company'); as error) { <span class="shop-error" id="billing-company-error">{{ error }}</span> }
+              </label>
+            }
+            @for (field of fields; track field.key) {
+              <label class="shop-field">
+                {{ ui()[field.key] }}
+                <input [type]="field.type" [name]="field.key" [formControlName]="field.key" [attr.autocomplete]="field.autocomplete" maxlength="150" required
+                  [attr.aria-invalid]="fieldError(field.key) ? 'true' : null" [attr.aria-describedby]="fieldError(field.key) ? 'billing-' + field.key + '-error' : null">
+                @if (fieldError(field.key); as error) { <span class="shop-error" [id]="'billing-' + field.key + '-error'">{{ error }}</span> }
+              </label>
+            }
+            <label class="shop-field">
+              {{ ui().country }}
+              <input readonly [value]="ui().germany">
+            </label>
+          </div>
+          <div class="shop-total">
+            <span>{{ item.name }} · {{ ui().total }}</span>
+            <strong>{{ price(item.cents, language()) }}</strong>
+          </div>
+          <nav class="shop-checkout-legal" [attr.aria-label]="ui().termsLink">
+            <a routerLink="/shop/agb">{{ ui().termsLink }}</a>
+            <a routerLink="/shop/widerrufsbelehrung">{{ ui().withdrawalLink }}</a>
+            <a routerLink="/datenschutz">{{ ui().privacyLink }}</a>
+          </nav>
+          <button type="submit" class="dcr-button dcr-button--accent">{{ ui().demoSubmit }}</button>
+        </form>
+
+        <aside class="shop-panel shop-summary" [style.--shop-accent]="item.accent">
+          <h2>{{ ui().summary }}</h2>
+          <img [src]="image(item)" width="960" height="640" alt="">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.copy[language()].description }}</p>
+          <p>{{ ui().license }}</p>
+          <p>{{ ui().paymentMethod }} · {{ ui().afterPayment }}</p>
+          <div class="shop-total"><span>{{ ui().total }}</span><strong>{{ price(item.cents, language()) }}</strong></div>
+        </aside>
+      </div>
+    } @else {
+      <p>{{ ui().freeCheckout }}</p>
+      <a class="dcr-button dcr-button--accent" [href]="image(item, 'layout')" download>{{ ui().sample }}</a>
+    }
+  } @else {
+    <h2>{{ ui().missing }}</h2><p>{{ ui().missingText }}</p>
+  }
+</main>

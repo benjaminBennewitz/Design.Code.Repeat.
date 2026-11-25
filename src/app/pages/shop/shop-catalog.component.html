@@ -1,0 +1,180 @@
+<main class="shop">
+  <header class="shop-hero">
+    <div class="dcr-container shop-hero__layout">
+      <div class="shop-hero__copy">
+        <p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>{{ ui().heroKicker }}</p>
+        <h1>DCR<span>//</span>TOOLS<span>_</span></h1>
+        <h2>{{ ui().heroClaim }}</h2>
+        <p class="shop-lead">{{ ui().intro }}</p>
+        <div class="shop-hero__actions">
+          <a class="dcr-button dcr-button--accent" [routerLink]="[]" fragment="shop-catalog" [queryParamsHandling]="'preserve'">
+            {{ ui().showTools }}
+            <span class="material-symbols-outlined" aria-hidden="true">south</span>
+          </a>
+          <a class="dcr-button dcr-button--ghost" [routerLink]="['/shop/product', featured.slug]">
+            {{ ui().viewBundle }}
+            <span class="material-symbols-outlined" aria-hidden="true">north_east</span>
+          </a>
+        </div>
+        <ul class="shop-hero__benefits">
+          @for (benefit of ui().heroBenefits; track benefit) {
+            <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ benefit }}</li>
+          }
+        </ul>
+      </div>
+      <section class="shop-matrix" aria-labelledby="shop-matrix-title">
+        <header class="shop-matrix__toolbar">
+          <h2 id="shop-matrix-title"><span class="shop-matrix__indicator" aria-hidden="true"></span>{{ ui().matrixTitle }}</h2>
+          <span>06 / {{ ui().matrixNodes }}</span>
+        </header>
+        <div class="shop-matrix__stage">
+          @for (group of matrixGroups; track group.name; let groupIndex = $index) {
+            <div class="shop-matrix__group" role="group" [attr.aria-label]="group.name">
+              <div class="shop-matrix__group-label"><span>{{ group.name }}</span><span aria-hidden="true">0{{ groupIndex + 1 }} / 03</span></div>
+              <div class="shop-matrix__nodes">
+                @for (tool of group.tools; track tool.id; let index = $index) {
+                  <button class="shop-matrix__node" type="button" [style.--matrix-accent]="tool.accent"
+                    [style.--matrix-order]="groupIndex * 3 + index" [attr.aria-pressed]="activeTool() === tool.id"
+                    (click)="activeTool.set(tool.id)">
+                    <span class="shop-matrix__node-index" aria-hidden="true">0{{ groupIndex * 3 + index + 1 }}</span>
+                    <span class="shop-matrix__mark" aria-hidden="true">{{ tool.mark }}</span>
+                    <strong>{{ tool.name }}</strong>
+                    <span class="shop-matrix__node-status">{{ matrixStatus(tool.id) }}</span>
+                  </button>
+                }
+              </div>
+            </div>
+            @if (groupIndex === 0) {
+              <div class="shop-matrix__bus" aria-hidden="true">
+                <div class="shop-matrix__bus-line"></div>
+                <div class="shop-matrix__flow">
+                  <span><i class="material-symbols-outlined">input</i>{{ ui().matrixInput }}</span>
+                  <i class="material-symbols-outlined shop-matrix__arrow">east</i>
+                  <span class="shop-matrix__engine"><i class="material-symbols-outlined">terminal</i>DCR//</span>
+                  <i class="material-symbols-outlined shop-matrix__arrow">east</i>
+                  <span><i class="material-symbols-outlined">task_alt</i>{{ ui().matrixOutput }}</span>
+                </div>
+              </div>
+            }
+          }
+        </div>
+        <div class="shop-matrix__readout" aria-live="polite" aria-atomic="true">
+          <span class="material-symbols-outlined" aria-hidden="true">terminal</span>
+          <div>
+            <p class="shop-matrix__readout-label">{{ matrixStatus(activeTool()) }}</p>
+            <p>{{ ui().matrixDescriptions[activeTool()] }}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <section class="dcr-container shop-introduction" aria-label="DCR//TOOLS">
+    <p class="shop-demo">{{ ui().demo }}</p>
+    <dcr-shop-information class="shop-information--compact" [showOverview]="true" />
+  </section>
+
+  <section class="dcr-container shop-catalog" id="shop-catalog" aria-labelledby="shop-catalog-title">
+    <header class="shop-catalog__heading">
+      <div><p class="shop-code">{{ ui().catalogKicker }}</p><h2 id="shop-catalog-title">{{ ui().catalog }}</h2></div>
+      <p class="shop-catalog__intro">{{ ui().catalogIntro }}</p>
+    </header>
+    <div class="shop-filters">
+      <label class="shop-field">
+        {{ ui().search }}
+        <input type="search" #search [value]="query()" [placeholder]="ui().searchPlaceholder" (input)="update({ q: search.value || null })" maxlength="100">
+      </label>
+      <label class="shop-field">
+        {{ ui().sort }}
+        <select #sorting [value]="sort()" (change)="update({ sort: sorting.value === 'featured' ? null : sorting.value })">
+          @for (option of sorts; track option) {
+            <option [value]="option" [selected]="sort() === option">{{ ui()[option] }}</option>
+          }
+        </select>
+      </label>
+      <div class="shop-filter-options">
+        <div class="shop-categories" [attr.aria-label]="ui().tools" role="group">
+          @for (option of categories; track option) {
+            <button type="button" [attr.aria-pressed]="category() === option"
+              (click)="update({ category: option === 'all' ? null : option })">{{ ui()[option] }}</button>
+          }
+        </div>
+        <label class="shop-check">
+          <input type="checkbox" #freeFilter [checked]="free()" (change)="update({ free: freeFilter.checked ? '1' : null })">
+          {{ ui().freeOnly }}
+        </label>
+      </div>
+    </div>
+    <p class="shop-count" role="status">{{ ui().results(filtered().length) }}</p>
+    <div class="shop-grid">
+      @for (entry of filtered(); track entry.code) {
+        <article class="shop-card" [style.--shop-accent]="entry.accent">
+          @if (entry.kind === 'product') {
+            <a class="shop-card__visual" [routerLink]="['/shop/product', entry.slug]" [attr.aria-label]="ui().details + ' · ' + entry.name">
+              <img [src]="image(entry)" width="960" height="640" loading="lazy" decoding="async" alt="">
+            </a>
+          } @else {
+            <div class="shop-card__visual shop-card__visual--concept" aria-hidden="true">
+              <div class="shop-card__cover-meta"><span>DCR//TOOLS</span><span>{{ entry.code }}</span></div>
+              <div class="shop-card__glyph"><span class="material-symbols-outlined">{{ entry.icon }}</span></div>
+              <span class="shop-card__cover-label">{{ ui()[entry.category] }}</span>
+            </div>
+          }
+          <div class="shop-card__body">
+            <div class="shop-card__meta">
+              <p class="shop-code">{{ entry.code }} <span>{{ ui()[entry.category] }}</span></p>
+              @if (entry.kind === 'concept') {
+                <span class="shop-card__tag">{{ entry.inquiryOnly ? ui().inquiryTag : ui().roadmapStatus }}</span>
+              } @else if (entry.category === 'bundle' || !entry.cents) {
+                <span class="shop-card__tag">{{ entry.cents ? ui().bundleTag : ui().freeTag }}</span>
+              }
+            </div>
+            @if (entry.kind === 'product') {
+              <h3><a [routerLink]="['/shop/product', entry.slug]">{{ entry.name }}</a></h3>
+            } @else {
+              <h3>{{ entry.name }}</h3>
+            }
+            <p>{{ entry.description }}</p>
+            <div class="shop-card__actions">
+              @if (entry.kind === 'product') {
+                <strong>{{ entry.cents ? price(entry.cents, language()) : ui().free }}</strong>
+                <div>
+                  <a class="dcr-button dcr-button--ghost" [routerLink]="['/shop/product', entry.slug]"
+                    [attr.aria-label]="ui().details + ' · ' + entry.name">{{ ui().cardDetails }} <span class="material-symbols-outlined" aria-hidden="true">east</span></a>
+                  @if (entry.cents) {
+                    <a class="dcr-button dcr-button--accent" [routerLink]="['/shop/checkout', entry.slug]"
+                      [attr.aria-label]="ui().checkoutLink + ' · ' + entry.name">{{ ui().checkoutLink }}</a>
+                  } @else {
+                    <a class="dcr-button dcr-button--accent" [href]="image(entry, 'layout')" download [attr.aria-label]="ui().sample + ' · ' + entry.name">{{ ui().cardSample }}</a>
+                  }
+                </div>
+              } @else {
+                <strong>{{ entry.cents === null ? ui().inquiryPrice : price(entry.cents, language()) }}</strong>
+                @if (entry.inquiryOnly) {
+                  <p class="shop-card__inquiry-note">{{ ui().inquiryNote }}</p>
+                }
+                <div>
+                  <button type="button" class="dcr-button dcr-button--accent" (click)="inquire(entry)"
+                    [attr.aria-label]="ui().inquiry + ' · ' + entry.name">{{ ui().inquiry }} <span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
+                </div>
+              }
+            </div>
+          </div>
+        </article>
+      } @empty {
+        <div class="shop-panel shop-empty">
+          <p>{{ ui().empty }}</p>
+          <button type="button" class="dcr-button dcr-button--ghost"
+            (click)="update({ q: null, category: null, sort: null, free: null })">{{ ui().reset }}</button>
+        </div>
+      }
+    </div>
+    <aside class="shop-custom shop-panel">
+      <div>
+        <h2>{{ ui().customTitle }}</h2>
+        <p>{{ ui().customText }}</p>
+      </div>
+      <a class="dcr-button dcr-button--ghost" routerLink="/kontakt">{{ ui().contact }}</a>
+    </aside>
+  </section>
+</main>

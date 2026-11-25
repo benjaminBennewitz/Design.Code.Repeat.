@@ -24,6 +24,7 @@ export const EN_LAYOUT_CONTENT: Pick<StudioContent, 'meta' | 'navigation' | 'foo
       { label: 'Process', href: '/#prozess' },
       { label: 'FAQ', href: '/faq' },
       { label: 'Website Audit', href: '/website-check' },
+      { label: 'Shop', href: '/shop' },
     ],
   },
   footer: {

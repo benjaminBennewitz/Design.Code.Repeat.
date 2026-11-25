@@ -1,0 +1,140 @@
+<main class="shop dcr-container shop-page shop-product-page">
+  <a class="shop-back" routerLink="/shop"><span class="material-symbols-outlined" aria-hidden="true">west</span> {{ ui().back }}</a>
+  <p class="shop-demo">{{ ui().demo }}</p>
+  @if (product(); as item) {
+    <header class="shop-heading shop-product-heading" [style.--shop-accent]="item.accent">
+      <p class="shop-code">{{ item.code }} <span>{{ ui()[item.category] }}</span></p>
+      <h1>{{ item.name }}</h1>
+      <p class="shop-lead">{{ item.copy[language()].description }}</p>
+    </header>
+
+    <div class="shop-product-grid" [style.--shop-accent]="item.accent">
+      <figure class="shop-gallery">
+        <div class="shop-gallery__stage">
+          @if (view() === 'video') {
+            <video controls playsinline preload="none" [poster]="image(item, 'layout')" [attr.aria-label]="ui().videoCaption">
+              <source src="assets/images/shop/year-grid-preview.mp4" type="video/mp4">
+              {{ ui().videoUnsupported }}
+            </video>
+          } @else {
+            <button class="shop-gallery__open" type="button" [attr.aria-label]="ui().openMedia" (click)="lightbox.showModal()">
+              <img [src]="image(item, view() === 'layout' ? 'layout' : 'cover')" width="960" height="640"
+                [alt]="item.name + ' · ' + ui()[view()]" fetchpriority="high">
+              <span class="material-symbols-outlined" aria-hidden="true">open_in_full</span>
+            </button>
+          }
+        </div>
+        <div class="shop-gallery__thumbs" role="group" [attr.aria-label]="ui().gallery">
+          @for (media of views(); track media) {
+            <button type="button" [attr.aria-pressed]="view() === media" (click)="view.set(media)">
+              <img [src]="image(item, media === 'cover' ? 'cover' : 'layout')" width="96" height="64" alt="">
+              <span>{{ ui()[media] }}</span>
+              @if (media === 'video') {
+                <span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+              }
+            </button>
+          }
+        </div>
+        <figcaption>{{ view() === 'video' ? ui().videoCaption : ui().concept }}</figcaption>
+      </figure>
+
+      <aside class="shop-panel shop-buy" [attr.aria-label]="ui().summary">
+        <p class="shop-code"><span class="shop-dot" aria-hidden="true"></span>{{ ui().collection }}</p>
+        <strong class="shop-price">{{ item.cents ? price(item.cents, language()) : ui().free }}</strong>
+        @if (item.cents) {
+          <p>{{ ui().priceNote }}</p>
+          <a class="dcr-button dcr-button--accent" [routerLink]="['/shop/checkout', item.slug]">{{ ui().checkoutLink }}</a>
+          <ul class="shop-buy__facts">
+            <li><span class="material-symbols-outlined" aria-hidden="true">account_balance</span>{{ ui().paymentMethod }}</li>
+            <li><span class="material-symbols-outlined" aria-hidden="true">lock</span>{{ ui().afterPayment }}</li>
+            @for (benefit of ui().heroBenefits; track benefit) {
+              <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ benefit }}</li>
+            }
+          </ul>
+        } @else {
+          <p>{{ ui().sampleDescription }}</p>
+          <a class="dcr-button dcr-button--accent" [href]="image(item, 'layout')" download>{{ ui().sample }}</a>
+        }
+      </aside>
+
+      <section class="shop-overview shop-panel">
+        <h2>{{ ui().overview }}</h2>
+        <ul class="shop-features">
+          @for (feature of item.copy[language()].features; track feature) {
+            <li><span class="material-symbols-outlined" aria-hidden="true">check</span>{{ feature }}</li>
+          }
+        </ul>
+        @if (item.copy[language()].optionalFeatures; as optionalFeatures) {
+          <h2>{{ ui().optionalFeatures }}</h2>
+          <ul class="shop-features">
+            @for (feature of optionalFeatures; track feature) {
+              <li><span class="material-symbols-outlined" aria-hidden="true">add_circle</span>{{ feature }}</li>
+            }
+          </ul>
+        }
+        <h2>{{ ui().compatibility }}</h2>
+        <p>{{ ui().compatibilityText }}</p>
+        @if (item.cents) {
+          <details><summary>{{ ui().docs }}</summary><p>{{ ui().docsText }}</p></details>
+        }
+        <details><summary>{{ ui().changelog }}</summary><p>{{ ui().changelogText }}</p></details>
+        <details><summary>{{ ui().faq }} · {{ ui().accountQuestion }}</summary><p>{{ ui().accountAnswer }}</p></details>
+      </section>
+    </div>
+    @if (item.category === 'bundle') {
+      <section class="shop-related shop-panel">
+        <h2>{{ ui().bundleIncludes }}</h2>
+        @for (related of bundleProducts; track related.slug) {
+          <a class="shop-back" [routerLink]="['/shop/product', related.slug]">{{ related.name }} <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+        }
+      </section>
+    } @else if (bundle; as collection) {
+      <aside class="shop-related shop-panel shop-related--bundle">
+        <img [src]="image(collection)" width="960" height="640" loading="lazy" alt="">
+        <div>
+          <h2>{{ collection.name }}</h2>
+          <p>{{ ui().bundleNote(price(savings(), language())) }}</p>
+          <a class="dcr-button dcr-button--ghost" [routerLink]="['/shop/product', collection.slug]">{{ ui().viewBundle }} <span class="material-symbols-outlined" aria-hidden="true">north_east</span></a>
+        </div>
+      </aside>
+    }
+
+    <dcr-shop-information [showPackage]="item.cents > 0" />
+
+    <section class="shop-product-end shop-panel" [style.--shop-accent]="item.accent">
+      <div>
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.cents ? price(item.cents, language()) + ' · ' + ui().priceNote : ui().sampleDescription }}</p>
+      </div>
+      @if (item.cents) {
+        <a class="dcr-button dcr-button--accent" [routerLink]="['/shop/checkout', item.slug]">{{ ui().checkoutLink }}</a>
+      } @else {
+        <a class="dcr-button dcr-button--accent" [href]="image(item, 'layout')" download>{{ ui().sample }}</a>
+      }
+    </section>
+
+    <dialog #lightbox class="shop-lightbox" [attr.aria-label]="ui().gallery" (keydown)="onGalleryKey($event)">
+      <div class="shop-lightbox__bar">
+        <p>{{ item.name }} · {{ ui()[view()] }}</p>
+        <button autofocus type="button" [attr.aria-label]="ui().close" (click)="lightbox.close()">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
+      </div>
+      <div class="shop-lightbox__image">
+        <img [src]="image(item, view() === 'layout' ? 'layout' : 'cover')" width="960" height="640" [alt]="item.name + ' · ' + ui()[view()]">
+      </div>
+      <div class="shop-lightbox__bar">
+        <button type="button" [attr.aria-label]="ui().previous" (click)="toggleImage()">
+          <span class="material-symbols-outlined" aria-hidden="true">west</span>
+        </button>
+        <span aria-live="polite">{{ view() === 'layout' ? 2 : 1 }} / 2</span>
+        <button type="button" [attr.aria-label]="ui().next" (click)="toggleImage()">
+          <span class="material-symbols-outlined" aria-hidden="true">east</span>
+        </button>
+      </div>
+    </dialog>
+  } @else {
+    <h1>{{ ui().missing }}</h1>
+    <p>{{ ui().missingText }}</p>
+  }
+</main>

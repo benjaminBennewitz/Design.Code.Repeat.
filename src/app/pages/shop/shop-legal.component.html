@@ -1,0 +1,22 @@
+<main class="shop dcr-container shop-page shop-transaction-page shop-legal-page">
+  <a class="shop-back" routerLink="/shop"><span class="material-symbols-outlined" aria-hidden="true">west</span> {{ ui().back }}</a>
+  <header class="shop-heading">
+    <p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / LEGAL</p>
+    <h1>{{ title() }}</h1>
+    <p class="shop-demo">{{ ui().draft }}</p>
+  </header>
+  <article class="shop-panel shop-legal-content">
+    @for (section of sections(); track section.title) {
+      <section>
+        <h2>{{ section.title }}</h2>
+        @for (paragraph of section.paragraphs; track $index) { <p>{{ paragraph }}</p> }
+      </section>
+    }
+    <nav class="shop-legal-links" [attr.aria-label]="ui().terms">
+      @if (!isNotice()) { <a routerLink="/shop/widerrufsbelehrung">{{ ui().notice }}</a> }
+      @else { <a routerLink="/shop/agb">{{ ui().terms }}</a> }
+      <a routerLink="/datenschutz">{{ ui().privacy }}</a>
+      <a class="dcr-button dcr-button--ghost" routerLink="/shop/widerruf">{{ ui().withdraw }}</a>
+    </nav>
+  </article>
+</main>

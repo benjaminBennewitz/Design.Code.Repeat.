@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Shop-Rechtstexte und Widerruf
+   ========================================================================== */
+.shop-legal-page {
+  max-width: 58rem;
+}
+
+.shop-legal-content {
+  justify-items: stretch;
+  gap: 1.75rem;
+
+  section {
+    display: grid;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--dcr-color-border);
+  }
+
+  h2 {
+    font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+  }
+
+  p {
+    max-width: 75ch;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+}
+
+.shop-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--dcr-color-border);
+}
+
+.shop-withdraw-form {
+  justify-items: stretch;
+
+  .shop-field {
+    width: 100%;
+  }
+
+  textarea {
+    min-height: 7rem;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--dcr-color-border-strong);
+    background: var(--dcr-color-bg);
+    color: var(--dcr-color-text);
+    font: inherit;
+    resize: vertical;
+  }
+
+  textarea[aria-invalid='true'] {
+    border-color: var(--dcr-color-danger-text);
+  }
+
+  small {
+    font-weight: 400;
+    color: var(--dcr-color-text-muted);
+  }
+
+  .dcr-button {
+    justify-self: start;
+    max-width: 100%;
+  }
+}

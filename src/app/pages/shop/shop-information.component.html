@@ -1,0 +1,44 @@
+@if (showOverview()) {
+  <section class="shop-info">
+    <h2>{{ ui().trustTitle }}</h2>
+    <p class="shop-info__intro">{{ ui().trustIntro }}</p>
+    <div class="shop-info__grid">
+      <article>
+        <span class="material-symbols-outlined" aria-hidden="true">computer</span>
+        <h3>{{ ui().trustLocalTitle }}</h3>
+        <p>{{ ui().trustLocal }}</p>
+      </article>
+      <article>
+        <span class="material-symbols-outlined" aria-hidden="true">fact_check</span>
+        <h3>{{ ui().trustSetupTitle }}</h3>
+        <p>{{ ui().trustSetup }}</p>
+      </article>
+    </div>
+  </section>
+}
+
+@if (showPackage()) {
+  <section class="shop-info">
+    <h2>{{ ui().package }}</h2>
+    <p class="shop-info__intro">{{ ui().packageIntro }}</p>
+    <dl class="shop-info__files">
+      @for (file of ui().packageFiles; track file.name) {
+        <div>
+          <dt><span class="material-symbols-outlined" aria-hidden="true">{{ file.icon }}</span>{{ file.name }}</dt>
+          <dd>{{ file.description }}</dd>
+        </div>
+      }
+    </dl>
+  </section>
+}
+
+<section class="shop-info shop-info--support">
+  <span class="shop-info__support-icon material-symbols-outlined" aria-hidden="true">support_agent</span>
+  <div>
+    <h2>{{ ui().supportTitle }}</h2>
+    <p class="shop-info__intro">{{ ui().supportText }}</p>
+  </div>
+  <a class="dcr-button dcr-button--ghost" routerLink="/kontakt">{{ ui().support }}
+    <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+  </a>
+</section>

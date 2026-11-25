@@ -24,6 +24,7 @@ export const DE_LAYOUT_CONTENT: Pick<StudioContent, 'meta' | 'navigation' | 'foo
       { label: 'Prozess', href: '/#prozess' },
       { label: 'FAQ', href: '/faq' },
       { label: 'Website-Check', href: '/website-check' },
+      { label: 'Shop', href: '/shop' },
     ],
   },
   footer: {

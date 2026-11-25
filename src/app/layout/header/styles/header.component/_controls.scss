@@ -79,10 +79,10 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.22fr);
     grid-template-rows: minmax(0, 1fr) auto;
-    gap: 1.5rem 3rem;
+    gap: clamp(0.75rem, 2dvh, 1.5rem) 3rem;
     height: calc(100dvh - var(--dcr-header-height));
     min-height: 0;
-    padding: clamp(1.5rem, 4vw, 4rem) var(--dcr-page-gutter) 1.25rem;
+    padding: 4rem var(--dcr-page-gutter) 1.25rem;
     overflow: hidden;
     visibility: hidden;
     background: var(--dcr-color-contrast-dark);

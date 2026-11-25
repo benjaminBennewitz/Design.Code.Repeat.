@@ -7,7 +7,8 @@ dcr/
 │   ├── readme/
 │   │   └── dcr-readme-banner.svg
 │   ├── phase-2-architecture.md
-│   └── security.md
+│   ├── security.md
+│   └── shop-legal-launch.md
 ├── node_modules/
 │   └── ...
 ├── scripts/
@@ -260,6 +261,31 @@ dcr/
 │   │   │   │   ├── services-page.component.html
 │   │   │   │   ├── services-page.component.scss
 │   │   │   │   └── services-page.component.ts
+│   │   │   ├── shop/
+│   │   │   │   ├── shop.routes.ts
+│   │   │   │   ├── shop.scss
+│   │   │   │   ├── shop-catalog.component.html
+│   │   │   │   ├── shop-catalog.component.scss
+│   │   │   │   ├── shop-catalog.component.ts
+│   │   │   │   ├── shop-checkout.component.html
+│   │   │   │   ├── shop-checkout.component.ts
+│   │   │   │   ├── shop-copy.data.ts
+│   │   │   │   ├── shop-information.component.html
+│   │   │   │   ├── shop-information.component.scss
+│   │   │   │   ├── shop-information.component.ts
+│   │   │   │   ├── shop-legal.component.html
+│   │   │   │   ├── shop-legal.component.scss
+│   │   │   │   ├── shop-legal.component.ts
+│   │   │   │   ├── shop-legal.data.ts
+│   │   │   │   ├── shop-order.component.html
+│   │   │   │   ├── shop-order.component.ts
+│   │   │   │   ├── shop-product.component.html
+│   │   │   │   ├── shop-product.component.scss
+│   │   │   │   ├── shop-product.component.ts
+│   │   │   │   ├── shop-products.data.ts
+│   │   │   │   ├── shop-roadmap.data.ts
+│   │   │   │   ├── shop-withdrawal.component.html
+│   │   │   │   └── shop-withdrawal.component.ts
 │   │   │   ├── studio-page/
 │   │   │   │   ├── styles/
 │   │   │   │   │   ├── _collaboration-region.scss
@@ -594,6 +620,23 @@ dcr/
 │   │   │   │   │   └── projects-welcome.webp
 │   │   │   │   ├── design-archive.webp
 │   │   │   │   └── globi-flow.webp
+│   │   │   ├── shop/
+│   │   │   │   ├── calendar-bundle-cover.svg
+│   │   │   │   ├── calendar-bundle-cover.webp
+│   │   │   │   ├── calendar-bundle-layout.webp
+│   │   │   │   ├── calendar-lite-cover.svg
+│   │   │   │   ├── calendar-lite-cover.webp
+│   │   │   │   ├── calendar-lite-layout.webp
+│   │   │   │   ├── monthly-cover.svg
+│   │   │   │   ├── monthly-cover.webp
+│   │   │   │   ├── monthly-layout.webp
+│   │   │   │   ├── weekly-planner-cover.svg
+│   │   │   │   ├── weekly-planner-cover.webp
+│   │   │   │   ├── weekly-planner-layout.webp
+│   │   │   │   ├── year-grid-cover.svg
+│   │   │   │   ├── year-grid-cover.webp
+│   │   │   │   ├── year-grid-layout.webp
+│   │   │   │   └── year-grid-preview.mp4
 │   │   │   └── studio/
 │   │   │       ├── ben-head.webp
 │   │   │       ├── ben-sip.webp

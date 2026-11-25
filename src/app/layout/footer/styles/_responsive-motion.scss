@@ -39,18 +39,34 @@
     }
 
     .site-footer__panel-copy {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
       min-height: 34rem;
     }
 
     .site-footer__panel {
-      grid-template-columns: 1fr;
+      position: relative;
+      inset: auto;
+      grid-area: 1 / 1;
+      grid-template-columns: minmax(0, 1fr);
       align-content: start;
     }
   }
 
   @media (max-width: 620px) {
     .site-footer__toolbar {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.5rem;
+    }
+
+    .site-footer__switch {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 0.45rem;
+    }
+
+    .site-footer__switch.is-previous {
+      flex-direction: row;
     }
 
     .site-footer__status {
@@ -64,7 +80,11 @@
     }
 
     .site-footer__legal-layout {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .site-footer__legal-grid a.site-footer__withdraw {
+      grid-column: 1 / -1;
     }
 
     .site-footer__socials {
@@ -124,5 +144,23 @@
   :host-context(:root[data-motion='reduced']) .site-footer__character,
   :host-context(:root[data-motion='off']) .site-footer__character {
     transition: none;
+  }
+
+  :host-context(:root[data-motion='reduced']) .site-footer__switch-icon,
+  :host-context(:root[data-motion='off']) .site-footer__switch-icon,
+  :host-context(:root[data-motion='reduced']) .site-footer__switch-label,
+  :host-context(:root[data-motion='off']) .site-footer__switch-label,
+  :host-context(:root[data-motion='reduced']) .site-footer__withdraw,
+  :host-context(:root[data-motion='off']) .site-footer__withdraw {
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-footer__switch-icon,
+    .site-footer__switch-label,
+    .site-footer__sitemap a.site-footer__withdraw,
+    .site-footer__legal-grid a.site-footer__withdraw {
+      transition: none;
+    }
   }
 }
