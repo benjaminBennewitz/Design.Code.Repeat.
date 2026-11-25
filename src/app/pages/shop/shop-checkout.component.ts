@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { ShopSampleDownloadComponent } from './shop-sample-download.component';
 import { SHOP_COPY } from './shop-copy.data';
 import { SHOP_PRODUCTS, formatShopPrice, shopImage } from './shop-products.data';
 
@@ -14,7 +15,7 @@ type BillingField = 'given' | 'family' | 'email' | 'street' | 'postal' | 'city';
 /** Simuliert die Eingabe und leitet ausschließlich die Produktauswahl weiter. */
 @Component({
   selector: 'dcr-shop-checkout',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ShopSampleDownloadComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './shop-checkout.component.html',
   styleUrl: './shop.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

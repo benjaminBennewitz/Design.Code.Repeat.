@@ -5,6 +5,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { ShopSampleDownloadComponent } from './shop-sample-download.component';
 import { SHOP_COPY } from './shop-copy.data';
 import { SHOP_PRODUCTS, ShopProduct, formatShopPrice, shopImage } from './shop-products.data';
 
@@ -13,7 +14,7 @@ type DemoStatus = 'pending' | 'paid' | 'available' | 'expired' | 'cancelled';
 /** Zeigt ausschließlich fiktive Bestellungen für kostenpflichtige Beispielprodukte. */
 @Component({
   selector: 'dcr-shop-order',
-  imports: [RouterLink],
+  imports: [ShopSampleDownloadComponent, RouterLink],
   templateUrl: './shop-order.component.html',
   styleUrl: './shop.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

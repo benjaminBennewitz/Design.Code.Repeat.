@@ -8,6 +8,7 @@
   </header>
   <form #withdrawForm class="shop-panel shop-withdraw-form" [formGroup]="form" (ngSubmit)="confirm(withdrawForm)" (input)="validated.set(false)" novalidate>
     <h2>{{ ui().formTitle }}</h2>
+    <p>{{ ui().testOnly }}</p>
     <label class="shop-field">
       {{ ui().name }}
       <input name="name" formControlName="name" autocomplete="off" maxlength="150" required [attr.aria-invalid]="fieldError('name') ? 'true' : null" [attr.aria-describedby]="fieldError('name') ? 'withdraw-name-error' : null">

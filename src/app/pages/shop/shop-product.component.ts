@@ -5,6 +5,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { SHOP_PACKAGES, formatPackageSize } from './shop-packages.data';
+import { ShopSampleDownloadComponent } from './shop-sample-download.component';
 import { SHOP_COPY } from './shop-copy.data';
 import { ShopInformationComponent } from './shop-information.component';
 import { SHOP_PRODUCTS, ShopProduct, formatShopPrice, shopImage } from './shop-products.data';
@@ -14,7 +16,7 @@ type MediaView = 'cover' | 'layout' | 'video';
 /** Zeigt die lokalisierte Produktvorschau und verlinkt deren nächsten Schritt. */
 @Component({
   selector: 'dcr-shop-product',
-  imports: [RouterLink, ShopInformationComponent],
+  imports: [ShopSampleDownloadComponent, RouterLink, ShopInformationComponent],
   templateUrl: './shop-product.component.html',
   styleUrls: ['./shop.scss', './shop-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +29,8 @@ export class ShopProductComponent {
   readonly language = inject(LanguageService).language;
   readonly ui = computed(() => SHOP_COPY[this.language()]);
   readonly product = computed(() => SHOP_PRODUCTS.find(item => item.slug === this.params().get('slug')));
+  readonly packageInfo = computed(() => SHOP_PACKAGES[this.product()?.slug ?? '']);
+  readonly packageSize = formatPackageSize;
   readonly hasVideo = computed(() => this.product()?.slug === 'year-grid');
   readonly views = computed<readonly MediaView[]>(() => this.hasVideo() ? ['cover', 'layout', 'video'] : ['cover', 'layout']);
   readonly view = linkedSignal<ShopProduct | undefined, MediaView>({
@@ -43,9 +47,9 @@ export class ShopProductComponent {
     effect(() => {
       const product = this.product();
       this.seo.setPage({
-        title: `${product?.name ?? this.ui().missing} | DCR//TOOLS`,
+        title: `${product?.name[this.language()] ?? this.ui().missing} | DCR//TOOLS`,
         description: product?.copy[this.language()].description ?? this.ui().missingText,
-        keywords: product ? [product.name, 'InDesign', 'DCR Tools'] : [],
+        keywords: product ? [product.name[this.language()], 'InDesign', 'DCR Tools'] : [],
       }, product ? `/shop/product/${product.slug}` : '/shop', 'website', 'noindex, follow');
     });
   }

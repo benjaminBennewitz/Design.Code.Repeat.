@@ -1,0 +1,85 @@
+/** @file Layout und Formularzustände des zentralen Produktsupports. */
+
+.shop-support-form {
+  justify-items: stretch;
+
+  textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--dcr-color-border-strong);
+    border-radius: 0;
+    background: var(--dcr-color-bg);
+    color: var(--dcr-color-text);
+    font: inherit;
+    resize: vertical;
+    transition: border-color 180ms ease;
+
+    &:hover {
+      border-color: var(--dcr-color-primary-text);
+    }
+
+    &[aria-invalid='true'] {
+      border-color: var(--dcr-color-danger-text);
+    }
+  }
+
+  .dcr-button {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  [role='status']:empty {
+    display: none;
+  }
+}
+
+.shop-support-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.shop-support-technical {
+  min-width: 0;
+  padding: 1rem 0 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--dcr-color-border);
+
+  legend {
+    padding-right: 0.7rem;
+    font-weight: 700;
+  }
+}
+
+.shop-support-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dcr-color-text-muted);
+  font-size: 0.88rem;
+}
+
+.shop-support-aside {
+  border-top: 3px solid var(--dcr-color-lime-text);
+
+  > .material-symbols-outlined {
+    color: var(--dcr-color-lime-text);
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 510px) {
+  .shop-support-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-support-form textarea {
+    transition: none;
+  }
+}

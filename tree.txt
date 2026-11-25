@@ -8,7 +8,9 @@ dcr/
 │   │   └── dcr-readme-banner.svg
 │   ├── phase-2-architecture.md
 │   ├── security.md
-│   └── shop-legal-launch.md
+│   ├── shop-download-verification.md
+│   ├── shop-legal-launch.md
+│   └── shop-support.md
 ├── node_modules/
 │   └── ...
 ├── scripts/
@@ -279,11 +281,20 @@ dcr/
 │   │   │   │   ├── shop-legal.data.ts
 │   │   │   │   ├── shop-order.component.html
 │   │   │   │   ├── shop-order.component.ts
+│   │   │   │   ├── shop-packages.data.ts
 │   │   │   │   ├── shop-product.component.html
 │   │   │   │   ├── shop-product.component.scss
 │   │   │   │   ├── shop-product.component.ts
 │   │   │   │   ├── shop-products.data.ts
 │   │   │   │   ├── shop-roadmap.data.ts
+│   │   │   │   ├── shop-sample-download.component.html
+│   │   │   │   ├── shop-sample-download.component.scss
+│   │   │   │   ├── shop-sample-download.component.ts
+│   │   │   │   ├── shop-sample-hashes.data.ts
+│   │   │   │   ├── shop-support.component.html
+│   │   │   │   ├── shop-support.component.scss
+│   │   │   │   ├── shop-support.component.ts
+│   │   │   │   ├── shop-support.data.ts
 │   │   │   │   ├── shop-withdrawal.component.html
 │   │   │   │   └── shop-withdrawal.component.ts
 │   │   │   ├── studio-page/

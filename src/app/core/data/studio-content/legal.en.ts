@@ -80,6 +80,7 @@ export const EN_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         paragraphs: [
           'The shop is currently a preview. Inputs in the simulated order and withdrawal forms are processed only within the browser form and are not sent to a shop backend or stored permanently. Please use example data only. No orders, payments or withdrawals are initiated.',
           'Custom inquiries from the shop use the existing contact form, as described above. Before sales begin, this policy will be extended to describe the actual processing of order, payment, invoice and download data and withdrawals.',
+          'The support form prepares an email draft locally in your browser. Nothing is automatically submitted or stored by the shop. Opening the draft passes your inputs to your email application. Only when you send the message do we receive the information and any attachments you choose to handle your request. The information on direct email contact applies.',
         ],
       },
       {

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContactDraftService } from '../../core/services/contact-draft.service';
 import { LanguageService } from '../../core/services/language.service';
 import { SeoService } from '../../core/services/seo.service';
+import { ShopSampleDownloadComponent } from './shop-sample-download.component';
 import { SHOP_COPY } from './shop-copy.data';
 import { ShopInformationComponent } from './shop-information.component';
 import { SHOP_PRODUCTS, ShopCategory, ShopProduct, formatShopPrice, shopImage } from './shop-products.data';
@@ -45,7 +46,7 @@ type MatrixTool = (typeof TOOL_MATRIX)[number]['tools'][number]['id'];
 /** Öffentliche Vorschau des Produktkatalogs. */
 @Component({
   selector: 'dcr-shop-catalog',
-  imports: [RouterLink, ShopInformationComponent],
+  imports: [ShopSampleDownloadComponent, RouterLink, ShopInformationComponent],
   templateUrl: './shop-catalog.component.html',
   styleUrls: ['./shop.scss', './shop-catalog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,7 +83,7 @@ export class ShopCatalogComponent {
     ];
     const matches = entries.filter(entry => {
       const features = entry.kind === 'product' ? entry.copy[language].features : [];
-      const text = [entry.name, entry.code, ui[entry.category], entry.description, ...features].join(' ').toLowerCase();
+      const text = [entry.name.de, entry.name.en, entry.code, ui[entry.category], entry.description, ...(entry.kind === 'product' ? [entry.slug] : []), ...features].join(' ').toLowerCase();
       return (this.category() === 'all' || entry.category === this.category())
         && (!this.free() || entry.cents === 0)
         && terms.every(term => text.includes(term));
@@ -100,8 +101,8 @@ export class ShopCatalogComponent {
   inquire(entry: Extract<CatalogEntry, { kind: 'concept' }>): void {
     const application = this.ui()[entry.category];
     const message = this.language() === 'de'
-      ? `Hallo, ich interessiere mich für ${entry.name} (${application}, ${entry.code}).\n\nMein gewünschter Workflow:\n`
-      : `Hello, I am interested in ${entry.name} (${application}, ${entry.code}).\n\nMy intended workflow:\n`;
+      ? `Hallo, ich interessiere mich für ${entry.name[this.language()]} (${application}, ${entry.code}).\n\nMein gewünschter Workflow:\n`
+      : `Hello, I am interested in ${entry.name[this.language()]} (${application}, ${entry.code}).\n\nMy intended workflow:\n`;
     this.contactDraft.prepare({ topic: 'software', message });
     void this.router.navigate(['/kontakt']);
   }

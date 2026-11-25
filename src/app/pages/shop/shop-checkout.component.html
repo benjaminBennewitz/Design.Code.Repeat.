@@ -2,7 +2,6 @@
   <a class="shop-back" [routerLink]="product() ? ['/shop/product', product()?.slug] : ['/shop']">
     <span class="material-symbols-outlined" aria-hidden="true">west</span> {{ product() ? ui().details : ui().back }}
   </a>
-  <p class="shop-demo">{{ ui().demo }}</p>
   <header class="shop-heading"><p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / {{ ui().checkout }}</p><h1>{{ ui().checkout }}</h1></header>
   @if (product(); as item) {
     @if (item.cents) {
@@ -41,7 +40,7 @@
             </label>
           </div>
           <div class="shop-total">
-            <span>{{ item.name }} · {{ ui().total }}</span>
+            <span>{{ item.name[language()] }} · {{ ui().total }}</span>
             <strong>{{ price(item.cents, language()) }}</strong>
           </div>
           <nav class="shop-checkout-legal" [attr.aria-label]="ui().termsLink">
@@ -55,16 +54,19 @@
         <aside class="shop-panel shop-summary" [style.--shop-accent]="item.accent">
           <h2>{{ ui().summary }}</h2>
           <img [src]="image(item)" width="960" height="640" alt="">
-          <h3>{{ item.name }}</h3>
+          <h3>{{ item.name[language()] }}</h3>
           <p>{{ item.copy[language()].description }}</p>
           <p>{{ ui().license }}</p>
           <p>{{ ui().paymentMethod }} · {{ ui().afterPayment }}</p>
           <div class="shop-total"><span>{{ ui().total }}</span><strong>{{ price(item.cents, language()) }}</strong></div>
+          <a class="dcr-button dcr-button--ghost" routerLink="/shop/support" [queryParams]="{ product: item.slug, type: 'order' }">
+            <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>{{ ui().supportLink }}
+          </a>
         </aside>
       </div>
     } @else {
       <p>{{ ui().freeCheckout }}</p>
-      <a class="dcr-button dcr-button--accent" [href]="image(item, 'layout')" download>{{ ui().sample }}</a>
+      <dcr-shop-sample-download [product]="item" [label]="ui().sample" />
     }
   } @else {
     <h2>{{ ui().missing }}</h2><p>{{ ui().missingText }}</p>

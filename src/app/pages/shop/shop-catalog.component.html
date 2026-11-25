@@ -70,14 +70,19 @@
   </header>
 
   <section class="dcr-container shop-introduction" aria-label="DCR//TOOLS">
-    <p class="shop-demo">{{ ui().demo }}</p>
     <dcr-shop-information class="shop-information--compact" [showOverview]="true" />
   </section>
 
   <section class="dcr-container shop-catalog" id="shop-catalog" aria-labelledby="shop-catalog-title">
     <header class="shop-catalog__heading">
       <div><p class="shop-code">{{ ui().catalogKicker }}</p><h2 id="shop-catalog-title">{{ ui().catalog }}</h2></div>
-      <p class="shop-catalog__intro">{{ ui().catalogIntro }}</p>
+      <div class="shop-catalog__intro">
+        <p>{{ ui().catalogIntro }}</p>
+        <a class="dcr-button dcr-button--ghost shop-support-link" routerLink="/shop/support">
+          <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>{{ ui().supportLink }}
+          <span class="material-symbols-outlined" aria-hidden="true">north_east</span>
+        </a>
+      </div>
     </header>
     <div class="shop-filters">
       <label class="shop-field">
@@ -110,7 +115,7 @@
       @for (entry of filtered(); track entry.code) {
         <article class="shop-card" [style.--shop-accent]="entry.accent">
           @if (entry.kind === 'product') {
-            <a class="shop-card__visual" [routerLink]="['/shop/product', entry.slug]" [attr.aria-label]="ui().details + ' · ' + entry.name">
+            <a class="shop-card__visual" [routerLink]="['/shop/product', entry.slug]" [attr.aria-label]="ui().details + ' · ' + entry.name[language()]">
               <img [src]="image(entry)" width="960" height="640" loading="lazy" decoding="async" alt="">
             </a>
           } @else {
@@ -130,9 +135,9 @@
               }
             </div>
             @if (entry.kind === 'product') {
-              <h3><a [routerLink]="['/shop/product', entry.slug]">{{ entry.name }}</a></h3>
+              <h3><a [routerLink]="['/shop/product', entry.slug]">{{ entry.name[language()] }}</a></h3>
             } @else {
-              <h3>{{ entry.name }}</h3>
+              <h3>{{ entry.name[language()] }}</h3>
             }
             <p>{{ entry.description }}</p>
             <div class="shop-card__actions">
@@ -140,12 +145,12 @@
                 <strong>{{ entry.cents ? price(entry.cents, language()) : ui().free }}</strong>
                 <div>
                   <a class="dcr-button dcr-button--ghost" [routerLink]="['/shop/product', entry.slug]"
-                    [attr.aria-label]="ui().details + ' · ' + entry.name">{{ ui().cardDetails }} <span class="material-symbols-outlined" aria-hidden="true">east</span></a>
+                    [attr.aria-label]="ui().details + ' · ' + entry.name[language()]">{{ ui().cardDetails }} <span class="material-symbols-outlined" aria-hidden="true">east</span></a>
                   @if (entry.cents) {
                     <a class="dcr-button dcr-button--accent" [routerLink]="['/shop/checkout', entry.slug]"
-                      [attr.aria-label]="ui().checkoutLink + ' · ' + entry.name">{{ ui().checkoutLink }}</a>
+                      [attr.aria-label]="ui().checkoutLink + ' · ' + entry.name[language()]">{{ ui().checkoutLink }}</a>
                   } @else {
-                    <a class="dcr-button dcr-button--accent" [href]="image(entry, 'layout')" download [attr.aria-label]="ui().sample + ' · ' + entry.name">{{ ui().cardSample }}</a>
+                    <dcr-shop-sample-download [product]="entry" [label]="ui().cardSample" />
                   }
                 </div>
               } @else {
@@ -155,7 +160,7 @@
                 }
                 <div>
                   <button type="button" class="dcr-button dcr-button--accent" (click)="inquire(entry)"
-                    [attr.aria-label]="ui().inquiry + ' · ' + entry.name">{{ ui().inquiry }} <span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
+                    [attr.aria-label]="ui().inquiry + ' · ' + entry.name[language()]">{{ ui().inquiry }} <span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
                 </div>
               }
             </div>

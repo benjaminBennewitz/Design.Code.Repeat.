@@ -80,6 +80,7 @@ export const DE_LEGAL_CONTENT: Pick<StudioContent, 'legal'> = {
         paragraphs: [
           'Der Shop befindet sich in der Vorschau. Die Eingaben in der simulierten Bestellung und Widerrufsfunktion werden ausschließlich im jeweiligen Formular im Browser verarbeitet und nicht an ein Shop-Backend übermittelt oder dauerhaft gespeichert. Bitte verwende ausschließlich Beispieldaten. Es werden keine Bestellungen, Zahlungen oder Widerrufe ausgelöst.',
           'Individuelle Anfragen aus dem Shop werden über das bestehende Kontaktformular bearbeitet. Die dafür geltenden Datenschutzhinweise sind oben beschrieben. Sobald eine echte Bestellabwicklung eingerichtet ist, werden diese Hinweise vor Verkaufsbeginn um die tatsächliche Verarbeitung von Bestell-, Zahlungs-, Rechnungs- und Downloaddaten sowie Widerrufen ergänzt.',
+          'Das Supportformular bereitet einen E-Mail-Entwurf lokal im Browser vor. Es erfolgt keine automatische Übermittlung oder Speicherung im Shop. Beim Öffnen des Entwurfs werden die Eingaben an dein E-Mail-Programm übergeben. Erst wenn du die Nachricht absendest, erhalten wir die von dir gewählten Angaben und gegebenenfalls Anhänge zur Bearbeitung deiner Anfrage. Die Hinweise zur direkten Kontaktaufnahme per E-Mail gelten entsprechend.',
         ],
       },
       {

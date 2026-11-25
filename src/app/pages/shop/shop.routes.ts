@@ -22,6 +22,10 @@ export const SHOP_ROUTES: Routes = [
     loadComponent: () => import('./shop-order.component').then(module => module.ShopOrderComponent),
   },
   {
+    path: 'support',
+    loadComponent: () => import('./shop-support.component').then(module => module.ShopSupportComponent),
+  },
+  {
     path: 'agb',
     data: { kind: 'terms' },
     loadComponent: () => import('./shop-legal.component').then(module => module.ShopLegalComponent),

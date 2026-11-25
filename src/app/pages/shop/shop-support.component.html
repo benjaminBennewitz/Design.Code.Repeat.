@@ -1,0 +1,72 @@
+<main class="shop dcr-container shop-page shop-transaction-page shop-support-page">
+  <a class="shop-back" routerLink="/shop"><span class="material-symbols-outlined" aria-hidden="true">west</span>{{ ui().back }}</a>
+  <header class="shop-heading">
+    <p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / SUPPORT CENTER</p>
+    <h1>{{ ui().title }}</h1>
+    <p class="shop-lead">{{ ui().intro }}</p>
+  </header>
+  <div class="shop-transaction-grid">
+    <form #supportForm class="shop-panel shop-support-form" [formGroup]="form" (ngSubmit)="prepare(supportForm)" (input)="draft.set('')" (change)="draft.set('')" novalidate>
+      <h2>{{ ui().form }}</h2>
+      <div class="shop-support-fields">
+        <label class="shop-field">{{ ui().type }}
+          <select name="type" formControlName="type">
+            @for (option of types; track option) { <option [value]="option">{{ ui().types[option] }}</option> }
+          </select>
+        </label>
+        <label class="shop-field">{{ ui().product }}
+          <select #product name="product" formControlName="product" (change)="updateProduct(product.value)">
+            <option value="">{{ ui().noProduct }}</option>
+            @for (item of products; track item.slug) { <option [value]="item.slug">{{ item.name[language()] }} ({{ item.code }})</option> }
+          </select>
+        </label>
+        <label class="shop-field">{{ ui().name }} *
+          <input name="name" formControlName="name" autocomplete="name" maxlength="150" required [attr.aria-invalid]="fieldError('name') ? 'true' : null" [attr.aria-describedby]="fieldError('name') ? 'support-name-error' : null">
+          @if (fieldError('name'); as error) { <span id="support-name-error" class="shop-error">{{ error }}</span> }
+        </label>
+        <label class="shop-field">{{ ui().email }} *
+          <input name="email" type="email" formControlName="email" autocomplete="email" maxlength="254" required [attr.aria-invalid]="fieldError('email') ? 'true' : null" [attr.aria-describedby]="fieldError('email') ? 'support-email-error' : null">
+          @if (fieldError('email'); as error) { <span id="support-email-error" class="shop-error">{{ error }}</span> }
+        </label>
+      </div>
+      @if (technical()) {
+        <fieldset class="shop-support-technical">
+          <legend>{{ ui().technical }} ({{ ui().optional }})</legend>
+          <div class="shop-support-fields">
+            <label class="shop-field">{{ ui().version }}<input name="version" formControlName="version" maxlength="40" placeholder="0.1.8"></label>
+            <label class="shop-field">{{ ui().software }}<input name="software" formControlName="software" maxlength="100" placeholder="InDesign 2026"></label>
+            <label class="shop-field">{{ ui().os }}
+              <select name="os" formControlName="os"><option value="">{{ ui().unknown }}</option><option value="Windows">Windows</option><option value="macOS">macOS</option><option value="Other">{{ ui().otherOs }}</option></select>
+            </label>
+          </div>
+        </fieldset>
+      }
+      @if (transaction()) {
+        <label class="shop-field">{{ ui().order }}<input name="order" formControlName="order" maxlength="100"></label>
+      }
+      <label class="shop-field">{{ type() === 'bug' ? ui().bugMessage : type() === 'feature' ? ui().featureMessage : ui().message }} *
+        <textarea name="message" formControlName="message" rows="5" maxlength="2000" required [attr.aria-invalid]="fieldError('message') ? 'true' : null" [attr.aria-describedby]="fieldError('message') ? 'support-message-error' : null"></textarea>
+        @if (fieldError('message'); as error) { <span id="support-message-error" class="shop-error">{{ error }}</span> }
+      </label>
+      @if (type() === 'bug') {
+        <label class="shop-field">{{ ui().steps }} ({{ ui().optional }})<textarea name="steps" formControlName="steps" rows="3" maxlength="1000"></textarea></label>
+        <label class="shop-field">{{ ui().error }}<textarea name="error" formControlName="error" rows="2" maxlength="500"></textarea></label>
+      }
+      <p class="shop-support-hint"><span class="material-symbols-outlined" aria-hidden="true">attach_file</span>{{ ui().screenshot }}</p>
+      <p class="shop-support-hint">{{ ui().privacyHint }} <a class="shop-legal-link" routerLink="/datenschutz">{{ ui().privacy }}</a></p>
+      <p>{{ ui().delivery }}</p>
+      <button type="submit" class="dcr-button dcr-button--primary">{{ ui().prepare }} <span class="material-symbols-outlined" aria-hidden="true">east</span></button>
+      <p role="status">@if (draft()) { {{ ui().ready }} }</p>
+      @if (draft()) {
+        <a class="dcr-button dcr-button--accent" [href]="draft()">{{ ui().open }} <span class="material-symbols-outlined" aria-hidden="true">mail</span></a>
+      }
+    </form>
+    <aside class="shop-panel shop-support-aside">
+      <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>
+      <h2>{{ ui().title }}</h2>
+      <p>{{ ui().response }}</p>
+      <p>{{ ui().contact }}</p>
+      <a class="shop-legal-link" href="mailto:kontakt@design-code-repeat.de"><span class="material-symbols-outlined" aria-hidden="true">mail</span>kontakt&#64;design-code-repeat.de</a>
+    </aside>
+  </div>
+</main>

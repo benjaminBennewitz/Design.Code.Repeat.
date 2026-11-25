@@ -1,0 +1,22 @@
+<button class="dcr-button dcr-button--accent" type="button" [attr.aria-label]="label() + ' · ' + product().name[language()]" (click)="open()">{{ label() }}</button>
+<dialog #verification class="shop-verification" [attr.aria-label]="ui().title" (close)="cleanup()">
+  <header class="shop-verification__header">
+    <p>DCR//TOOLS / DOWNLOAD</p>
+    <button class="shop-verification__close" type="button" autofocus [attr.aria-label]="ui().close" (click)="verification.close()"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+  </header>
+  <h2>{{ ui().title }}</h2>
+  <p>{{ product().name[language()] }} · WEBP</p>
+  <div class="shop-verification__status" [attr.data-state]="state()" role="status">
+    <span class="material-symbols-outlined" aria-hidden="true">{{ state() === 'checking' ? 'sync' : state() === 'ready' ? 'verified' : 'error' }}</span>
+    <p>{{ ui()[state()] }}</p>
+  </div>
+  <p class="shop-verification__note">{{ ui().note }}</p>
+  @if (state() === 'ready') {
+    <a class="dcr-button dcr-button--accent" [href]="downloadUrl()" [download]="product().slug + '-layout.webp'">{{ ui().save }} <span class="material-symbols-outlined" aria-hidden="true">download</span></a>
+  } @else if (state() === 'error') {
+    <button class="dcr-button dcr-button--ghost" type="button" (click)="verify()">{{ ui().retry }}</button>
+  }
+  <a class="dcr-button dcr-button--ghost" routerLink="/shop/support" [queryParams]="{ product: product().slug, type: 'download' }" (click)="verification.close()">
+    <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>{{ ui().support }}
+  </a>
+</dialog>

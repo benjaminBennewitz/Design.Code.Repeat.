@@ -1,0 +1,62 @@
+/** @file Dialog zur transparenten Prüfung öffentlicher Musterdateien. */
+
+:host { display: grid; min-width: 0; }
+
+.shop-verification {
+  box-sizing: border-box;
+  width: min(30rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid var(--dcr-color-border-strong);
+  border-top: 3px solid var(--dcr-color-lime-text);
+  background: var(--dcr-color-surface-solid);
+  color: var(--dcr-color-text);
+  overflow: auto;
+
+  &[open] { display: grid; gap: 1rem; }
+  &::backdrop { background: rgb(0 0 0 / 65%); }
+  h2, p { margin: 0; }
+  a { text-decoration: none; }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--dcr-color-text-muted);
+  }
+
+  &__close {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--dcr-color-border-strong);
+    background: transparent;
+    color: var(--dcr-color-text);
+    cursor: pointer;
+  }
+
+  &__status {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--dcr-color-border-strong);
+    background: var(--dcr-color-bg-soft);
+
+    > .material-symbols-outlined { flex: none; font-size: 1.75rem; }
+    &[data-state='ready'] > .material-symbols-outlined { color: var(--dcr-color-lime-text); }
+    &[data-state='checking'] > .material-symbols-outlined { animation: shop-verify-spin 1s linear infinite; }
+  }
+
+  &__note { font-size: 0.85rem; color: var(--dcr-color-text-muted); }
+  :focus-visible { outline: 2px solid var(--dcr-color-lime-text); outline-offset: 3px; }
+}
+
+@keyframes shop-verify-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-verification__status[data-state='checking'] > .material-symbols-outlined { animation: none; }
+}

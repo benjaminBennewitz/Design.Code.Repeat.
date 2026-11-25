@@ -1,6 +1,5 @@
 <main class="shop dcr-container shop-page shop-transaction-page">
   <a class="shop-back" routerLink="/shop"><span class="material-symbols-outlined" aria-hidden="true">west</span> {{ ui().back }}</a>
-  <p class="shop-demo">{{ ui().demo }}</p>
   <header class="shop-heading"><p class="shop-code shop-eyebrow"><span class="shop-dot" aria-hidden="true"></span>DCR//TOOLS / {{ ui().checkout }}</p><h1>{{ ui().order }}</h1></header>
   @if (product(); as item) {
     <ol class="shop-steps" [attr.aria-label]="ui().steps">
@@ -10,6 +9,7 @@
     </ol>
     <div class="shop-transaction-grid">
       <section class="shop-panel shop-order">
+        <p>{{ ui().demo }}</p>
         <label class="shop-field shop-demo-select">
           {{ ui().statusControls }}
           <select #statusSelect (change)="changeStatus(statusSelect.value)">
@@ -46,7 +46,7 @@
           }
           @case ('available') {
             <p>{{ ui().availableText }}</p>
-            <a class="dcr-button dcr-button--accent" [href]="image(item, 'layout')" download>{{ ui().sample }}</a>
+            <dcr-shop-sample-download [product]="item" [label]="ui().sample" />
           }
           @case ('expired') { <p>{{ ui().expiredText }}</p> }
           @case ('cancelled') { <p>{{ ui().cancelledText }}</p> }
@@ -56,12 +56,13 @@
       <aside class="shop-panel shop-summary" [style.--shop-accent]="item.accent">
         <h2>{{ ui().summary }}</h2>
         <img [src]="image(item)" width="960" height="640" alt="">
-        <h3>{{ item.name }}</h3>
+        <h3>{{ item.name[language()] }}</h3>
         <p>{{ ui().orderReference }} · <strong>{{ reference }}</strong></p>
         <div class="shop-total"><span>{{ ui().total }}</span><strong>{{ price(item.cents, language()) }}</strong></div>
         <h3>{{ ui().invoice }}</h3>
         <p>{{ ui().invoiceText }}</p>
-        <a class="dcr-button dcr-button--ghost" routerLink="/kontakt">{{ ui().support }}</a>
+        <a class="dcr-button dcr-button--ghost" routerLink="/shop/support" [queryParams]="{ product: item.slug, type: 'order' }">
+          <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>{{ ui().support }}</a>
         <a class="dcr-button dcr-button--ghost" routerLink="/shop/widerruf">{{ ui().withdrawLink }}</a>
         <a routerLink="/shop/widerrufsbelehrung">{{ ui().withdrawalLink }}</a>
       </aside>

@@ -6,6 +6,7 @@ export const FOOTER_UI = {
     next: 'Nächster Footer-Bereich',
     panelLabel: 'Footer-Bereich',
     sitemap: 'Sitemap',
+    productSupport: 'Produktsupport',
     legal: 'Rechtliches',
     cookie: 'Cookie-Einstellungen',
     notice: 'Impressum',
@@ -20,6 +21,7 @@ export const FOOTER_UI = {
     social: 'Social',
   },
   en: {
+    productSupport: 'Product support',
     previous: 'Previous footer section',
     next: 'Next footer section',
     panelLabel: 'Footer section',

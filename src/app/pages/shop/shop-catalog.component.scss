@@ -378,6 +378,9 @@
 }
 
 .shop-catalog__intro {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
   max-width: 65ch;
   color: var(--dcr-color-text-muted);
 }
